@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.homecontroller">
+   <columnConstraints>
+      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="8.0" valignment="TOP" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="251.0" spacing="15.0" style="-fx-background-color: #fffdf6;" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="labelglowna" prefHeight="50.0" prefWidth="267.0" text="Strona główna" />
+            <Separator prefWidth="200.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label fx:id="labelkatalog" prefHeight="50.0" prefWidth="266.0" text="Katalog książek" />
+            <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" text="Kategorie" />
+            <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" text="Nowości" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" text="Twoje wypożyczenia" />
+            <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" text="Twoje rezerwacje" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label fx:id="labelbiblioteka" prefHeight="50.0" prefWidth="276.0" text="Twoja biblioteka" />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="190.0" text="Kontakt" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX">
+               <color>
+                  <Color red="0.5894736647605896" green="0.5894736647605896" blue="0.5894736647605896" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="1370.0" style="-fx-background-color: #fffdf6;" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+         <children>
+            <ImageView fx:id="logo" cache="true" cacheHint="QUALITY" depthTest="ENABLE" fitHeight="62.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/2.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchbar" layoutX="301.0" layoutY="8.0" pickOnBounds="false" prefHeight="2.0" prefWidth="467.0" promptText="Szybkie wyszukiwanie">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <ImageView id="#avatar" fx:id="avatar" fitHeight="59.0" fitWidth="95.0" layoutX="894.0" pickOnBounds="true">
+               <image>
+                  <Image url="@test.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="nametag" layoutX="1058.0" layoutY="7.0" prefHeight="32.0" prefWidth="189.0" text="Imie Nazwisko">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   </children>
+</GridPane>
