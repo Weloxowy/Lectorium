@@ -77,7 +77,7 @@ public class logincontroller {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/verify/register.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/register.fxml"));
             parent = loader.load();
             registercontroller controller = loader.getController();
             controller.font();
