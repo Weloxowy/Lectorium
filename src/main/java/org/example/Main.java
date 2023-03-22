@@ -20,7 +20,7 @@ public class Main extends Application {
         Image icon = new Image("res/9k.png");
         stage.getIcons().add(icon);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/verify/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             Parent parent = loader.load();
             logincontroller controller = loader.getController();
             controller.font();
