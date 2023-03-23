@@ -57,7 +57,7 @@
                   <Insets right="10.0" />
                </VBox.margin>
             </Separator>
-            <Label fx:id="labelkatalog" prefHeight="50.0" prefWidth="266.0" text="Katalog książek" />
+            <Label fx:id="labelkatalog" onMouseClicked="#katalog_klik" prefHeight="50.0" prefWidth="266.0" text="Katalog książek" />
             <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" text="Kategorie" />
             <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" text="Nowości" />
             <Separator prefWidth="200.0">

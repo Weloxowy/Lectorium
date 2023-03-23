@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.katalogcontroller">
+    <columnConstraints>
+        <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="8.0" valignment="TOP" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="1073.0" style="-fx-background-color: #f8f8f5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <children>
+                <TextField fx:id="searchbar" cache="true" layoutX="92.0" layoutY="9.0" pickOnBounds="false" prefHeight="2.0" prefWidth="467.0" promptText="Szybkie wyszukiwanie" style="-fx-border-radius: 15px; -fx-background-radius: 15px;">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </TextField>
+                <ImageView id="#avatar" fx:id="avatar" fitHeight="62.0" fitWidth="86.0" layoutX="636.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@test.jpg" />
+                    </image>
+                </ImageView>
+                <Label fx:id="nametag" layoutX="772.0" layoutY="13.0" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <AnchorPane layoutX="-4.0" layoutY="-3.0" prefHeight="719.0" prefWidth="1101.0">
+               <children>
+                  <ListView fx:id="lista" layoutX="-5.0" layoutY="-5.0" prefHeight="727.0" prefWidth="1107.0" />
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+        <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="251.0" spacing="15.0" style="-fx-background-color: #f8f8f5;" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+            <children>
+                <Label fx:id="labelglowna"  prefHeight="50.0" prefWidth="267.0" text="Strona główna">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Label>
+                <Separator prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets right="10.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label fx:id="labelkatalog" prefHeight="50.0" prefWidth="266.0" text="Katalog książek" />
+                <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" text="Kategorie" />
+                <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" text="Nowości" />
+                <Separator prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets right="10.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" text="Twoje wypożyczenia" />
+                <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" text="Twoje rezerwacje" />
+                <Separator prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets right="10.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label fx:id="labelbiblioteka" prefHeight="50.0" prefWidth="276.0" text="Twoja biblioteka" />
+                <Separator prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets right="10.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="190.0" text="Kontakt">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin></Label>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </VBox>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f8f8f5;">
+            <children>
+                <ImageView fitHeight="58.0" fitWidth="234.0" layoutX="22.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

@@ -98,5 +98,42 @@ public class dbloader {
     public void load_file(){
         
     }
+
+    public void print_book()
+    {
+        connectToDatabase();
+        String print = "SELECT id_katalog, nazwa, rok_wydania, wydanie, isbn, jezyk FROM katalog";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) { //Accepted login
+                int id_katalog = resultSet.getInt("id_katalog");
+                final String nazwa = resultSet.getString("nazwa");
+                final String rok_wydania = resultSet.getString("rok_wydania");
+                final String wydanie = resultSet.getString("wydanie");
+                final String isbn = resultSet.getString("isbn");
+                final String jezyk = resultSet.getString("jezyk");
+                Main.kat.setId_katalog(id_katalog);
+                Main.kat.setNazwa(nazwa);
+                Main.kat.setRok_wydania(rok_wydania);
+                Main.kat.setWydanie(wydanie);
+                Main.kat.setIsbn(isbn);
+                Main.kat.setJezyk(jezyk);
+                resultSet.close();
+                closeConnection();
+            } else { //Wrong login or password
+                System.out.println("Błąd logowania");
+                resultSet.close();
+                closeConnection();
+            }
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error inserting user: " + e.getMessage());
+            System.exit(100);
+        }
+
+        closeConnection();
+    }
 }
 
