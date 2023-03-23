@@ -32,9 +32,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>1.38.1</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/karpa/javafx-sdk-19.0.2.1/sqlite-jdbc-3.41.0.0.jar</systemPath>
+            <version>3.41.0.0</version>
         </dependency>
 
     </dependencies>
