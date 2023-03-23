@@ -29,15 +29,15 @@
             </DropShadow>
          </effect>
          <children>
-            <PasswordField fx:id="haslo" layoutX="80.0" layoutY="246.0" promptText="Hasło" />
-            <TextField fx:id="login" layoutX="79.0" layoutY="203.0" promptText="Login" />
-            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="136.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
-            <ImageView fx:id="strzalkabutton" fitHeight="26.0" fitWidth="25.0" layoutX="142.0" layoutY="304.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
+            <PasswordField fx:id="haslo" layoutX="84.0" layoutY="231.0" promptText="Hasło" />
+            <TextField fx:id="login" layoutX="84.0" layoutY="203.0" promptText="Login" />
+            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="135.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
+            <ImageView fx:id="strzalkabutton" fitHeight="26.0" fitWidth="25.0" layoutX="141.0" layoutY="280.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@forward.png" />
                </image>
             </ImageView>
-            <Text fx:id="switchtologin" fill="#faf8ee" layoutX="1.0" layoutY="364.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Posiadasz konto? Zaloguj się" textAlignment="CENTER" underline="true" wrappingWidth="318.4000000000001">
+            <Text fx:id="switchtologin" fill="#faf8ee" layoutX="1.0" layoutY="356.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Posiadasz konto? Zaloguj się" textAlignment="CENTER" underline="true" wrappingWidth="318.4000000000001">
                <font>
                   <Font size="15.0" />
                </font>
@@ -45,12 +45,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="264.0" layoutY="23.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="252.0" layoutY="14.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="234.0" layoutY="35.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="221.0" layoutY="27.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@minimize.png" />
                </image>
@@ -60,8 +60,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="nazwisko" layoutX="79.0" layoutY="160.0" promptText="Nazwisko" />
-            <TextField fx:id="imie" layoutX="79.0" layoutY="116.0" promptText="Imie" />
+            <TextField fx:id="nazwisko" layoutX="84.0" layoutY="171.0" promptText="Nazwisko" />
+            <TextField fx:id="imie" layoutX="84.0" layoutY="141.0" promptText="Imie" />
          </children>
       </AnchorPane>
    </children>

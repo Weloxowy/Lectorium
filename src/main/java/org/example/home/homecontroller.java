@@ -16,20 +16,22 @@ public class homecontroller {
 
     @FXML
     public void font(){
-        Font name = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 25);
-        Font category = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
-        nametag.setFont(name);
-        labelbiblioteka.setFont(category);
-        labelglowna.setFont(category);
-        labelkatalog.setFont(category);
-        labelkontakt.setFont(category);
-        labelkategorie.setFont(category);
-        labelnowosci.setFont(category);
-        labelrezerwacje.setFont(category);
-        labelwypozyczenia.setFont(category);
+        Font ssp_semibold = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 25);
+        Font ssp_reg = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
+        Font pop_med = Font.loadFont(getClass().getResourceAsStream("/res/Poppins-Medium.ttf"), 13);
+        nametag.setFont(ssp_semibold);
+        labelbiblioteka.setFont(pop_med);
+        labelglowna.setFont(pop_med);
+        labelkatalog.setFont(pop_med);
+        labelkontakt.setFont(pop_med);
+        labelkategorie.setFont(pop_med);
+        labelnowosci.setFont(pop_med);
+        labelrezerwacje.setFont(pop_med);
+        labelwypozyczenia.setFont(pop_med);
     }
     @FXML
     private ImageView avatar;
+
 
     @FXML
     private Label labelbiblioteka;

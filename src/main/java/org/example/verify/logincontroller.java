@@ -31,6 +31,9 @@ public class logincontroller {
         zalogujsietext.setFont(myFont1);
         myFont2 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
         switchtoregister.setFont(myFont2);
+        /*Font myFont3 = Font.loadFont(getClass().getResourceAsStream("/res/Poppins-Medium.ttf"), 13);
+        haslo.setFont(myFont3); // niepoprawne znaki przy wprowadzanie hasla oraz zła proporcja
+        login.setFont(myFont3);*/
     }
 
     @FXML
