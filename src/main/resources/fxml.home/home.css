@@ -1,7 +1,34 @@
-#avatar{
-    border-radius: 50%;
+.avatar{
+   -fx-background-color: NULL;
 }
-.img{
-    border-radius:50%;
-    background-color: red;
+
+.menu_left{
+-fx-border-color: NULL;
+-fx-background-radius: 0 0 20 0;
+-fx-background-color: #004aad;
 }
+
+.font_menu_left{
+-fx-text-fill: #f6f2df;
+}
+
+.separator{
+-fx-background-color: #f6f2df;
+-fx-opacity: 10%;
+-fx-background-radius: 10;
+}
+
+.search_field{
+-fx-background-color: #fffdf6;
+-fx-border-color: #004aad;
+-fx-border-width: 0 0 2 0;
+}
+
+.menu_up{
+-fx-background-color: #fffdf6;
+}
+
+.font_menu_up{
+
+}
+

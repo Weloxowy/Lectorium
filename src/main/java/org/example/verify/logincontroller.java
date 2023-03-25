@@ -20,6 +20,8 @@ import org.example.Main;
 import org.example.db.dbloader;
 import org.example.home.homecontroller;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 
 public class logincontroller {
@@ -120,7 +122,7 @@ public class logincontroller {
             parent = loader.load();
             homecontroller controller = loader.getController();
             controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko());
+            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
             stage.setResizable(false);
             stage.setResizable(true);
             stage.isMaximized();
@@ -132,6 +134,7 @@ public class logincontroller {
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(getClass().getResource("/fxml.home/home.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -139,5 +142,6 @@ public class logincontroller {
     void onfailure(MouseEvent event) {
         error.setOpacity(1.0);
     }
+
 }
 

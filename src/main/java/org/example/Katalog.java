@@ -1,6 +1,6 @@
 package org.example;
 
-public class katalog {
+public class Katalog {
     int id_katalog;
     String nazwa;
     String rok_wydania;

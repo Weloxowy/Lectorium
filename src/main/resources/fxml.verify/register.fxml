@@ -29,9 +29,15 @@
             </DropShadow>
          </effect>
          <children>
-            <PasswordField fx:id="haslo" layoutX="84.0" layoutY="231.0" promptText="Hasło" />
-            <TextField fx:id="login" layoutX="84.0" layoutY="203.0" promptText="Login" />
-            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="135.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
+            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="136.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
+            <AnchorPane prefHeight="406.4" prefWidth="322.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="imie" layoutX="84.0" layoutY="121.0" onMouseClicked="#hidefailuresign" promptText="Imie" />
+                  <TextField fx:id="nazwisko" layoutX="84.0" layoutY="151.0" onMouseClicked="#hidefailuresign" promptText="Nazwisko" />
+                  <TextField fx:id="login" layoutX="84.0" layoutY="181.0" onMouseClicked="#hidefailuresign" promptText="Login" />
+                  <PasswordField fx:id="haslo" layoutX="84.0" layoutY="211.0" onMouseClicked="#hidefailuresign" promptText="Hasło (min. 5 znaków)" />
+               </children>
+            </AnchorPane>
             <ImageView fx:id="strzalkabutton" fitHeight="26.0" fitWidth="25.0" layoutX="141.0" layoutY="280.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@forward.png" />
@@ -55,13 +61,26 @@
                   <Image url="@minimize.png" />
                </image>
             </ImageView>
-            <Label fx:id="zarejestrujsietext" alignment="CENTER" layoutX="-5.0" layoutY="48.0" prefHeight="68.0" prefWidth="318.0" text="Zarejestruj się" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="zarejestrujsietext" alignment="CENTER" layoutX="-5.0" layoutY="48.0" prefHeight="68.0" prefWidth="318.0" text="Zarejestruj się" textAlignment="CENTER" textFill="#faf8ee">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="nazwisko" layoutX="84.0" layoutY="171.0" promptText="Nazwisko" />
-            <TextField fx:id="imie" layoutX="84.0" layoutY="141.0" promptText="Imie" />
+            <Label fx:id="error_dane" layoutX="35.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="246.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Nieprawidłowe dane logowania  " textFill="#f2f2f2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="error_login" layoutX="39.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="233.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Konto o takim loginie istnieje  " textFill="#f2f2f2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="error_haslo" layoutX="29.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="271.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Wprowadzone hasło jest za krótkie  " textFill="#f2f2f2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

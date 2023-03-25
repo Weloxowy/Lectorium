@@ -1,11 +1,17 @@
 package org.example.db;
 
+import javafx.scene.image.ImageView;
 import org.example.Main;
 import org.example.home.homecontroller;
 import org.example.verify.logincontroller;
 
+import javax.swing.*;
 import javax.swing.plaf.nimbus.State;
+import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 
 public class dbloader {
@@ -88,8 +94,8 @@ public class dbloader {
             closeConnection();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error inserting user: " + e.getMessage());
-            System.exit(100);
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
         }
         closeConnection();
         return false;
@@ -129,11 +135,37 @@ public class dbloader {
                 closeConnection();
             }
         } catch (SQLException e) { //Error while connecting with DB
-            System.out.println("Error inserting user: " + e.getMessage());
+            System.out.println("Error while connecting with DB: " + e.getMessage());
             System.exit(100);
         }
 
         closeConnection();
+    }
+
+    void getimage(int id, ImageView imageView) {
+        connectToDatabase();//TODO jezeli zdjecie != NULL; dokonczyc konwersje bloba na image;zamienic parametry homecontroller
+        String print = "SELECT avatar FROM uzytkownicy WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                //Blob blob = resultSet.getBlob("avatar");
+                //InputStream is = blob.getBinaryStream();
+                //OutputStream os = new FileOutputStream(new File("photo.jpg"));
+                //byte[] content = new byte[1024];
+                //int size = 0;
+                //while((size = is.read(content)) != -1 ){
+                    //os.write(content,0,size);
+                //}
+                //Main.user.setImage(os);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while getting image: " + e.getMessage());
+            System.exit(100);
+        } finally {
+            closeConnection();
+        }
     }
 }
 

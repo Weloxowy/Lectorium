@@ -27,10 +27,8 @@ import java.io.IOException;
 public class registercontroller {
 
     public void font(){
-        Font myFont1 = null;
-        myFont1 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 35);
-        Font myFont2 = null;
-        myFont2 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
+        Font myFont1 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 35);
+        Font myFont2 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
         myFont1 = Font.font(myFont1.getFamily(), FontWeight.SEMI_BOLD, myFont1.getSize());
         myFont2 = Font.font(myFont2.getFamily(), FontWeight.NORMAL, myFont2.getSize());
         zarejestrujsietext.setFont(myFont1);
@@ -68,6 +66,15 @@ public class registercontroller {
     private Label zarejestrujsietext;
 
     @FXML
+    private Label error_dane;
+
+    @FXML
+    private Label error_haslo;
+
+    @FXML
+    private Label error_login;
+
+    @FXML
     void onclosewindow(MouseEvent event) {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();
@@ -99,11 +106,20 @@ public class registercontroller {
 
     @FXML
     void onsubmit(MouseEvent event){
+        hidefailuresign(event);
         org.example.db.dbloader l = new dbloader();
         String name = imie.getText();
         String last_name = nazwisko.getText();
         String log = login.getText();
         String has = haslo.getText();
+        if(has.isEmpty() || log.isEmpty() || last_name.isEmpty() || name.isEmpty()){
+            error_dane.setOpacity(1.0);
+            return;
+        }
+        if(has.length()<5){
+            error_haslo.setOpacity(1.0);
+            return;
+        }
         boolean res = l.tryRegister(name,last_name,log,has);
         res = l.tryLogin(log,has);
         if (res) {
@@ -125,7 +141,7 @@ public class registercontroller {
             parent = loader.load();
             homecontroller controller = loader.getController();
             controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko());
+            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
             stage.setResizable(false);
             stage.setResizable(true);
             stage.isMaximized();
@@ -137,12 +153,26 @@ public class registercontroller {
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add(getClass().getResource("/fxml.home/home.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
     void onfailure(MouseEvent event) {
-        //error.setOpacity(1.0);
+        error_login.setOpacity(1.0);
+    }
+
+    @FXML
+    void hidefailuresign(MouseEvent event) {
+        if(error_dane.getOpacity() == 1.0){
+        error_dane.setOpacity(0.0);
+        }
+        if(error_haslo.getOpacity() == 1.0) {
+            error_haslo.setOpacity(0.0);
+        }
+        if(error_login.getOpacity() == 1.0) {
+            error_login.setOpacity(0.0);
+        }
     }
 
 }

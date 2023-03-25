@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     static public User user = new User();
-    static public katalog kat = new katalog();
+    static public Katalog kat = new Katalog();
 
     @Override
     public void start(Stage stage) throws Exception{
