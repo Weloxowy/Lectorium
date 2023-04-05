@@ -124,7 +124,9 @@ public class homecontroller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init();
+            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            kat.init_lista();
+            kat.font();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

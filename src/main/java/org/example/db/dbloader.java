@@ -118,8 +118,6 @@ public class dbloader {
                 final String wydanie = resultSet.getString("wydanie");
                 final String isbn = resultSet.getString("isbn");
                 final String jezyk = resultSet.getString("jezyk");
-                //final String isbnstr = Double.toString(isbn);
-                //System.out.println("CHUJ" + isbnstr);
                 System.out.println(isbn);
                 String[] row = {nazwa, rok_wydania, wydanie, isbn, jezyk};
                 array.add(row);

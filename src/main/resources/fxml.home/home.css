@@ -32,3 +32,9 @@
 
 }
 
+.css_list{
+-fx-background-color:#f8f8f5;
+-fx-border-color: grey;
+-fx-text-fill: red;
+
+}

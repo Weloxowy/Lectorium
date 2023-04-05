@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,36 +26,40 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="1073.0" style="-fx-background-color: #f8f8f5;" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="1073.0" styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <children>
-                <TextField fx:id="searchbar" cache="true" layoutX="92.0" layoutY="9.0" pickOnBounds="false" prefHeight="2.0" prefWidth="467.0" promptText="Szybkie wyszukiwanie" style="-fx-border-radius: 15px; -fx-background-radius: 15px;">
+                <TextField fx:id="searchbar" cache="true" layoutX="88.0" layoutY="4.0" onMouseClicked="#searchbar_exited" onMouseExited="#searchbar_exited" onMouseReleased="#searchbar_exited" onTouchReleased="#searchbar_exited" pickOnBounds="false" prefHeight="40.0" prefWidth="466.0" promptText="Szybkie wyszukiwanie" styleClass="search_field">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </TextField>
-                <ImageView id="#avatar" fx:id="avatar" fitHeight="62.0" fitWidth="86.0" layoutX="636.0" pickOnBounds="true">
-                    <image>
-                        <Image url="@test.jpg" />
-                    </image>
-                </ImageView>
-                <Label fx:id="nametag" layoutX="772.0" layoutY="13.0" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko">
+                <Label fx:id="nametag" cache="true" layoutX="772.0" layoutY="13.0" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko" textFill="#0a0813">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Label>
+                <ImageView fx:id="avatar" fitHeight="62.0" fitWidth="62.0" layoutX="692.0" layoutY="-2.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@test.jpg" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="logout" fitHeight="40.0" fitWidth="63.0" layoutX="1030.0" layoutY="8.0" onMouseClicked="#logout_perform" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logout.png" />
+                    </image>
+                </ImageView>
             </children>
+            <effect>
+                <DropShadow height="35.57" radius="8.3925" width="0.0" />
+            </effect>
         </AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <AnchorPane cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <AnchorPane layoutX="-4.0" layoutY="-3.0" prefHeight="719.0" prefWidth="1101.0">
-               <children>
-                  <ListView fx:id="lista" editable="true" layoutX="-5.0" layoutY="-5.0" prefHeight="727.0" prefWidth="1107.0" />
-               </children>
-            </AnchorPane>
+            <ListView fx:id="lista" prefHeight="717.0" prefWidth="1102.0" styleClass="css_list" />
          </children></AnchorPane>
-        <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="251.0" spacing="15.0" style="-fx-background-color: #f8f8f5;" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+        <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <children>
-                <Label fx:id="labelglowna" prefHeight="50.0" prefWidth="267.0" text="Strona główna">
+                <Label fx:id="labelglowna" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Strona główna" textFill="#f6f2df">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin></Label>
@@ -65,28 +71,28 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelkatalog" prefHeight="50.0" prefWidth="266.0" text="Katalog książek" />
-                <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" text="Kategorie" />
-                <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" text="Nowości" />
+                <Label fx:id="labelkatalog" onMouseClicked="#katalog_klik" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
+                <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
+                <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" text="Twoje wypożyczenia" />
-                <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" text="Twoje rezerwacje" />
+                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+                <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelbiblioteka" prefHeight="50.0" prefWidth="276.0" text="Twoja biblioteka" />
+                <Label fx:id="labelbiblioteka" prefHeight="50.0" prefWidth="276.0" styleClass="font_menu_left" text="Twoja biblioteka" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="190.0" text="Kontakt">
+                <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="255.0" styleClass="font_menu_left" text="Kontakt" textFill="#f6f2df">
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin></Label>
@@ -95,14 +101,21 @@
                 <Insets left="10.0" />
             </padding>
         </VBox>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f8f8f5;">
+        <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up">
             <children>
-                <ImageView fitHeight="58.0" fitWidth="234.0" layoutX="22.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="62.0" fitWidth="215.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
                     <image>
-
+                        <Image url="@../res/Lectorium_full_logo.png" />
                     </image>
                 </ImageView>
             </children>
+            <effect>
+                <DropShadow height="35.57" radius="8.3925" width="0.0" />
+            </effect>
         </AnchorPane>
     </children>
+   <stylesheets>
+      <URL value="@home.css" />
+      <URL value="@home.css" />
+   </stylesheets>
 </GridPane>
