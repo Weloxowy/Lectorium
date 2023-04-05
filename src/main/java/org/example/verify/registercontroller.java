@@ -131,7 +131,7 @@ public class registercontroller {
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
-        Image icon = new Image("res/9k.png");
+        Image icon = new Image("res/Lectorium_logo.png");
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();

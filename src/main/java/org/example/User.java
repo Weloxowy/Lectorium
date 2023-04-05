@@ -2,14 +2,12 @@ package org.example;
 
 import javafx.scene.image.Image;
 
-import java.sql.Blob;
-
 public class User {
     String imie;
     String nazwisko;
     int id;
     String czy_admin;
-    Blob image;
+    Image image;
 
     public String getImie() {
         return imie;
@@ -43,11 +41,11 @@ public class User {
         this.czy_admin = czy_admin;
     }
 
-    public Blob getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 }

@@ -7,6 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import org.example.Main;
+import org.example.db.dbloader;
+
+import java.util.ArrayList;
+
+import static org.example.Main.dbload;
 
 public class katalogcontroller {
 
@@ -46,14 +52,42 @@ public class katalogcontroller {
     @FXML
     private TextField searchbar;
 
-
-    public void Katalog_lista(int id_katalog, String nazwa, String rok_wydania, String wydanie, String isbn, String jezyk)
+    public void init(){
+        Katalog_lista();
+    }
+    public void Katalog_lista()
     {
+        dbload.print_book();
+        System.out.println("test");
+        ObservableList<String[]> items = null;
+        System.out.println(dbload.array.size());
 
-        ObservableList<String> items = FXCollections.observableArrayList (
-                id_katalog+" | "+nazwa+ "", "", "");
+        for(String tab[]: dbload.array) {
+            String finalstr = "";
+            for (String text: tab) {
+                //lista.getItems().add(text);
+                finalstr = finalstr + " " + text;
+            }
+            lista.getItems().add(finalstr);
+        }
+    }
 
-        lista.setItems(items);
+    private String[] concatenateArrays(ArrayList<String[]> arrays) {
+        int totalLength = 0;
+        for (String[] array : arrays) {
+            totalLength += array.length;
+        }
+
+        String[] result = new String[totalLength];
+        int currentIndex = 0;
+
+        for (String[] array : arrays) {
+            for (String str : array) {
+                result[currentIndex++] = str;
+            }
+        }
+
+        return result;
     }
 
 }

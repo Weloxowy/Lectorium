@@ -16,10 +16,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.Main;
 import org.example.verify.logincontroller;
-import org.example.verify.registercontroller;
 
 import java.io.IOException;
-import java.sql.Blob;
 
 public class homecontroller {
 
@@ -41,7 +39,7 @@ public class homecontroller {
         searchbar.setFont(pop_med_bigger);
     }
     @FXML
-    private ImageView avatar;
+    private ImageView avatar = new ImageView();
 
 
     @FXML
@@ -83,16 +81,17 @@ public class homecontroller {
     void searchbar_exited(MouseEvent event) {
         searchbar.setFocusTraversable(false);
     }
-    public void init(String imie, String nazwisko, MouseEvent event, Blob image){ //zamienic na image
+    public void init(String imie, String nazwisko, MouseEvent event, Image image){ //zamienic na image
+        System.out.println(Main.user.getImage());
         nametag.setText(imie+" "+nazwisko);
         searchbar_exited(event);
-        //avatar.setImage(image);
+        avatar.setImage(Main.user.getImage());
     }
     @FXML
     void logout_perform(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
-        Image icon = new Image("res/9k.png");
+        Image icon = new Image("res/Lectorium_logo.png");
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();
@@ -124,15 +123,8 @@ public class homecontroller {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
-            katalogcontroller controller = loader.getController();
-            controller.Katalog_lista(
-                    Main.kat.getId_katalog(),
-                    Main.kat.getNazwa(),
-                    Main.kat.getRok_wydania(),
-                    Main.kat.getWydanie(),
-                    Main.kat.getIsbn(),
-                    Main.kat.getJezyk());
-            // TODO: 23.03.2023 Dodać arraya do przechowywania wszystkich danych z tabeli, a następnie przesłać go do katalog.fxml 
+            katalogcontroller kat = loader.getController();
+            kat.init();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,5 +133,6 @@ public class homecontroller {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
     }
+
 
 }

@@ -11,6 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -78,6 +81,17 @@ public class logincontroller {
     }
 
     @FXML
+    public void buttonPressed(KeyEvent event) //if ENTER is clicked, do sth
+    {
+        /*if(event.getCode() == KeyCode.ENTER) {
+            Button button = (Button) event.getSource();
+            Stage stage = (Stage) button.getScene().getWindow();
+            System.out.println("enter pressed");
+            onsubmit(button.getEventDispatcher());
+        }*/
+    }
+
+    @FXML
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent = null;
@@ -96,7 +110,7 @@ public class logincontroller {
     }
 
     @FXML
-    void onsubmit(MouseEvent event) {
+    void onsubmit(MouseEvent event) { //TODO dorzucić uruchamianie funkcji przy kliknieciu klawisza ENTER!
         error.setOpacity(0.0);
         org.example.db.dbloader l = new dbloader();
         String log = login.getText();
@@ -104,7 +118,7 @@ public class logincontroller {
         boolean res = l.tryLogin(log, has);
         if (res) {
             onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
-        } else if (!res) {
+        } else {
             onfailure(event);
         }
     }
@@ -112,7 +126,7 @@ public class logincontroller {
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
-        Image icon = new Image("res/9k.png");
+        Image icon = new Image("res/Lectorium_logo.png");
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();
@@ -142,6 +156,5 @@ public class logincontroller {
     void onfailure(MouseEvent event) {
         error.setOpacity(1.0);
     }
-
 }
 

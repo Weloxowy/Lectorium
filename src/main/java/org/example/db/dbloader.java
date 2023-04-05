@@ -1,22 +1,21 @@
 package org.example.db;
-
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.Main;
 import org.example.home.homecontroller;
 import org.example.verify.logincontroller;
-
 import javax.swing.*;
 import javax.swing.plaf.nimbus.State;
 import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class dbloader {
     private Connection connection;
     private Statement stat;
+    private ArrayList<String[]> data;
 
     public void connectToDatabase() {
         String url = "jdbc:sqlite:database.db";
@@ -57,12 +56,13 @@ public class dbloader {
                 int id = resultSet.getInt("id_uzytkownicy");
                 final String name = resultSet.getString("imie");
                 final String last_name = resultSet.getString("nazwisko");
-                final String full_name = (resultSet.getString("imie")+" "+resultSet.getString("nazwisko"));
+                final String full_name = (resultSet.getString("imie") + " " + resultSet.getString("nazwisko"));
                 final String czy_admin = resultSet.getString("czy_admin");
                 Main.user.setImie(name);
                 Main.user.setNazwisko(last_name);
                 Main.user.setCzy_admin(czy_admin);
                 Main.user.setId(id);
+                getimage(id);
                 resultSet.close();
                 closeConnection();
                 return true;
@@ -101,71 +101,69 @@ public class dbloader {
         return false;
     }
 
-    public void load_file(){
-        
-    }
+    public void load_file() {
 
-    public void print_book()
-    {
+    }
+    public ArrayList<String[]> array = new ArrayList<String[]>();
+    public void print_book() {
         connectToDatabase();
         String print = "SELECT id_katalog, nazwa, rok_wydania, wydanie, isbn, jezyk FROM katalog";
-
         try {
             PreparedStatement statement = connection.prepareStatement(print);
             ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) { //Accepted login
+            while (resultSet.next()) {
                 int id_katalog = resultSet.getInt("id_katalog");
                 final String nazwa = resultSet.getString("nazwa");
                 final String rok_wydania = resultSet.getString("rok_wydania");
                 final String wydanie = resultSet.getString("wydanie");
                 final String isbn = resultSet.getString("isbn");
                 final String jezyk = resultSet.getString("jezyk");
-                Main.kat.setId_katalog(id_katalog);
-                Main.kat.setNazwa(nazwa);
-                Main.kat.setRok_wydania(rok_wydania);
-                Main.kat.setWydanie(wydanie);
-                Main.kat.setIsbn(isbn);
-                Main.kat.setJezyk(jezyk);
-                resultSet.close();
-                closeConnection();
-            } else { //Wrong login or password
-                System.out.println("Błąd logowania");
-                resultSet.close();
-                closeConnection();
+                //final String isbnstr = Double.toString(isbn);
+                //System.out.println("CHUJ" + isbnstr);
+                System.out.println(isbn);
+                String[] row = {nazwa, rok_wydania, wydanie, isbn, jezyk};
+                array.add(row);
             }
+            System.out.println(array.size());
+            resultSet.close();
+            closeConnection();
         } catch (SQLException e) { //Error while connecting with DB
-            System.out.println("Error while connecting with DB: " + e.getMessage());
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         }
 
         closeConnection();
     }
 
-    void getimage(int id, ImageView imageView) {
-        connectToDatabase();//TODO jezeli zdjecie != NULL; dokonczyc konwersje bloba na image;zamienic parametry homecontroller
-        String print = "SELECT avatar FROM uzytkownicy WHERE id = ?";
+    public ArrayList<String[]> getData() {
+        return data;
+    }
+
+    public void getimage(int id) {
+        connectToDatabase();
+        String print = "SELECT avatar FROM uzytkownicy WHERE id_uzytkownicy = ?";
+        Image image;
         try {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                //Blob blob = resultSet.getBlob("avatar");
-                //InputStream is = blob.getBinaryStream();
-                //OutputStream os = new FileOutputStream(new File("photo.jpg"));
-                //byte[] content = new byte[1024];
-                //int size = 0;
-                //while((size = is.read(content)) != -1 ){
-                    //os.write(content,0,size);
-                //}
-                //Main.user.setImage(os);
+                InputStream binaryStream = resultSet.getBinaryStream("avatar");
+                if (binaryStream != null) {
+                    byte[] imageBytes = binaryStream.readAllBytes();
+                    image = new Image(new ByteArrayInputStream(imageBytes));
+                    binaryStream.close();
+                    Main.user.setImage(image);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error while getting image: " + e.getMessage());
             System.exit(100);
-        } finally {
-            closeConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        closeConnection();
     }
 }
+
 
