@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #faf8ee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.verify.registercontroller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#buttonPressed" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #faf8ee;" stylesheets="@verify.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.verify.registercontroller">
    <children>
-      <ImageView cacheHint="QUALITY" depthTest="ENABLE" fitHeight="400.0" fitWidth="318.0" layoutX="-8.0" mouseTransparent="true" pickOnBounds="true">
+      <ImageView cache="true" cacheHint="QUALITY" depthTest="ENABLE" fitHeight="406.0" fitWidth="328.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@p2.gif" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="300.0" layoutY="-2.0" prefHeight="406.0" prefWidth="318.0" style="-fx-border-color: #004aad; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #004aad;">
+      <AnchorPane layoutX="325.0" prefHeight="450.0" prefWidth="328.0" styleClass="panel">
          <effect>
             <DropShadow>
                <color>
@@ -29,21 +29,24 @@
             </DropShadow>
          </effect>
          <children>
-            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="136.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
-            <AnchorPane prefHeight="406.4" prefWidth="322.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <TextField fx:id="imie" layoutX="84.0" layoutY="121.0" onMouseClicked="#hidefailuresign" promptText="Imie" />
-                  <TextField fx:id="nazwisko" layoutX="84.0" layoutY="151.0" onMouseClicked="#hidefailuresign" promptText="Nazwisko" />
-                  <TextField fx:id="login" layoutX="84.0" layoutY="181.0" onMouseClicked="#hidefailuresign" promptText="Login" />
-                  <PasswordField fx:id="haslo" layoutX="84.0" layoutY="211.0" onMouseClicked="#hidefailuresign" promptText="Hasło (min. 5 znaków)" />
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="strzalkabutton" fitHeight="26.0" fitWidth="25.0" layoutX="141.0" layoutY="280.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="login" layoutX="63.0" layoutY="196.0" prefHeight="38.0" prefWidth="204.0" promptText="Login (min. 5 znaków)" styleClass="fields">
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
+            <PasswordField fx:id="haslo" layoutX="63.0" layoutY="244.0" prefHeight="38.0" prefWidth="204.0" promptText="Hasło (min. 5 znaków)" styleClass="fields">
+               <font>
+                  <Font size="16.0" />
+               </font></PasswordField>
+            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="63.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#onsubmit" prefHeight="38.0" prefWidth="204.0" text="Rejestracja" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
+            <ImageView fx:id="strzalkabutton" accessibleRole="BUTTON" fitHeight="20.0" fitWidth="25.0" layoutX="238.0" layoutY="334.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@forward.png" />
+                  <Image url="@../res/icons/light/login.png" />
                </image>
             </ImageView>
-            <Text fx:id="switchtologin" fill="#faf8ee" layoutX="1.0" layoutY="356.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Posiadasz konto? Zaloguj się" textAlignment="CENTER" underline="true" wrappingWidth="318.4000000000001">
+            <Text fx:id="switchtologin" fill="#faf8ee" fontSmoothingType="LCD" layoutX="1.0" layoutY="386.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="clickable_text" text="Posiadasz konto? Zaloguj się" textAlignment="CENTER" underline="true" wrappingWidth="328.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -51,36 +54,42 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="252.0" layoutY="14.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="289.0" layoutY="15.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@close.png" />
+                  <Image url="@../res/icons/light/close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="221.0" layoutY="27.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="248.0" layoutY="15.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
                <image>
-                  <Image url="@minimize.png" />
+                  <Image url="@../res/icons/light/remove.png" />
                </image>
             </ImageView>
-            <Label fx:id="zarejestrujsietext" alignment="CENTER" layoutX="-5.0" layoutY="48.0" prefHeight="68.0" prefWidth="318.0" text="Zarejestruj się" textAlignment="CENTER" textFill="#faf8ee">
+            <Label fx:id="error_dane" alignment="CENTER" layoutX="15.0" layoutY="289.0" opacity="0.0" prefHeight="26.0" prefWidth="304.0" styleClass="info" text="   Błędne dane  " textFill="#f2f2f2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="error_dane" layoutX="35.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="246.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Nieprawidłowe dane logowania  " textFill="#f2f2f2">
+            <Label fx:id="error_login" alignment="CENTER" layoutX="15.0" layoutY="289.0" opacity="0.0" prefHeight="26.0" prefWidth="304.0" styleClass="info" text="Taki użytkownik już istnieje" textFill="#f2f2f2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="error_login" layoutX="39.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="233.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Konto o takim loginie istnieje  " textFill="#f2f2f2">
+            <Label fx:id="error_haslo" alignment="CENTER" layoutX="15.0" layoutY="289.0" opacity="0.0" prefHeight="26.0" prefWidth="304.0" styleClass="info" text="Zbyt krótkie hasło" textFill="#f2f2f2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="error_haslo" layoutX="29.0" layoutY="243.0" opacity="0.0" prefHeight="27.0" prefWidth="271.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="  Wprowadzone hasło jest za krótkie  " textFill="#f2f2f2">
+            <Label fx:id="zarejestrujsietext" alignment="CENTER" layoutX="1.0" layoutY="58.0" mnemonicParsing="true" prefHeight="26.0" prefWidth="328.0" styleClass="h1" text="Zarejestruj się" />
+            <TextField fx:id="imie" layoutX="65.0" layoutY="103.0" prefHeight="38.0" prefWidth="204.0" promptText="Imię" styleClass="fields">
                <font>
                   <Font size="16.0" />
                </font>
-            </Label>
+            </TextField>
+            <TextField fx:id="nazwisko" layoutX="63.0" layoutY="150.0" prefHeight="38.0" prefWidth="204.0" promptText="Nazwisko" styleClass="fields">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>

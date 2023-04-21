@@ -11,9 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -23,24 +21,8 @@ import org.example.Main;
 import org.example.db.dbloader;
 import org.example.home.homecontroller;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 
 public class logincontroller {
-
-    public void font() {
-        Font myFont1 = null;
-        Font myFont2 = null;
-        myFont1 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 35);
-        zalogujsietext.setFont(myFont1);
-        myFont2 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
-        switchtoregister.setFont(myFont2);
-        /*Font myFont3 = Font.loadFont(getClass().getResourceAsStream("/res/Poppins-Medium.ttf"), 13);
-        haslo.setFont(myFont3); // niepoprawne znaki przy wprowadzanie hasla oraz zła proporcja
-        login.setFont(myFont3);*/
-    }
-
     @FXML
     private ImageView closebutton;
 
@@ -54,28 +36,40 @@ public class logincontroller {
     private ImageView minimizebutton;
 
     @FXML
-    private ImageView strzalkabutton;
-
-    @FXML
     private Button submit;
 
     @FXML
     private Text switchtoregister;
 
     @FXML
-    private Label zalogujsietext = new Label();
+    private Label zalogujsietext;
+
 
     @FXML
     private Label error;
 
+    public void font() {
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+
+        zalogujsietext.setFont(ssp_sb_h1);
+        submit.setFont(pop_r_h1);
+        haslo.setFont(pop_r_h2);
+        login.setFont(pop_r_h2);
+        error.setFont(pop_b_h1);
+        switchtoregister.setFont(pop_r_h2);
+    }
+
     @FXML
-    void onclosewindow(MouseEvent event) {
+    void onclosewindow() {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    void onminimalizewindow(MouseEvent event) {
+    void onminimalizewindow() {
         Stage stage = (Stage) minimizebutton.getScene().getWindow();
         stage.setIconified(true);
     }
@@ -126,7 +120,7 @@ public class logincontroller {
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
-        Image icon = new Image("res/Lectorium_logo.png");
+        Image icon = new Image("res/logo/Lectorium_logo.png");
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();
@@ -144,6 +138,7 @@ public class logincontroller {
             stage.setTitle("Lectorium alpha");
         } catch (IOException e) {
             throw new RuntimeException(e);
+
         }
         if (parent == null)
             return;

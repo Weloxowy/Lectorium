@@ -1,0 +1,41 @@
+.h1{
+    -fx-text-size: 22;
+    -fx-text-fill: #f3eed8;
+    -fx-font-kerning: normal;
+}
+
+.clickable_text{
+    -fx-text-fill: #f3eed8;
+    -fx-underline: true;
+}
+
+.panel{
+    -fx-border-color: NULL;
+    -fx-background-color: linear-gradient(#037cb9 40%,#004aad);
+    -fx-border-radius: 30;
+    -fx-background-radius: 0 0 0 30;
+}
+
+.fields{
+    -fx-background-color: NULL;
+    -fx-border-color: #f3eed8;
+    -fx-border-radius: 10;
+    -fx-text-fill: #f3eed8;
+}
+
+.button{
+    -fx-border-radius: 10;
+    -fx-border-color: #f3eed8;
+    -fx-background-radius: 10;
+    -fx-background-color: NULL;
+    -fx-border-width: 1;
+    -fx-text-fill: #f3eed8;
+}
+
+.button:hover{
+    -fx-border-width: 2;
+}
+
+.info{
+}
+

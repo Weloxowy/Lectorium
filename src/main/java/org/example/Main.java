@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.db.dbloader;
@@ -13,12 +14,12 @@ import java.io.IOException;
 
 public class Main extends Application {
     static public User user = new User();
-    static public Katalog kat = new Katalog();
+    static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null);
     static public dbloader dbload = new dbloader();
 
     @Override
     public void start(Stage stage) throws Exception{
-        Image icon = new Image("res/Lectorium_logo.png");
+        Image icon = new Image("res/logo/Lectorium_logo.png");
         stage.getIcons().add(icon);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
@@ -33,8 +34,6 @@ public class Main extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
     public static void main(String[] args) {
         launch();

@@ -1,14 +1,7 @@
 package org.example.db;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import org.example.Main;
-import org.example.home.homecontroller;
-import org.example.verify.logincontroller;
-import javax.swing.*;
-import javax.swing.plaf.nimbus.State;
-import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -39,8 +32,34 @@ public class dbloader {
 
     }
 
-    public void initializeDatabase() { //niewykorzystywane; zostawic na pozniej
-
+    public boolean testRegister(String login){
+        connectToDatabase();
+        String testUserSQL = "SELECT count(id_uzytkownicy) as cnt from uzytkownicy where login=?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(testUserSQL);
+            statement.setString(1,login);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("cnt");
+                closeConnection();
+                if(id==0){
+                    return true;
+                }
+                if(id>0 || id<0){
+                    return false;
+                }
+            } else { //Wrong login or password
+                System.out.println("Błąd logowania");
+                resultSet.close();
+                closeConnection();
+                return false;
+            }
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error inserting user: " + e.getMessage());
+            System.exit(100);
+        }
+        closeConnection();
+        return false;
     }
 
     public boolean tryLogin(String login, String password) {
@@ -63,7 +82,7 @@ public class dbloader {
                 Main.user.setCzy_admin(czy_admin);
                 Main.user.setId(id);
                 getimage(id);
-                resultSet.close();
+                //resultSet.close();  //jezeli nadal bedzie wywalalo uzytkownikow z ret 0 - odkomentowac linie
                 closeConnection();
                 return true;
             } else { //Wrong login or password
@@ -101,28 +120,27 @@ public class dbloader {
         return false;
     }
 
-    public void load_file() {
-
-    }
     public ArrayList<String[]> array = new ArrayList<String[]>();
     public void print_book() {
         connectToDatabase();
-        String print = "SELECT id_katalog, nazwa, rok_wydania, wydanie, isbn, jezyk FROM katalog";
+        String print = "SELECT katalog.id_katalog, autor.tytul_autora ,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa, katalog.rok_wydania, katalog.wydanie, katalog.isbn, katalog.jezyk, katalog.uwagi FROM katalog, autor WHERE katalog.autor_id_autor = autor.id_autor";
         try {
+            array.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id_katalog = resultSet.getInt("id_katalog");
                 final String nazwa = resultSet.getString("nazwa");
+                String nazwa_autora = "";
+                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
                 final String rok_wydania = resultSet.getString("rok_wydania");
                 final String wydanie = resultSet.getString("wydanie");
                 final String isbn = resultSet.getString("isbn");
                 final String jezyk = resultSet.getString("jezyk");
-                System.out.println(isbn);
-                String[] row = {nazwa, rok_wydania, wydanie, isbn, jezyk};
+                final String uwagi = resultSet.getString("uwagi");
+                String[] row = {String.valueOf(id_katalog),nazwa,nazwa_autora, rok_wydania, wydanie, isbn, jezyk, uwagi};
                 array.add(row);
             }
-            System.out.println(array.size());
             resultSet.close();
             closeConnection();
         } catch (SQLException e) { //Error while connecting with DB
@@ -153,6 +171,10 @@ public class dbloader {
                     binaryStream.close();
                     Main.user.setImage(image);
                 }
+                else{
+                    Image def = new Image("/res/icons/dark/avatar.png");
+                    Main.user.setImage(def);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error while getting image: " + e.getMessage());
@@ -162,6 +184,39 @@ public class dbloader {
         }
         closeConnection();
     }
+
+    public void get_cover(int id){
+        connectToDatabase();
+        String print = "SELECT okladka FROM katalog WHERE id_katalog = ?";
+        Image image;
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                InputStream binaryStream = resultSet.getBinaryStream("okladka");
+                if (binaryStream != null) {
+                    byte[] imageBytes = binaryStream.readAllBytes();
+                    image = new Image(new ByteArrayInputStream(imageBytes));
+                    binaryStream.close();
+                    Main.kat.setOkladka(image);
+                    System.out.println(image);//usuniecie
+                }
+                else{
+                    Image def = new Image("/fxml.home/Brakokładki.jpg");
+                    Main.kat.setOkladka(def);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while getting image: " + e.getMessage());
+            System.exit(100);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        closeConnection();
+    }
+
+
 }
 
 

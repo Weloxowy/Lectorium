@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -25,15 +26,6 @@ import org.example.home.homecontroller;
 import java.io.IOException;
 
 public class registercontroller {
-
-    public void font(){
-        Font myFont1 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-SemiBold.ttf"), 35);
-        Font myFont2 = Font.loadFont(getClass().getResourceAsStream("/res/SourceSerifPro-Regular.ttf"), 13);
-        myFont1 = Font.font(myFont1.getFamily(), FontWeight.SEMI_BOLD, myFont1.getSize());
-        myFont2 = Font.font(myFont2.getFamily(), FontWeight.NORMAL, myFont2.getSize());
-        zarejestrujsietext.setFont(myFont1);
-        switchtologin.setFont(myFont2);
-    }
 
     @FXML
     private ImageView closebutton;
@@ -73,6 +65,24 @@ public class registercontroller {
 
     @FXML
     private Label error_login;
+
+    public void font(){
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+
+        zarejestrujsietext.setFont(ssp_sb_h1);
+        submit.setFont(pop_r_h1);
+        haslo.setFont(pop_r_h2);
+        login.setFont(pop_r_h2);
+        imie.setFont(pop_r_h2);
+        nazwisko.setFont(pop_r_h2);
+        switchtologin.setFont(pop_r_h2);
+        error_dane.setFont(pop_b_h1);
+        error_haslo.setFont(pop_b_h1);
+        error_login.setFont(pop_b_h1);
+    }
 
     @FXML
     void onclosewindow(MouseEvent event) {
@@ -120,18 +130,23 @@ public class registercontroller {
             error_haslo.setOpacity(1.0);
             return;
         }
-        boolean res = l.tryRegister(name,last_name,log,has);
-        res = l.tryLogin(log,has);
-        if (res) {
-            onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
-        } else if (!res) {
-            onfailure(event);
+        if(l.testRegister(log)==true) {
+            boolean res = l.tryRegister(name, last_name, log, has);
+            res = l.tryLogin(log, has);
+            if (res) {
+                onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
+            } else if (!res) {
+                onfailure(event);
+            }
+        }
+        else{
+            error_login.setOpacity(1.0);
         }
     }
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
-        Image icon = new Image("res/Lectorium_logo.png");
+        Image icon = new Image("res/logo/Lectorium_logo.png");
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();
@@ -173,6 +188,10 @@ public class registercontroller {
         if(error_login.getOpacity() == 1.0) {
             error_login.setOpacity(0.0);
         }
+    }
+    @FXML
+    public void buttonPressed(KeyEvent event) //if ENTER is clicked, do sth
+    {
     }
 
 }

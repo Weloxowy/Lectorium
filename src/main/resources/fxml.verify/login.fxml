@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#buttonPressed" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #faf8ee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.verify.logincontroller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#buttonPressed" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #faf8ee;" stylesheets="@verify.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.verify.logincontroller">
    <children>
-      <ImageView fx:id="gif" cache="true" cacheHint="QUALITY" depthTest="ENABLE" fitHeight="400.0" fitWidth="318.0" layoutX="-8.0" pickOnBounds="true">
+      <ImageView cache="true" cacheHint="QUALITY" depthTest="ENABLE" fitHeight="406.0" fitWidth="328.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@p2.gif" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="300.0" layoutY="-3.0" prefHeight="406.0" prefWidth="306.0" style="-fx-border-color: #004aad; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #004aad;">
+      <AnchorPane layoutX="325.0" prefHeight="450.0" prefWidth="328.0" styleClass="panel">
          <effect>
             <DropShadow>
                <color>
@@ -29,20 +29,24 @@
             </DropShadow>
          </effect>
          <children>
-            <Label fx:id="zalogujsietext" alignment="CENTER" depthTest="ENABLE" layoutX="-1.0" layoutY="49.0" prefHeight="68.0" prefWidth="318.0" style="-fx-font-smoothing-type: LCD; -fx-text-rendering: optimizeLegibility;" text="Zaloguj się" textAlignment="CENTER" textFill="WHITE">
+            <TextField fx:id="login" layoutX="63.0" layoutY="133.0" prefHeight="38.0" prefWidth="204.0" promptText="Login" styleClass="fields">
                <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="haslo" layoutX="84.0" layoutY="181.0" promptText="Hasło" />
-            <TextField fx:id="login" layoutX="84.0" layoutY="141.0" promptText="Login" />
-            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="135.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#onclosewindow" prefHeight="35.0" prefWidth="36.0" style="-fx-border-radius: 20px; -fx-border-color: #faf8ee; -fx-background-radius: 20px; -fx-background-color: #faf8ee;" text="   " textOverrun="LEADING_ELLIPSIS" />
-            <ImageView fx:id="strzalkabutton" fitHeight="26.0" fitWidth="25.0" layoutX="141.0" layoutY="280.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
+                  <Font size="16.0" />
+               </font></TextField>
+            <PasswordField fx:id="haslo" layoutX="63.0" layoutY="194.0" prefHeight="38.0" prefWidth="204.0" promptText="Hasło" styleClass="fields">
+               <font>
+                  <Font size="16.0" />
+               </font></PasswordField>
+            <Button fx:id="submit" contentDisplay="BOTTOM" ellipsisString="  " layoutX="63.0" layoutY="313.0" mnemonicParsing="false" onMouseClicked="#onsubmit" prefHeight="38.0" prefWidth="204.0" text="Logowanie" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
+            <ImageView fx:id="strzalkabutton" accessibleRole="BUTTON" fitHeight="20.0" fitWidth="25.0" layoutX="238.0" layoutY="322.0" onMouseClicked="#onsubmit" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@forward.png" />
+                  <Image url="@../res/icons/light/login.png" />
                </image>
             </ImageView>
-            <Text fx:id="switchtoregister" fill="#faf8ee" layoutX="41.0" layoutY="356.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-smoothing-type: lcd; -fx-text-rendering: optimizeLegibility;" text="Nie posiadasz konta? Zarejestruj się" underline="true">
+            <Text fx:id="switchtoregister" fill="#faf8ee" fontSmoothingType="LCD" layoutX="1.0" layoutY="386.0" onMouseClicked="#onregisterclicked" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="clickable_text" text="Nie posiadasz konta? Zarejestruj się" textAlignment="CENTER" underline="true" wrappingWidth="328.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -50,21 +54,22 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="252.0" layoutY="14.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closebutton" fitHeight="26.0" fitWidth="25.0" layoutX="289.0" layoutY="15.0" onMouseClicked="#onclosewindow" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@close.png" />
+                  <Image url="@../res/icons/light/close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="221.0" layoutY="27.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="minimizebutton" fitHeight="25.0" fitWidth="25.0" layoutX="248.0" layoutY="15.0" onMouseClicked="#onminimalizewindow" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
                <image>
-                  <Image url="@minimize.png" />
+                  <Image url="@../res/icons/light/remove.png" />
                </image>
             </ImageView>
-            <Label fx:id="error" layoutX="71.0" layoutY="229.0" opacity="0.0" style="-fx-border-color: #ff2201; -fx-border-radius: 30px 20px; -fx-background-color: #ff2201; -fx-background-radius: 30px 20px;" text="   Błąd uwierzytelniania   " textFill="#f2f2f2">
+            <Label fx:id="error" alignment="CENTER" layoutX="14.0" layoutY="266.0" opacity="0.0" prefHeight="26.0" prefWidth="304.0" styleClass="info" text="   Błąd uwierzytelniania   " textFill="#f2f2f2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <Label fx:id="zalogujsietext" alignment="CENTER" layoutX="2.0" layoutY="66.0" mnemonicParsing="true" prefHeight="26.0" prefWidth="328.0" styleClass="h1" text="Zaloguj się" />
          </children>
       </AnchorPane>
    </children>

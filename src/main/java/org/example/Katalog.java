@@ -1,58 +1,136 @@
 package org.example;
 
-public class Katalog {
-    int id_katalog;
-    String nazwa;
-    String rok_wydania;
-    String wydanie;
-    String isbn;
-    String jezyk;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
-    public int getId_katalog() {
+public class Katalog {
+    ReadOnlyIntegerWrapper id_katalog;
+    SimpleStringProperty nazwa;
+    SimpleStringProperty rok_wydania;
+    SimpleStringProperty wydanie;
+    SimpleStringProperty isbn;
+    SimpleStringProperty jezyk;
+    SimpleStringProperty nazwa_autora;
+    SimpleStringProperty uwagi;
+    Image okladka; //okladka nie jest pobierana w tabeli bo szkoda pamieci
+
+    public Katalog(int id_katalog, String nazwa, String nazwa_autora, String rok_wydania, String wydanie, String isbn, String jezyk,String uwagi) {
+        this.id_katalog = new ReadOnlyIntegerWrapper(id_katalog);
+        this.nazwa = new SimpleStringProperty(nazwa);
+        this.rok_wydania = new SimpleStringProperty(rok_wydania);
+        this.wydanie = new SimpleStringProperty(wydanie);
+        this.isbn = new SimpleStringProperty(isbn);
+        this.jezyk = new SimpleStringProperty(jezyk);
+        this.nazwa_autora = new SimpleStringProperty(nazwa_autora);
+        this.uwagi = new SimpleStringProperty(uwagi);
+    }
+    public ReadOnlyIntegerWrapper id_katalogProperty() {
         return id_katalog;
     }
 
-    public void setId_katalog(int id_katalog) {
-        this.id_katalog = id_katalog;
+    public ReadOnlyIntegerProperty getId_katalog() {
+        return id_katalog.getReadOnlyProperty();
+    }
+
+    public void setId_katalog(Integer id_katalog) {
+        this.id_katalog.set(id_katalog);
     }
 
     public String getNazwa() {
-        return this.nazwa;
+        return nazwa.get();
+    }
+
+    public SimpleStringProperty nazwaProperty() {
+        return nazwa;
     }
 
     public void setNazwa(String nazwa) {
-        this.nazwa = nazwa;
+        this.nazwa.set(nazwa);
     }
 
     public String getRok_wydania() {
-        return this.rok_wydania;
+        return rok_wydania.get();
+    }
+
+    public SimpleStringProperty rok_wydaniaProperty() {
+        return rok_wydania;
     }
 
     public void setRok_wydania(String rok_wydania) {
-        this.rok_wydania = rok_wydania;
+        this.rok_wydania.set(rok_wydania);
     }
 
     public String getWydanie() {
+        return wydanie.get();
+    }
+
+    public SimpleStringProperty wydanieProperty() {
         return wydanie;
     }
 
     public void setWydanie(String wydanie) {
-        this.wydanie = wydanie;
+        this.wydanie.set(wydanie);
     }
 
     public String getIsbn() {
-        return this.isbn;
+        return isbn.get();
+    }
+
+    public SimpleStringProperty isbnProperty() {
+        return isbn;
     }
 
     public void setIsbn(String isbn) {
-        this.isbn = isbn;
+        this.isbn.set(isbn);
     }
 
     public String getJezyk() {
-        return this.jezyk;
+        return jezyk.get();
+    }
+
+    public SimpleStringProperty jezykProperty() {
+        return jezyk;
     }
 
     public void setJezyk(String jezyk) {
-        this.jezyk = jezyk;
+        this.jezyk.set(jezyk);
+    }
+
+    public String getNazwa_autora() {
+        return nazwa_autora.get();
+    }
+
+    public SimpleStringProperty nazwa_autoraProperty() {
+        return nazwa_autora;
+    }
+
+    public void setNazwa_autora(String nazwa_autora) {
+        this.nazwa_autora.set(nazwa_autora);
+    }
+
+    public String getUwagi() {
+        return uwagi.get();
+    }
+
+    public SimpleStringProperty uwagiProperty() {
+        return uwagi;
+    }
+
+    public void setUwagi(String uwagi) {
+        this.uwagi.set(uwagi);
+    }
+
+    public Image okladkaProperty() {
+        return okladka;
+    }
+
+    public Image getOkladka() {
+        return okladka;
+    }
+
+    public void setOkladka(Image okladka) {
+        this.okladka = okladka;
     }
 }
