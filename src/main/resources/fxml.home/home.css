@@ -62,14 +62,18 @@
 .table-view .column-header-background .filler,
 .table-view .corner {
     -fx-background-color: transparent;
+        -fx-font-size: 12px;
+        -fx-font-family: Bitter;
 }
 /* naglowki */
 .table-view .column-header-background{
     -fx-background-color: #037cb9;
-    -fx-background-insets: 0 11px 0 0;
+    -fx-background-insets: 0 11 0 0;
     -fx-padding: 0 5px 5px 0;
-    -fx-background-radius: 5 0 0 5;
-    -fx-font: 13px 'SourceSerifPro-Bold';
+    -fx-background-radius: 5 5 5 5;
+    -fx-font-size: 14px;
+    -fx-font-family: Poppins;
+    -fx-font-weight: 900;
     -fx-text-fill: #f3eed8;
 }
 
@@ -81,7 +85,6 @@
 .table-view .row-cell:filled{
     -fx-border-color: transparent;
     -fx-padding: 0 0 0 10px;
-    -fx-font: 13px 'SourceSerifPro-Bold';
 }
 
 .table-row-cell:empty {

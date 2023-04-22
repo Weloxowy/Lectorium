@@ -71,7 +71,7 @@
         </HBox>
         <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <children>
-                <Label fx:id="labelglowna" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Strona główna" textFill="#f6f2df">
+                <Label fx:id="labelglowna" onMouseClicked="#glowna_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Strona główna" textFill="#f6f2df">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin></Label>
@@ -83,8 +83,8 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelkatalog" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
-                <Label fx:id="labelkategorie" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
+                <Label fx:id="labelkatalog" onMouseClicked="#katalog_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
+                <Label fx:id="labelkategorie" onMouseClicked="#kategorie_clicked" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
                 <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
@@ -104,7 +104,7 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="255.0" styleClass="font_menu_left" text="Kontakt" textFill="#f6f2df">
+                <Label fx:id="labelkontakt" onMouseClicked="#contact_clicked" prefHeight="50.0" prefWidth="255.0" styleClass="font_menu_left" text="Kontakt" textFill="#f6f2df">
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin></Label>

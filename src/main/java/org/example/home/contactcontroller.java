@@ -21,7 +21,7 @@ import org.example.verify.logincontroller;
 
 import java.io.IOException;
 
-public class contactcontroller {
+public class contactcontroller extends home{
     @FXML
     private VBox kontakt_id;
     @FXML
@@ -61,35 +61,6 @@ public class contactcontroller {
 
     @FXML
     private TextField searchbar;
-
-    @FXML
-    void logout_perform(MouseEvent event) {
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        Image icon = new Image("res/logo/Lectorium_logo.png");
-        stage.getIcons().add(icon);
-        final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        oldstage.close();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
-            parent = loader.load();
-            logincontroller controller = loader.getController();
-            controller.font();
-            stage.setResizable(false);
-            stage.setResizable(true);
-            stage.isMaximized();
-            stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if(parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     void images_view(){
         double centerXa1 = contact_img.getBoundsInLocal().getWidth();

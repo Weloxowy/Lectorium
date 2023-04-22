@@ -72,7 +72,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <AnchorPane fx:id="anchortable" layoutX="1.0" layoutY="431.0" prefHeight="279.0" prefWidth="1094.0" />
+            <AnchorPane fx:id="anchortable" layoutX="1.0" layoutY="431.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="279.0" prefWidth="1094.0" />
          </children></AnchorPane>
         <VBox fx:id="menubox" cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <children>

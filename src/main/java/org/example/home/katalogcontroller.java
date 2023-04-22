@@ -28,7 +28,7 @@ import java.io.IOException;
 
 import static org.example.Main.dbload;
 
-public class katalogcontroller {
+public class katalogcontroller extends home{
     @FXML
     public void font() {
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
@@ -105,7 +105,7 @@ public class katalogcontroller {
         idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
-        //idCol.setVisible(false);
+            idCol.setVisible(false);
 
         TableColumn autorCol = new TableColumn("Autor");
         autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
@@ -234,78 +234,6 @@ public class katalogcontroller {
         stage.setScene(scene);
     }
 
-    @FXML
-    void logout_perform(MouseEvent event) {
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        Image icon = new Image("res/logo/Lectorium_logo.png");
-        stage.getIcons().add(icon);
-        final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        oldstage.close();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
-            parent = loader.load();
-            logincontroller controller = loader.getController();
-            controller.font();
-            stage.setResizable(false);
-            stage.setResizable(true);
-            stage.isMaximized();
-            stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    void glowna_clicked(MouseEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
-            parent = loader.load();
-            homecontroller controller = loader.getController();
-            controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    void katalog_clicked(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
-            parent = loader.load();
-            katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            kat.init_lista();
-            kat.font();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
-    void searchbar_exited(String key) {
-        searchbar.setText(key);
-    }
-
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
@@ -321,23 +249,5 @@ public class katalogcontroller {
         avatar.setClip(clipCircle);
     }
 
-    @FXML
-    void kategorie_clicked(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/kategorie.fxml"));
-            parent = loader.load();
-            kategoriecontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            kat.font();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
     //TODO dodać menu slider
 }

@@ -11,7 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,7 +22,10 @@ import javafx.stage.StageStyle;
 import org.example.Main;
 import org.example.db.dbloader;
 import org.example.home.homecontroller;
+import org.w3c.dom.events.Event;
+
 import java.io.IOException;
+import java.util.Objects;
 
 public class logincontroller {
     @FXML
@@ -75,20 +80,20 @@ public class logincontroller {
     }
 
     @FXML
-    public void buttonPressed(KeyEvent event) //if ENTER is clicked, do sth
-    {
-        /*if(event.getCode() == KeyCode.ENTER) {
-            Button button = (Button) event.getSource();
-            Stage stage = (Stage) button.getScene().getWindow();
-            System.out.println("enter pressed");
-            onsubmit(button.getEventDispatcher());
-        }*/
+    public void buttonPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            event.consume(); // przechwycenie klawisza Enter
+            submit.fireEvent(new MouseEvent(
+                    MouseEvent.MOUSE_CLICKED,
+                    100, 100, 0, 0, MouseButton.PRIMARY, 1,
+                    false, false, false, false,false,false,false,false,false,false,null)); // wywołanie zdarzenia MouseEvent
+        }
     }
 
     @FXML
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
+        Parent parent;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/register.fxml"));
             parent = loader.load();
@@ -113,7 +118,7 @@ public class logincontroller {
         if (res) {
             onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
         } else {
-            onfailure(event);
+            onfailure();
         }
     }
 
@@ -124,7 +129,7 @@ public class logincontroller {
         stage.getIcons().add(icon);
         final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         oldstage.close();
-        Parent parent = null;
+        Parent parent;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
             parent = loader.load();
@@ -142,12 +147,12 @@ public class logincontroller {
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
-        scene.getStylesheets().add(getClass().getResource("/fxml.home/home.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
-    void onfailure(MouseEvent event) {
+    void onfailure() {
         error.setOpacity(1.0);
     }
 }

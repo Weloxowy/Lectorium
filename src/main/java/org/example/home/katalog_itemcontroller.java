@@ -17,8 +17,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,25 +33,26 @@ import java.io.IOException;
 
 import static org.example.Main.dbload;
 
-public class katalog_itemcontroller {
+public class katalog_itemcontroller extends home{
 
     @FXML
     public void font() {
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),20);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
         nametag.setFont(ssp_sb_h1);
-        labelbiblioteka.setFont(pop_b_h1);
-        labelglowna.setFont(pop_b_h1);
-        labelkatalog.setFont(pop_b_h1);
-        labelkontakt.setFont(pop_b_h1);
-        labelkategorie.setFont(pop_b_h1);
-        labelnowosci.setFont(pop_b_h1);
-        labelrezerwacje.setFont(pop_b_h1);
-        labelwypozyczenia.setFont(pop_b_h1);
+        labelbiblioteka.setFont(pop_b_h2);
+        labelglowna.setFont(pop_b_h2);
+        labelkatalog.setFont(pop_b_h2);
+        labelkontakt.setFont(pop_b_h2);
+        labelkategorie.setFont(pop_b_h2);
+        labelnowosci.setFont(pop_b_h2);
+        labelrezerwacje.setFont(pop_b_h2);
+        labelwypozyczenia.setFont(pop_b_h2);
         searchbar.setFont(pop_r_h1);
-        title_book.setFont(pop_b_h1);
+        title_book.setFont(ssp_sb_h1);
         author_book.setFont(pop_r_h1);
         isbn_book.setFont(pop_r_h1);
         publisher_book.setFont(pop_r_h1);
@@ -127,89 +130,17 @@ public class katalog_itemcontroller {
     private TableView<Egzemplarze> lista = new TableView<Egzemplarze>();
 
     void load(int id){ //ladujemy po lp. wiersza z tabeli
-        String[] tab = dbload.array.get(id); //TODO dołożyc w zapytaniu wydawnictwo, poprawić CSS, dodać ikony i zmienić układ
+        String[] tab = dbload.array.get(id);
         if(tab[0]!=null){
-            author_book.setText(tab[2]);
-            title_book.setText(tab[1]);
-            year_book.setText(tab[3]);
-            publisher_book.setText(tab[8]);
-            isbn_book.setText(tab[5]);
-            String text = tab[1].substring(0,5);
+            author_book.setText("Autor: "+tab[2]);
+            title_book.setText("\""+tab[1]+"\"");
+            year_book.setText("Rok wydania: "+tab[3]);
+            publisher_book.setText("Wydawnictwo: "+tab[8]);
+            isbn_book.setText("ISBN: "+tab[5]);
+            String text = tab[1].substring(0,8);
             background_tytul.setText(text);
             egzemplarz_lista(id+1);
         }
-    }
-    @FXML
-    void glowna_clicked(MouseEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
-            parent = loader.load();
-            homecontroller controller = loader.getController();
-            controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    void katalog_clicked(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
-            parent = loader.load();
-            katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            kat.init_lista();
-            kat.font();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    void kategorie_clicked(MouseEvent event) {
-
-    }
-
-    @FXML
-    void logout_perform(MouseEvent event) {
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        Image icon = new Image("res/Lectorium_logo.png");
-        stage.getIcons().add(icon);
-        final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        oldstage.close();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
-            parent = loader.load();
-            logincontroller controller = loader.getController();
-            controller.font();
-            stage.setResizable(false);
-            stage.setResizable(true);
-            stage.isMaximized();
-            stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
@@ -224,6 +155,11 @@ public class katalog_itemcontroller {
         cover_book.setImage(Main.kat.getOkladka());
         avatar_view();
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
+        cover_view();
+        AnchorPane.setTopAnchor(anchor, 0.0);
+        AnchorPane.setLeftAnchor(anchor, 0.0);
+        AnchorPane.setBottomAnchor(anchor, 0.0);
+        AnchorPane.setRightAnchor(anchor, 0.0); //TODO tabela bez zmian
     }
 
     void avatar_view() {
@@ -250,7 +186,7 @@ public class katalog_itemcontroller {
                 new PropertyValueFactory<>("id_egzemplarze"));
 
         TableColumn lokalizacjaCol = new TableColumn("Lokalizacja");
-        lokalizacjaCol.setMinWidth(anchortable.getPrefWidth()*0.20);
+        lokalizacjaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
         lokalizacjaCol.setCellValueFactory(
                 new PropertyValueFactory<>("lokalizacja"));
 
@@ -260,14 +196,14 @@ public class katalog_itemcontroller {
                 new PropertyValueFactory<>("czy_dostepne"));
 
         TableColumn zwrotCol = new TableColumn("Data zwrotu");
-        zwrotCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        zwrotCol.setMinWidth(anchortable.getPrefWidth()*0.25);
         zwrotCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
-        /*TableColumn isbnCol = new TableColumn("ISBN");
+        /*TableColumn isbnCol = new TableColumn("ISBN");//todo guzik wypozyczenia ksiazki; aktywny jak czydost = T
         isbnCol.setMinWidth(anchortable.getPrefWidth()*0.2);
         isbnCol.setCellValueFactory(
-                new PropertyValueFactory<>("isbn"));*/ //zostawić na guzik wypożycz
+                new PropertyValueFactory<>("isbn"));*/
 
         for (String[] tab : dbload.copy) {
             String nazwa = tab[0];
@@ -275,7 +211,6 @@ public class katalog_itemcontroller {
             String lokalizacja = tab[2];
             String czy_dostepne = tab[3];
             String data_zwrotu = tab[4];
-            System.out.println(nazwa+" "+id_egzemplarze+" "+lokalizacja+" "+czy_dostepne+" "+data_zwrotu);
             items.add(new Egzemplarze(nazwa,id_egzemplarze,lokalizacja,czy_dostepne,data_zwrotu));
         }
         //Dodaj wartości do kolumn
@@ -293,10 +228,10 @@ public class katalog_itemcontroller {
         // Dodaj TableView do AnchorPane
         anchortable.getChildren().addAll(lista);
         // Ustaw parametry kotwiczenia TableView na wartość 0
-        AnchorPane.setTopAnchor(lista, 0.0);
-        AnchorPane.setLeftAnchor(lista, 0.0);
-        AnchorPane.setBottomAnchor(lista, 0.0);
-        AnchorPane.setRightAnchor(lista, 0.0);
+        AnchorPane.setTopAnchor(anchor, 0.0);
+        AnchorPane.setLeftAnchor(anchortable, 0.0);
+        AnchorPane.setBottomAnchor(anchor, 0.0);
+        AnchorPane.setRightAnchor(anchortable, 0.0);
         //dodaj css
         lista.getStylesheets().add("/fxml.home/home.css");
 
@@ -310,5 +245,14 @@ public class katalog_itemcontroller {
                 katalog_item(event,data,row);//get data
             }
         });*/
+    }
+
+    void cover_view() {
+        double centerX = cover_book.getBoundsInLocal().getWidth();
+        double centerY = cover_book.getBoundsInLocal().getHeight();
+        Rectangle rectangle = new Rectangle(centerX, centerY);
+        rectangle.setArcWidth(10.0);
+        rectangle.setArcHeight(10.0);
+        cover_book.setClip(rectangle);
     }
 }

@@ -3,6 +3,7 @@ import javafx.scene.image.Image;
 import org.example.Main;
 import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -240,8 +241,8 @@ public class dbloader {
                 int id_egzemplarze = resultSet.getInt("id_egzemplarze");
                 final String lokalizacja = resultSet.getString("lokalizacja");
                 final String czy_dostepne = resultSet.getString("czy_dostepne");
-                final Date data_zwrotu = resultSet.getDate("data_zwrotu");
-                String[] row = {nazwa,String.valueOf(id_egzemplarze),lokalizacja,czy_dostepne,String.valueOf(data_zwrotu)};
+                final String data_zwrotu = resultSet.getString("data_zwrotu");
+                String[] row = {nazwa,String.valueOf(id_egzemplarze),lokalizacja,czy_dostepne,data_zwrotu};
                 copy.add(row);
             }
             resultSet.close();

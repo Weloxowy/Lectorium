@@ -21,7 +21,7 @@ import org.example.verify.logincontroller;
 
 import java.io.IOException;
 
-public class kategoriecontroller {
+public class kategoriecontroller extends home{
 
     @FXML
     public void font() {
@@ -92,76 +92,7 @@ public class kategoriecontroller {
     private TextField searchbar;
 
     @FXML
-    void katalog_clicked(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
-            parent = loader.load();
-            katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            kat.init_lista();
-            kat.font();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    void logout_perform(MouseEvent event) {
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        Image icon = new Image("res/Lectorium_logo.png");
-        stage.getIcons().add(icon);
-        final Stage oldstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        oldstage.close();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
-            parent = loader.load();
-            logincontroller controller = loader.getController();
-            controller.font();
-            stage.setResizable(false);
-            stage.setResizable(true);
-            stage.isMaximized();
-            stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
     void searchbar_exited(MouseEvent event) {
 
     }
-
-    @FXML
-    void glowna_clicked(MouseEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
-            parent = loader.load();
-            homecontroller controller = loader.getController();
-            controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-    }
-
 }
