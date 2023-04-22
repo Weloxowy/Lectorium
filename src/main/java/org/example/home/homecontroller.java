@@ -215,4 +215,38 @@ public class homecontroller {
         stage.setScene(scene);
     }
 
+    @FXML
+    void katalog_clicked_with_param(MouseEvent event, String key) { //najpewniej do usuniecia
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent parent = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
+            parent = loader.load();
+            katalogcontroller kat = loader.getController();
+            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            kat.init_lista();
+            kat.font();
+            kat.searchbar_exited(key);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (parent == null)
+            return;
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+    }
+
+    @FXML
+    void banner_clicked(MouseEvent event) { //TODO dokończyc
+       if(event.getSource().equals(image_a1)){
+           /*String text = "Houellebecq";
+           katalog_clicked_with_param(event,text);*/
+       }
+       else if(event.getSource().equals(image_b1)){
+           //System.out.println("BBB");
+       }
+       else if(event.getSource().equals(image_b2)){
+           //System.out.println("CCC");
+       }
+    }
 }

@@ -9,66 +9,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/kategoriecontroller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/Brakokładki.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/a1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/b1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/b2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/biblioteka.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/verify.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/font/Poppins-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/font/Poppins-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/font/Poppins-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/font/Poppins-SemiBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/arrow_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/bookmark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/login.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/remove.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/dark/search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/light/arrow_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/light/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/light/login.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/icons/light/remove.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/res/logo/Lectorium_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Egzemplarze.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/registercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/registercontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/logout.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/test.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/forward.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/minimize.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/9k.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/res/logo/9k.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/Lectorium_full_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/res/logo/Lectorium_full_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/Lectorium_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/SourceSerifPro-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/res/font/SourceSerifPro-Bold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/SourceSerifPro-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/SourceSerifPro-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/res/font/SourceSerifPro-Regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/res/SourceSerifPro-SemiBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/res/font/SourceSerifPro-SemiBold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,12 +31,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -188,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679742341759</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="v0.4">
+      <created>1682081673278</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682081673278</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,7 +166,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="Paweł" />
                       </list>
                     </value>
                   </entry>
@@ -230,9 +194,9 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
