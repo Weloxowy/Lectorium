@@ -105,7 +105,7 @@ public class katalogcontroller {
         idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
-        idCol.setVisible(false);
+        //idCol.setVisible(false);
 
         TableColumn autorCol = new TableColumn("Autor");
         autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
@@ -151,7 +151,8 @@ public class katalogcontroller {
             String isbn = tab[5];
             String jezyk = tab[6];
             String uwagi = tab[7];
-            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi));
+            String wydawnictwo = tab[8];
+            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
@@ -301,14 +302,12 @@ public class katalogcontroller {
         stage.setScene(scene);
     }
 
-    @FXML
-    void searchbar_exited(MouseEvent event) {
-
+    void searchbar_exited(String key) {
+        searchbar.setText(key);
     }
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
         nametag.setText(imie + " " + nazwisko);
-        searchbar_exited(event);
         avatar.setImage(Main.user.getImage());
         avatar_view();
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));

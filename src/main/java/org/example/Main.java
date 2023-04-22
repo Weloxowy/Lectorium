@@ -9,13 +9,16 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.db.dbloader;
+import org.example.home.contactcontroller;
 import org.example.verify.logincontroller;
 import java.io.IOException;
 
 public class Main extends Application {
     static public User user = new User();
-    static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null);
+    static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null,null);
     static public dbloader dbload = new dbloader();
+
+
 
     @Override
     public void start(Stage stage) throws Exception{
