@@ -195,6 +195,24 @@ public class homecontroller {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
     }
+    @FXML
+    void contact_clicked(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent parent = null;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
+                parent = loader.load();
+                contactcontroller contact = loader.getController();
+                contact.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        if (parent == null)
+            return;
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+    }
+
 
     @FXML
     void kategorie_clicked(MouseEvent event){
@@ -216,6 +234,7 @@ public class homecontroller {
     }
 
     @FXML
+<<<<<<< src/main/java/org/example/home/homecontroller.java
     void katalog_clicked_with_param(MouseEvent event, String key) { //najpewniej do usuniecia
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent = null;
@@ -227,6 +246,16 @@ public class homecontroller {
             kat.init_lista();
             kat.font();
             kat.searchbar_exited(key);
+=======
+    void contact_clicked(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent parent = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
+            parent = loader.load();
+            contactcontroller contact = loader.getController();
+            contact.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+>>>>>>> src/main/java/org/example/home/homecontroller.java
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -236,6 +265,7 @@ public class homecontroller {
         stage.setScene(scene);
     }
 
+<<<<<<< src/main/java/org/example/home/homecontroller.java
     @FXML
     void banner_clicked(MouseEvent event) { //TODO dokończyc
        if(event.getSource().equals(image_a1)){
@@ -249,4 +279,6 @@ public class homecontroller {
            //System.out.println("CCC");
        }
     }
+=======
+>>>>>>> src/main/java/org/example/home/homecontroller.java
 }

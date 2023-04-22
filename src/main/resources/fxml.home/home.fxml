@@ -156,7 +156,7 @@
                   <Insets right="10.0" />
                </VBox.margin>
             </Separator>
-            <Label fx:id="labelkontakt" prefHeight="50.0" prefWidth="255.0" styleClass="font_menu_left" text="Kontakt" textFill="#f6f2df">
+            <Label fx:id="labelkontakt" onMouseClicked="#contact_clicked" prefHeight="50.0" prefWidth="255.0" styleClass="font_menu_left" text="Kontakt" textFill="#f6f2df">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></Label>
