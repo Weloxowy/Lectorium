@@ -4,6 +4,7 @@ import org.example.Main;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class dbloader {
     private Connection connection;
@@ -123,7 +124,7 @@ public class dbloader {
     public ArrayList<String[]> array = new ArrayList<String[]>();
     public void print_book() {
         connectToDatabase();
-        String print = "SELECT katalog.id_katalog, autor.tytul_autora ,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa, katalog.rok_wydania, katalog.wydanie, katalog.isbn, katalog.jezyk, katalog.uwagi FROM katalog, autor WHERE katalog.autor_id_autor = autor.id_autor";
+        String print = "SELECT katalog.id_katalog, autor.tytul_autora ,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa, katalog.rok_wydania, katalog.wydanie, katalog.isbn, katalog.jezyk, katalog.uwagi, wydawnictwo.nazwa_wydawnictwa FROM katalog, autor, wydawnictwo WHERE katalog.autor_id_autor = autor.id_autor AND katalog.wydawnictwo_id_wydawnictwo = wydawnictwo.id_wydawnictwo";
         try {
             array.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
@@ -138,7 +139,8 @@ public class dbloader {
                 final String isbn = resultSet.getString("isbn");
                 final String jezyk = resultSet.getString("jezyk");
                 final String uwagi = resultSet.getString("uwagi");
-                String[] row = {String.valueOf(id_katalog),nazwa,nazwa_autora, rok_wydania, wydanie, isbn, jezyk, uwagi};
+                final String nazwa_wydawnictwa = resultSet.getString("nazwa_wydawnictwa");
+                String[] row = {String.valueOf(id_katalog),nazwa,nazwa_autora, rok_wydania, wydanie, isbn, jezyk, uwagi, nazwa_wydawnictwa};
                 array.add(row);
             }
             resultSet.close();
@@ -216,6 +218,40 @@ public class dbloader {
         closeConnection();
     }
 
+    public ArrayList<String[]> copy = new ArrayList<String[]>();
+
+    public void print_copies(int id) {
+        System.out.println("ID" +id);
+        connectToDatabase();
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, egzemplarze.lokalizacja, egzemplarze.czy_dostepne,\n" +
+                "  CASE WHEN wypozyczenia.data_zwrotu < date('now') THEN NULL ELSE wypozyczenia.data_zwrotu END AS data_zwrotu\n" +
+                "FROM katalog\n" +
+                "JOIN egzemplarze ON egzemplarze.katalog_id_katalog = katalog.id_katalog\n" +
+                "LEFT JOIN wypozyczenia ON wypozyczenia.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
+                "WHERE katalog.id_katalog = ?\n" +
+                "ORDER BY data_zwrotu DESC;\n";
+        try {
+            copy.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                final String nazwa = resultSet.getString("nazwa");
+                int id_egzemplarze = resultSet.getInt("id_egzemplarze");
+                final String lokalizacja = resultSet.getString("lokalizacja");
+                final String czy_dostepne = resultSet.getString("czy_dostepne");
+                final Date data_zwrotu = resultSet.getDate("data_zwrotu");
+                String[] row = {nazwa,String.valueOf(id_egzemplarze),lokalizacja,czy_dostepne,String.valueOf(data_zwrotu)};
+                copy.add(row);
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+        closeConnection();
+    }
 
 }
 

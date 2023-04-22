@@ -14,9 +14,10 @@ public class Katalog {
     SimpleStringProperty jezyk;
     SimpleStringProperty nazwa_autora;
     SimpleStringProperty uwagi;
+    SimpleStringProperty nazwa_wydawnictwa;
     Image okladka; //okladka nie jest pobierana w tabeli bo szkoda pamieci
 
-    public Katalog(int id_katalog, String nazwa, String nazwa_autora, String rok_wydania, String wydanie, String isbn, String jezyk,String uwagi) {
+    public Katalog(int id_katalog, String nazwa, String nazwa_autora, String rok_wydania, String wydanie, String isbn, String jezyk,String uwagi, String nazwa_wydawnictwa) {
         this.id_katalog = new ReadOnlyIntegerWrapper(id_katalog);
         this.nazwa = new SimpleStringProperty(nazwa);
         this.rok_wydania = new SimpleStringProperty(rok_wydania);
@@ -25,6 +26,7 @@ public class Katalog {
         this.jezyk = new SimpleStringProperty(jezyk);
         this.nazwa_autora = new SimpleStringProperty(nazwa_autora);
         this.uwagi = new SimpleStringProperty(uwagi);
+        this.nazwa_wydawnictwa = new SimpleStringProperty(nazwa_wydawnictwa);
     }
     public ReadOnlyIntegerWrapper id_katalogProperty() {
         return id_katalog;
@@ -132,5 +134,17 @@ public class Katalog {
 
     public void setOkladka(Image okladka) {
         this.okladka = okladka;
+    }
+
+    public String getNazwa_wydawnictwa() {
+        return nazwa_wydawnictwa.get();
+    }
+
+    public SimpleStringProperty nazwa_wydawnictwaProperty() {
+        return nazwa_wydawnictwa;
+    }
+
+    public void setNazwa_wydawnictwa(String nazwa_wydawnictwa) {
+        this.nazwa_wydawnictwa.set(nazwa_wydawnictwa);
     }
 }

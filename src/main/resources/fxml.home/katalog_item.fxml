@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane fx:id="anchortable" cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="715.0" prefWidth="1097.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <AnchorPane fx:id="anchor" cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="715.0" prefWidth="1097.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Label fx:id="background_tytul" ellipsisString="" layoutX="476.0" opacity="0.1" prefHeight="336.0" prefWidth="824.0" text="Tytuł">
                <font>
@@ -43,12 +43,27 @@
                         <Insets right="50.0" />
                      </HBox.margin>
                   </ImageView>
-                  <VBox prefHeight="366.0" prefWidth="521.0">
+                  <VBox prefHeight="366.0" prefWidth="521.0" spacing="20.0">
                      <children>
-                        <Label fx:id="title_book" styleClass="book_data_h1" text="Tytuł książki" />
-                        <Label fx:id="author_book" styleClass="book_data_h1" text="Autor książki (clickable)" />
-                        <Label fx:id="year_book" styleClass="book_data_h2" text="Rok wydania,wydanie" />
-                        <Label fx:id="isbn_book" styleClass="book_data_h2" text="ISBN" />
+                        <Label fx:id="title_book" styleClass="book_data_h1" text="Tytuł książki">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></Label>
+                        <Label fx:id="author_book" styleClass="book_data_h1" text="Autor książki (clickable)">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Label>
+                        <Label fx:id="year_book" styleClass="book_data_h2" text="Rok wydania,wydanie">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Label>
+                        <Label fx:id="isbn_book" styleClass="book_data_h2" text="ISBN">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Label>
                         <Label fx:id="publisher_book" styleClass="book_data_h2" text="Wydawnictwo (clickable)" />
                      </children>
                   </VBox>
@@ -57,7 +72,7 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <AnchorPane layoutX="1.0" layoutY="431.0" prefHeight="279.0" prefWidth="1094.0" />
+            <AnchorPane fx:id="anchortable" layoutX="1.0" layoutY="431.0" prefHeight="279.0" prefWidth="1094.0" />
          </children></AnchorPane>
         <VBox fx:id="menubox" cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <children>
