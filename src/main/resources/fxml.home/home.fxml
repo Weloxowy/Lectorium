@@ -38,7 +38,7 @@
                 <RowConstraints maxHeight="155.0" prefHeight="155.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="image_a1" fitHeight="308.0" fitWidth="622.0" onMouseClicked="#banner_clicked" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.halignment="RIGHT" GridPane.rowSpan="2">
+                  <ImageView fx:id="image_a1" fitHeight="308.0" fitWidth="622.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.halignment="RIGHT" GridPane.rowSpan="2">
                      <image>
                         <Image url="@a1.png" />
                      </image>
@@ -46,7 +46,7 @@
                         <Insets right="30.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fx:id="image_b1" fitHeight="148.0" fitWidth="308.0" onMouseClicked="#banner_clicked" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <ImageView fx:id="image_b1" fitHeight="148.0" fitWidth="308.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <image>
                         <Image url="@b1.png" />
                      </image>
@@ -54,7 +54,7 @@
                         <Insets />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fx:id="image_b2" fitHeight="152.0" fitWidth="299.0" onMouseClicked="#banner_clicked" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <ImageView fx:id="image_b2" fitHeight="152.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@b2.png" />
                      </image>

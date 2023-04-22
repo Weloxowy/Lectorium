@@ -138,7 +138,6 @@ public class logincontroller {
             stage.setTitle("Lectorium alpha");
         } catch (IOException e) {
             throw new RuntimeException(e);
-
         }
         if (parent == null)
             return;
