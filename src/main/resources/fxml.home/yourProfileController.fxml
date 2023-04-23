@@ -14,9 +14,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.yourLibraryController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.yourProfileController">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
@@ -26,57 +25,6 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane cache="true" cacheHint="QUALITY" maxHeight="900.0" maxWidth="1097.0" prefHeight="704.0" prefWidth="1056.0" styleClass="main_area" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <children>
-            <GridPane prefHeight="713.0" prefWidth="1096.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fitHeight="708.0" fitWidth="449.0" pickOnBounds="true" preserveRatio="true" styleClass="book_data_cover" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@twoja_biblioteka.jpg" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets right="20.0" />
-                     </GridPane.margin>
-                  </ImageView>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do naszej biblioteki, która jest skarbnicą wiedzy i rozrywki dla każdego! W naszych zbiorach znajdziesz bogaty wybór książek, czasopism, filmów, muzyki i gier, które umilą Ci czas wolny i pozwolą na rozwijanie zainteresowań." wrappingWidth="548.3999404907227">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" top="20.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nasza biblioteka oferuje wiele atrakcyjnych możliwości. Możesz wypożyczyć interesującą Cię pozycję na kilka dni lub tygodni, a także skorzystać z czytelni i korzystać z materiałów na miejscu. Posiadamy również liczne komputery z dostępem do Internetu, co umożliwia przeglądanie stron internetowych, poszukiwanie informacji i wykonywanie różnych zadań." wrappingWidth="547.7366695404053">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do odwiedzenia naszej biblioteki i skorzystania z jej bogatych zasobów. Nasz zespół pracowników chętnie udzieli Ci pomocy i wsparcia w znalezieniu odpowiedniej pozycji. Nie zwlekaj, odwiedź nas już dzisiaj i zacznij czerpać wiedzę i przyjemność z czytania!" wrappingWidth="547.7366695404053">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                        </Text>
-                     </children>
-                  </VBox>
-               </children>
-            </GridPane>
-         </children></AnchorPane>
         <HBox styleClass="menu_up" GridPane.columnIndex="1">
             <children>
                 <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
@@ -177,5 +125,64 @@
                 <DropShadow height="35.57" radius="8.3925" width="0.0" />
             </effect>
         </AnchorPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fx:id="avatar2115" fitHeight="196.0" fitWidth="230.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../res/icons/dark/avatar.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <Label fx:id="Name" prefHeight="89.0" prefWidth="185.0" text="Imie">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Surname" prefHeight="80.0" prefWidth="556.0" text="Nazwisko">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Login" prefHeight="67.0" prefWidth="550.0" text="Login">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <Label prefHeight="70.0" prefWidth="551.0" text="Zmien login">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="51.0" prefWidth="598.0" text="Zmien haslo">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="43.0" prefWidth="562.0" text="Usun konto">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
     </children>
 </GridPane>

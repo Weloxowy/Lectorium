@@ -8,13 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.3 - poprawki po merge">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.4">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682167309555</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="v0.4.4">
+      <created>1682245447778</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682245447778</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,7 +182,8 @@
     <MESSAGE value="v0.2" />
     <MESSAGE value="v0.3" />
     <MESSAGE value="v0.4.3 - poprawki po merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.3 - poprawki po merge" />
+    <MESSAGE value="v0.4.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
