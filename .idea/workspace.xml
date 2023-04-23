@@ -8,13 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.3 - poprawki po merge">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +25,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -99,7 +99,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="verify" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\karpa\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;D:\Studia 4 semestr\Java projekt\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,14 +156,7 @@
       <option name="project" value="LOCAL" />
       <updated>1682167309555</updated>
     </task>
-    <task id="LOCAL-00007" summary="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami">
-      <created>1682197478356</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1682197478356</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,8 +175,7 @@
     <MESSAGE value="v0.2" />
     <MESSAGE value="v0.3" />
     <MESSAGE value="v0.4.3 - poprawki po merge" />
-    <MESSAGE value="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.3 - poprawki po merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -200,7 +192,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/abte$Main.ic" NAME="Main Coverage Results" MODIFIED="1681133045533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/verify$Main.ic" NAME="Main Coverage Results" MODIFIED="1679141270880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/abte$Main.ic" NAME="Main Coverage Results" MODIFIED="1681133045533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

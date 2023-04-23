@@ -103,7 +103,7 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelbiblioteka" prefHeight="50.0" prefWidth="276.0" styleClass="font_menu_left" text="Twoja biblioteka" textFill="#f6f2df" />
+                <Label fx:id="labelbiblioteka" onMouseClicked="#library_clicked" prefHeight="50.0" prefWidth="276.0" styleClass="font_menu_left" text="Twoja biblioteka" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
