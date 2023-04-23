@@ -1,11 +1,13 @@
 package org.example.home;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -196,14 +199,25 @@ public class katalog_itemcontroller extends home{
                 new PropertyValueFactory<>("czy_dostepne"));
 
         TableColumn zwrotCol = new TableColumn("Data zwrotu");
-        zwrotCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        zwrotCol.setMinWidth(anchortable.getPrefWidth()*0.15);
         zwrotCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
-        /*TableColumn isbnCol = new TableColumn("ISBN");//todo guzik wypozyczenia ksiazki; aktywny jak czydost = T
-        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.2);
-        isbnCol.setCellValueFactory(
-                new PropertyValueFactory<>("isbn"));*/
+        TableColumn wypozyczCol = new TableColumn("Zarezerwuj");
+        wypozyczCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wypozyczCol.setCellValueFactory(
+                new PropertyValueFactory<>("czy_dostepne"));
+        wypozyczCol.setCellFactory(col -> {
+            TableCell<Katalog, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                if (newVal != null && newVal.contentEquals("T")) {
+                    Node centreBox = createPriorityGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+                }
+            });
+            return cell;
+        });
+
 
         for (String[] tab : dbload.copy) {
             String nazwa = tab[0];
@@ -218,7 +232,7 @@ public class katalog_itemcontroller extends home{
             lista.setItems(items);
         }
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll(nazwaCol,nrCol,lokalizacjaCol,dostepneCol,zwrotCol);
+        lista.getColumns().addAll(nazwaCol,nrCol,lokalizacjaCol,dostepneCol,zwrotCol,wypozyczCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
@@ -235,7 +249,6 @@ public class katalog_itemcontroller extends home{
         //dodaj css
         lista.getStylesheets().add("/fxml.home/home.css");
 
-
         /*lista.setOnMouseClicked(event -> {
             if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                 TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
@@ -247,6 +260,15 @@ public class katalog_itemcontroller extends home{
         });*/
     }
 
+    private Node createPriorityGraphic(){
+        HBox graphicContainer = new HBox();
+        graphicContainer.setAlignment(Pos.CENTER);
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/add.png")));
+        imageView.setFitHeight(25);
+        imageView.setPreserveRatio(true);
+        graphicContainer.getChildren().add(imageView);
+        return graphicContainer;
+    }
     void cover_view() {
         double centerX = cover_book.getBoundsInLocal().getWidth();
         double centerY = cover_book.getBoundsInLocal().getHeight();

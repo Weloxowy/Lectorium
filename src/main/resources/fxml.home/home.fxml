@@ -63,17 +63,18 @@
             </GridPane>
             <AnchorPane layoutX="1.0" layoutY="364.0" maxWidth="500.0" prefWidth="500.0">
                <children>
-                  <Label fx:id="biblioteka_title" alignment="CENTER" contentDisplay="TOP" layoutX="12.0" layoutY="-1.0" prefHeight="37.0" prefWidth="1082.0" text="Witaj w bibliotece im. Adama Mickiewicza" />
-                  <ImageView fx:id="biblioteka_photo" fitHeight="250.0" fitWidth="356.0" layoutX="721.0" layoutY="40.0" pickOnBounds="true">
+                  <Label fx:id="biblioteka_title" alignment="CENTER" contentDisplay="TOP" layoutX="6.0" layoutY="14.0" prefHeight="40.0" prefWidth="1082.0" text="Witaj w bibliotece im. Adama Mickiewicza" />
+                  <ImageView fx:id="biblioteka_photo" fitHeight="250.0" fitWidth="356.0" layoutX="724.0" layoutY="58.0" pickOnBounds="true">
                      <image>
                         <Image url="@biblioteka.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="biblioteka_desc" layoutX="63.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteka Główna im. Adama Mickiewicza to miejsce, gdzie każdy miłośnik książek znajdzie coś dla siebie. Dysponujemy ponad 50 000 książek i czasopism, w tym najnowsze bestsellery, literaturę faktu, naukową i popularnonaukową. Nasze zbiory są systematycznie aktualizowane, tak aby nasi klienci mieli dostęp do najnowszych publikacji. W naszej czytelni oferujemy wygodne miejsca do nauki i pracy, a także komputery z dostępem do internetu i programów biurowych. Dla osób z niepełnosprawnościami przygotowaliśmy udogodnienia takie jak winda, toalety przystosowane do potrzeb osób niepełnosprawnych oraz wózek inwalidzki. Zapraszamy serdecznie do Biblioteki Głównej im. Adama Mickiewicza, gdzie nauka i przyjemność spotykają się w jednym miejscu!" wrappingWidth="581.3333435058594">
+                  <Text fx:id="biblioteka_desc" layoutX="63.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Biblioteka Główna im. Adama Mickiewicza to miejsce, gdzie każdy miłośnik książek znajdzie coś dla siebie. Dysponujemy ponad 50 000 książek i czasopism, w tym najnowsze bestsellery, literaturę faktu, naukową i popularnonaukową. Nasze zbiory są systematycznie aktualizowane, tak aby nasi klienci mieli dostęp do najnowszych publikacji. W naszej czytelni oferujemy wygodne miejsca do nauki i pracy, a także komputery z dostępem do internetu i programów biurowych. Dla osób z niepełnosprawnościami przygotowaliśmy udogodnienia takie jak winda, toalety przystosowane do potrzeb osób niepełnosprawnych oraz wózek inwalidzki. Zapraszamy serdecznie do Biblioteki Głównej im. Adama Mickiewicza, gdzie nauka i przyjemność spotykają się w jednym miejscu!" wrappingWidth="605.3333435058594">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
+                  <Separator layoutX="51.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #aaaaaa;" />
                </children>
             </AnchorPane>
          </children></AnchorPane>

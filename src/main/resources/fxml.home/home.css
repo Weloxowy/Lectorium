@@ -44,17 +44,7 @@
 }
 
 /*ITEM*/
-/*.book_data_h1{
--fx-font: 20px 'SourceSerifPro-Bold';
-}
 
-.book_data_h2{
--fx-font: 13px 'Poppins';
-}*/
-
-.book_data_cover{
--fx-border: 10;
-}
 
 /*TABLE*/
 /*  usuwanie bialych elementow */
@@ -73,7 +63,7 @@
     -fx-background-radius: 5 5 5 5;
     -fx-font-size: 14px;
     -fx-font-family: Poppins;
-    -fx-font-weight: 900;
+    -fx-font-weight: bold;
     -fx-text-fill: #f3eed8;
 }
 
@@ -101,7 +91,7 @@
 }
 
 .table-row-cell:even{
-    -fx-background-color: #fafaee;
+    -fx-background-color: #FAF8EE;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }

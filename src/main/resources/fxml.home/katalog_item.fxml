@@ -35,7 +35,7 @@
             </Label>
             <HBox layoutX="101.0" layoutY="31.0" prefHeight="383.0" prefWidth="994.0">
                <children>
-                  <ImageView fx:id="cover_book" fitHeight="383.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" styleClass="book_data_cover">
+                  <ImageView fx:id="cover_book" fitHeight="383.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Brakokładki.jpg" />
                      </image>
@@ -45,26 +45,26 @@
                   </ImageView>
                   <VBox prefHeight="366.0" prefWidth="521.0" spacing="20.0">
                      <children>
-                        <Label fx:id="title_book" styleClass="book_data_h1" text="Tytuł książki">
+                        <Label fx:id="title_book" text="Tytuł książki">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin></Label>
-                        <Label fx:id="author_book" styleClass="book_data_h1" text="Autor książki (clickable)">
+                        <Label fx:id="author_book" text="Autor książki (clickable)">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin></Label>
-                        <Label fx:id="year_book" styleClass="book_data_h2" text="Rok wydania,wydanie">
+                        <Label fx:id="year_book" text="Rok wydania,wydanie">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin></Label>
-                        <Label fx:id="isbn_book" styleClass="book_data_h2" text="ISBN">
+                        <Label fx:id="isbn_book" text="ISBN">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin></Label>
-                        <Label fx:id="publisher_book" styleClass="book_data_h2" text="Wydawnictwo (clickable)" />
+                        <Label fx:id="publisher_book" text="Wydawnictwo (clickable)" />
                      </children>
                   </VBox>
                </children>
