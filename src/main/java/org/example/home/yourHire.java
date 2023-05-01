@@ -54,6 +54,19 @@ public class yourHire extends home{
         @FXML
         private Label nametag;
 
+         @FXML
+        private Label Name;
+
+         @FXML
+         private Label Surname;
+
+         @FXML
+        private Button Wszystkie;
+
+
+        @FXML
+        private Button Aktualne;
+
         @FXML
         private TextField searchbar;
         @FXML
@@ -70,6 +83,9 @@ public class yourHire extends home{
         avatar_view();
         font();
         Lista_Hire(Main.user.getId());
+        Name.setText(imie);
+        Surname.setText(nazwisko);
+
 
     }
     public void Lista_Hire(int id) {
@@ -83,38 +99,38 @@ public class yourHire extends home{
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn nazwaCol = new TableColumn("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.3);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
 
         TableColumn egzemplarzeCol = new TableColumn("id_egzemplarze");
-        egzemplarzeCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        egzemplarzeCol.setMinWidth(anchortable.getPrefWidth()*0.05);
         egzemplarzeCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_egzemplarze"));
 
         TableColumn data_wypozyczeniaCol = new TableColumn("data_wypozyczenia");
-        data_wypozyczeniaCol.setMinWidth(anchortable.getPrefWidth()*0.2);
+        data_wypozyczeniaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
         data_wypozyczeniaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_wypozyczenia"));
 
         TableColumn data_zwrotuCol = new TableColumn("data_zwrotu");
-        data_zwrotuCol.setMinWidth(anchortable.getPrefWidth()*0.2);
+        data_zwrotuCol.setMinWidth(anchortable.getPrefWidth()*0.25);
         data_zwrotuCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
         for (String[] tab : dbload.ListHire) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
-            String data_wypozyczenia = tab[2];
-            String data_zwrotu = tab[3];
-            String nazwa_autora = tab[4];
-            items.add(new Wypozyczenia(id_egzemplarze,nazwa,data_wypozyczenia,data_zwrotu,nazwa_autora));
+            String nazwa_autora = tab[2];
+            String data_wypozyczenia = tab[3];
+            String data_zwrotu = tab[4];
+            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll(autorCol, nazwaCol, egzemplarzeCol, data_wypozyczeniaCol, data_zwrotuCol);
+        lista.getColumns().addAll(egzemplarzeCol, nazwaCol,  data_wypozyczeniaCol,data_zwrotuCol,autorCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
         lista.setPrefWidth(anchor_hire.getPrefWidth());
         lista.setPrefHeight(anchor_hire.getPrefHeight());
@@ -168,5 +184,23 @@ public class yourHire extends home{
         labelwypozyczenia.setFont(pop_b_h1);
         searchbar.setFont(pop_r_h1);
     }
+
+    @FXML
+    void check_hire_information(MouseEvent event)
+    {
+        ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
+        dbload.check_hire_information(Main.user.getId());
+        for (String[] tab : dbload.ListHire) {
+            String id_egzemplarze = tab[0];
+            String nazwa = tab[1];
+            String nazwa_autora = tab[2];
+            String data_wypozyczenia = tab[3];
+            String data_zwrotu = tab[4];
+            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora));
+        }
+
+        lista.setItems(items);
+    }
+
 
 }

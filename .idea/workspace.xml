@@ -8,15 +8,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Wypozyczenia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682274950534</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi">
+      <created>1682692058859</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682692058859</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,7 +217,8 @@
     <MESSAGE value="v0.4.3 - poprawki po merge" />
     <MESSAGE value="v0.4.4" />
     <MESSAGE value="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika" />
+    <MESSAGE value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
