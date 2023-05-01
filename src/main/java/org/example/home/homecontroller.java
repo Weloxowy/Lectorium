@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.example.Main;
 
+import static org.example.Main.dbload;
+
 public class homecontroller extends home{
 
     @FXML
@@ -92,15 +94,24 @@ public class homecontroller extends home{
     private VBox vbox;
 
     @FXML
+    private ImageView search_button;
+
+
+    @FXML
     void searchbar_exited(MouseEvent event) {
         searchbar.setFocusTraversable(false);
     }
     public void init(String imie, String nazwisko, MouseEvent event, Image image){
+        //dbload.displayActiveConnections();
+
         nametag.setText(imie+" "+nazwisko);
         searchbar_exited(event);
         avatar.setImage(Main.user.getImage());
         avatar_view();
         images_view();
+        //dbload.displayActiveConnections();
+        //dbload.rent(8,5);
+        //dbload.get_categories();
     }
 
     void avatar_view(){
@@ -136,4 +147,28 @@ public class homecontroller extends home{
         //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         image_b2.setClip(rectangleb2);
     }
+
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
+
+
+    @FXML
+    void menu_panels(MouseEvent event){
+        if(event.getSource().equals(image_a1)){ //pokaz wyszukiwania dla autora Houellebecq
+            String query = "Houellebecq";
+            katalog_clicked(event,query);
+        }
+        if(event.getSource().equals(image_b1)){ //pokaz ksiazke o id 130
+            String query = "Wilcza Rzeka";
+            katalog_item(event,130);
+        }
+        if(event.getSource().equals(image_b2)){ //pokaz wyszukiwania dla autora King
+            String query = "King";
+            katalog_clicked(event,query);
+        }
+    }
+    //TODO dodać menu slider
 }

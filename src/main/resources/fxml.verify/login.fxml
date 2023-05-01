@@ -29,11 +29,11 @@
             </DropShadow>
          </effect>
          <children>
-            <TextField fx:id="login" layoutX="63.0" layoutY="133.0" prefHeight="38.0" prefWidth="204.0" promptText="Login" styleClass="fields">
+            <TextField fx:id="login" layoutX="63.0" layoutY="133.0" prefHeight="38.0" prefWidth="204.0" promptText="Login" styleClass="fields" text="awiech">
                <font>
                   <Font size="16.0" />
                </font></TextField>
-            <PasswordField fx:id="haslo" layoutX="63.0" layoutY="194.0" prefHeight="38.0" prefWidth="204.0" promptText="Hasło" styleClass="fields">
+            <PasswordField fx:id="haslo" layoutX="63.0" layoutY="194.0" prefHeight="38.0" prefWidth="204.0" promptText="Hasło" styleClass="fields" text="awiech">
                <font>
                   <Font size="16.0" />
                </font></PasswordField>

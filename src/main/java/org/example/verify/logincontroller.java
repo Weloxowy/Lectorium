@@ -22,7 +22,6 @@ import javafx.stage.StageStyle;
 import org.example.Main;
 import org.example.db.dbloader;
 import org.example.home.homecontroller;
-import org.w3c.dom.events.Event;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -58,7 +57,6 @@ public class logincontroller {
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
-
         zalogujsietext.setFont(ssp_sb_h1);
         submit.setFont(pop_r_h1);
         haslo.setFont(pop_r_h2);

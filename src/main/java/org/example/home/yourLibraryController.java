@@ -84,4 +84,9 @@ public class yourLibraryController extends home{
         searchbar.setFont(pop_r_h1);
     }
 
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
 }
