@@ -73,7 +73,7 @@
         </VBox>
         <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up">
             <children>
-                <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="50.0" fitWidth="215.0" layoutY="8.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
+                <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="57.0" fitWidth="247.0" layoutY="1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
                     <image>
                         <Image url="@../res/logo/Lectorium_full_logo.png" />
                     </image>

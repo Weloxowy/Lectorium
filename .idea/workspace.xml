@@ -8,18 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682692058859</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli">
+      <created>1682935264956</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682935264956</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,7 +214,8 @@
     <MESSAGE value="v0.4.4" />
     <MESSAGE value="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika" />
     <MESSAGE value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
+    <MESSAGE value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
