@@ -8,13 +8,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2 - dokonczenie panelu uzytkownika, dodanie funkcji rezerwacji (7 dni),pomniejsze poprawki interfejsu, css w yourlibrary i contact, dorzucenie przejsc pomiedzy oknami">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,7 @@
         <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -70,7 +72,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/karpa/IdeaProjects/abte/src/main/resources/fxml.admin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Studia 4 semestr/Java/lab8/projekt_lab6&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2908046&quot;,
@@ -95,6 +97,9 @@
       <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources\fxml\Loginandregister" />
       <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources" />
       <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\java\org\example" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example" />
     </key>
   </component>
   <component name="RunManager">
@@ -172,7 +177,35 @@
       <option name="project" value="LOCAL" />
       <updated>1682936156179</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00008" summary="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika">
+      <created>1682274950534</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682274950534</updated>
+    </task>
+    <task id="LOCAL-00009" summary="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi">
+      <created>1682692058859</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682692058859</updated>
+    </task>
+    <task id="LOCAL-00010" summary="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli">
+      <created>1682935264956</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682935264956</updated>
+    </task>
+    <task id="LOCAL-00011" summary="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
+      <created>1682935612027</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682935612027</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +213,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="branch_test" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -191,9 +236,12 @@
     <MESSAGE value="v0.2" />
     <MESSAGE value="v0.3" />
     <MESSAGE value="v0.4.3 - poprawki po merge" />
-    <MESSAGE value="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami" />
-    <MESSAGE value="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu." />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu." />
+    <MESSAGE value="v0.4.4" />
+    <MESSAGE value="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika" />
+    <MESSAGE value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
+    <MESSAGE value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
+    <MESSAGE value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

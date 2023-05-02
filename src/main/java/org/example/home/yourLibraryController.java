@@ -7,11 +7,25 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import org.example.Main;
 
 public class yourLibraryController extends home{
 
+
+    @FXML
+    private Text gbs1;
+
+    @FXML
+    private Text gbs2;
+
+    @FXML
+    private Text gbs3;
+
+    @FXML
+    private ImageView gbs_dobrze_jest;
     @FXML
     private ImageView avatar;
 
@@ -55,6 +69,7 @@ public class yourLibraryController extends home{
         avatar.setImage(Main.user.getImage());
         avatar_view();
         font();
+        image_view();
 
     }
 
@@ -65,13 +80,23 @@ public class yourLibraryController extends home{
         Circle clipCircle = new Circle(centerX, centerY, radius);
         avatar.setClip(clipCircle);
     }
-
+    void image_view()
+    {
+        double centerXa1 = gbs_dobrze_jest.getBoundsInLocal().getWidth();
+        double centerYa1 = gbs_dobrze_jest.getBoundsInLocal().getHeight();
+        Rectangle rectanglea1 = new Rectangle(centerXa1, centerYa1);
+        rectanglea1.setArcWidth(20.0);
+        rectanglea1.setArcHeight(20.0);
+        //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
+        gbs_dobrze_jest.setClip(rectanglea1);
+    }
     @FXML
     void font(){
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),20);
         nametag.setFont(ssp_sb_h1);
         labelbiblioteka.setFont(pop_b_h1);
         labelglowna.setFont(pop_b_h1);
@@ -82,7 +107,9 @@ public class yourLibraryController extends home{
         labelrezerwacje.setFont(pop_b_h1);
         labelwypozyczenia.setFont(pop_b_h1);
         searchbar.setFont(pop_r_h1);
-
+        gbs1.setFont(pop_b_h2);
+        gbs2.setFont(pop_b_h2);
+        gbs3.setFont(pop_b_h2);
     }
 
     @FXML

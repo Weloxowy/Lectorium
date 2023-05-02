@@ -1,4 +1,5 @@
 package org.example.db;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import org.example.Egzemplarze;
 import org.example.Main;
@@ -360,6 +361,69 @@ public class dbloader {
         closeConnection();
         return false;
     }
+
+    public ArrayList<String[]> ListHire = new ArrayList<String[]>();
+    public void yourHireInformation(int id) {
+        connectToDatabase();
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu \n" +
+                "from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze\n" +
+                "AND wypozyczenia.uzytkownicy_id_uzytkownicy = ? ";
+        try {
+            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id_egzemplarze = resultSet.getInt("id_egzemplarze");
+                final String nazwa = resultSet.getString("nazwa");
+                final String data_wypozyczenia = resultSet.getString("data_wypozyczenia");
+                final String data_zwrotu = resultSet.getString("data_zwrotu");
+                String nazwa_autora = "";
+                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
+                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_wypozyczenia, data_zwrotu};
+                ListHire.add(row);
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+
+        closeConnection();
+    }
+
+    public void check_hire_information(int id)
+    {
+        connectToDatabase();
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu \n" +
+                "from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze\n" +
+                "AND wypozyczenia.data_zwrotu > date('now')  AND wypozyczenia.uzytkownicy_id_uzytkownicy = ?";
+        try {
+            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id_egzemplarze = resultSet.getInt("id_egzemplarze");
+                final String nazwa = resultSet.getString("nazwa");
+                final String data_wypozyczenia = resultSet.getString("data_wypozyczenia");
+                final String data_zwrotu = resultSet.getString("data_zwrotu");
+                String nazwa_autora = "";
+                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
+                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_wypozyczenia, data_zwrotu};
+                ListHire.add(row);
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+
+        closeConnection();
+    }
+
 
 }
 

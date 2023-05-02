@@ -18,7 +18,7 @@ public class Main extends Application {
     static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null,null,null);
     static public dbloader dbload = new dbloader();
 
-
+    static public Wypozyczenia wypozyczenia = new Wypozyczenia(null,null,null,null,null);
 
     @Override
     public void start(Stage stage) throws Exception{
