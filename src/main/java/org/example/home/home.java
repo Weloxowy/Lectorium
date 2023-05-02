@@ -14,8 +14,6 @@ import org.example.verify.logincontroller;
 
 import java.io.IOException;
 
-import static org.example.Main.kat;
-
 public class home {
 
     @FXML
@@ -161,5 +159,24 @@ public class home {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
     }
+    @FXML
+    void yourHire_clicked(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent parent;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
+            parent = loader.load();
+            yourHire Profile = loader.getController();
+            Profile.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            Profile.font();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (parent == null)
+            return;
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+    }
+
 
 }

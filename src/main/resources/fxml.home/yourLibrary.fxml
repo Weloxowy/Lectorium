@@ -38,7 +38,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="708.0" fitWidth="449.0" pickOnBounds="true" preserveRatio="true" styleClass="book_data_cover" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+                  <ImageView fx:id="gbs_dobrze_jest" fitHeight="708.0" fitWidth="449.0" pickOnBounds="true" preserveRatio="true" styleClass="book_data_cover" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@twoja_biblioteka.jpg" />
                      </image>
@@ -48,7 +48,7 @@
                   </ImageView>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do naszej biblioteki, która jest skarbnicą wiedzy i rozrywki dla każdego! W naszych zbiorach znajdziesz bogaty wybór książek, czasopism, filmów, muzyki i gier, które umilą Ci czas wolny i pozwolą na rozwijanie zainteresowań." wrappingWidth="548.3999404907227">
+                        <Text fx:id="gbs1" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do naszej biblioteki, która jest skarbnicą wiedzy i rozrywki dla każdego! W naszych zbiorach znajdziesz bogaty wybór książek, czasopism, filmów, muzyki i gier, które umilą Ci czas wolny i pozwolą na rozwijanie zainteresowań." wrappingWidth="548.3999404907227">
                            <font>
                               <Font name="System Italic" size="25.0" />
                            </font>
@@ -56,7 +56,7 @@
                               <Insets left="20.0" top="20.0" />
                            </VBox.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nasza biblioteka oferuje wiele atrakcyjnych możliwości. Możesz wypożyczyć interesującą Cię pozycję na kilka dni lub tygodni, a także skorzystać z czytelni i korzystać z materiałów na miejscu. Posiadamy również liczne komputery z dostępem do Internetu, co umożliwia przeglądanie stron internetowych, poszukiwanie informacji i wykonywanie różnych zadań." wrappingWidth="547.7366695404053">
+                        <Text fx:id="gbs2" strokeType="OUTSIDE" strokeWidth="0.0" text="Nasza biblioteka oferuje wiele atrakcyjnych możliwości. Możesz wypożyczyć interesującą Cię pozycję na kilka dni lub tygodni, a także skorzystać z czytelni i korzystać z materiałów na miejscu. Posiadamy również liczne komputery z dostępem do Internetu, co umożliwia przeglądanie stron internetowych, poszukiwanie informacji i wykonywanie różnych zadań." wrappingWidth="547.7366695404053">
                            <font>
                               <Font name="System Italic" size="25.0" />
                            </font>
@@ -64,7 +64,7 @@
                               <Insets left="20.0" />
                            </VBox.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do odwiedzenia naszej biblioteki i skorzystania z jej bogatych zasobów. Nasz zespół pracowników chętnie udzieli Ci pomocy i wsparcia w znalezieniu odpowiedniej pozycji. Nie zwlekaj, odwiedź nas już dzisiaj i zacznij czerpać wiedzę i przyjemność z czytania!" wrappingWidth="547.7366695404053">
+                        <Text fx:id="gbs3" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do odwiedzenia naszej biblioteki i skorzystania z jej bogatych zasobów. Nasz zespół pracowników chętnie udzieli Ci pomocy i wsparcia w znalezieniu odpowiedniej pozycji. Nie zwlekaj, odwiedź nas już dzisiaj i zacznij czerpać wiedzę i przyjemność z czytania!" wrappingWidth="547.7366695404053">
                            <font>
                               <Font name="System Italic" size="25.0" />
                            </font>
@@ -73,6 +73,12 @@
                            </VBox.margin>
                         </Text>
                      </children>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
                   </VBox>
                </children>
             </GridPane>
@@ -143,7 +149,7 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+                <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
                 <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
