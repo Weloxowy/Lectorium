@@ -99,8 +99,6 @@ public class contactcontroller extends home{
         rectanglea1.setArcHeight(40.0);
         //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         contact_img.setClip(rectanglea1);
-
-
     }
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
@@ -148,4 +146,9 @@ public class contactcontroller extends home{
         contact9.setFont(pop_b_h2);
     }
 
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
 }

@@ -28,7 +28,7 @@
     <children>
         <AnchorPane fx:id="anchor" cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="715.0" prefWidth="1097.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label fx:id="background_tytul" ellipsisString="" layoutX="476.0" opacity="0.1" prefHeight="336.0" prefWidth="824.0" text="Tytuł">
+            <Label fx:id="background_tytul" alignment="CENTER_RIGHT" contentDisplay="RIGHT" ellipsisString="" layoutX="550.0" opacity="0.1" prefHeight="336.0" prefWidth="642.0" text="Tytuł" textAlignment="RIGHT">
                <font>
                   <Font name="Book Antiqua" size="260.0" />
                </font>
@@ -140,7 +140,7 @@
                   <Insets left="30.0" right="15.0" top="5.0" />
                </HBox.margin>
             </TextField>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#search_init" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../res/icons/dark/search.png" />
                </image>
@@ -148,7 +148,7 @@
                   <Insets right="10.0" top="13.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fx:id="avatar" fitHeight="62.0" fitWidth="62.0" pickOnBounds="true">
+            <ImageView fx:id="avatar" fitHeight="62.0" fitWidth="62.0" onMouseClicked="#yourProfileController_clicked" pickOnBounds="true">
                <image>
                   <Image url="@../res/icons/dark/avatar.png" />
                </image>
@@ -156,7 +156,7 @@
                   <Insets left="20.0" right="10.0" />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="nametag" cache="true" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko" textFill="#0a0813">
+            <Label fx:id="nametag" cache="true" onMouseClicked="#yourProfileController_clicked" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko" textFill="#0a0813">
                <font>
                   <Font size="22.0" />
                </font>

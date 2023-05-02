@@ -112,4 +112,9 @@ public class yourLibraryController extends home{
         gbs3.setFont(pop_b_h2);
     }
 
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
 }

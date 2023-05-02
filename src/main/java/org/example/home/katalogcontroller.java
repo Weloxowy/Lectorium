@@ -93,10 +93,6 @@ public class katalogcontroller extends home{
     private AnchorPane anchortable = new AnchorPane();
 
 
-    public void init_lista() {
-            Katalog_lista();
-    }
-
     public void Katalog_lista() {
         dbload.print_book();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
@@ -105,7 +101,7 @@ public class katalogcontroller extends home{
         idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
-            idCol.setVisible(false);
+            //idCol.setVisible(false);
 
         TableColumn autorCol = new TableColumn("Autor");
         autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
@@ -152,7 +148,8 @@ public class katalogcontroller extends home{
             String jezyk = tab[6];
             String uwagi = tab[7];
             String wydawnictwo = tab[8];
-            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo));
+            String nazwa_gatunku = tab[9];
+            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo,nazwa_gatunku));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
@@ -206,15 +203,14 @@ public class katalogcontroller extends home{
         lista.setOnMouseClicked(event -> {
             if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                 TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                int row = tablePosition.getRow();
-                Integer data = (Integer) idCol.getCellObservableValue(row).getValue();
-                System.out.println(data);
-                katalog_item(event,data,row);//get data
+                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
+                System.out.println("DDD:"+data);
+                katalog_item(event,data);//get data
             }
         });
     }
 
-    void katalog_item(MouseEvent event, int row,int id) {
+    void katalog_item(MouseEvent event, int row) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent = null;
         try {
@@ -224,7 +220,7 @@ public class katalogcontroller extends home{
             katalog_itemcontroller kat = loader.getController();
             kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
             kat.font();
-            kat.load(id);
+            kat.load(row-1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -232,6 +228,124 @@ public class katalogcontroller extends home{
             return;
         Scene scene = new Scene(parent);
         stage.setScene(scene);
+    }
+
+    public void Katalog_lista(String query) {
+        dbload.print_book();
+        ObservableList<Katalog> items = FXCollections.observableArrayList();
+
+        TableColumn idCol = new TableColumn("Id");
+        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<>("id_katalog"));
+        idCol.setVisible(false);
+
+        TableColumn autorCol = new TableColumn("Autor");
+        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa_autora"));
+
+        TableColumn nazwaCol = new TableColumn("Nazwa");
+        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa"));
+
+        TableColumn rokCol = new TableColumn("Rok wydania");
+        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setCellValueFactory(
+                new PropertyValueFactory<>("rok_wydania"));
+
+        TableColumn wydanieCol = new TableColumn("Wydanie");
+        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setCellValueFactory(
+                new PropertyValueFactory<>("wydanie"));
+
+        TableColumn isbnCol = new TableColumn("ISBN");
+        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setCellValueFactory(
+                new PropertyValueFactory<>("isbn"));
+
+        TableColumn jezykCol = new TableColumn("Język");
+        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setCellValueFactory(
+                new PropertyValueFactory<>("jezyk"));
+
+        TableColumn uwagiCol = new TableColumn("Uwagi");
+        uwagiCol.setMinWidth(anchortable.getPrefWidth()*0.2);
+        uwagiCol.setCellValueFactory(
+                new PropertyValueFactory<>("uwagi"));
+
+        for (String[] tab : dbload.array) {
+            Integer id_katalog = Integer.valueOf(tab[0]);
+            String nazwa = tab[1];
+            String nazwa_autora = tab[2];
+            String rok_wydania = tab[3];
+            String wydanie = tab[4];
+            String isbn = tab[5];
+            String jezyk = tab[6];
+            String uwagi = tab[7];
+            String wydawnictwo = tab[8];
+            String nazwa_gatunku = tab[9];
+            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo,nazwa_gatunku));
+        }
+        //Dodaj wartości do kolumn
+        lista.setItems(items);
+        //Dodaj kolumny do tabeli
+        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+        lista.setPrefWidth(anchortable.getPrefWidth());
+        lista.setPrefHeight(anchortable.getPrefHeight());
+        // Powiąż preferowane wielkości TableView i AnchorPane
+        lista.prefWidthProperty().bind(anchortable.widthProperty());
+        lista.prefHeightProperty().bind(anchortable.heightProperty());
+        // Dodaj TableView do AnchorPane
+        anchortable.getChildren().addAll(lista);
+        // Ustaw parametry kotwiczenia TableView na wartość 0
+        AnchorPane.setTopAnchor(lista, 0.0);
+        AnchorPane.setLeftAnchor(lista, 0.0);
+        AnchorPane.setBottomAnchor(lista, 0.0);
+        AnchorPane.setRightAnchor(lista, 0.0);
+
+        lista.getStylesheets().add("/fxml.home/home.css");
+        //filtrowanie rekordów
+        //tworzenie nowej listy obiektow katalog
+        FilteredList<Katalog> filteredList = new FilteredList<Katalog>(items, b-> true);
+        //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
+
+            filteredList.setPredicate(Katalog -> {
+                if(query.isEmpty() || query.isBlank() || query == null ){ return true;}
+
+                String searchword = query.toLowerCase();
+                //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
+                if(Katalog.getNazwa().toLowerCase().indexOf(searchword) > -1){
+                    return true;
+                }
+                if(Katalog.getNazwa_autora().toLowerCase().indexOf(searchword) > -1){
+                    return true;
+                }
+                if(Katalog.getIsbn().toLowerCase().indexOf(searchword) > -1){
+                    return true;
+                }
+                if(Katalog.getNazwa_gatunku().toLowerCase().indexOf(searchword)> -1){
+                    return true;
+                }
+                else return false;
+
+            });
+        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
+        SortedList<Katalog> sortedList = new SortedList<Katalog>(filteredList);
+        //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
+        sortedList.comparatorProperty().bind(lista.comparatorProperty());
+        //umiesc elementy
+        lista.setItems(sortedList);
+
+        lista.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
+                katalog_item(event,data);//get data
+            }
+        });
     }
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
@@ -249,5 +363,10 @@ public class katalogcontroller extends home{
         avatar.setClip(clipCircle);
     }
 
-    //TODO dodać menu slider
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
+
 }

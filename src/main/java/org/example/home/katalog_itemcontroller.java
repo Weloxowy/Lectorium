@@ -33,6 +33,9 @@ import org.example.Main;
 import org.example.verify.logincontroller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static org.example.Main.dbload;
 
@@ -140,7 +143,13 @@ public class katalog_itemcontroller extends home{
             year_book.setText("Rok wydania: "+tab[3]);
             publisher_book.setText("Wydawnictwo: "+tab[8]);
             isbn_book.setText("ISBN: "+tab[5]);
-            String text = tab[1].substring(0,8);
+            String text;
+            if(tab[1].length() > 8) {
+                text = tab[1].substring(0, 8);
+            }
+            else{
+                text = tab[1];
+            }
             background_tytul.setText(text);
             egzemplarz_lista(id+1);
         }
@@ -181,7 +190,7 @@ public class katalog_itemcontroller extends home{
         nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
-        //idCol.setVisible(false);
+
 
         TableColumn nrCol = new TableColumn("Numer egzemplarza");
         nrCol.setMinWidth(anchortable.getPrefWidth()*0.15);
@@ -214,8 +223,18 @@ public class katalog_itemcontroller extends home{
                     Node centreBox = createPriorityGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
+                cell.setOnMouseClicked(event -> {
+                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                        TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                        int row = tablePosition.getRow();
+                        int data = (int) nrCol.getCellObservableValue(row).getValue();
+                        System.out.println(data+"");
+                        int idd = Main.user.getId();
+                    }
+                });
             });
             return cell;
+
         });
 
 
@@ -248,16 +267,9 @@ public class katalog_itemcontroller extends home{
         AnchorPane.setRightAnchor(anchortable, 0.0);
         //dodaj css
         lista.getStylesheets().add("/fxml.home/home.css");
-
-        /*lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                int row = tablePosition.getRow();
-                Integer data = (Integer) idCol.getCellObservableValue(row).getValue();
-                System.out.println(data);
-                katalog_item(event,data,row);//get data
-            }
-        });*/
+        Locale locale = new Locale("pl","PL");
+        SimpleDateFormat date = new SimpleDateFormat("dd.MM.YYYY");
+        String d = date.format(new Date());
     }
 
     private Node createPriorityGraphic(){
@@ -276,5 +288,11 @@ public class katalog_itemcontroller extends home{
         rectangle.setArcWidth(10.0);
         rectangle.setArcHeight(10.0);
         cover_book.setClip(rectangle);
+    }
+
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
     }
 }

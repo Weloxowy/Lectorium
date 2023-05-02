@@ -1,12 +1,17 @@
 package org.example.db;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
+import org.example.Egzemplarze;
 import org.example.Main;
+import org.sqlite.SQLiteConnection;
+import org.sqlite.SQLiteConnectionConfig;
+
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class dbloader {
     private Connection connection;
@@ -29,26 +34,25 @@ public class dbloader {
         try {
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Error searching for user: " + e.getMessage());
             System.exit(1);
         }
 
     }
 
-    public boolean testRegister(String login){
+    public boolean testRegister(String login) {
         connectToDatabase();
         String testUserSQL = "SELECT count(id_uzytkownicy) as cnt from uzytkownicy where login=?";
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(testUserSQL);
-            statement.setString(1,login);
+            statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("cnt");
                 closeConnection();
-                if(id==0){
+                if (id == 0) {
                     return true;
                 }
-                if(id>0 || id<0){
+                if (id > 0 || id < 0) {
                     return false;
                 }
             } else { //Wrong login or password
@@ -60,8 +64,9 @@ public class dbloader {
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
+        } finally {
+            closeConnection();
         }
-        closeConnection();
         return false;
     }
 
@@ -97,8 +102,9 @@ public class dbloader {
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
+        } finally {
+            closeConnection();
         }
-        closeConnection();
         return false;
     }
 
@@ -124,9 +130,13 @@ public class dbloader {
     }
 
     public ArrayList<String[]> array = new ArrayList<String[]>();
+
     public void print_book() {
         connectToDatabase();
-        String print = "SELECT katalog.id_katalog, autor.tytul_autora ,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa, katalog.rok_wydania, katalog.wydanie, katalog.isbn, katalog.jezyk, katalog.uwagi, wydawnictwo.nazwa_wydawnictwa FROM katalog, autor, wydawnictwo WHERE katalog.autor_id_autor = autor.id_autor AND katalog.wydawnictwo_id_wydawnictwo = wydawnictwo.id_wydawnictwo";
+        String print = "SELECT katalog.id_katalog, autor.tytul_autora ,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa, katalog.rok_wydania, \n" +
+                "katalog.wydanie, katalog.isbn, katalog.jezyk, katalog.uwagi, wydawnictwo.nazwa_wydawnictwa, gatunek.nazwa_gatunku \n" +
+                "FROM katalog, autor, wydawnictwo, gatunek WHERE katalog.autor_id_autor = autor.id_autor AND \n" +
+                "katalog.wydawnictwo_id_wydawnictwo = wydawnictwo.id_wydawnictwo AND gatunek.id_gatunek = katalog.gatunek_id_gatunek;";
         try {
             array.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
@@ -135,14 +145,15 @@ public class dbloader {
                 int id_katalog = resultSet.getInt("id_katalog");
                 final String nazwa = resultSet.getString("nazwa");
                 String nazwa_autora = "";
-                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
+                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") + " " + resultSet.getString("nazwisko_autora"));
                 final String rok_wydania = resultSet.getString("rok_wydania");
                 final String wydanie = resultSet.getString("wydanie");
                 final String isbn = resultSet.getString("isbn");
                 final String jezyk = resultSet.getString("jezyk");
                 final String uwagi = resultSet.getString("uwagi");
                 final String nazwa_wydawnictwa = resultSet.getString("nazwa_wydawnictwa");
-                String[] row = {String.valueOf(id_katalog),nazwa,nazwa_autora, rok_wydania, wydanie, isbn, jezyk, uwagi, nazwa_wydawnictwa};
+                final String nazwa_gatunku = resultSet.getString("nazwa_gatunku");
+                String[] row = {String.valueOf(id_katalog), nazwa, nazwa_autora, rok_wydania, wydanie, isbn, jezyk, uwagi, nazwa_wydawnictwa, nazwa_gatunku};
                 array.add(row);
             }
             resultSet.close();
@@ -150,9 +161,9 @@ public class dbloader {
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
+        } finally {
+            closeConnection();
         }
-
-        closeConnection();
     }
 
     public ArrayList<String[]> getData() {
@@ -174,8 +185,7 @@ public class dbloader {
                     image = new Image(new ByteArrayInputStream(imageBytes));
                     binaryStream.close();
                     Main.user.setImage(image);
-                }
-                else{
+                } else {
                     Image def = new Image("/res/icons/dark/avatar.png");
                     Main.user.setImage(def);
                 }
@@ -185,11 +195,12 @@ public class dbloader {
             System.exit(100);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            closeConnection();
         }
-        closeConnection();
     }
 
-    public void get_cover(int id){
+    public void get_cover(int id) {
         connectToDatabase();
         String print = "SELECT okladka FROM katalog WHERE id_katalog = ?";
         Image image;
@@ -204,9 +215,8 @@ public class dbloader {
                     image = new Image(new ByteArrayInputStream(imageBytes));
                     binaryStream.close();
                     Main.kat.setOkladka(image);
-                    System.out.println(image);//usuniecie
-                }
-                else{
+                    System.out.println(image);//TODO usuniecie tej linijki, o ile wszystkie okladki sie dobrze laduja
+                } else {
                     Image def = new Image("/fxml.home/Brakokładki.jpg");
                     Main.kat.setOkladka(def);
                 }
@@ -216,22 +226,22 @@ public class dbloader {
             System.exit(100);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            closeConnection();
         }
-        closeConnection();
     }
 
     public ArrayList<String[]> copy = new ArrayList<String[]>();
 
     public void print_copies(int id) {
-        System.out.println("ID" +id);
         connectToDatabase();
         String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, egzemplarze.lokalizacja, egzemplarze.czy_dostepne,\n" +
                 "  CASE WHEN wypozyczenia.data_zwrotu < date('now') THEN NULL ELSE wypozyczenia.data_zwrotu END AS data_zwrotu\n" +
                 "FROM katalog\n" +
                 "JOIN egzemplarze ON egzemplarze.katalog_id_katalog = katalog.id_katalog\n" +
                 "LEFT JOIN wypozyczenia ON wypozyczenia.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
-                "WHERE katalog.id_katalog = ?\n" +
-                "ORDER BY data_zwrotu DESC;\n";
+                "WHERE katalog.id_katalog=?\n" +
+                "ORDER BY data_zwrotu DESC;";
         try {
             copy.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
@@ -243,16 +253,113 @@ public class dbloader {
                 final String lokalizacja = resultSet.getString("lokalizacja");
                 final String czy_dostepne = resultSet.getString("czy_dostepne");
                 final String data_zwrotu = resultSet.getString("data_zwrotu");
-                String[] row = {nazwa,String.valueOf(id_egzemplarze),lokalizacja,czy_dostepne,data_zwrotu};
+                String[] row = {nazwa, String.valueOf(id_egzemplarze), lokalizacja, czy_dostepne, data_zwrotu};
                 copy.add(row);
             }
             resultSet.close();
+            //closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public ArrayList<String[]> top = new ArrayList<String[]>();
+
+    public void get_top() {
+        if (top.isEmpty()) {
+            connectToDatabase();
+            String print = "SELECT katalog.id_katalog,autor.imie_autora, autor.nazwisko_autora, katalog.nazwa\n" +
+                    "FROM katalog, autor WHERE katalog.autor_id_autor = autor.id_autor ORDER BY katalog.id_katalog DESC LIMIT 8;";
+            try {
+                PreparedStatement statement = connection.prepareStatement(print);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    final int id_katalog = resultSet.getInt("id_katalog");
+                    String nazwa_autora = "";
+                    nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") + " " + resultSet.getString("nazwisko_autora"));
+                    final String nazwa = resultSet.getString("nazwa");
+                    String[] row = {String.valueOf(id_katalog), nazwa, nazwa_autora};
+                    top.add(row);
+                }
+                resultSet.close();
+                closeConnection();
+            } catch (SQLException e) { //Error while connecting with DB
+                System.out.println("Error while dowloading data from DB: " + e.getMessage());
+                System.exit(100);
+            } finally {
+                closeConnection();
+            }
+        }
+    }
+
+    public ArrayList<String[]> categories = new ArrayList<String[]>();
+
+    public void get_categories() {
+        if (categories.isEmpty()) { //TODO: mozna tez dorzucic warunek czasowy ze czas od ostatniego zaladowania wyniosl minimum 1h
+            connectToDatabase();
+            String print = "SELECT gatunek.nazwa_gatunku , count(katalog.gatunek_id_gatunek) as ilosc \n" +
+                    "from gatunek, katalog where gatunek.id_gatunek = katalog.gatunek_id_gatunek \n" +
+                    "GROUP BY katalog.gatunek_id_gatunek;";
+            try {
+                PreparedStatement statement = connection.prepareStatement(print);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    final String nazwa_gatunku = resultSet.getString("nazwa_gatunku");
+                    final String ilosc = resultSet.getString("ilosc");
+                    String[] row = {nazwa_gatunku, ilosc};
+                    categories.add(row);
+                }
+                resultSet.close();
+            } catch (SQLException e) { //Error while connecting with DB
+                System.out.println("Error while dowloading data from DB: " + e.getMessage());
+                System.exit(100);
+            } finally {
+                closeConnection();
+            }
+        }
+    }
+
+    public void rent(int egz, int id) { //nie chce działać
+        connectToDatabase();
+        String print = "INSERT INTO rezerwacje(data_rezerwacji,data_konca,egzemplarze_id_egzemplarze,uzytkownicy_id_uzytkownicy) VALUES (date('now'),date('now', '+7 day'),?,?);\n";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, egz);
+            statement.setInt(2, id);
+            statement.execute();
+            System.out.println(statement.isClosed());
             closeConnection();
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public boolean login_update(String new_login, int id, String login) {
+        connectToDatabase();
+        closeConnection();
+        connectToDatabase();
+        String print = "UPDATE uzytkownicy SET login = ?  where id_uzytkownicy=? AND login = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setString(1, new_login);
+            statement.setInt(2, id);
+            statement.setString(3, login);
+            int result = statement.executeUpdate();
+            System.out.println("Rows affected: " + result);
+            closeConnection();
+            return true;
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            e.printStackTrace();
         }
         closeConnection();
+        return false;
     }
 
     public ArrayList<String[]> ListHire = new ArrayList<String[]>();
@@ -319,5 +426,6 @@ public class dbloader {
 
 
 }
+
 
 
