@@ -23,6 +23,33 @@ import java.io.IOException;
 
 public class contactcontroller extends home{
     @FXML
+    private Label contact1;
+
+    @FXML
+    private Label contact2;
+
+    @FXML
+    private Label contact3;
+
+    @FXML
+    private Label contact4;
+
+    @FXML
+    private Label contact5;
+
+    @FXML
+    private Label contact6;
+
+    @FXML
+    private Label contact7;
+
+    @FXML
+    private Label contact8;
+
+    @FXML
+    private Label contact9;
+
+    @FXML
     private VBox kontakt_id;
     @FXML
     private ImageView contact_img;
@@ -72,8 +99,6 @@ public class contactcontroller extends home{
         rectanglea1.setArcHeight(40.0);
         //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         contact_img.setClip(rectanglea1);
-
-
     }
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
@@ -99,6 +124,7 @@ public class contactcontroller extends home{
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),30);
         nametag.setFont(ssp_sb_h1);
         labelbiblioteka.setFont(pop_b_h1);
         labelglowna.setFont(pop_b_h1);
@@ -109,6 +135,20 @@ public class contactcontroller extends home{
         labelrezerwacje.setFont(pop_b_h1);
         labelwypozyczenia.setFont(pop_b_h1);
         searchbar.setFont(pop_r_h1);
+        contact1.setFont(pop_b_h2);
+        contact2.setFont(pop_b_h2);
+        contact3.setFont(pop_b_h2);
+        contact4.setFont(pop_b_h2);
+        contact5.setFont(pop_b_h2);
+        contact6.setFont(pop_b_h2);
+        contact7.setFont(pop_b_h2);
+        contact8.setFont(pop_b_h2);
+        contact9.setFont(pop_b_h2);
     }
 
+    @FXML
+    void search_init(MouseEvent event){
+        String query = searchbar.getText();
+        katalog_clicked(event,query);
+    }
 }

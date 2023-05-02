@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -35,7 +37,7 @@
                         <Insets left="30.0" right="15.0" top="5.0" />
                     </HBox.margin>
                 </TextField>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#search_init" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../res/icons/dark/search.png" />
                     </image>
@@ -43,7 +45,7 @@
                         <Insets right="10.0" top="13.0" />
                     </HBox.margin>
                 </ImageView>
-                <ImageView fx:id="avatar" fitHeight="62.0" fitWidth="62.0" pickOnBounds="true">
+                <ImageView fx:id="avatar" fitHeight="62.0" fitWidth="62.0" onMouseClicked="#yourProfileController_clicked" pickOnBounds="true">
                     <image>
                         <Image url="@../res/icons/dark/avatar.png" />
                     </image>
@@ -51,7 +53,7 @@
                         <Insets left="20.0" right="10.0" />
                     </HBox.margin>
                 </ImageView>
-                <Label fx:id="nametag" cache="true" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko" textFill="#0a0813">
+                <Label fx:id="nametag" cache="true" onMouseClicked="#yourProfileController_clicked" prefHeight="32.0" prefWidth="215.0" text="Imie Nazwisko" textFill="#0a0813">
                     <font>
                         <Font size="22.0" />
                     </font>
@@ -91,7 +93,7 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+                <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
                 <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
@@ -125,18 +127,18 @@
                 <DropShadow height="35.57" radius="8.3925" width="0.0" />
             </effect>
         </AnchorPane>
-      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane fx:id="grid" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="222.00000610351563" minHeight="10.0" prefHeight="222.00000610351563" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="291.6000122070312" minHeight="10.0" prefHeight="266.79999389648435" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="avatar2115" fitHeight="196.0" fitWidth="230.0" pickOnBounds="true">
+            <ImageView fx:id="avatar2115" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <image>
                   <Image url="@../res/icons/dark/avatar.png" />
                </image>
@@ -144,7 +146,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </ImageView>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+            <VBox prefHeight="242.0" prefWidth="548.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
                   <Label fx:id="Name" prefHeight="89.0" prefWidth="185.0" text="Imie">
                      <font>
@@ -156,32 +158,47 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="Login" prefHeight="67.0" prefWidth="550.0" text="Login">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <children>
-                  <Label prefHeight="70.0" prefWidth="551.0" text="Zmien login">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="51.0" prefWidth="598.0" text="Zmien haslo">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="43.0" prefWidth="562.0" text="Usun konto">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
+                  <Button fx:id="avatar_change" layoutX="10.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#avatar_swap" prefHeight="64.0" prefWidth="300.0" text="Zmień avatar" />
+                  <Button fx:id="login_change" mnemonicParsing="false" onMouseClicked="#login_c" prefHeight="64.0" prefWidth="300.0" text="Zmień login" />
+                  <Button fx:id="password_change" mnemonicParsing="false" onMouseClicked="#haslo_c" prefHeight="64.0" prefWidth="300.0" text="Zmień hasło" />
+                  <Button fx:id="profile_delete" mnemonicParsing="false" onMouseClicked="#profile_d" prefHeight="64.0" prefWidth="300.0" styleClass="button_usun" text="Usuń konto" />
                </children>
+               <GridPane.margin>
+                  <Insets left="80.0" right="30.0" top="30.0" />
+               </GridPane.margin>
             </VBox>
+            <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <children>
+                  <VBox fx:id="login" spacing="50.0">
+                     <children>
+                        <TextField fx:id="curr_login" prefHeight="30.0" prefWidth="300.0" promptText="Aktualny login" styleClass="fields" />
+                        <TextField fx:id="new_login" prefHeight="30.0" prefWidth="300.0" promptText="Nowy login" styleClass="fields" />
+                        <Button fx:id="commit_login" mnemonicParsing="false" onMouseClicked="#login_change" prefHeight="50.0" prefWidth="250.0" text="Potwierdź zmianę" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="password" spacing="50.0">
+                     <children>
+                        <PasswordField fx:id="curr_password" prefHeight="30.0" prefWidth="300.0" promptText="Aktualne hasło" styleClass="fields" />
+                        <PasswordField fx:id="new_password" prefHeight="30.0" prefWidth="300.0" promptText="Nowe hasło" styleClass="fields" />
+                        <Button fx:id="commit_password" mnemonicParsing="false" onMouseClicked="#password_change" prefHeight="50.0" prefWidth="250.0" text="Potwierdź zmianę" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="usun" spacing="50.0">
+                     <children>
+                        <Label fx:id="text_delete" prefHeight="51.0" prefWidth="450.0" text="Pamiętaj że zmiana jest nieodwracalna! Wpisz aktualne hasło, aby kontynuować." />
+                        <PasswordField fx:id="delete_password" prefHeight="30.0" prefWidth="300.0" promptText="Aktualne hasło" styleClass="fields" />
+                        <Button fx:id="commit_delete" mnemonicParsing="false" onMouseClicked="#delete_profile" prefHeight="50.0" prefWidth="250.0" text="Potwierdź usunięcie" />
+                     </children>
+                  </VBox>
+               </children>
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin>
+            </AnchorPane>
          </children>
       </GridPane>
     </children>

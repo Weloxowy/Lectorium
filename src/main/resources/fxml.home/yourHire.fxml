@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -14,9 +15,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.yourLibraryController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.yourHire">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
@@ -26,63 +26,23 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane cache="true" cacheHint="QUALITY" maxHeight="900.0" maxWidth="1097.0" prefHeight="704.0" prefWidth="1056.0" styleClass="main_area" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <GridPane prefHeight="713.0" prefWidth="1096.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fx:id="gbs_dobrze_jest" fitHeight="708.0" fitWidth="449.0" pickOnBounds="true" preserveRatio="true" styleClass="book_data_cover" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@twoja_biblioteka.jpg" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets right="20.0" />
-                     </GridPane.margin>
-                  </ImageView>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
-                     <children>
-                        <Text fx:id="gbs1" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do naszej biblioteki, która jest skarbnicą wiedzy i rozrywki dla każdego! W naszych zbiorach znajdziesz bogaty wybór książek, czasopism, filmów, muzyki i gier, które umilą Ci czas wolny i pozwolą na rozwijanie zainteresowań." wrappingWidth="548.3999404907227">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" top="20.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="gbs2" strokeType="OUTSIDE" strokeWidth="0.0" text="Nasza biblioteka oferuje wiele atrakcyjnych możliwości. Możesz wypożyczyć interesującą Cię pozycję na kilka dni lub tygodni, a także skorzystać z czytelni i korzystać z materiałów na miejscu. Posiadamy również liczne komputery z dostępem do Internetu, co umożliwia przeglądanie stron internetowych, poszukiwanie informacji i wykonywanie różnych zadań." wrappingWidth="547.7366695404053">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                        </Text>
-                        <Text fx:id="gbs3" strokeType="OUTSIDE" strokeWidth="0.0" text="Zapraszamy do odwiedzenia naszej biblioteki i skorzystania z jej bogatych zasobów. Nasz zespół pracowników chętnie udzieli Ci pomocy i wsparcia w znalezieniu odpowiedniej pozycji. Nie zwlekaj, odwiedź nas już dzisiaj i zacznij czerpać wiedzę i przyjemność z czytania!" wrappingWidth="547.7366695404053">
-                           <font>
-                              <Font name="System Italic" size="25.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                        </Text>
-                     </children>
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets left="20.0" />
-                     </GridPane.margin>
-                  </VBox>
-               </children>
-            </GridPane>
-         </children></AnchorPane>
+              <AnchorPane fx:id="anchor_hire" cache="true" cacheHint="QUALITY" layoutX="2.0" layoutY="112.0" maxHeight="900.0" maxWidth="1097.0" prefHeight="602.0" prefWidth="1095.0" styleClass="main_area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="112.0" />
+            <Label fx:id="Wyp" layoutX="51.0" layoutY="23.0" prefHeight="54.0" prefWidth="354.0" text="Wypożyczenia dla użytkownika ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="Name" layoutX="392.0" layoutY="27.0" prefHeight="47.0" prefWidth="254.0" text="Imie">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="Aktualne" layoutX="693.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#check_hire_information" prefHeight="60.0" prefWidth="162.0" text="Aktualne wypożyczenia" />
+            <Button fx:id="Wszystkie" layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#yourHire_clicked" prefHeight="57.0" prefWidth="161.0" text="Wszystkie wypożyczenia" />
+         </children>
+      </AnchorPane>
         <HBox styleClass="menu_up" GridPane.columnIndex="1">
             <children>
                 <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
@@ -93,7 +53,7 @@
                         <Insets left="30.0" right="15.0" top="5.0" />
                     </HBox.margin>
                 </TextField>
-                <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#search_init" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../res/icons/dark/search.png" />
                     </image>
@@ -149,7 +109,7 @@
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
                 <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>

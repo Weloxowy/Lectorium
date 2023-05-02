@@ -38,7 +38,7 @@
                 <RowConstraints maxHeight="155.0" prefHeight="155.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="image_a1" fitHeight="308.0" fitWidth="622.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.halignment="RIGHT" GridPane.rowSpan="2">
+                  <ImageView fx:id="image_a1" fitHeight="308.0" fitWidth="622.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.halignment="RIGHT" GridPane.rowSpan="2">
                      <image>
                         <Image url="@a1.png" />
                      </image>
@@ -46,7 +46,7 @@
                         <Insets right="30.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fx:id="image_b1" fitHeight="148.0" fitWidth="308.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                  <ImageView fx:id="image_b1" fitHeight="148.0" fitWidth="308.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <image>
                         <Image url="@b1.png" />
                      </image>
@@ -54,7 +54,7 @@
                         <Insets />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fx:id="image_b2" fitHeight="152.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                  <ImageView fx:id="image_b2" fitHeight="152.0" fitWidth="299.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true" styleClass="banners" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@b2.png" />
                      </image>
@@ -88,7 +88,7 @@
                   <Insets left="30.0" right="15.0" top="5.0" />
                </HBox.margin>
             </TextField>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="search_button" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#search_init" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../res/icons/dark/search.png" />
                </image>
@@ -138,13 +138,13 @@
             </Separator>
             <Label fx:id="labelkatalog" onMouseClicked="#katalog_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
             <Label fx:id="labelkategorie" onMouseClicked="#kategorie_clicked" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
-            <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
+            <Label fx:id="labelnowosci" onMouseClicked="#nowosciController_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
             </Separator>
-            <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+            <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
             <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
             <Separator prefWidth="200.0">
                <VBox.margin>
