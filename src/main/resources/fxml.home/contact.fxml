@@ -145,47 +145,47 @@
             </ImageView>
             <VBox fx:id="kontakt_id" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.rowSpan="2">
                <children>
-                  <Label alignment="CENTER" prefWidth="553.0" text="KONTAKT">
+                  <Label fx:id="contact1" alignment="CENTER" prefWidth="553.0" text="KONTAKT">
                      <font>
                         <Font name="System Italic" size="40.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="58.0" prefWidth="530.0" text="Tel.  555-684-983">
+                  <Label fx:id="contact2" alignment="CENTER" prefHeight="58.0" prefWidth="530.0" text="Tel.  555-684-983">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="535.0" text="Tel. stac. 041 668 473" textAlignment="CENTER">
+                  <Label fx:id="contact3" alignment="CENTER" prefHeight="51.0" prefWidth="535.0" text="Tel. stac. 041 668 473" textAlignment="CENTER">
                      <font>
                         <Font name="System Italic" size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="537.0" text="Fax. 22 826 93 20">
+                  <Label fx:id="contact4" alignment="CENTER" prefHeight="51.0" prefWidth="537.0" text="Fax. 22 826 93 20">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="530.0" text="Godziny otwarcia:">
+                  <Label fx:id="contact5" alignment="CENTER" prefHeight="51.0" prefWidth="530.0" text="Godziny otwarcia:">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="533.0" text="Pn-pt 10:00-17:00">
+                  <Label fx:id="contact6" alignment="CENTER" prefHeight="51.0" prefWidth="533.0" text="Pn-pt 10:00-17:00">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="549.0" text="Sobota 10:00-14:00">
+                  <Label fx:id="contact7" alignment="CENTER" prefHeight="51.0" prefWidth="549.0" text="Sobota 10:00-14:00">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="528.0" text="Adres:">
+                  <Label fx:id="contact8" alignment="CENTER" prefHeight="51.0" prefWidth="528.0" text="Adres:">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="51.0" prefWidth="527.0" text="ul. Wapienna 21/37 Kielce">
+                  <Label fx:id="contact9" alignment="CENTER" prefHeight="51.0" prefWidth="527.0" text="ul. Wapienna 21/37 Kielce">
                      <font>
                         <Font size="35.0" />
                      </font>

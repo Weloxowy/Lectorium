@@ -29,17 +29,12 @@
       <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
               <AnchorPane fx:id="anchor_hire" cache="true" cacheHint="QUALITY" layoutX="2.0" layoutY="112.0" maxHeight="900.0" maxWidth="1097.0" prefHeight="602.0" prefWidth="1095.0" styleClass="main_area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="112.0" />
-            <Label layoutX="51.0" layoutY="23.0" prefHeight="54.0" prefWidth="354.0" text="Wypożyczenia dla użytkownika ">
+            <Label fx:id="Wyp" layoutX="51.0" layoutY="23.0" prefHeight="54.0" prefWidth="354.0" text="Wypożyczenia dla użytkownika ">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="Name" layoutX="405.0" layoutY="24.0" prefHeight="47.0" prefWidth="179.0" text="Imie">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="Surname" layoutX="526.0" layoutY="23.0" prefHeight="46.0" prefWidth="171.0" text="Nazwisko">
+            <Label fx:id="Name" layoutX="392.0" layoutY="27.0" prefHeight="47.0" prefWidth="254.0" text="Imie">
                <font>
                   <Font size="24.0" />
                </font>

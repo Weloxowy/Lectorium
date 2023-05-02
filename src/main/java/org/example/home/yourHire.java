@@ -56,10 +56,8 @@ public class yourHire extends home{
 
          @FXML
         private Label Name;
-
          @FXML
-         private Label Surname;
-
+         private Label Wyp;
          @FXML
         private Button Wszystkie;
 
@@ -83,8 +81,7 @@ public class yourHire extends home{
         avatar_view();
         font();
         Lista_Hire(Main.user.getId());
-        Name.setText(imie);
-        Surname.setText(nazwisko);
+        Name.setText(imie + " " + nazwisko);
 
 
     }
@@ -173,6 +170,7 @@ public class yourHire extends home{
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
         nametag.setFont(ssp_sb_h1);
         labelbiblioteka.setFont(pop_b_h1);
         labelglowna.setFont(pop_b_h1);
@@ -183,6 +181,8 @@ public class yourHire extends home{
         labelrezerwacje.setFont(pop_b_h1);
         labelwypozyczenia.setFont(pop_b_h1);
         searchbar.setFont(pop_r_h1);
+        Wyp.setFont(pop_b_h2);
+        Name.setFont(pop_b_h2);
     }
 
     @FXML

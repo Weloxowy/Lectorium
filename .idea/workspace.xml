@@ -8,7 +8,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682935264956</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
+      <created>1682935612027</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682935612027</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,7 +230,8 @@
     <MESSAGE value="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika" />
     <MESSAGE value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
     <MESSAGE value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
+    <MESSAGE value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
