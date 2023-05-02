@@ -2,6 +2,9 @@ package org.example.db;
 import javafx.scene.image.Image;
 import org.example.Egzemplarze;
 import org.example.Main;
+import org.sqlite.SQLiteConnection;
+import org.sqlite.SQLiteConnectionConfig;
+
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -30,7 +33,6 @@ public class dbloader {
         try {
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Error searching for user: " + e.getMessage());
             System.exit(1);
         }
 
@@ -310,7 +312,6 @@ public class dbloader {
                     categories.add(row);
                 }
                 resultSet.close();
-                closeConnection();
             } catch (SQLException e) { //Error while connecting with DB
                 System.out.println("Error while dowloading data from DB: " + e.getMessage());
                 System.exit(100);
@@ -340,23 +341,26 @@ public class dbloader {
 
     public boolean login_update(String new_login, int id, String login) {
         connectToDatabase();
-        String print = "UPDATE uzytkownicy SET login = ?  where id_uzytkownicy=? AND login = ?;";
+        closeConnection();
+        connectToDatabase();
+        String print = "UPDATE uzytkownicy SET login = ?  where id_uzytkownicy=? AND login = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setString(1, new_login);
             statement.setInt(2, id);
             statement.setString(3, login);
-            statement.execute();
-            System.out.println(statement.isClosed());
+            int result = statement.executeUpdate();
+            System.out.println("Rows affected: " + result);
             closeConnection();
             return true;
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
-            System.exit(100);
+            e.printStackTrace();
         }
         closeConnection();
         return false;
     }
+
 }
 
 

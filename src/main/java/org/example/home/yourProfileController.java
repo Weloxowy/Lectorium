@@ -7,22 +7,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import org.example.Main;
 import org.example.verify.logincontroller;
 
 import javax.naming.Name;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.example.Main.dbload;
 
@@ -120,6 +129,9 @@ public class yourProfileController extends home {
         @FXML
         private VBox usun;
 
+        @FXML
+        private GridPane grid;
+
 
         void avatar_view() {
             int radius = 28;
@@ -142,17 +154,39 @@ public class yourProfileController extends home {
             Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
             Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-            Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
-            nametag.setFont(ssp_sb_h1);
-            labelbiblioteka.setFont(pop_b_h1);
-            labelglowna.setFont(pop_b_h1);
-            labelkatalog.setFont(pop_b_h1);
-            labelkontakt.setFont(pop_b_h1);
-            labelkategorie.setFont(pop_b_h1);
-            labelnowosci.setFont(pop_b_h1);
-            labelrezerwacje.setFont(pop_b_h1);
-            labelwypozyczenia.setFont(pop_b_h1);
-            searchbar.setFont(pop_r_h1);
+            Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),22);
+            Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),18);
+            Label name = (Label) grid.lookup("#Name");
+            name.setFont(pop_b_h1);
+            Label sur = (Label) grid.lookup("#Surname");
+            sur.setFont(pop_b_h1);
+            Button login_change = (Button) grid.lookup("#login_change");
+            login_change.setFont(pop_r_h1);
+            Button password_change = (Button) grid.lookup("#password_change");
+            password_change.setFont(pop_r_h1);
+            Button profile_delete = (Button) grid.lookup("#profile_delete");
+            profile_delete.setFont(pop_r_h1);
+            Button avatar_change = (Button) grid.lookup("#avatar_change");
+            avatar_change.setFont(pop_r_h1);
+            Label warning = (Label) grid.lookup("#text_delete");
+            warning.setFont(pop_r_h2);
+            PasswordField delete_password = (PasswordField) grid.lookup("#delete_password");
+            delete_password.setFont(pop_r_h1);
+            Button commit_delete = (Button) grid.lookup("#commit_delete");
+            commit_delete.setFont(pop_b_h2);
+            TextField curr_login = (TextField) grid.lookup("#curr_login");
+            curr_login.setFont(pop_r_h1);
+            TextField new_login = (TextField) grid.lookup("#new_login");
+            new_login.setFont(pop_r_h1);
+            Button commit_login = (Button) grid.lookup("#commit_login");
+            commit_login.setFont(pop_b_h2);
+            PasswordField curr_password = (PasswordField) grid.lookup("#curr_password");
+            curr_password.setFont(pop_r_h1);
+            PasswordField new_password = (PasswordField) grid.lookup("#new_password");
+            new_password.setFont(pop_r_h1);
+            Button commit_password = (Button) grid.lookup("#commit_password");
+            commit_password.setFont(pop_b_h2);
+
         }
 
         public void init(String imie, String nazwisko, MouseEvent event, Image image) {
@@ -161,9 +195,7 @@ public class yourProfileController extends home {
             avatar2115.setImage(Main.user.getImage());
             Name.setText("Imie: " + imie);
             Surname.setText("Nazwisko: " + nazwisko);
-            //Login.setText();
             avatar_view();
-            font();
             avatar_view_profile();
             wash_effects();
         }
@@ -189,7 +221,7 @@ public class yourProfileController extends home {
         }
 
         @FXML
-        void login_change(MouseEvent event) {
+        void login_change(MouseEvent event) throws SQLException {
             String old_l = curr_login.getText();
             String new_l = new_login.getText();
             if(dbload.login_update(new_l,Main.user.getId(),old_l)){
@@ -198,6 +230,10 @@ public class yourProfileController extends home {
             else{
                 commit_login.setStyle("-fx-border-width: 2");
                 commit_login.setStyle("-fx-border-color: red");
+                Label wrong = new Label("Wystapil");
+                wrong.setLayoutX(300);
+                wrong.setLayoutY(300);
+                login.getChildren().add(wrong);
                 //dac tekst ze blad
             }
         }
@@ -228,4 +264,24 @@ public class yourProfileController extends home {
             password_change.setStyle("-fx-border-width: 1");
             profile_delete.setStyle("-fx-border-width: 1");
         }
+
+        @FXML
+        void avatar_swap(MouseEvent event){
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Obrazy (*.png, *.jpg)", "*.png", "*.jpg");
+            fileChooser.setTitle("Wybierz avatar");
+            fileChooser.getExtensionFilters().add(imageFilter);
+            File file = fileChooser.showOpenDialog(avatar2115.getScene().getWindow());
+            try (InputStream stream = new FileInputStream(file)) { //do poprawy
+                Image image = new Image(stream);
+                Main.user.setImage(image);
+                avatar.fireEvent(event);
+            } catch (IOException ex) {
+                // obsługa wyjątku
+            }
+
+
+
+            //po udanym imporcie zrobic konwersje na bytechar i zrobic update do bazy danych
+    }
 }

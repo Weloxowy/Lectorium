@@ -185,6 +185,7 @@ public class home {
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
+        font(scene);
         stage.setScene(scene);
     }
 

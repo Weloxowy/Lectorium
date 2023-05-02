@@ -8,38 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.1 - dodano nowosci wraz z przejsciami, uaktualniono katalog_itemcontroller, przeniesienie funkcji powielajacych sie, ktore posiadają parametry FXML do klasy home, dodano okno kategorii wraz z przejsciami, usunięcie zbędnych fx:id oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/nowosciController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/admin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/home.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2 - dokonczenie panelu uzytkownika, dodanie funkcji rezerwacji (7 dni),pomniejsze poprawki interfejsu, css w yourlibrary i contact, dorzucenie przejsc pomiedzy oknami">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/kategoriecontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/a1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/a1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/b1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/b1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/b2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/b2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682197478356</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu.">
+      <created>1682936156179</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682936156179</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -210,7 +192,8 @@
     <MESSAGE value="v0.3" />
     <MESSAGE value="v0.4.3 - poprawki po merge" />
     <MESSAGE value="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.4 - klawisz enter wywoluje weryfikacje logowania, dolaczenie czcionek do tabel, interfejs dla przejsc miedzy oknami" />
+    <MESSAGE value="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu." />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -221,18 +204,33 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>242</line>
+          <line>244</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>323</line>
+          <line>324</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java</url>
           <line>231</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
+          <line>342</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java</url>
+          <line>269</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

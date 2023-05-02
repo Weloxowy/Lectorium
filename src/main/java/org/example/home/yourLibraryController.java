@@ -82,6 +82,7 @@ public class yourLibraryController extends home{
         labelrezerwacje.setFont(pop_b_h1);
         labelwypozyczenia.setFont(pop_b_h1);
         searchbar.setFont(pop_r_h1);
+
     }
 
     @FXML
