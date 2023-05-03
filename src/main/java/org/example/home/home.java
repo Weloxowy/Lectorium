@@ -45,7 +45,7 @@ public class home {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(parent == null)
+        if (parent == null)
             return;
         Scene scene = new Scene(parent);
         stage.setScene(scene);
@@ -60,7 +60,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             kat.Katalog_lista();
             kat.font();
         } catch (IOException e) {
@@ -72,7 +72,7 @@ public class home {
         stage.setScene(scene);
     }
 
-   @FXML
+    @FXML
     void katalog_clicked(MouseEvent event, String query) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
@@ -80,7 +80,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             kat.Katalog_lista(query);
             kat.font();
         } catch (IOException e) {
@@ -93,7 +93,7 @@ public class home {
     }
 
     @FXML
-    void kategorie_clicked(MouseEvent event){
+    void kategorie_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
         try {
@@ -101,7 +101,7 @@ public class home {
             parent = loader.load();
             kategoriecontroller controller = loader.getController();
             //controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            controller.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +120,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
             parent = loader.load();
             contactcontroller contact = loader.getController();
-            contact.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            contact.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -131,7 +131,7 @@ public class home {
     }
 
     @FXML
-    void glowna_clicked(MouseEvent event){
+    void glowna_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Parent parent;
@@ -140,7 +140,7 @@ public class home {
             parent = loader.load();
             homecontroller controller = loader.getController();
             controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            controller.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -158,7 +158,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
             parent = loader.load();
             yourLibraryController library = loader.getController();
-            library.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            library.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             library.font();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -177,7 +177,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourProfileController.fxml"));
             parent = loader.load();
             yourProfileController Profile = loader.getController();
-            Profile.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             Profile.font();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -197,7 +197,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/nowosci.fxml"));
             parent = loader.load();
             nowosciController nowosci = loader.getController();
-            nowosci.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            nowosci.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -209,32 +209,32 @@ public class home {
     }
 
     void font(Scene scene) {
-            Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-            Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-            Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),20);
-            Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
-            Label nametag = (Label) scene.lookup("#nametag");
-            nametag.setFont(ssp_sb_h1);
-            Label labelbiblioteka = (Label) scene.lookup("#labelbiblioteka");
-            labelbiblioteka.setFont(pop_b_h2);
-            Label labelglowna = (Label) scene.lookup("#labelglowna");
-            labelglowna.setFont(pop_b_h2);
-            Label labelkatalog = (Label) scene.lookup("#labelkatalog");
-            labelkatalog.setFont(pop_b_h2);
-            Label labelkontakt = (Label) scene.lookup("#labelkontakt");
-            labelkontakt.setFont(pop_b_h2);
-            Label labelkategorie = (Label) scene.lookup("#labelkategorie");
-            labelkategorie.setFont(pop_b_h2);
-            Label labelnowosci = (Label) scene.lookup("#labelnowosci");
-            labelnowosci.setFont(pop_b_h2);
-            Label labelrezerwacje = (Label) scene.lookup("#labelrezerwacje");
-            labelrezerwacje.setFont(pop_b_h2);
-            Label labelwypozyczenia = (Label) scene.lookup("#labelwypozyczenia");
-            labelwypozyczenia.setFont(pop_b_h2);
-            TextField searchbar = (TextField) scene.lookup("#searchbar");
-            searchbar.setFont(pop_r_h1);
-        }
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
+        Label nametag = (Label) scene.lookup("#nametag");
+        nametag.setFont(ssp_sb_h1);
+        Label labelbiblioteka = (Label) scene.lookup("#labelbiblioteka");
+        labelbiblioteka.setFont(pop_b_h2);
+        Label labelglowna = (Label) scene.lookup("#labelglowna");
+        labelglowna.setFont(pop_b_h2);
+        Label labelkatalog = (Label) scene.lookup("#labelkatalog");
+        labelkatalog.setFont(pop_b_h2);
+        Label labelkontakt = (Label) scene.lookup("#labelkontakt");
+        labelkontakt.setFont(pop_b_h2);
+        Label labelkategorie = (Label) scene.lookup("#labelkategorie");
+        labelkategorie.setFont(pop_b_h2);
+        Label labelnowosci = (Label) scene.lookup("#labelnowosci");
+        labelnowosci.setFont(pop_b_h2);
+        Label labelrezerwacje = (Label) scene.lookup("#labelrezerwacje");
+        labelrezerwacje.setFont(pop_b_h2);
+        Label labelwypozyczenia = (Label) scene.lookup("#labelwypozyczenia");
+        labelwypozyczenia.setFont(pop_b_h2);
+        TextField searchbar = (TextField) scene.lookup("#searchbar");
+        searchbar.setFont(pop_r_h1);
+    }
 
     void katalog_item(MouseEvent event, int row) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -243,13 +243,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
             parent = loader.load();
             dbload.get_cover(row);
-            if(dbload.array.isEmpty()){
+            if (dbload.array.isEmpty()) {
                 dbload.print_book(); //unikamy sytuacji gdy nie otworzylismy jeszcze katalogu glownego i nie mamy skad pobrac ksiazek
             }
             katalog_itemcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             kat.font();
-            kat.load(row-1);
+            kat.load(row - 1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -259,7 +259,7 @@ public class home {
         stage.setScene(scene);
     }
 
-    }
+
     @FXML
     void yourHire_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -268,7 +268,7 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
             parent = loader.load();
             yourHire Profile = loader.getController();
-            Profile.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
+            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
             Profile.font();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -278,5 +278,6 @@ public class home {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
     }
+}
 
 

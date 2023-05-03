@@ -1,5 +1,7 @@
 package org.example.home;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.example.Egzemplarze;
 import org.example.Katalog;
 import org.example.Main;
@@ -225,11 +228,55 @@ public class katalog_itemcontroller extends home{
                 }
                 cell.setOnMouseClicked(event -> {
                     if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
-                        TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                        int row = tablePosition.getRow();
-                        int data = (int) nrCol.getCellObservableValue(row).getValue();
-                        System.out.println(data+"");
-                        int idd = Main.user.getId();
+                        if(dbload.rentlimit(Main.user.getId())<5) {
+                            TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                            int row = tablePosition.getRow();
+                            int data = (int) nrCol.getCellObservableValue(row).getValue();
+                            dbload.rent(data, Main.user.getId());
+                            Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                            notificationLabel.setFont(pop_r_h1);
+                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                            notificationLabel.setPrefSize(300, 50);
+                            notificationLabel.setLayoutX(700);
+                            notificationLabel.setLayoutY(320);
+                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                    "    -fx-border-color: #004aad;\n" +
+                                    "    -fx-background-radius: 10;\n" +
+                                    "    -fx-background-color: NULL;\n" +
+                                    "    -fx-border-width: 1;\n" +
+                                    "    -fx-text-fill: #004aad;");
+                            Timeline timeline = new Timeline(new KeyFrame(
+                                    Duration.seconds(3),
+                                    event2 -> {
+                                        notificationLabel.setVisible(false);
+                                        katalog_item(event, id);
+                                    }
+                            ));
+                            timeline.play();
+                            anchor.getChildren().add(notificationLabel);
+                        }
+                        else{
+                            Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                            notificationLabel.setFont(pop_r_h1);
+                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                            notificationLabel.setPrefSize(300, 50);
+                            notificationLabel.setLayoutX(700);
+                            notificationLabel.setLayoutY(320);
+                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                    "    -fx-border-color: #004aad;\n" +
+                                    "    -fx-background-radius: 10;\n" +
+                                    "    -fx-background-color: NULL;\n" +
+                                    "    -fx-border-width: 1;\n" +
+                                    "    -fx-text-fill: #004aad;");
+                            Timeline timeline = new Timeline(new KeyFrame(
+                                    Duration.seconds(3),
+                                    event2 -> notificationLabel.setVisible(false)
+                            ));
+                            timeline.play();
+                            anchor.getChildren().add(notificationLabel);
+                        }
                     }
                 });
             });

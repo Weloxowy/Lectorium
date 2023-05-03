@@ -1,26 +1,23 @@
 package org.example.db;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
-import org.example.Egzemplarze;
+import javafx.scene.image.PixelFormat;
 import org.example.Main;
-import org.sqlite.SQLiteConnection;
-import org.sqlite.SQLiteConnectionConfig;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.*;
+import java.nio.file.Files;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class dbloader {
     private Connection connection;
-    private Statement stat;
-    private ArrayList<String[]> data;
 
     public void connectToDatabase() {
         String url = "jdbc:sqlite:database.db";
-
         connection = null;
         try {
             connection = DriverManager.getConnection(url);
@@ -48,6 +45,7 @@ public class dbloader {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("cnt");
+                resultSet.close();
                 closeConnection();
                 if (id == 0) {
                     return true;
@@ -64,9 +62,8 @@ public class dbloader {
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
-        } finally {
-            closeConnection();
         }
+        closeConnection();
         return false;
     }
 
@@ -90,7 +87,7 @@ public class dbloader {
                 Main.user.setCzy_admin(czy_admin);
                 Main.user.setId(id);
                 getimage(id);
-                //resultSet.close();  //jezeli nadal bedzie wywalalo uzytkownikow z ret 0 - odkomentowac linie
+                resultSet.close();
                 closeConnection();
                 return true;
             } else { //Wrong login or password
@@ -102,9 +99,8 @@ public class dbloader {
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
-        } finally {
-            closeConnection();
         }
+        closeConnection();
         return false;
     }
 
@@ -164,10 +160,6 @@ public class dbloader {
         } finally {
             closeConnection();
         }
-    }
-
-    public ArrayList<String[]> getData() {
-        return data;
     }
 
     public void getimage(int id) {
@@ -324,13 +316,18 @@ public class dbloader {
 
     public void rent(int egz, int id) { //nie chce działać
         connectToDatabase();
-        String print = "INSERT INTO rezerwacje(data_rezerwacji,data_konca,egzemplarze_id_egzemplarze,uzytkownicy_id_uzytkownicy) VALUES (date('now'),date('now', '+7 day'),?,?);\n";
+        String insert = "INSERT INTO rezerwacje(data_rezerwacji,data_konca,egzemplarze_id_egzemplarze,uzytkownicy_id_uzytkownicy) VALUES (date('now'),date('now', '+7 day'),?,?);\n";
+        String update = "UPDATE egzemplarze SET czy_dostepne=\"N\" where id_egzemplarze=?;";
         try {
-            PreparedStatement statement = connection.prepareStatement(print);
+            PreparedStatement statement = connection.prepareStatement(insert);
             statement.setInt(1, egz);
             statement.setInt(2, id);
-            statement.execute();
-            System.out.println(statement.isClosed());
+            statement.executeUpdate();
+            statement.close();
+            PreparedStatement statement2 = connection.prepareStatement(update);
+            statement2.setInt(1, egz);
+            statement2.executeUpdate();
+            statement2.close();
             closeConnection();
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
@@ -342,8 +339,6 @@ public class dbloader {
 
     public boolean login_update(String new_login, int id, String login) {
         connectToDatabase();
-        closeConnection();
-        connectToDatabase();
         String print = "UPDATE uzytkownicy SET login = ?  where id_uzytkownicy=? AND login = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(print);
@@ -351,9 +346,12 @@ public class dbloader {
             statement.setInt(2, id);
             statement.setString(3, login);
             int result = statement.executeUpdate();
-            System.out.println("Rows affected: " + result);
+            statement.close();
             closeConnection();
-            return true;
+            if(result>0){
+                return true;
+            }
+            return false;
         } catch (SQLException e) { //Error while connecting with DB
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             e.printStackTrace();
@@ -424,6 +422,95 @@ public class dbloader {
         closeConnection();
     }
 
+    public boolean password_update(String new_password, int id, String password) {
+        connectToDatabase();
+        String print = "UPDATE uzytkownicy SET haslo = ?  where id_uzytkownicy=? AND haslo = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setString(1, new_password);
+            statement.setInt(2, id);
+            statement.setString(3, password);
+            int result = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+            if(result>0){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        closeConnection();
+        return false;
+    }
+
+    public boolean profile_delete(String password, int id) {
+        connectToDatabase();
+        String print = "DELETE FROM uzytkownicy where id_uzytkownicy=? AND haslo = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            statement.setString(2, password);
+            int result = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+            if(result>0){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        closeConnection();
+        return false;
+    }
+
+    public int rentlimit(int id){
+        connectToDatabase();
+        String print = "SELECT count(id_rezerwacje) as cnt from rezerwacje where uzytkownicy_id_uzytkownicy=?;";
+        int ilosc = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ilosc = resultSet.getInt("cnt");
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            closeConnection();
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+        return ilosc;
+    }
+    public void avatar_change(Image image, int id) throws IOException {
+        /*connectToDatabase();
+        String print = "UPDATE uzytkownicy SET avatar = ? WHERE id_uzytkownicy = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+
+            // konwersja obiektu Image na InputStream
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            BufferedImage bImage = new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, bImage), "png", os);
+            InputStream is = new ByteArrayInputStream(os.toByteArray());
+
+            statement.setBinaryStream(1, is);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            statement.close();
+            closeConnection();
+        } catch (SQLException e) {
+            System.out.println("Error while getting image: " + e.getMessage());
+            System.exit(100);
+        } finally {
+            closeConnection();
+        }*/
+    }
 
 }
 

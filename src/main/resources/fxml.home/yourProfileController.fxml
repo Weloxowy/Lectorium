@@ -199,6 +199,18 @@
                   <Insets top="30.0" />
                </GridPane.margin>
             </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="info" alignment="TOP_LEFT" layoutX="1.0" opacity="0.0" prefHeight="90.0" prefWidth="548.0" text="Komunikat">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
     </children>

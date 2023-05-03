@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import static org.example.Main.dbload;
 
@@ -186,7 +187,8 @@ public class yourProfileController extends home {
             new_password.setFont(pop_r_h1);
             Button commit_password = (Button) grid.lookup("#commit_password");
             commit_password.setFont(pop_b_h2);
-
+            Label info = (Label) grid.lookup("#info");
+            info.setFont(pop_b_h1);
         }
 
         public void init(String imie, String nazwisko, MouseEvent event, Image image) {
@@ -221,27 +223,44 @@ public class yourProfileController extends home {
         }
 
         @FXML
-        void login_change(MouseEvent event) throws SQLException {
+        void login_change(MouseEvent event) {
+            commit_login.setStyle("-fx-border-width: 1");
+            commit_login.setStyle("-fx-border-color: #004aad");
             String old_l = curr_login.getText();
             String new_l = new_login.getText();
+            Label info = (Label) grid.lookup("#info");
+            info.setOpacity(0.0);
             if(dbload.login_update(new_l,Main.user.getId(),old_l)){
-                //tutaj dac potwierdzenie ze zmieniono, ewentualnie wylogowac
+                info.setText("Zmiana wykonana pomyślnie.");
+                info.setOpacity(1.0);
             }
             else{
                 commit_login.setStyle("-fx-border-width: 2");
                 commit_login.setStyle("-fx-border-color: red");
-                Label wrong = new Label("Wystapil");
-                wrong.setLayoutX(300);
-                wrong.setLayoutY(300);
-                login.getChildren().add(wrong);
-                //dac tekst ze blad
+                info.setText("Wystapil błąd. Spróbuj ponownie.");
+                info.setOpacity(1.0);
             }
         }
 
 
         @FXML
         void password_change(MouseEvent event) {
-
+            commit_login.setStyle("-fx-border-width: 1");
+            commit_login.setStyle("-fx-border-color: #004aad");
+            String old_p = curr_password.getText();
+            String new_p = new_password.getText();
+            Label info = (Label) grid.lookup("#info");
+            info.setOpacity(0.0);
+            if(dbload.password_update(new_p,Main.user.getId(),old_p)){
+                info.setText("Zmiana wykonana pomyślnie.");
+                info.setOpacity(1.0);
+            }
+            else{
+                commit_password.setStyle("-fx-border-width: 2");
+                commit_password.setStyle("-fx-border-color: red");
+                info.setText("Wystapil błąd. Spróbuj ponownie.");
+                info.setOpacity(1.0);
+            }
         }
 
         @FXML
@@ -253,7 +272,22 @@ public class yourProfileController extends home {
 
         @FXML
         void delete_profile(MouseEvent event) {
-
+            commit_delete.setStyle("-fx-border-width: 1");
+            commit_delete.setStyle("-fx-border-color: #004aad");
+            String password = delete_password.getText();
+            Label info = (Label) grid.lookup("#info");
+            info.setOpacity(0.0);
+            if(dbload.profile_delete(password,Main.user.getId())){
+                info.setText("Zmiana wykonana pomyślnie.");
+                info.setOpacity(1.0);
+                logout_perform(event);
+            }
+            else{
+                commit_delete.setStyle("-fx-border-width: 2");
+                commit_delete.setStyle("-fx-border-color: red");
+                info.setText("Wystapil błąd. Spróbuj ponownie. Magda oddzwoń prosze, zmieniłem się.");
+                info.setOpacity(1.0);
+            }
         }
 
         void wash_effects(){
@@ -275,6 +309,7 @@ public class yourProfileController extends home {
             try (InputStream stream = new FileInputStream(file)) { //do poprawy
                 Image image = new Image(stream);
                 Main.user.setImage(image);
+                dbload.avatar_change(image,Main.user.getId());
                 avatar.fireEvent(event);
             } catch (IOException ex) {
                 // obsługa wyjątku
