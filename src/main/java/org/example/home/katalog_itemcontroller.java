@@ -222,7 +222,7 @@ public class katalog_itemcontroller extends home{
         wypozyczCol.setCellFactory(col -> {
             TableCell<Katalog, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
-                if (newVal != null && newVal.contentEquals("T")) {
+                if (newVal != null && newVal.contentEquals("T")) { //tak
                     Node centreBox = createPriorityGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
@@ -323,6 +323,16 @@ public class katalog_itemcontroller extends home{
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/add.png")));
+        imageView.setFitHeight(25);
+        imageView.setPreserveRatio(true);
+        graphicContainer.getChildren().add(imageView);
+        return graphicContainer;
+    }
+
+    private Node createPriorityGraphic2(){
+        HBox graphicContainer = new HBox();
+        graphicContainer.setAlignment(Pos.CENTER);
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/remove.png")));
         imageView.setFitHeight(25);
         imageView.setPreserveRatio(true);
         graphicContainer.getChildren().add(imageView);

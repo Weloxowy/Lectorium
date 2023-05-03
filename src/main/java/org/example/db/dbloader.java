@@ -487,29 +487,21 @@ public class dbloader {
         }
         return ilosc;
     }
-    public void avatar_change(Image image, int id) throws IOException {
-        /*connectToDatabase();
+    public void avatar_change(byte[] imageData, int id) throws IOException {
+        connectToDatabase();
         String print = "UPDATE uzytkownicy SET avatar = ? WHERE id_uzytkownicy = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(print);
-
-            // konwersja obiektu Image na InputStream
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            BufferedImage bImage = new BufferedImage((int) image.getWidth(), (int) image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            ImageIO.write(SwingFXUtils.fromFXImage(image, bImage), "png", os);
-            InputStream is = new ByteArrayInputStream(os.toByteArray());
-
-            statement.setBinaryStream(1, is);
+            statement.setBytes(1, imageData);
             statement.setInt(2, id);
             statement.executeUpdate();
             statement.close();
-            closeConnection();
         } catch (SQLException e) {
-            System.out.println("Error while getting image: " + e.getMessage());
+            System.out.println("Error while updating avatar: " + e.getMessage());
             System.exit(100);
         } finally {
             closeConnection();
-        }*/
+        }
     }
 
 }
