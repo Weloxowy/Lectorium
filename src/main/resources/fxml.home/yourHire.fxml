@@ -39,8 +39,8 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="Aktualne" layoutX="693.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#check_hire_information" prefHeight="60.0" prefWidth="162.0" text="Aktualne wypożyczenia" />
-            <Button fx:id="Wszystkie" layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#yourHire_clicked" prefHeight="57.0" prefWidth="161.0" text="Wszystkie wypożyczenia" />
+            <Button fx:id="Aktualne" layoutX="693.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#check_hire_information" prefHeight="60.0" prefWidth="160.0" text="Aktualne wypożyczenia" />
+            <Button fx:id="Wszystkie" layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#yourHire_clicked" prefHeight="60.0" prefWidth="160.0" text="Wszystkie wypożyczenia" />
          </children>
       </AnchorPane>
         <HBox styleClass="menu_up" GridPane.columnIndex="1">
@@ -103,13 +103,13 @@
                 </Separator>
                 <Label fx:id="labelkatalog" onMouseClicked="#katalog_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
                 <Label fx:id="labelkategorie" onMouseClicked="#kategorie_clicked" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
-                <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
+                <Label fx:id="labelnowosci" onMouseClicked="#nowosciController_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
                     </VBox.margin>
                 </Separator>
-                <Label fx:id="labelwypozyczenia" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
+                <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
                 <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
