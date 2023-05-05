@@ -8,14 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.3 - uaktualniono bazę danych, pomniejsze poprawki interfejsu, przejścia pomiędzy oknami, naprawiono funkcje avatar_change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,13 +164,6 @@
       <option name="project" value="LOCAL" />
       <updated>1682197478356</updated>
     </task>
-    <task id="LOCAL-00008" summary="v0.4.5.1 - dodano nowosci wraz z przejsciami oraz poprawienie filtra daty dla data_zwrot w katalog_itemcontroller i zaktualizowano bazę danych. Zaczęte zmiany w profilu.">
-      <created>1682936156179</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1682936156179</updated>
-    </task>
     <task id="LOCAL-00008" summary="v0.4.5 - Dodana zakładka &quot;Twoja biblioteka&quot;, oraz informacje odnośnie profilu użytkownika">
       <created>1682274950534</created>
       <option name="number" value="00008" />
@@ -205,7 +192,28 @@
       <option name="project" value="LOCAL" />
       <updated>1682935612027</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="v0.4.5.2 - zmiany w panelu uzytkownika, dodana możliwość rezerwacji, dodany limit rezerwacji (5 egzemplarzy)">
+      <created>1683114015533</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683114015533</updated>
+    </task>
+    <task id="LOCAL-00013" summary="v0.4.5.3 - uaktualniono bazę danych, pomniejsze poprawki interfejsu, przejścia pomiędzy oknami, naprawiono funkcje avatar_change">
+      <created>1683146837227</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683146837227</updated>
+    </task>
+    <task id="LOCAL-00014" summary="v0.4.5.3 - uaktualniono bazę danych, pomniejsze poprawki interfejsu, przejścia pomiędzy oknami, naprawiono funkcje avatar_change">
+      <created>1683197932326</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683197932326</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,7 +227,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="branch_test" />
+                        <option value="origin/pawel" />
                       </list>
                     </value>
                   </entry>
@@ -241,7 +249,10 @@
     <MESSAGE value="v0.4.5.1 - Dodane twoje wypozyczenia, nawet dobrze chodzi" />
     <MESSAGE value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
     <MESSAGE value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
+    <MESSAGE value="v0.4.5.2 - zmiany w panelu uzytkownika, dodana możliwość rezerwacji, dodany limit rezerwacji (5 egzemplarzy)" />
+    <MESSAGE value="v0.4.5.4 -" />
+    <MESSAGE value="v0.4.5.3 - uaktualniono bazę danych, pomniejsze poprawki interfejsu, przejścia pomiędzy oknami, naprawiono funkcje avatar_change" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4.5.3 - uaktualniono bazę danych, pomniejsze poprawki interfejsu, przejścia pomiędzy oknami, naprawiono funkcje avatar_change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -252,33 +263,18 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>244</line>
+          <line>236</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>324</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java</url>
-          <line>231</line>
-          <option name="timeStamp" value="18" />
+          <line>234</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>342</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java</url>
-          <line>269</line>
-          <option name="timeStamp" value="23" />
+          <line>317</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

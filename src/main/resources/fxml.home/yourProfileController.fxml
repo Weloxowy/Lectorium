@@ -87,7 +87,7 @@
                 </Separator>
                 <Label fx:id="labelkatalog" onMouseClicked="#katalog_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Katalog książek" textFill="#f6f2df" />
                 <Label fx:id="labelkategorie" onMouseClicked="#kategorie_clicked" prefHeight="50.0" prefWidth="264.0" styleClass="font_menu_left" text="Kategorie" textFill="#f6f2df" />
-                <Label fx:id="labelnowosci" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
+                <Label fx:id="labelnowosci" onMouseClicked="#nowosciController_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Nowości" textFill="#f6f2df" />
                 <Separator prefWidth="200.0">
                     <VBox.margin>
                         <Insets right="10.0" />
@@ -158,6 +158,11 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
+                  <Label fx:id="Rank" layoutX="10.0" layoutY="100.0" prefHeight="80.0" prefWidth="556.0" text="Status użytkownika">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
@@ -189,7 +194,7 @@
                   </VBox>
                   <VBox fx:id="usun" spacing="50.0">
                      <children>
-                        <Label fx:id="text_delete" prefHeight="51.0" prefWidth="450.0" text="Pamiętaj że zmiana jest nieodwracalna! Wpisz aktualne hasło, aby kontynuować." />
+                        <Label fx:id="text_delete" prefHeight="51.0" prefWidth="450.0" text="Pamiętaj że zmiana jest nieodwracalna! Wpisz aktualne hasło, aby kontynuować." textOverrun="WORD_ELLIPSIS" wrapText="true" />
                         <PasswordField fx:id="delete_password" prefHeight="30.0" prefWidth="300.0" promptText="Aktualne hasło" styleClass="fields" />
                         <Button fx:id="commit_delete" mnemonicParsing="false" onMouseClicked="#delete_profile" prefHeight="50.0" prefWidth="250.0" text="Potwierdź usunięcie" />
                      </children>
@@ -198,6 +203,18 @@
                <GridPane.margin>
                   <Insets top="30.0" />
                </GridPane.margin>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="info" alignment="TOP_LEFT" layoutX="1.0" opacity="0.0" prefHeight="90.0" prefWidth="548.0" text="Komunikat">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
             </AnchorPane>
          </children>
       </GridPane>
