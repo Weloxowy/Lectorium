@@ -20,6 +20,8 @@ public class Main extends Application {
 
     static public Wypozyczenia wypozyczenia = new Wypozyczenia(null,null,null,null,null);
 
+
+    static public Rezerwacje rezerwacje = new Rezerwacje(null,null,null,null,null,null, null);
     @Override
     public void start(Stage stage) throws Exception{
         Image icon = new Image("res/logo/Lectorium_logo.png");
