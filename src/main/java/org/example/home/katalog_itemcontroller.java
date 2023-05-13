@@ -352,4 +352,5 @@ public class katalog_itemcontroller extends home{
         String query = searchbar.getText();
         katalog_clicked(event,query);
     }
+
 }

@@ -15,6 +15,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -51,6 +53,7 @@ public class logincontroller {
 
     @FXML
     private Label error;
+
 
     public void font() {
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
@@ -92,9 +95,12 @@ public class logincontroller {
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
+        final double[] x = {0};
+        final double[] y = {0};
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/register.fxml"));
             parent = loader.load();
+
             registercontroller controller = loader.getController();
             controller.font();
         } catch (IOException e) {
@@ -103,6 +109,14 @@ public class logincontroller {
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
+        scene.setOnMousePressed(event2 -> {
+            x[0] = event2.getSceneX();
+            y[0] = event2.getSceneY();
+        });
+        scene.setOnMouseDragged(event3 -> {
+            stage.setX(event3.getScreenX()- x[0]);
+            stage.setY(event3.getScreenY()- y[0]);
+        });
         stage.setScene(scene);
     }
 
@@ -134,17 +148,17 @@ public class logincontroller {
             homecontroller controller = loader.getController();
             controller.font();
             controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            stage.setResizable(false);
+            //stage.setResizable(false);
             stage.setResizable(true);
-            stage.isMaximized();
             stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
+            stage.setTitle("Lectorium");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         if (parent == null)
             return;
         Scene scene = new Scene(parent);
+
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();

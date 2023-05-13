@@ -25,6 +25,7 @@ public class kategoriecontroller extends home{
         avatar_view();
         images_view();
         categories_init();
+
     }
 
     void avatar_view() {

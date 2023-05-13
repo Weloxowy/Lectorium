@@ -101,7 +101,7 @@ public class katalogcontroller extends home{
         idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
-            //idCol.setVisible(false);
+            idCol.setVisible(false);
 
         TableColumn autorCol = new TableColumn("Autor");
         autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
@@ -134,7 +134,7 @@ public class katalogcontroller extends home{
                 new PropertyValueFactory<>("jezyk"));
 
         TableColumn uwagiCol = new TableColumn("Uwagi");
-        uwagiCol.setMinWidth(anchortable.getPrefWidth()*0.2);
+        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
@@ -226,7 +226,7 @@ public class katalogcontroller extends home{
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 

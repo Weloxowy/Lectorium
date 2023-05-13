@@ -76,8 +76,8 @@ public class nowosciController extends home{
     void font(Scene scene) {
         super.font(scene);
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-        Label labelkontakt = (Label) scene.lookup("#labelkontakt");
-        labelkontakt.setFont(ssp_sb_h1);
+        Label header = (Label) grid_nowosci.lookup("#nowosci");
+        header.setFont(ssp_sb_h1);
     }
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image){
@@ -88,8 +88,6 @@ public class nowosciController extends home{
         int w = Main.user.getId();
         System.out.println(w);
         int i=1;
-        nowosci_anchor.setPrefWidth(Region.USE_COMPUTED_SIZE);
-        nowosci_anchor.setPrefHeight(Region.USE_COMPUTED_SIZE);
         grid_nowosci.setPrefWidth(Region.USE_COMPUTED_SIZE);
         grid_nowosci.setPrefHeight(Region.USE_COMPUTED_SIZE);
 

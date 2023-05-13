@@ -15,17 +15,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.kategoriecontroller">
+<GridPane fx:id="grid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.kategoriecontroller">
    <columnConstraints>
-      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="8.0" valignment="TOP" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="8.0" valignment="TOP" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
             <TextField fx:id="searchbar" cache="true" onMouseClicked="#searchbar_exited" onMouseExited="#searchbar_exited" onMouseReleased="#searchbar_exited" onTouchReleased="#searchbar_exited" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szybkie wyszukiwanie" styleClass="search_field">
                <font>
@@ -69,15 +69,15 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox styleClass="main_area" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <HBox styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <children>
-            <VBox fx:id="cat_vbox" prefHeight="714.0" prefWidth="466.0" spacing="30.0">
+            <VBox fx:id="cat_vbox" prefHeight="714.0" prefWidth="466.0" spacing="30.0" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets left="30.0" top="50.0" />
                </padding></VBox>
-            <VBox fx:id="images_vbox" prefHeight="708.0" prefWidth="602.0" spacing="25.0">
+            <VBox fx:id="images_vbox" prefHeight="708.0" prefWidth="602.0" spacing="25.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="header" text="Zainteresuj się tym:" />
+                  <Label fx:id="header" alignment="CENTER" prefHeight="34.0" prefWidth="620.0" text="Zainteresuj się tym" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <ImageView fx:id="image_a1" fitHeight="147.0" fitWidth="319.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
@@ -85,14 +85,14 @@
                               <Image url="@b1.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="image_a2" fitHeight="147.0" fitWidth="295.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image_a2" fitHeight="147.0" fitWidth="319.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@b2.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
-                  <ImageView fx:id="image_a3" fitHeight="310.0" fitWidth="667.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image_a3" fitHeight="304.0" fitWidth="628.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@a3.png" />
                      </image>

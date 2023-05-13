@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" styleClass="main_area" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.nowosciController">
+<GridPane minHeight="766.0" minWidth="1376.0" prefHeight="776.0" prefWidth="1376.0" styleClass="main_area" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.nowosciController">
    <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
@@ -25,7 +25,7 @@
       <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1">
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
          <children>
             <TextField fx:id="searchbar" cache="true" onMouseClicked="#searchbar_exited" onMouseExited="#searchbar_exited" onMouseReleased="#searchbar_exited" onTouchReleased="#searchbar_exited" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szybkie wyszukiwanie" styleClass="search_field">
                <font>
@@ -69,215 +69,202 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="nowosci_anchor" cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane fx:id="grid_nowosci" prefHeight="716.0" prefWidth="1098.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="333.5" minHeight="10.0" prefHeight="333.5" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="333.5" minHeight="10.0" prefHeight="333.5" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label graphicTextGap="0.0" layoutX="-20.0" opacity="0.05" prefHeight="254.0" prefWidth="1114.0" text="1    2   3   4">
+            <Label fx:id="nowosci" alignment="CENTER" prefHeight="96.0" prefWidth="1089.0" text="Nowości" GridPane.columnSpan="4">
                <font>
-                  <Font name="Book Antiqua" size="200.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutX="-10.0" layoutY="340.0" opacity="0.05" prefHeight="254.0" prefWidth="1114.0" text="5   6    7   8">
-               <font>
-                  <Font name="Book Antiqua" size="200.0" />
-               </font>
-            </Label>
-            <GridPane fx:id="grid_nowosci" layoutX="-1.0" layoutY="-2.0" prefHeight="716.0" prefWidth="1098.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-2.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="337.8000244140625" minHeight="0.0" prefHeight="47.39996337890625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="333.5" minHeight="10.0" prefHeight="333.5" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="333.5" minHeight="10.0" prefHeight="333.5" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox fx:id="vbox1" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="header" alignment="CENTER" prefHeight="96.0" prefWidth="1089.0" text="Nowosci" GridPane.columnSpan="4">
+                  <ImageView fx:id="cover1" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title1" text="Tytuł ksiazki">
                      <font>
-                        <Font size="22.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="vbox1" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fx:id="cover1" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title1" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author1" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox2" alignment="TOP_CENTER" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fx:id="cover2" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title2" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author2" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox3" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="289.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fx:id="cover3" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title3" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author3" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox4" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fx:id="cover4" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title4" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author4" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox5" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fx:id="cover5" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title5" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author5" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox6" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fx:id="cover6" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title6" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author6" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox7" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fx:id="cover7" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title7" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author7" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="vbox8" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fx:id="cover8" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Brakokładki.jpg" />
-                           </image>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Label fx:id="title8" text="Tytuł ksiazki">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="author8" text="Autor">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  <Label fx:id="author1" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
-            </GridPane>
-         </children></AnchorPane>
+            </VBox>
+            <VBox fx:id="vbox2" alignment="TOP_CENTER" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="cover2" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title2" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author2" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox3" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="289.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="cover3" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title3" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author3" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox4" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="cover4" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title4" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author4" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox5" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="cover5" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title5" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author5" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox6" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="cover6" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title6" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author6" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox7" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="cover7" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title7" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author7" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="vbox8" alignment="TOP_CENTER" onMouseClicked="#refer_to_book" prefHeight="370.0" prefWidth="299.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="cover8" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Brakokładki.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label fx:id="title8" text="Tytuł ksiazki">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="author8" text="Autor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
       <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
          <children>
             <Label fx:id="labelglowna" onMouseClicked="#glowna_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Strona główna" textFill="#f6f2df">
@@ -322,7 +309,7 @@
             <Insets left="10.0" />
          </padding>
       </VBox>
-      <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up">
+      <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <children>
             <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="62.0" fitWidth="215.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
                <image>

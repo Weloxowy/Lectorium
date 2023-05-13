@@ -101,6 +101,8 @@ public class registercontroller {
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
+        final double[] x = {0};
+        final double[] y = {0};
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             parent = loader.load();
@@ -112,6 +114,14 @@ public class registercontroller {
         if(parent == null)
             return;
         Scene scene = new Scene(parent);
+        scene.setOnMousePressed(event2 -> {
+            x[0] = event2.getSceneX();
+            y[0] = event2.getSceneY();
+        });
+        scene.setOnMouseDragged(event3 -> {
+            stage.setX(event3.getScreenX()- x[0]);
+            stage.setY(event3.getScreenY()- y[0]);
+        });
         stage.setScene(scene);
     }
 
@@ -158,11 +168,10 @@ public class registercontroller {
             homecontroller controller = loader.getController();
             controller.font();
             controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            stage.setResizable(false);
+            //stage.setResizable(false);
             stage.setResizable(true);
-            stage.isMaximized();
             stage.setFullScreen(false);
-            stage.setTitle("Lectorium alpha");
+            stage.setTitle("Lectorium");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-      <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <AnchorPane styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <children>
               <AnchorPane fx:id="anchor_hire" cache="true" cacheHint="QUALITY" layoutX="2.0" layoutY="112.0" maxHeight="900.0" maxWidth="1097.0" prefHeight="602.0" prefWidth="1095.0" styleClass="main_area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="112.0" />
             <Label fx:id="Wyp" layoutX="51.0" layoutY="23.0" prefHeight="54.0" prefWidth="354.0" text="Wypożyczenia dla użytkownika ">
@@ -34,7 +34,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="Name" layoutX="392.0" layoutY="27.0" prefHeight="47.0" prefWidth="254.0" text="Imie">
+            <Label fx:id="Name" layoutX="392.0" layoutY="23.0" prefHeight="54.0" prefWidth="254.0" text="Imie">
                <font>
                   <Font size="24.0" />
                </font>
@@ -43,7 +43,7 @@
             <Button fx:id="Wszystkie" layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#yourHire_clicked" prefHeight="60.0" prefWidth="160.0" text="Wszystkie wypożyczenia" />
          </children>
       </AnchorPane>
-        <HBox styleClass="menu_up" GridPane.columnIndex="1">
+        <HBox styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
             <children>
                 <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
                     <font>
@@ -131,7 +131,7 @@
                 <Insets left="10.0" />
             </padding>
         </VBox>
-        <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up">
+        <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up" GridPane.halignment="LEFT" GridPane.valignment="TOP">
             <children>
                 <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="57.0" fitWidth="247.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
                     <image>

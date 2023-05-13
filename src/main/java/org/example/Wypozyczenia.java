@@ -9,14 +9,28 @@ public class Wypozyczenia {
     SimpleStringProperty data_wypozyczenia;
     SimpleStringProperty data_zwrotu;
     SimpleStringProperty nazwa_autora;
+    SimpleStringProperty ilosc_przedluzen;
 
-    public Wypozyczenia(String id_egz, String naz, String data_wypo, String data_zwr, String nazwa_autor)
+    public Wypozyczenia(String id_egz, String naz, String data_wypo, String data_zwr, String nazwa_autor, String ilosc_przedluzen)
     {
         this.id_egzemplarze = new SimpleStringProperty(id_egz);
         this.nazwa = new SimpleStringProperty(naz);
         this.data_wypozyczenia = new SimpleStringProperty(data_wypo);
         this.data_zwrotu = new SimpleStringProperty(data_zwr);
         this.nazwa_autora = new SimpleStringProperty(nazwa_autor);
+        this.ilosc_przedluzen = new SimpleStringProperty(ilosc_przedluzen);
+    }
+
+    public String getIlosc_przedluzen() {
+        return ilosc_przedluzen.get();
+    }
+
+    public SimpleStringProperty ilosc_przedluzenProperty() {
+        return ilosc_przedluzen;
+    }
+
+    public void setIlosc_przedluzen(String ilosc_przedluzen) {
+        this.ilosc_przedluzen.set(ilosc_przedluzen);
     }
 
     public String getId_egzemplarze() {
