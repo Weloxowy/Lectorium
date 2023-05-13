@@ -126,12 +126,14 @@ public class logincontroller {
         org.example.db.dbloader l = new dbloader();
         String log = login.getText();
         String has = haslo.getText();
+
         boolean res = l.tryLogin(log, has);
         if (res) {
             onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
         } else {
             onfailure();
         }
+
     }
 
     void onsuccess(MouseEvent event) {

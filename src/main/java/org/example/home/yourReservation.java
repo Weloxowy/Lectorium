@@ -86,6 +86,8 @@ public class yourReservation extends home{
     private AnchorPane anchortable = new AnchorPane();
 
 
+
+
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
@@ -93,7 +95,7 @@ public class yourReservation extends home{
         font();
         Lista_Hire(Main.user.getId());
         Name.setText(imie + " " + nazwisko);
-
+        labelrezerwacje.setStyle("-fx-text-fill:#808080");
 
     }
 

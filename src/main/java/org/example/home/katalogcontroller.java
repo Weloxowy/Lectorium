@@ -353,6 +353,7 @@ public class katalogcontroller extends home{
         avatar.setImage(Main.user.getImage());
         avatar_view();
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
+        labelkatalog.setStyle("-fx-text-fill:#808080");
     }
 
     void avatar_view() {

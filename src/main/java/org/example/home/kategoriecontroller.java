@@ -15,6 +15,8 @@ import org.example.Main;
 
 import static org.example.Main.dbload;
 
+
+
 public class kategoriecontroller extends home{
 
 
@@ -25,6 +27,7 @@ public class kategoriecontroller extends home{
         avatar_view();
         images_view();
         categories_init();
+        labelkategorie.setStyle("-fx-text-fill:#808080");
 
     }
 
@@ -146,4 +149,6 @@ public class kategoriecontroller extends home{
     }
 
 
+    @FXML
+    private Label labelkategorie;
 }

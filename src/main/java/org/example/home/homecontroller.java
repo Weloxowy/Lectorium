@@ -113,6 +113,8 @@ public class homecontroller extends home{
         avatar.setImage(Main.user.getImage());
         avatar_view();
         images_view();
+        labelglowna.setStyle("-fx-text-fill:#808080");
+
     }
 
     void avatar_view(){

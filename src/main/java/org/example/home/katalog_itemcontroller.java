@@ -175,6 +175,7 @@ public class katalog_itemcontroller extends home{
         AnchorPane.setLeftAnchor(anchor, 0.0);
         AnchorPane.setBottomAnchor(anchor, 0.0);
         AnchorPane.setRightAnchor(anchor, 0.0); //TODO tabela bez zmian
+        labelkatalog.setStyle("-fx-text-fill:#808080");
     }
 
     void avatar_view() {

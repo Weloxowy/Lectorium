@@ -83,6 +83,7 @@ public class registercontroller {
         error_dane.setFont(pop_b_h1);
         error_haslo.setFont(pop_b_h1);
         error_login.setFont(pop_b_h1);
+
     }
 
     @FXML

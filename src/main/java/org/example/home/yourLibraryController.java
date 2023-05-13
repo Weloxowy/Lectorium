@@ -70,6 +70,7 @@ public class yourLibraryController extends home{
         avatar_view();
         font();
         image_view();
+        labelbiblioteka.setStyle("-fx-text-fill:#808080");
 
     }
 

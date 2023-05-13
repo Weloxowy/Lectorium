@@ -180,6 +180,7 @@
                <children>
                   <VBox fx:id="login" spacing="50.0">
                      <children>
+                        <Label fx:id="change_login" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="299.0" text="Zmiana loginu!" />
                         <TextField fx:id="curr_login" prefHeight="30.0" prefWidth="300.0" promptText="Aktualny login" styleClass="fields" />
                         <TextField fx:id="new_login" prefHeight="30.0" prefWidth="300.0" promptText="Nowy login" styleClass="fields" />
                         <Button fx:id="commit_login" mnemonicParsing="false" onMouseClicked="#login_change" prefHeight="50.0" prefWidth="250.0" text="Potwierdź zmianę" />
@@ -187,6 +188,7 @@
                   </VBox>
                   <VBox fx:id="password" spacing="50.0">
                      <children>
+                        <Label fx:id="change_password" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="300.0" text="Zmiana hasła!" />
                         <PasswordField fx:id="curr_password" prefHeight="30.0" prefWidth="300.0" promptText="Aktualne hasło" styleClass="fields" />
                         <PasswordField fx:id="new_password" prefHeight="30.0" prefWidth="300.0" promptText="Nowe hasło" styleClass="fields" />
                         <Button fx:id="commit_password" mnemonicParsing="false" onMouseClicked="#password_change" prefHeight="50.0" prefWidth="250.0" text="Potwierdź zmianę" />
@@ -194,6 +196,7 @@
                   </VBox>
                   <VBox fx:id="usun" spacing="50.0">
                      <children>
+                        <Label fx:id="delete_account" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="450.0" text="Usuwanie konta!" />
                         <Label fx:id="text_delete" prefHeight="51.0" prefWidth="450.0" text="Pamiętaj że zmiana jest nieodwracalna! Wpisz aktualne hasło, aby kontynuować." textOverrun="WORD_ELLIPSIS" wrapText="true" />
                         <PasswordField fx:id="delete_password" prefHeight="30.0" prefWidth="300.0" promptText="Aktualne hasło" styleClass="fields" />
                         <Button fx:id="commit_delete" mnemonicParsing="false" onMouseClicked="#delete_profile" prefHeight="50.0" prefWidth="250.0" text="Potwierdź usunięcie" />

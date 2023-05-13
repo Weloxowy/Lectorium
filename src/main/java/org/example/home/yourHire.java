@@ -95,7 +95,7 @@ public class yourHire extends home{
         font();
         Lista_Hire(Main.user.getId());
         Name.setText(imie + " " + nazwisko);
-
+        labelwypozyczenia.setStyle("-fx-text-fill:#808080");
 
     }
     public void Lista_Hire(int id) {
@@ -133,6 +133,7 @@ public class yourHire extends home{
         przedluzCol.setCellValueFactory(
                 new PropertyValueFactory<>("ilosc_przedluzen"));
         przedluzCol.setCellFactory(col -> {
+
             TableCell<Katalog, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
                 if (newVal != null && Integer.parseInt(newVal) < 3) { //tak

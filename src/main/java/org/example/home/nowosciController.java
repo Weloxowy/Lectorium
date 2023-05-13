@@ -55,6 +55,8 @@ public class nowosciController extends home{
     private VBox vbox8;
 
     @FXML
+    private Label labelnowosci;
+    @FXML
     private AnchorPane  nowosci_anchor;
 
     @FXML
@@ -118,6 +120,7 @@ public class nowosciController extends home{
             setLabelText(vbox,nazwa,nazwa_autora,id_katalog,i);
             i++;
         }
+        labelnowosci.setStyle("-fx-text-fill:#808080");
     }
 
     public void setLabelText(VBox vb, String nazwa, String autor,int id_katalog, int i) {

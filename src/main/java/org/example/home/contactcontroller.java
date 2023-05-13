@@ -107,6 +107,7 @@ public class contactcontroller extends home{
         avatar_view();
         images_view();
         font();
+        labelkontakt.setStyle("-fx-text-fill:#808080");
 
     }
 

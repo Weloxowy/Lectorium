@@ -222,14 +222,14 @@ public class yourProfileController extends home {
     void haslo_c(MouseEvent event) {
         wash_effects();
         password.setVisible(true);
-        password_change.setStyle("-fx-border-width: 2");
+
     }
 
     @FXML
     void login_c(MouseEvent event) {
         wash_effects();
         login.setVisible(true);
-        login_change.setStyle("-fx-border-width: 2");
+
     }
 
     @FXML
@@ -305,9 +305,12 @@ public class yourProfileController extends home {
         password.setVisible(false);
         usun.setVisible(false);
         login.setVisible(false);
+        /*
         login_change.setStyle("-fx-border-width: 1");
         password_change.setStyle("-fx-border-width: 1");
         profile_delete.setStyle("-fx-border-width: 1");
+
+         */
     }
 
     @FXML
