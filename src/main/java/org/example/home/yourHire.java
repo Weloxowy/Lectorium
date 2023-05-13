@@ -34,59 +34,59 @@ import java.util.Locale;
 import static org.example.Main.dbload;
 
 public class yourHire extends home{
-        @FXML
-        private ImageView avatar;
+    @FXML
+    private ImageView avatar;
 
-        @FXML
-        private Label labelbiblioteka;
+    @FXML
+    private Label labelbiblioteka;
 
-        @FXML
-        private Label labelglowna;
+    @FXML
+    private Label labelglowna;
 
-        @FXML
-        private Label labelkatalog;
+    @FXML
+    private Label labelkatalog;
 
-        @FXML
-        private Label labelkategorie;
+    @FXML
+    private Label labelkategorie;
 
-        @FXML
-        private Label labelkontakt;
+    @FXML
+    private Label labelkontakt;
 
-        @FXML
-        private Label labelnowosci;
+    @FXML
+    private Label labelnowosci;
 
-        @FXML
-        private Label labelrezerwacje;
+    @FXML
+    private Label labelrezerwacje;
 
-        @FXML
-        private Label labelwypozyczenia;
+    @FXML
+    private Label labelwypozyczenia;
 
-        @FXML
-        private ImageView logout;
+    @FXML
+    private ImageView logout;
 
-        @FXML
-        private Label nametag;
+    @FXML
+    private Label nametag;
 
-         @FXML
-        private Label Name;
-         @FXML
-         private Label Wyp;
-         @FXML
-        private Button Wszystkie;
+    @FXML
+    private Label Name;
+    @FXML
+    private Label Wyp;
+    @FXML
+    private Button Wszystkie;
 
 
-        @FXML
-        private Button Aktualne;
+    @FXML
+    private Button Aktualne;
 
-        @FXML
-        private TextField searchbar;
-        @FXML
-         private TableView<Wypozyczenia> lista = new TableView<Wypozyczenia>();
-         @FXML
-         private AnchorPane anchortable = new AnchorPane();
+    @FXML
+    private TextField searchbar;
+    @FXML
+    private TableView<Wypozyczenia> lista = new TableView<Wypozyczenia>();
+    @FXML
+    private AnchorPane anchortable = new AnchorPane();
 
-         @FXML
-         private AnchorPane anchor_hire;
+    @FXML
+    private AnchorPane anchor_hire;
 
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
         nametag.setText(imie + " " + nazwisko);
@@ -139,61 +139,61 @@ public class yourHire extends home{
                     Node centreBox = createPriorityGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
 
-                cell.setOnMouseClicked(event -> {
-                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
-                        TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                        int row = tablePosition.getRow();
-                        int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                        String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
-                        if(dbload.rent_date_update(data,Main.user.getId(), start_date)) {
-                            Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
-                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-                            notificationLabel.setFont(pop_r_h1);
-                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
-                            notificationLabel.setPrefSize(300, 50);
-                            notificationLabel.setLayoutX(700);
-                            notificationLabel.setLayoutY(320);
-                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                    "    -fx-border-color: #004aad;\n" +
-                                    "    -fx-background-radius: 10;\n" +
-                                    "    -fx-background-color: NULL;\n" +
-                                    "    -fx-border-width: 1;\n" +
-                                    "    -fx-text-fill: #004aad;");
-                            Timeline timeline = new Timeline(new KeyFrame(
-                                    Duration.seconds(3),
-                                    event2 -> {
-                                        notificationLabel.setVisible(false);
-                                        labelwypozyczenia.fireEvent(event);
-                                    }
-                            ));
-                            timeline.play();
-                            anchor_hire.getChildren().add(notificationLabel);
+                    cell.setOnMouseClicked(event -> {
+                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                            TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                            int row = tablePosition.getRow();
+                            int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                            String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
+                            if(dbload.rent_date_update(data,Main.user.getId(), start_date)) {
+                                Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                        "    -fx-border-color: #004aad;\n" +
+                                        "    -fx-background-radius: 10;\n" +
+                                        "    -fx-background-color: NULL;\n" +
+                                        "    -fx-border-width: 1;\n" +
+                                        "    -fx-text-fill: #004aad;");
+                                Timeline timeline = new Timeline(new KeyFrame(
+                                        Duration.seconds(3),
+                                        event2 -> {
+                                            notificationLabel.setVisible(false);
+                                            labelwypozyczenia.fireEvent(event);
+                                        }
+                                ));
+                                timeline.play();
+                                anchor_hire.getChildren().add(notificationLabel);
+                            }
+                            else{
+                                Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                        "    -fx-border-color: #004aad;\n" +
+                                        "    -fx-background-radius: 10;\n" +
+                                        "    -fx-background-color: NULL;\n" +
+                                        "    -fx-border-width: 1;\n" +
+                                        "    -fx-text-fill: #004aad;");
+                                Timeline timeline = new Timeline(new KeyFrame(
+                                        Duration.seconds(3),
+                                        event2 -> notificationLabel.setVisible(false)
+                                ));
+                                timeline.play();
+                                anchor_hire.getChildren().add(notificationLabel);
+                            }
                         }
-                        else{
-                            Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
-                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-                            notificationLabel.setFont(pop_r_h1);
-                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
-                            notificationLabel.setPrefSize(300, 50);
-                            notificationLabel.setLayoutX(700);
-                            notificationLabel.setLayoutY(320);
-                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                    "    -fx-border-color: #004aad;\n" +
-                                    "    -fx-background-radius: 10;\n" +
-                                    "    -fx-background-color: NULL;\n" +
-                                    "    -fx-border-width: 1;\n" +
-                                    "    -fx-text-fill: #004aad;");
-                            Timeline timeline = new Timeline(new KeyFrame(
-                                    Duration.seconds(3),
-                                    event2 -> notificationLabel.setVisible(false)
-                            ));
-                            timeline.play();
-                            anchor_hire.getChildren().add(notificationLabel);
-                        }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
             return cell;
 
         });

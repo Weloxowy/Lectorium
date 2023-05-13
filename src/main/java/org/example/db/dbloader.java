@@ -360,10 +360,11 @@ public class dbloader {
         return false;
     }
 
+    //public ArrayList<String[]> ListHire = new ArrayList<String[]>();
     public ArrayList<String[]> ListHire = new ArrayList<String[]>();
     public void yourHireInformation(int id) {
         connectToDatabase();
-        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu \n" +
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu, wypozyczenia.ilosc_przedluzen \n" +
                 "from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze\n" +
                 "AND wypozyczenia.uzytkownicy_id_uzytkownicy = ? ";
         try {
@@ -376,9 +377,10 @@ public class dbloader {
                 final String nazwa = resultSet.getString("nazwa");
                 final String data_wypozyczenia = resultSet.getString("data_wypozyczenia");
                 final String data_zwrotu = resultSet.getString("data_zwrotu");
+                final int ilosc_przedluzen = resultSet.getInt("ilosc_przedluzen");
                 String nazwa_autora = "";
                 nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
-                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_wypozyczenia, data_zwrotu};
+                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_wypozyczenia, data_zwrotu, String.valueOf(ilosc_przedluzen)};
                 ListHire.add(row);
             }
             resultSet.close();
@@ -391,10 +393,11 @@ public class dbloader {
         closeConnection();
     }
 
+
     public void check_hire_information(int id)
     {
         connectToDatabase();
-        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu \n" +
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu, wypozyczenia.ilosc_przedluzen \n" +
                 "from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze\n" +
                 "AND wypozyczenia.data_zwrotu > date('now')  AND wypozyczenia.uzytkownicy_id_uzytkownicy = ?";
         try {
@@ -407,9 +410,11 @@ public class dbloader {
                 final String nazwa = resultSet.getString("nazwa");
                 final String data_wypozyczenia = resultSet.getString("data_wypozyczenia");
                 final String data_zwrotu = resultSet.getString("data_zwrotu");
+                final String ilosc_przedluzen= resultSet.getString("ilosc_przedluzen");
+
                 String nazwa_autora = "";
                 nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
-                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_wypozyczenia, data_zwrotu};
+                String[] row = {String.valueOf(id_egzemplarze), nazwa, nazwa_autora, data_wypozyczenia, data_zwrotu, ilosc_przedluzen};
                 ListHire.add(row);
             }
             resultSet.close();
@@ -421,6 +426,8 @@ public class dbloader {
 
         closeConnection();
     }
+
+
 
 
     public void yourReservationInformation(int id) {
@@ -556,6 +563,30 @@ public class dbloader {
         }
         return resultSet;
     }
+
+    public boolean rent_date_update(int egz, int id, String date) {
+        connectToDatabase();
+        String print = "UPDATE wypozyczenia SET data_zwrotu = DATE(data_zwrotu, '+30 day'), ilosc_przedluzen = ilosc_przedluzen + 1  where uzytkownicy_id_uzytkownicy=? AND egzemplarze_id_egzemplarze = ? AND data_wypozyczenia = ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            statement.setInt(2, egz);
+            statement.setString(3, date); //data zla, sprawdzic poprawnosc
+            int result = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+            if(result>0){
+                return true;
+            }
+            return false;
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        closeConnection();
+        return false;
+    }
+
 
 }
 

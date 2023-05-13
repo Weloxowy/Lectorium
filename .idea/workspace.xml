@@ -9,24 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Rezerwacje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourReservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_05_2023_15_22__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_05_2023_15_23__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/nowosciController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,19 +262,19 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>339</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java</url>
           <line>314</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
+          <line>365</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -292,7 +284,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/verify$Main.ic" NAME="Main Coverage Results" MODIFIED="1679141270880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/abte$Main.ic" NAME="Main Coverage Results" MODIFIED="1681133045533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/verify$Main.ic" NAME="Main Coverage Results" MODIFIED="1679141270880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,7 +18,6 @@ import org.example.verify.logincontroller;
 import java.io.IOException;
 
 import static org.example.Main.dbload;
-import static org.example.Main.kat;
 
 public class home {
 
@@ -68,7 +66,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -88,7 +86,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -126,7 +124,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -146,7 +144,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -165,7 +163,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -184,13 +182,13 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         font(scene);
         stage.setScene(scene);
     }
 
     @FXML
-    void nowosciController_clicked(MouseEvent event) {
+    void nowosciController_clicked(MouseEvent event) { //TODO wzór dla przekazywania czcionek
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
         try {
@@ -198,14 +196,12 @@ public class home {
             parent = loader.load();
             nowosciController nowosci = loader.getController();
             nowosci.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            nowosci.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
-        stage.setScene(scene);
-        font(scene);
     }
 
     void font(Scene scene) {
@@ -238,7 +234,7 @@ public class home {
 
     void katalog_item(MouseEvent event, int row) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent parent = null;
+        Parent parent;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
             parent = loader.load();
@@ -255,7 +251,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -275,7 +271,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -294,7 +290,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 }

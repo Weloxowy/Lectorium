@@ -76,7 +76,7 @@ public class nowosciController extends home{
     void font(Scene scene) {
         super.font(scene);
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-        Label header = (Label) grid_nowosci.lookup("#nowosci");
+        Label header = (Label) grid_nowosci.lookup("#header");
         header.setFont(ssp_sb_h1);
     }
 
