@@ -121,7 +121,7 @@ public class logincontroller {
     }
 
     @FXML
-    void onsubmit(MouseEvent event) { //TODO dorzucić uruchamianie funkcji przy kliknieciu klawisza ENTER!
+    void onsubmit(MouseEvent event) {
         error.setOpacity(0.0);
         org.example.db.dbloader l = new dbloader();
         String log = login.getText();
