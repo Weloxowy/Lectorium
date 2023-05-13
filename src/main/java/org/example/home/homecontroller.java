@@ -1,16 +1,20 @@
 package org.example.home;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.Main;
 
 import static org.example.Main.dbload;
@@ -96,22 +100,19 @@ public class homecontroller extends home{
     @FXML
     private ImageView search_button;
 
+    @FXML
+    private AnchorPane anchor;
 
     @FXML
     void searchbar_exited(MouseEvent event) {
         searchbar.setFocusTraversable(false);
     }
     public void init(String imie, String nazwisko, MouseEvent event, Image image){
-        //dbload.displayActiveConnections();
-
         nametag.setText(imie+" "+nazwisko);
         searchbar_exited(event);
         avatar.setImage(Main.user.getImage());
         avatar_view();
         images_view();
-        //dbload.displayActiveConnections();
-        //dbload.rent(8,5);
-        //dbload.get_categories();
     }
 
     void avatar_view(){
@@ -146,6 +147,13 @@ public class homecontroller extends home{
         rectangleb2.setArcHeight(20.0);
         //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         image_b2.setClip(rectangleb2);
+
+        double centerXbib = biblioteka_photo.getBoundsInLocal().getWidth();
+        double centerYbib = biblioteka_photo.getBoundsInLocal().getHeight();
+        Rectangle rectanglebib = new Rectangle(centerXbib, centerYbib);
+        rectanglebib.setArcWidth(20.0);
+        rectanglebib.setArcHeight(20.0);
+        biblioteka_photo.setClip(rectanglebib);
     }
 
     @FXML

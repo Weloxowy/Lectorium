@@ -1,10 +1,15 @@
 
 package org.example.home;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -12,11 +17,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import org.example.Katalog;
 import org.example.Main;
 import org.example.Wypozyczenia;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import static org.example.Main.dbload;
 
@@ -91,28 +104,102 @@ public class yourHire extends home{
 
 
         TableColumn autorCol = new TableColumn("Autor");
-        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn nazwaCol = new TableColumn("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.3);
+        nazwaCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
-
-        TableColumn egzemplarzeCol = new TableColumn("id_egzemplarze");
-        egzemplarzeCol.setMinWidth(anchortable.getPrefWidth()*0.05);
+        TableColumn egzemplarzeCol = new TableColumn("Numer egzemplarza");
+        egzemplarzeCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
         egzemplarzeCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_egzemplarze"));
 
-        TableColumn data_wypozyczeniaCol = new TableColumn("data_wypozyczenia");
-        data_wypozyczeniaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        TableColumn data_wypozyczeniaCol = new TableColumn("Data wypozyczenia");
+        data_wypozyczeniaCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
         data_wypozyczeniaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_wypozyczenia"));
 
-        TableColumn data_zwrotuCol = new TableColumn("data_zwrotu");
-        data_zwrotuCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        TableColumn data_zwrotuCol = new TableColumn("Termin zwrotu");
+        data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
+        data_zwrotuCol.setCellValueFactory(
+                new PropertyValueFactory<>("data_zwrotu"));
+
+        TableColumn przedluzCol = new TableColumn("Przedłuż");
+        przedluzCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        przedluzCol.setCellValueFactory(
+                new PropertyValueFactory<>("ilosc_przedluzen"));
+        przedluzCol.setCellFactory(col -> {
+            TableCell<Katalog, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                if (newVal != null && Integer.parseInt(newVal) < 3) { //tak
+                    Node centreBox = createPriorityGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+
+                cell.setOnMouseClicked(event -> {
+                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                        TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                        int row = tablePosition.getRow();
+                        int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                        String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
+                        if(dbload.rent_date_update(data,Main.user.getId(), start_date)) {
+                            Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                            notificationLabel.setFont(pop_r_h1);
+                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                            notificationLabel.setPrefSize(300, 50);
+                            notificationLabel.setLayoutX(700);
+                            notificationLabel.setLayoutY(320);
+                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                    "    -fx-border-color: #004aad;\n" +
+                                    "    -fx-background-radius: 10;\n" +
+                                    "    -fx-background-color: NULL;\n" +
+                                    "    -fx-border-width: 1;\n" +
+                                    "    -fx-text-fill: #004aad;");
+                            Timeline timeline = new Timeline(new KeyFrame(
+                                    Duration.seconds(3),
+                                    event2 -> {
+                                        notificationLabel.setVisible(false);
+                                        labelwypozyczenia.fireEvent(event);
+                                    }
+                            ));
+                            timeline.play();
+                            anchor_hire.getChildren().add(notificationLabel);
+                        }
+                        else{
+                            Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                            notificationLabel.setFont(pop_r_h1);
+                            notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                            notificationLabel.setPrefSize(300, 50);
+                            notificationLabel.setLayoutX(700);
+                            notificationLabel.setLayoutY(320);
+                            notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                    "    -fx-border-color: #004aad;\n" +
+                                    "    -fx-background-radius: 10;\n" +
+                                    "    -fx-background-color: NULL;\n" +
+                                    "    -fx-border-width: 1;\n" +
+                                    "    -fx-text-fill: #004aad;");
+                            Timeline timeline = new Timeline(new KeyFrame(
+                                    Duration.seconds(3),
+                                    event2 -> notificationLabel.setVisible(false)
+                            ));
+                            timeline.play();
+                            anchor_hire.getChildren().add(notificationLabel);
+                        }
+                    }
+                });
+            }
+        });
+            return cell;
+
+        });
+
+        TableColumn grzywnaCol = new TableColumn("Grzywna");
+        data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         data_zwrotuCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
@@ -122,12 +209,13 @@ public class yourHire extends home{
             String nazwa_autora = tab[2];
             String data_wypozyczenia = tab[3];
             String data_zwrotu = tab[4];
-            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora));
+            String ilosc_przedluzen = tab[5];
+            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll(egzemplarzeCol, nazwaCol,  data_wypozyczeniaCol,data_zwrotuCol,autorCol);
+        lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,przedluzCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
         lista.setPrefWidth(anchor_hire.getPrefWidth());
         lista.setPrefHeight(anchor_hire.getPrefHeight());
@@ -189,6 +277,8 @@ public class yourHire extends home{
     void check_hire_information(MouseEvent event)
     {
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
+        //dbload.yourHireInformation(Main.user.getId());
+        items.clear();
         dbload.check_hire_information(Main.user.getId());
         for (String[] tab : dbload.ListHire) {
             String id_egzemplarze = tab[0];
@@ -196,11 +286,19 @@ public class yourHire extends home{
             String nazwa_autora = tab[2];
             String data_wypozyczenia = tab[3];
             String data_zwrotu = tab[4];
-            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora));
+            String ilosc_przedluzen = tab[5];
+            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
         }
-
         lista.setItems(items);
     }
 
-
+    private Node createPriorityGraphic(){
+        HBox graphicContainer = new HBox();
+        graphicContainer.setAlignment(Pos.CENTER);
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/add.png")));
+        imageView.setFitHeight(25);
+        imageView.setPreserveRatio(true);
+        graphicContainer.getChildren().add(imageView);
+        return graphicContainer;
+    }
 }

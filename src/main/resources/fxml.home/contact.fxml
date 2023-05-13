@@ -15,17 +15,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.contactcontroller">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="700.0" minWidth="1000.0" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.contactcontroller">
     <columnConstraints>
-        <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
-        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="NEVER" percentWidth="20.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" percentWidth="80.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="8.0" valignment="TOP" vgrow="ALWAYS" />
-        <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="8.0" valignment="TOP" vgrow="NEVER" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <HBox styleClass="menu_up" GridPane.columnIndex="1">
+        <HBox styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
             <children>
                 <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
                     <font>
@@ -69,7 +69,7 @@
                 </ImageView>
             </children>
         </HBox>
-        <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+        <VBox cache="true" cacheHint="QUALITY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="261.0" spacing="15.0" styleClass="menu_left" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
             <children>
                 <Label fx:id="labelglowna" onMouseClicked="#glowna_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Strona główna" textFill="#f6f2df">
                     <VBox.margin>
@@ -113,7 +113,7 @@
                 <Insets left="10.0" />
             </padding>
         </VBox>
-        <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up">
+        <AnchorPane prefHeight="47.0" prefWidth="274.0" styleClass="menu_up" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
             <children>
                 <ImageView cacheHint="QUALITY" depthTest="DISABLE" fitHeight="57.0" fitWidth="247.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
                     <image>
@@ -125,7 +125,7 @@
                 <DropShadow height="35.57" radius="8.3925" width="0.0" />
             </effect>
         </AnchorPane>
-      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

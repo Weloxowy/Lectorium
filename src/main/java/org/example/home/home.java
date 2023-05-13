@@ -37,7 +37,7 @@ public class home {
             parent = loader.load();
             logincontroller controller = loader.getController();
             controller.font();
-            stage.setResizable(false);
+            //stage.setResizable(false);
             stage.setResizable(true);
             stage.isMaximized();
             stage.setFullScreen(false);
@@ -68,7 +68,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -88,7 +88,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -107,7 +107,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
         font(scene);
     }
@@ -126,7 +126,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -146,7 +146,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -165,7 +165,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -184,7 +184,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         font(scene);
         stage.setScene(scene);
     }
@@ -203,7 +203,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
         font(scene);
     }
@@ -255,7 +255,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
@@ -275,7 +275,7 @@ public class home {
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
+        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
         stage.setScene(scene);
     }
 
