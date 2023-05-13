@@ -422,6 +422,39 @@ public class dbloader {
         closeConnection();
     }
 
+
+    public void yourReservationInformation(int id) {
+        connectToDatabase();
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, autor.imie_autora, autor.nazwisko_autora, rezerwacje.data_konca, rezerwacje.data_rezerwacji, rezerwacje.ilosc_przedluzen \n" +
+                "from katalog, egzemplarze, autor, rezerwacje where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = rezerwacje.egzemplarze_id_egzemplarze\n" +
+                "AND rezerwacje.uzytkownicy_id_uzytkownicy = ?";
+        try {
+            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id_egzemplarze = resultSet.getInt("id_egzemplarze");
+                final String nazwa = resultSet.getString("nazwa");
+                final String data_konca = resultSet.getString("data_konca");
+                final String data_rezerwacji = resultSet.getString("data_rezerwacji");
+                final int ilosc_przedluzen = resultSet.getInt("ilosc_przedluzen");
+                final String anuluj_rezerwacje = "1";
+                String nazwa_autora = "";
+                nazwa_autora = nazwa_autora.concat(resultSet.getString("imie_autora") +" "+ resultSet.getString("nazwisko_autora"));
+                String[] row = {String.valueOf(id_egzemplarze),nazwa,nazwa_autora, data_konca, data_rezerwacji, String.valueOf(ilosc_przedluzen), anuluj_rezerwacje};
+                ListHire.add(row);
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+
+        closeConnection();
+    }
+
     public boolean password_update(String new_password, int id, String password) {
         connectToDatabase();
         String print = "UPDATE uzytkownicy SET haslo = ?  where id_uzytkownicy=? AND haslo = ?";
@@ -502,6 +535,26 @@ public class dbloader {
         } finally {
             closeConnection();
         }
+    }
+
+    public int update(int id)
+    {
+        connectToDatabase();
+        String print = "UPDATE rezerwacje SET data_konca = DATE(data_konca, '+7 day'), ilosc_przedluzen = ilosc_przedluzen + 1 where rezerwacje.egzemplarze_id_egzemplarze = ? AND rezerwacje.uzytkownicy_id_uzytkownicy = ?;";
+        int resultSet = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, id);
+            statement.setInt(2, Main.user.getId());
+            resultSet = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            closeConnection();
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+        return resultSet;
     }
 
 }
