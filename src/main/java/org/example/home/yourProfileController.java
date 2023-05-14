@@ -4,10 +4,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -305,12 +300,9 @@ public class yourProfileController extends home {
         password.setVisible(false);
         usun.setVisible(false);
         login.setVisible(false);
-        /*
-        login_change.setStyle("-fx-border-width: 1");
+        /*login_change.setStyle("-fx-border-width: 1");
         password_change.setStyle("-fx-border-width: 1");
-        profile_delete.setStyle("-fx-border-width: 1");
-
-         */
+        profile_delete.setStyle("-fx-border-width: 1");*/
     }
 
     @FXML

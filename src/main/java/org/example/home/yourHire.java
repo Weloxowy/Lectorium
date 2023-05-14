@@ -29,6 +29,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import static org.example.Main.dbload;
@@ -136,63 +138,70 @@ public class yourHire extends home{
 
             TableCell<Katalog, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
-                if (newVal != null && Integer.parseInt(newVal) < 3) { //tak
-                    Node centreBox = createPriorityGraphic();
-                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+                int rowIndex = cell.getIndex();
 
-                    cell.setOnMouseClicked(event -> {
-                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
-                            TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                            int row = tablePosition.getRow();
-                            int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                            String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
-                            if(dbload.rent_date_update(data,Main.user.getId(), start_date)) {
-                                Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
-                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-                                notificationLabel.setFont(pop_r_h1);
-                                notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
-                                notificationLabel.setPrefSize(300, 50);
-                                notificationLabel.setLayoutX(700);
-                                notificationLabel.setLayoutY(320);
-                                notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                        "    -fx-border-color: #004aad;\n" +
-                                        "    -fx-background-radius: 10;\n" +
-                                        "    -fx-background-color: NULL;\n" +
-                                        "    -fx-border-width: 1;\n" +
-                                        "    -fx-text-fill: #004aad;");
-                                Timeline timeline = new Timeline(new KeyFrame(
-                                        Duration.seconds(3),
-                                        event2 -> {
-                                            notificationLabel.setVisible(false);
-                                            labelwypozyczenia.fireEvent(event);
-                                        }
-                                ));
-                                timeline.play();
-                                anchor_hire.getChildren().add(notificationLabel);
+                if (!data_zwrotuCol.getCellObservableValue(rowIndex).getValue().toString().isEmpty()) {
+                    String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
+                    LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalDate currentDate = LocalDate.now();
+                    if (newVal != null && Integer.parseInt(newVal) < 3 && dataZwrotu.isAfter(currentDate)) { //tak
+                        Node centreBox = createPriorityGraphic();
+                        cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+
+                        cell.setOnMouseClicked(event -> {
+                            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                                TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                                int row = tablePosition.getRow();
+                                int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                                String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
+                                if (dbload.rent_date_update(data, Main.user.getId(), start_date)) {
+                                    Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(700);
+                                    notificationLabel.setLayoutY(320);
+                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                            "    -fx-border-color: #004aad;\n" +
+                                            "    -fx-background-radius: 10;\n" +
+                                            "    -fx-background-color: NULL;\n" +
+                                            "    -fx-border-width: 1;\n" +
+                                            "    -fx-text-fill: #004aad;");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> {
+                                                notificationLabel.setVisible(false);
+                                                labelwypozyczenia.fireEvent(event);
+                                            }
+                                    ));
+                                    timeline.play();
+                                    anchor_hire.getChildren().add(notificationLabel);
+                                } else {
+                                    Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(700);
+                                    notificationLabel.setLayoutY(320);
+                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                            "    -fx-border-color: #004aad;\n" +
+                                            "    -fx-background-radius: 10;\n" +
+                                            "    -fx-background-color: NULL;\n" +
+                                            "    -fx-border-width: 1;\n" +
+                                            "    -fx-text-fill: #004aad;");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> notificationLabel.setVisible(false)
+                                    ));
+                                    timeline.play();
+                                    anchor_hire.getChildren().add(notificationLabel);
+
+                                }
                             }
-                            else{
-                                Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
-                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-                                notificationLabel.setFont(pop_r_h1);
-                                notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
-                                notificationLabel.setPrefSize(300, 50);
-                                notificationLabel.setLayoutX(700);
-                                notificationLabel.setLayoutY(320);
-                                notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                        "    -fx-border-color: #004aad;\n" +
-                                        "    -fx-background-radius: 10;\n" +
-                                        "    -fx-background-color: NULL;\n" +
-                                        "    -fx-border-width: 1;\n" +
-                                        "    -fx-text-fill: #004aad;");
-                                Timeline timeline = new Timeline(new KeyFrame(
-                                        Duration.seconds(3),
-                                        event2 -> notificationLabel.setVisible(false)
-                                ));
-                                timeline.play();
-                                anchor_hire.getChildren().add(notificationLabel);
-                            }
-                        }
-                    });
+                        });
+                    }
                 }
             });
             return cell;
