@@ -226,7 +226,7 @@ public class katalogcontroller extends home{
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
