@@ -6,15 +6,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -24,6 +28,8 @@ import javafx.stage.StageStyle;
 import org.example.Katalog;
 import org.example.Main;
 import org.example.verify.logincontroller;
+
+import java.awt.*;
 import java.io.IOException;
 
 import static org.example.Main.dbload;
@@ -92,6 +98,8 @@ public class katalogcontroller extends home{
     @FXML
     private AnchorPane anchortable = new AnchorPane();
 
+    private int lastLoadedIndex = 0; // zmienna przechowująca numer ostatnio pobranego rekordu
+
 
     public void Katalog_lista() {
         dbload.print_book();
@@ -138,18 +146,20 @@ public class katalogcontroller extends home{
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        for (String[] tab : dbload.array) {
-            Integer id_katalog = Integer.valueOf(tab[0]);
-            String nazwa = tab[1];
-            String nazwa_autora = tab[2];
-            String rok_wydania = tab[3];
-            String wydanie = tab[4];
-            String isbn = tab[5];
-            String jezyk = tab[6];
-            String uwagi = tab[7];
-            String wydawnictwo = tab[8];
-            String nazwa_gatunku = tab[9];
-            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo,nazwa_gatunku));
+        /*lista.addEventFilter(ScrollEvent.SCROLL, event -> {
+            ScrollBar verticalScrollBar = getVerticalScrollBar(lista);
+            double verticalValue = verticalScrollBar.getValue();
+            double verticalMax = verticalScrollBar.getMax();
+
+            if (verticalValue > 0.8 * verticalMax) {
+                // Załaduj kolejne rekordy
+                loadNextRecords(items);
+                lista.setItems(items);
+            }
+        });
+        loadNextRecords(items);*/
+        for (String[] tab: dbload.array) {
+            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
@@ -226,7 +236,7 @@ public class katalogcontroller extends home{
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent,stage.getWidth(),stage.getHeight());
+        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
         stage.setScene(scene);
     }
 
@@ -275,18 +285,8 @@ public class katalogcontroller extends home{
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        for (String[] tab : dbload.array) {
-            Integer id_katalog = Integer.valueOf(tab[0]);
-            String nazwa = tab[1];
-            String nazwa_autora = tab[2];
-            String rok_wydania = tab[3];
-            String wydanie = tab[4];
-            String isbn = tab[5];
-            String jezyk = tab[6];
-            String uwagi = tab[7];
-            String wydawnictwo = tab[8];
-            String nazwa_gatunku = tab[9];
-            items.add(new Katalog(id_katalog,nazwa,nazwa_autora,rok_wydania,wydanie,isbn,jezyk,uwagi,wydawnictwo,nazwa_gatunku));
+        for (String[] tab: dbload.array) {
+            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
@@ -370,4 +370,27 @@ public class katalogcontroller extends home{
         katalog_clicked(event,query);
     }
 
+    private ScrollBar getVerticalScrollBar(TableView<?> tableView) {
+        for (Node node : tableView.lookupAll(".scroll-bar")) {
+            if (node instanceof ScrollBar) {
+                ScrollBar scrollBar = (ScrollBar) node;
+                if (scrollBar.getOrientation() == Orientation.VERTICAL) {
+                    return scrollBar;
+                }
+            }
+        }
+        return null;
+    }
+
+    void loadNextRecords(ObservableList<Katalog> items){
+        int recordsToLoad = 50;
+        int endIndex = Math.min(lastLoadedIndex + recordsToLoad, dbload.array.size());
+
+        for (int i = lastLoadedIndex; i < endIndex; i++) {
+            String[] tab = dbload.array.get(i);
+
+            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
+        }
+        lastLoadedIndex = endIndex;
+    }
 }

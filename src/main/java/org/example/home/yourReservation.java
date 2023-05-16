@@ -22,20 +22,13 @@ import javafx.util.Duration;
 import org.example.Katalog;
 import org.example.Main;
 import org.example.Rezerwacje;
-import org.example.Wypozyczenia;
 
 import static org.example.Main.dbload;
 
 public class yourReservation extends home{
 
     @FXML
-    private Button Aktualne;
-
-    @FXML
     private Label Name;
-
-    @FXML
-    private Button Wszystkie;
 
     @FXML
     private Label Wyp;
@@ -143,11 +136,11 @@ public class yourReservation extends home{
         przedluz_rezerwacjeCol.setCellFactory(col -> {
             TableCell<Katalog, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
-                int neww = Integer.parseInt(newVal);
-                if (neww >= 0 && neww < 3) {
+                int rowIndex = cell.getIndex();
+                if (przedluz_rezerwacjeCol.getCellObservableValue(rowIndex) != null) {
                     Node centreBox = createPriorityGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
-                }
+
                 cell.setOnMouseClicked(event -> {
                     if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
                         if(przedluz_rezerwacjeCol.getCellFactory().toString().contentEquals("3")) {
@@ -201,9 +194,14 @@ public class yourReservation extends home{
                         }
                     }
                 });
+                }
             });
             return cell;
 
+        });
+
+        anuluj_rezerwacjeCol.setCellValueFactory(col->{
+            //tutaj dorzucic
         });
 
 
@@ -278,5 +276,16 @@ public class yourReservation extends home{
         graphicContainer.getChildren().add(imageView);
         return graphicContainer;
     }
+
+    private Node createDeleteGraphic(){
+        HBox graphicContainer = new HBox();
+        graphicContainer.setAlignment(Pos.CENTER);
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/remove.png")));
+        imageView.setFitHeight(25);
+        imageView.setPreserveRatio(true);
+        graphicContainer.getChildren().add(imageView);
+        return graphicContainer;
+    }
+
 
 }

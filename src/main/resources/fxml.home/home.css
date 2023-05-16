@@ -98,6 +98,10 @@
     -fx-text-fill: #ffffff;
 }
 
+.table-view .table-cell{
+-fx-border-color: transparent;
+}
+
 /* wszystkie wiersze*/
 .table-view .row-cell:filled{
     -fx-border-color: transparent;
@@ -106,27 +110,31 @@
 
 .table-row-cell:empty {
 	-fx-background-color: transparent;
+	-fx-border-width: 0;
 }
-/*.table-row-cell:hover {
-    -fx-background-color: #004AAD;
-}
-*/
+
 .table-row-cell:odd{
     -fx-background-color: #FAF8EE;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+    -fx-border-width: 0;
+}
+.table-row-cell:odd .table-cell .table-cell {
+    -fx-border-width: 0;
 }
 
 .table-row-cell:even{
     -fx-background-color: #FAF8EE;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+    -fx-border-width: 0;
 }
 
 .table-row-cell: highlighted {
     -fx-background-color: -primary;
     /*-fx-background-radius: 5px;*/
     -fx-background-insets: 2px;
+    -fx-background-color: #037cb9;
 }
 
 .table-row-cell: selected {
