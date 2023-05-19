@@ -587,6 +587,27 @@ public class dbloader {
         return false;
     }
 
+    public int delete(int id_egzemplarz)
+    {
+        connectToDatabase();
+        String print = "DELETE from rezerwacje where uzytkownicy_id_uzytkownicy = ? AND egzemplarze_id_egzemplarze = ?;";
+        int resultSet = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement(print);
+            statement.setInt(1, Main.user.getId());
+            statement.setInt(2, id_egzemplarz);
+            resultSet = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            closeConnection();
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        }
+        return resultSet;
+    }
+
+
 
 }
 

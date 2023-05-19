@@ -164,8 +164,8 @@ public class yourHire extends home{
                                     notificationLabel.setFont(pop_r_h1);
                                     notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
                                     notificationLabel.setPrefSize(300, 50);
-                                    notificationLabel.setLayoutX(700);
-                                    notificationLabel.setLayoutY(320);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
                                     notificationLabel.setStyle("-fx-border-radius: 10;\n" +
                                             "    -fx-border-color: #004aad;\n" +
                                             "    -fx-background-radius: 10;\n" +
@@ -187,8 +187,8 @@ public class yourHire extends home{
                                     notificationLabel.setFont(pop_r_h1);
                                     notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
                                     notificationLabel.setPrefSize(300, 50);
-                                    notificationLabel.setLayoutX(700);
-                                    notificationLabel.setLayoutY(320);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
                                     notificationLabel.setStyle("-fx-border-radius: 10;\n" +
                                             "    -fx-border-color: #004aad;\n" +
                                             "    -fx-background-radius: 10;\n" +

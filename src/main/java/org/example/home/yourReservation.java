@@ -143,7 +143,7 @@ public class yourReservation extends home{
 
                 cell.setOnMouseClicked(event -> {
                     if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
-                        if(przedluz_rezerwacjeCol.getCellFactory().toString().contentEquals("3")) {
+                        if(Integer.parseInt(przedluz_rezerwacjeCol.getCellData(rowIndex).toString()) > 3) {
                             Label notificationLabel = new Label("Przekroczono limit przedluzen rezerwacji.");
                             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
                             notificationLabel.setFont(pop_r_h1);
@@ -200,9 +200,76 @@ public class yourReservation extends home{
 
         });
 
-        anuluj_rezerwacjeCol.setCellValueFactory(col->{
-            //tutaj dorzucic
+
+        anuluj_rezerwacjeCol.setCellFactory(col -> {
+            TableCell<Katalog, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                int rowIndex = cell.getIndex();
+                if (anuluj_rezerwacjeCol.getCellObservableValue(rowIndex) != null) {
+                    Node centreBox = createDeleteGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+
+                    cell.setOnMouseClicked(event -> {
+                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                            if(anuluj_rezerwacjeCol.getCellData(rowIndex).toString().contentEquals("1")) {
+                                TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                                int row = tablePosition.getRow();
+                                int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                                if(dbload.delete(data) > 0)
+                                {
+                                    Label notificationLabel = new Label("Anulowano rezerwacje.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
+                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                            "    -fx-border-color: #004aad;\n" +
+                                            "    -fx-background-radius: 10;\n" +
+                                            "    -fx-background-color: NULL;\n" +
+                                            "    -fx-border-width: 1;\n" +
+                                            "    -fx-text-fill: #004aad;");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> {notificationLabel.setVisible(false); labelrezerwacje.fireEvent(event);}
+                                    ));
+                                    timeline.play();
+                                    anchor.getChildren().add(notificationLabel);
+                                }
+                                else
+                                {
+                                    Label notificationLabel = new Label("Nie udalo sie anulowac rezerwacji.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
+                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
+                                            "    -fx-border-color: #004aad;\n" +
+                                            "    -fx-background-radius: 10;\n" +
+                                            "    -fx-background-color: NULL;\n" +
+                                            "    -fx-border-width: 1;\n" +
+                                            "    -fx-text-fill: #004aad;");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> {notificationLabel.setVisible(false); labelrezerwacje.fireEvent(event);}
+                                    ));
+                                    timeline.play();
+                                    anchor.getChildren().add(notificationLabel);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+            return cell;
+
         });
+
+
+
 
 
         for (String[] tab : dbload.ListHire) {
