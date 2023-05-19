@@ -8,15 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourReservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.6.2 - rezerwacje poprawione" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684065310603</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="v0.6.2 - rezerwacje poprawione">
+      <created>1684496131454</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684496131454</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,7 +241,8 @@
     <MESSAGE value="v0.4.5.2 - Dodane guziki filtrowania do twoich wypozyczen, poparwic szerokosc wysiwetlania tabeli" />
     <MESSAGE value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
     <MESSAGE value="v 0.6.2 - yourHire działa, ale trzeba wyeliminować errory dla wartosci null, patrz (yourHire.java:143)" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 0.6.2 - yourHire działa, ale trzeba wyeliminować errory dla wartosci null, patrz (yourHire.java:143)" />
+    <MESSAGE value="v0.6.2 - rezerwacje poprawione" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.6.2 - rezerwacje poprawione" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
