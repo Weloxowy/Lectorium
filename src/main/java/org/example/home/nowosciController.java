@@ -1,15 +1,11 @@
 package org.example.home;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -17,10 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import org.example.Katalog;
 import org.example.Main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,8 +23,7 @@ import static org.example.Main.dbload;
 public class nowosciController extends home{
 
     @FXML
-    private ImageView avatar; //TODO labele z katalogami zostały przejete przez metode font w klasie home. zrob tak z reszta kontrolerów oraz zrob dziedziczenie lokalnych fontow po tym z home'a
-
+    private ImageView avatar;
     @FXML
     private Label nametag;
 
@@ -56,11 +49,10 @@ public class nowosciController extends home{
 
     @FXML
     private Label labelnowosci;
-    @FXML
-    private AnchorPane  nowosci_anchor;
 
     @FXML
     private GridPane grid_nowosci;
+
 
     @FXML
     void search_init(MouseEvent event){
@@ -68,11 +60,6 @@ public class nowosciController extends home{
         katalog_clicked(event,query);
     }
 
-
-    @FXML
-    void searchbar_exited(MouseEvent event) {
-
-    }
 
     @Override
     void font(Scene scene) {
@@ -82,21 +69,19 @@ public class nowosciController extends home{
         header.setFont(ssp_sb_h1);
     }
 
-    public void init(String imie, String nazwisko, MouseEvent event, Image image){
+    public void init(String imie, String nazwisko){
         dbload.get_top();
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
         avatar_view();
-        int w = Main.user.getId();
-        System.out.println(w);
         int i=1;
         grid_nowosci.setPrefWidth(Region.USE_COMPUTED_SIZE);
         grid_nowosci.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        nowosci_anchor.setTopAnchor(grid_nowosci, 10.0);
-        nowosci_anchor.setLeftAnchor(grid_nowosci, 10.0);
-        nowosci_anchor.setRightAnchor(grid_nowosci, 10.0);
-        nowosci_anchor.setBottomAnchor(grid_nowosci, 10.0);
+        AnchorPane.setTopAnchor(grid_nowosci, 10.0);
+        AnchorPane.setLeftAnchor(grid_nowosci, 10.0);
+        AnchorPane.setRightAnchor(grid_nowosci, 10.0);
+        AnchorPane.setBottomAnchor(grid_nowosci, 10.0);
 
         grid_nowosci.setHgap(55.0);
         grid_nowosci.setVgap(30.0);
@@ -112,10 +97,9 @@ public class nowosciController extends home{
             vboxMap.put(8, vbox8);
 
         for (String[] tab : dbload.top) {
-            Integer id_katalog = Integer.valueOf(tab[0]);
+            int id_katalog = Integer.parseInt(tab[0]);
             String nazwa = tab[1];
             String nazwa_autora = tab[2];
-            System.out.println(nazwa_autora);
             VBox vbox = vboxMap.get(i);
             setLabelText(vbox,nazwa,nazwa_autora,id_katalog,i);
             i++;
@@ -133,7 +117,9 @@ public class nowosciController extends home{
         Label label_n = (Label) vb.lookup("#title"+i);
         if (label_n != null) {
             label_n.setText(nazwa);
-            label_a.setFont(pop_r_h1);
+            if (label_a != null) {
+                label_a.setFont(pop_r_h1);
+            }
         }
         dbload.get_cover(id_katalog);
         ImageView image = (ImageView) vb.lookup("#cover"+i);
@@ -158,7 +144,6 @@ public class nowosciController extends home{
 
     @FXML
     void refer_to_book(MouseEvent event){
-        System.out.println( event.getSource());
         Map<Integer, VBox> vboxMap = new HashMap<>();
         vboxMap.put(1, vbox1);
         vboxMap.put(2, vbox2);

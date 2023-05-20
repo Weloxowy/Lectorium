@@ -85,7 +85,7 @@
          </children></AnchorPane>
         <HBox styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
             <children>
-                <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
+                <TextField fx:id="searchbar" cache="true" focusTraversable="false" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szukaj tytułu, autora lub kategorii..." styleClass="search_field">
                     <font>
                         <Font size="22.0" />
                     </font>

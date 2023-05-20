@@ -8,18 +8,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v 0.6.2 - yourHire naprawione">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2023_20_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2023_20_15__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2023_20_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_05_2023_20_17__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2023_11_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2023_11_46__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2023_11_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2023_11_48__Changes_.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v 0.6.3 - zmiana koordynatów komunikatów, doubleclick na przyciskach akcyjnych w tabelach, dodanie pola kwoty zadłużenia za każdą pozycję.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/contactcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/homecontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/katalogcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/kategoriecontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/nowosciController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourLibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/home/yourReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/registercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/registercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourLibrary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourProfileController.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684269183774</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="v 0.6.3 - zmiana koordynatów komunikatów, doubleclick na przyciskach akcyjnych w tabelach, dodanie pola kwoty zadłużenia za każdą pozycję.">
+      <created>1684595115838</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1684595115838</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +276,8 @@
     <MESSAGE value="v0.4.5.2.1 - Poprawiona icona programu w katalogu ksiazek" />
     <MESSAGE value="v 0.6.2 - yourHire działa, ale trzeba wyeliminować errory dla wartosci null, patrz (yourHire.java:143)" />
     <MESSAGE value="v 0.6.2 - yourHire naprawione" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 0.6.2 - yourHire naprawione" />
+    <MESSAGE value="v 0.6.3 - zmiana koordynatów komunikatów, doubleclick na przyciskach akcyjnych w tabelach, dodanie pola kwoty zadłużenia za każdą pozycję." />
+    <option name="LAST_COMMIT_MESSAGE" value="v 0.6.3 - zmiana koordynatów komunikatów, doubleclick na przyciskach akcyjnych w tabelach, dodanie pola kwoty zadłużenia za każdą pozycję." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -265,27 +288,17 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>236</line>
+          <line>228</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>316</line>
+          <line>309</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/katalog_itemcontroller.java</url>
-          <line>235</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourProfileController.java</url>
-          <line>309</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java</url>
-          <line>191</line>
+          <line>184</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>

@@ -27,7 +27,7 @@
       <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane cache="true" cacheHint="QUALITY" maxHeight="900.0" maxWidth="1097.0" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="704.0" prefWidth="1056.0" styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+      <AnchorPane cache="true" cacheHint="QUALITY" maxHeight="900.0" maxWidth="1097.0" prefHeight="704.0" prefWidth="1056.0" styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
          <children>
             <GridPane hgap="20.0" layoutX="10.0" layoutY="32.0" vgap="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0">
               <columnConstraints>
@@ -91,7 +91,7 @@
       </AnchorPane>
       <HBox styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="searchbar" cache="true" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wolne wyszukiwanie" styleClass="search_field">
+            <TextField fx:id="searchbar" cache="true" focusTraversable="false" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szukaj tytułu, autora lub kategorii..." styleClass="search_field">
                <font>
                   <Font size="22.0" />
                </font>

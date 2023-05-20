@@ -167,20 +167,20 @@ public class registercontroller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
             parent = loader.load();
             homecontroller controller = loader.getController();
-            controller.font();
-            controller.init(Main.user.getImie(),Main.user.getNazwisko(),event,Main.user.getImage());
-            //stage.setResizable(false);
+
+            controller.init(Main.user.getImie(),Main.user.getNazwisko());
             stage.setResizable(true);
             stage.setFullScreen(false);
             stage.setTitle("Lectorium");
+            Scene scene = new Scene(parent);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
+            stage.setScene(scene);
+            controller.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         if (parent == null)
             return;
-        Scene scene = new Scene(parent);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
-        stage.setScene(scene);
         stage.show();
     }
 

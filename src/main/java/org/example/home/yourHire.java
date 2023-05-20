@@ -1,17 +1,15 @@
 
 package org.example.home;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -23,20 +21,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import org.example.Katalog;
 import org.example.Main;
 import org.example.Wypozyczenia;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Objects;
 
-import static org.example.Main.*;
+import static org.example.Main.dbload;
 
 public class yourHire extends home{
     @FXML
@@ -78,9 +72,9 @@ public class yourHire extends home{
     @FXML
     private TextField searchbar;
     @FXML
-    private TableView<Wypozyczenia> lista = new TableView<Wypozyczenia>();
+    private final TableView<Wypozyczenia> lista = new TableView<>();
     @FXML
-    private AnchorPane anchortable = new AnchorPane();
+    private final AnchorPane anchortable = new AnchorPane();
 
     @FXML
     private AnchorPane anchor_hire;
@@ -88,11 +82,10 @@ public class yourHire extends home{
     @FXML
     private AnchorPane anchor;
 
-    public void init(String imie, String nazwisko, MouseEvent event, Image image) {
+    public void init(String imie, String nazwisko, MouseEvent event) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
         avatar_view();
-        font();
         actual_button(event,true);
         Lista_Hire(Main.user.getId());
         Wyp.setText(Wyp.getText()+" "+imie + " " + nazwisko);
@@ -103,37 +96,37 @@ public class yourHire extends home{
         dbload.yourHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
-        TableColumn autorCol = new TableColumn("Autor");
+        TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
         autorCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
-        TableColumn nazwaCol = new TableColumn("Nazwa");
+        TableColumn<Wypozyczenia, ?> nazwaCol = new TableColumn<>("Nazwa");
         nazwaCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
-        TableColumn egzemplarzeCol = new TableColumn("Numer egzemplarza");
+        TableColumn<Wypozyczenia, ?> egzemplarzeCol = new TableColumn<>("Numer egzemplarza");
         egzemplarzeCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
         egzemplarzeCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_egzemplarze"));
 
-        TableColumn data_wypozyczeniaCol = new TableColumn("Data wypozyczenia");
+        TableColumn<Wypozyczenia, ?> data_wypozyczeniaCol = new TableColumn<>("Data wypozyczenia");
         data_wypozyczeniaCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
         data_wypozyczeniaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_wypozyczenia"));
 
-        TableColumn data_zwrotuCol = new TableColumn("Termin zwrotu");
+        TableColumn<Wypozyczenia, ?> data_zwrotuCol = new TableColumn<>("Termin zwrotu");
         data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
         data_zwrotuCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
-        TableColumn grzywnaCol = new TableColumn("Grzywna");
+        TableColumn<Wypozyczenia, String> grzywnaCol = new TableColumn<>("Grzywna");
         grzywnaCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
         grzywnaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
         grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
-            TableCell<Katalog, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
+            TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
 
             cell.itemProperty().addListener((obs, old, newVal) -> {
                 int rowIndex = cell.getIndex();
@@ -141,7 +134,7 @@ public class yourHire extends home{
                     String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
                     LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
                     LocalDate currentDate = LocalDate.now(); //aktualna data
-                    String debt = null;
+                    String debt;
                     if (dataZwrotu.isAfter(currentDate)) {
                         cell.setText(" - ");
                     } else if (dataZwrotu.isBefore(currentDate)) {
@@ -156,7 +149,7 @@ public class yourHire extends home{
         });
 
 
-        TableColumn przedluzCol = new TableColumn("Przedłuż");
+        TableColumn<Wypozyczenia, String> przedluzCol = new TableColumn<>("Przedłuż");
         przedluzCol.setMinWidth(anchortable.getPrefWidth()*0.1);
         przedluzCol.setCellValueFactory(
                 new PropertyValueFactory<>("ilosc_przedluzen"));
@@ -170,7 +163,7 @@ public class yourHire extends home{
                              <_|      <_|
 */
         przedluzCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
-            TableCell<Katalog, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
+            TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
             cell.itemProperty().addListener((obs, old, newVal) -> { //pierwsza lambda nasłuchuje zmiany wartości elementów w kolumnie
                 int rowIndex = cell.getIndex(); //rowIndex to jest numer wiersza w nowej tabeli
                 if (data_zwrotuCol.getCellObservableValue(rowIndex) != null) { /* sprawdzamy czy data zwrotu jest ustawiona,
@@ -193,16 +186,17 @@ public class yourHire extends home{
                                     Label notificationLabel = new Label("Zarezerwowano pomyślnie."); //wygląd
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
-                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setAlignment(Pos.CENTER);
                                     notificationLabel.setPrefSize(300, 50);
                                     notificationLabel.setLayoutX(150);
                                     notificationLabel.setLayoutY(70);
-                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                            "    -fx-border-color: #004aad;\n" +
-                                            "    -fx-background-radius: 10;\n" +
-                                            "    -fx-background-color: NULL;\n" +
-                                            "    -fx-border-width: 1;\n" +
-                                            "    -fx-text-fill: #004aad;");
+                                    notificationLabel.setStyle("""
+                                            -fx-border-radius: 10;
+                                                -fx-border-color: #004aad;
+                                                -fx-background-radius: 10;
+                                                -fx-background-color: NULL;
+                                                -fx-border-width: 1;
+                                                -fx-text-fill: #004aad;""");
                                     Timeline timeline = new Timeline(new KeyFrame( //ustawiamy ramke czasową na 3 sekundy; po 3 sekundach wykona sie to co jest w funkcji
                                             Duration.seconds(3),
                                             event2 -> {
@@ -216,16 +210,17 @@ public class yourHire extends home{
                                     Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
-                                    notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
+                                    notificationLabel.setAlignment(Pos.CENTER);
                                     notificationLabel.setPrefSize(300, 50);
                                     notificationLabel.setLayoutX(150);
                                     notificationLabel.setLayoutY(70);
-                                    notificationLabel.setStyle("-fx-border-radius: 10;\n" +
-                                            "    -fx-border-color: #004aad;\n" +
-                                            "    -fx-background-radius: 10;\n" +
-                                            "    -fx-background-color: NULL;\n" +
-                                            "    -fx-border-width: 1;\n" +
-                                            "    -fx-text-fill: #004aad;");
+                                    notificationLabel.setStyle("""
+                                            -fx-border-radius: 10;
+                                                -fx-border-color: #004aad;
+                                                -fx-background-radius: 10;
+                                                -fx-background-color: NULL;
+                                                -fx-border-width: 1;
+                                                -fx-text-fill: #004aad;""");
                                     Timeline timeline = new Timeline(new KeyFrame( //ustawiamy ramke czasową na 3 sekundy; po 3 sekundach wykona sie to co jest w funkcji
                                             Duration.seconds(3),
                                             event2 -> notificationLabel.setVisible(false) //chowamy komunikat
@@ -255,6 +250,8 @@ public class yourHire extends home{
         lista.setItems(items);
         //Dodaj kolumny do tabeli
         lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,grzywnaCol,przedluzCol);
+        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+        lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
         //Ustaw wysokosc wierszy na 30px
         lista.setFixedCellSize(30);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
@@ -283,22 +280,9 @@ public class yourHire extends home{
     }
 
     @FXML
-    void font(){
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+    void font(Scene scene){
+        super.font(scene);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
-        nametag.setFont(ssp_sb_h1);
-        labelbiblioteka.setFont(pop_b_h1);
-        labelglowna.setFont(pop_b_h1);
-        labelkatalog.setFont(pop_b_h1);
-        labelkontakt.setFont(pop_b_h1);
-        labelkategorie.setFont(pop_b_h1);
-        labelnowosci.setFont(pop_b_h1);
-        labelrezerwacje.setFont(pop_b_h1);
-        labelwypozyczenia.setFont(pop_b_h1);
-        searchbar.setFont(pop_r_h1);
         Wyp.setFont(pop_b_h2);
     }
 
@@ -326,7 +310,7 @@ public class yourHire extends home{
     private Node createPriorityGraphic(){
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/res/icons/dark/add.png")));
+        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));
         imageView.setFitHeight(25);
         imageView.setPreserveRatio(true);
         graphicContainer.getChildren().add(imageView);

@@ -3,7 +3,6 @@ package org.example.home;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -20,9 +19,8 @@ import static org.example.Main.dbload;
 public class kategoriecontroller extends home{
 
 
-    public void init(String imie, String nazwisko, MouseEvent event, Image image){ //zamienic na image
+    public void init(String imie, String nazwisko){ //zamienic na image
         nametag.setText(imie+" "+nazwisko);
-        searchbar_exited(event);
         avatar.setImage(Main.user.getImage());
         avatar_view();
         images_view();
@@ -47,7 +45,8 @@ public class kategoriecontroller extends home{
     @FXML
     private ImageView image_a3;
 
-
+    @FXML
+    private Label labelkategorie;
     @FXML
     private Label nametag;
 
@@ -58,11 +57,6 @@ public class kategoriecontroller extends home{
     private VBox cat_vbox;
     @FXML
     private VBox images_vbox;
-
-    @FXML
-    void searchbar_exited(MouseEvent event) {
-        searchbar.setFocusTraversable(false);
-    }
 
     @FXML
     void search_init(MouseEvent event){
@@ -92,12 +86,8 @@ public class kategoriecontroller extends home{
                     String categoryName = tab[0]; // pobranie nazwy kategorii z tablicy
                         katalog_clicked(event,categoryName); //przejscie do okna katalog z wybrana kategoria
                 });
-                    label.setOnMouseEntered(event -> {
-                        label.setUnderline(true);
-                    });
-                label.setOnMouseExited(event -> {
-                    label.setUnderline(false);
-                });
+                    label.setOnMouseEntered(event -> label.setUnderline(true));
+                label.setOnMouseExited(event -> label.setUnderline(false));
                     cat_vbox.getChildren().add(label);
                     label.setId(id);
                     i++;
@@ -111,7 +101,6 @@ public class kategoriecontroller extends home{
         Rectangle rectanglea1 = new Rectangle(centerXa1, centerYa1);
         rectanglea1.setArcWidth(20.0);
         rectanglea1.setArcHeight(20.0);
-        //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         image_a1.setClip(rectanglea1);
 
         double centerXa2 = image_a2.getBoundsInLocal().getWidth();
@@ -119,7 +108,6 @@ public class kategoriecontroller extends home{
         Rectangle rectanglea2 = new Rectangle(centerXa2, centerYa2);
         rectanglea2.setArcWidth(20.0);
         rectanglea2.setArcHeight(20.0);
-        //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         image_a2.setClip(rectanglea2);
 
         double centerXa3 = image_a3.getBoundsInLocal().getWidth();
@@ -127,14 +115,12 @@ public class kategoriecontroller extends home{
         Rectangle rectanglea3 = new Rectangle(centerXa3, centerYa3);
         rectanglea3.setArcWidth(20.0);
         rectanglea3.setArcHeight(20.0);
-        //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         image_a3.setClip(rectanglea3);
     }
 
     @FXML
     void menu_panels(MouseEvent event){
         if(event.getSource().equals(image_a1)){ //pokaz ksiazke o id 130
-            String query = "Wilcza Rzeka";
             katalog_item(event,130);
         }
         if(event.getSource().equals(image_a2)){ //pokaz wyszukiwania dla autora King
@@ -148,7 +134,4 @@ public class kategoriecontroller extends home{
 
     }
 
-
-    @FXML
-    private Label labelkategorie;
 }

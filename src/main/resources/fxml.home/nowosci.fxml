@@ -27,7 +27,7 @@
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1">
          <children>
-            <TextField fx:id="searchbar" cache="true" onMouseClicked="#searchbar_exited" onMouseExited="#searchbar_exited" onMouseReleased="#searchbar_exited" onTouchReleased="#searchbar_exited" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szybkie wyszukiwanie" styleClass="search_field">
+            <TextField fx:id="searchbar" cache="true" focusTraversable="false" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szukaj tytułu, autora lub kategorii..." styleClass="search_field">
                <font>
                   <Font size="22.0" />
                </font>
@@ -291,7 +291,7 @@
                </VBox.margin>
             </Separator>
             <Label fx:id="labelwypozyczenia" onMouseClicked="#yourHire_clicked" prefHeight="50.0" prefWidth="267.0" styleClass="font_menu_left" text="Twoje wypożyczenia" textFill="#f6f2df" />
-            <Label fx:id="labelrezerwacje" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
+            <Label fx:id="labelrezerwacje" onMouseClicked="#yourReservation_clicked" prefHeight="50.0" prefWidth="266.0" styleClass="font_menu_left" text="Twoje rezerwacje" textFill="#f6f2df" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets right="10.0" />

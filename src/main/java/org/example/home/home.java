@@ -35,7 +35,6 @@ public class home {
             parent = loader.load();
             logincontroller controller = loader.getController();
             controller.font();
-            //stage.setResizable(false);
             stage.setResizable(true);
             stage.isMaximized();
             stage.setFullScreen(false);
@@ -58,16 +57,14 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            kat.init(Main.user.getImie(), Main.user.getNazwisko());
             kat.Katalog_lista();
-            kat.font();
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            kat.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -78,16 +75,14 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            kat.init(Main.user.getImie(), Main.user.getNazwisko());
             kat.Katalog_lista(query);
-            kat.font();
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            kat.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -98,16 +93,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/kategorie.fxml"));
             parent = loader.load();
             kategoriecontroller controller = loader.getController();
-            //controller.font();
-            controller.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            controller.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            controller.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
-        font(scene);
     }
 
     @FXML
@@ -118,14 +110,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
             parent = loader.load();
             contactcontroller contact = loader.getController();
-            contact.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            contact.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            contact.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -137,15 +128,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
             parent = loader.load();
             homecontroller controller = loader.getController();
-            controller.font();
-            controller.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            controller.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            controller.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -156,15 +145,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
             parent = loader.load();
             yourLibraryController library = loader.getController();
-            library.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
-            library.font();
+            library.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            library.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -175,27 +162,24 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourProfileController.fxml"));
             parent = loader.load();
             yourProfileController Profile = loader.getController();
-            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
-            Profile.font();
+            Profile.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            Profile.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        font(scene);
-        stage.setScene(scene);
     }
 
     @FXML
-    void nowosciController_clicked(MouseEvent event) { //TODO wzór dla przekazywania czcionek
+    void nowosciController_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent parent;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/nowosci.fxml"));
             parent = loader.load();
             nowosciController nowosci = loader.getController();
-            nowosci.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
+            nowosci.init(Main.user.getImie(), Main.user.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             nowosci.font(scene);
@@ -239,20 +223,15 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
             parent = loader.load();
             dbload.get_cover(row);
-            if (dbload.array.isEmpty()) {
-                dbload.print_book(); //unikamy sytuacji gdy nie otworzylismy jeszcze katalogu glownego i nie mamy skad pobrac ksiazek
-            }
             katalog_itemcontroller kat = loader.getController();
-            kat.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
-            kat.font();
-            kat.load(row - 1);
+            kat.init(Main.user.getImie(),Main.user.getNazwisko());
+            kat.load(row-1);
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            kat.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
 
@@ -264,15 +243,13 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
             parent = loader.load();
             yourHire Profile = loader.getController();
-            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
-            Profile.font();
+            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event);
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            Profile.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
 
     @FXML
@@ -283,16 +260,15 @@ public class home {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourReservation.fxml"));
             parent = loader.load();
             yourReservation Profile = loader.getController();
-            Profile.init(Main.user.getImie(), Main.user.getNazwisko(), event, Main.user.getImage());
-            Profile.font();
+            Profile.init(Main.user.getImie(), Main.user.getNazwisko());
+            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            stage.setScene(scene);
+            Profile.font(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (parent == null)
-            return;
-        Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-        stage.setScene(scene);
     }
+
 }
 
 

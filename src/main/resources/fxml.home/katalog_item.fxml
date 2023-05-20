@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane fx:id="anchor" cache="true" cacheHint="QUALITY" onMouseExited="#searchbar_exited" onMouseMoved="#searchbar_exited" onMouseReleased="#searchbar_exited" prefHeight="715.0" prefWidth="1097.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <AnchorPane fx:id="anchor" cache="true" cacheHint="QUALITY" prefHeight="715.0" prefWidth="1097.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Label fx:id="background_tytul" alignment="CENTER_RIGHT" contentDisplay="RIGHT" ellipsisString="" layoutX="550.0" opacity="0.1" prefHeight="336.0" prefWidth="642.0" text="Tytuł" textAlignment="RIGHT">
                <font>
@@ -140,7 +140,7 @@
         </AnchorPane>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_up" GridPane.columnIndex="1">
          <children>
-            <TextField fx:id="searchbar" cache="true" onMouseClicked="#searchbar_exited" onMouseExited="#searchbar_exited" onMouseReleased="#searchbar_exited" onTouchReleased="#searchbar_exited" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szybkie wyszukiwanie" styleClass="search_field">
+            <TextField fx:id="searchbar" cache="true" focusTraversable="false" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Szukaj tytułu, autora lub kategorii..." styleClass="search_field">
                <font>
                   <Font size="22.0" />
                </font>

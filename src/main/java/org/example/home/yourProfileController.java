@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -14,31 +15,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import org.example.Main;
-import org.example.verify.logincontroller;
 
 import javax.imageio.ImageIO;
-import javax.naming.Name;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Timer;
 
 import static org.example.Main.dbload;
 
 public class yourProfileController extends home {
-    @FXML
-    private Label Login;
-
     @FXML
     private Label Name;
 
@@ -153,8 +141,8 @@ public class yourProfileController extends home {
     }
 
     @FXML
-    void font() {
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+    void font(Scene scene) {
+        super.font(scene);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 22);
@@ -193,9 +181,15 @@ public class yourProfileController extends home {
         commit_password.setFont(pop_b_h2);
         Label info = (Label) grid.lookup("#info");
         info.setFont(pop_b_h1);
+        Label delete_account = (Label) grid.lookup("#delete_account");
+        delete_account.setFont(pop_b_h2);
+        Label change_login = (Label) grid.lookup("#change_login");
+        change_login.setFont(pop_b_h2);
+        Label change_password = (Label) grid.lookup("#change_password");
+        change_password.setFont(pop_b_h2);
     }
 
-    public void init(String imie, String nazwisko, MouseEvent event, Image image) {
+    public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
         avatar2115.setImage(Main.user.getImage());
@@ -235,6 +229,10 @@ public class yourProfileController extends home {
         String new_l = new_login.getText();
         Label info = (Label) grid.lookup("#info");
         info.setOpacity(0.0);
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(2),
+                event2 -> info.setOpacity(0.0)
+        ));
         if (dbload.login_update(new_l, Main.user.getId(), old_l)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
@@ -244,6 +242,7 @@ public class yourProfileController extends home {
             info.setText("Wystapil błąd. Spróbuj ponownie.");
             info.setOpacity(1.0);
         }
+        timeline.play();
     }
 
 
@@ -255,6 +254,10 @@ public class yourProfileController extends home {
         String new_p = new_password.getText();
         Label info = (Label) grid.lookup("#info");
         info.setOpacity(0.0);
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(2),
+                event2 -> info.setOpacity(0.0)
+        ));
         if (dbload.password_update(new_p, Main.user.getId(), old_p)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
@@ -264,6 +267,7 @@ public class yourProfileController extends home {
             info.setText("Wystapil błąd. Spróbuj ponownie.");
             info.setOpacity(1.0);
         }
+        timeline.play();
     }
 
     @FXML
@@ -280,29 +284,26 @@ public class yourProfileController extends home {
         String password = delete_password.getText();
         Label info = (Label) grid.lookup("#info");
         info.setOpacity(0.0);
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(2),
+                event2 -> info.setOpacity(0.0)
+        ));
         if (dbload.profile_delete(password, Main.user.getId())) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.seconds(3),
-                    event2 -> logout_perform(event) //TODO sprawdzić skuteczność
-            ));
-            timeline.play();
         } else {
             commit_delete.setStyle("-fx-border-width: 2");
             commit_delete.setStyle("-fx-border-color: red");
             info.setText("Wystapil błąd. Spróbuj ponownie.");
             info.setOpacity(1.0);
         }
+        timeline.play();
     }
 
     void wash_effects() {
         password.setVisible(false);
         usun.setVisible(false);
         login.setVisible(false);
-        /*login_change.setStyle("-fx-border-width: 1");
-        password_change.setStyle("-fx-border-width: 1");
-        profile_delete.setStyle("-fx-border-width: 1");*/
     }
 
     @FXML
@@ -327,7 +328,12 @@ public class yourProfileController extends home {
                 ex.printStackTrace();
                 Label info = (Label) grid.lookup("#info");
                 info.setText("Avatar nie został zmieniony. Spróbuj później.");
+                Timeline timeline = new Timeline(new KeyFrame(
+                        Duration.seconds(2),
+                        event2 -> info.setOpacity(0.0)
+                ));
                 info.setOpacity(1.0);
+                timeline.play();
             }
         }
     }
