@@ -228,7 +228,7 @@ public class katalog_itemcontroller extends home{
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
                 cell.setOnMouseClicked(event -> {
-                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                         if(dbload.rentlimit(Main.user.getId())<5) {
                             TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                             int row = tablePosition.getRow();

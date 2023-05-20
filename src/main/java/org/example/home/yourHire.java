@@ -3,6 +3,8 @@ package org.example.home;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -25,18 +27,16 @@ import org.example.Katalog;
 import org.example.Main;
 import org.example.Wypozyczenia;
 
-import java.sql.Date;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 public class yourHire extends home{
     @FXML
@@ -85,6 +85,9 @@ public class yourHire extends home{
     @FXML
     private AnchorPane anchor_hire;
 
+    @FXML
+    private AnchorPane anchor;
+
     public void init(String imie, String nazwisko, MouseEvent event, Image image) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
@@ -124,6 +127,34 @@ public class yourHire extends home{
         data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
         data_zwrotuCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
+        TableColumn grzywnaCol = new TableColumn("Grzywna");
+        grzywnaCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
+        grzywnaCol.setCellValueFactory(
+                new PropertyValueFactory<>("data_zwrotu"));
+
+        grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
+            TableCell<Katalog, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
+
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                int rowIndex = cell.getIndex();
+                if (data_zwrotuCol.getCellObservableValue(rowIndex) != null) {
+                    String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
+                    LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
+                    LocalDate currentDate = LocalDate.now(); //aktualna data
+                    String debt = null;
+                    if (dataZwrotu.isAfter(currentDate)) {
+                        cell.setText(" - ");
+                    } else if (dataZwrotu.isBefore(currentDate)) {
+                        DecimalFormat currency = new DecimalFormat("#0.00");
+                        int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
+                        debt = String.valueOf(currency.format(diff*0.2));
+                        cell.setText(debt+" zł");
+                    }
+                }
+            });
+            return cell;
+        });
+
 
         TableColumn przedluzCol = new TableColumn("Przedłuż");
         przedluzCol.setMinWidth(anchortable.getPrefWidth()*0.1);
@@ -153,7 +184,7 @@ public class yourHire extends home{
                         cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox)); //ustawianie granic wielkosci
 
                         cell.setOnMouseClicked(event -> { //jezeli klikniemy na guzik dokonujemy przedluzenia o 30 dni
-                            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) { //klikniecie nastapilo raz PPM
+                            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) { //klikniecie nastapilo dwa razy PPM
                                 TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);  //ustawiamy pozycje tabeli na klikniety wiersz
                                 int row = tablePosition.getRow(); //pobieramy numer w tabeli wiersza
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue()); //pobieramy id egzemplarza
@@ -180,7 +211,7 @@ public class yourHire extends home{
                                             }
                                     ));
                                     timeline.play(); //uruchamiamy ramke
-                                    anchor_hire.getChildren().add(notificationLabel); //wyswietlamy komunikat
+                                    anchor.getChildren().add(notificationLabel); //wyswietlamy komunikat
                                 } else {
                                     Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
@@ -200,7 +231,7 @@ public class yourHire extends home{
                                             event2 -> notificationLabel.setVisible(false) //chowamy komunikat
                                     ));
                                     timeline.play(); //uruchamiamy ramke
-                                    anchor_hire.getChildren().add(notificationLabel); //pokazujemy komunikat
+                                    anchor.getChildren().add(notificationLabel); //pokazujemy komunikat
 
                                 }
                             }
@@ -209,13 +240,7 @@ public class yourHire extends home{
                 }
             });
             return cell;
-
         });
-
-        TableColumn grzywnaCol = new TableColumn("Grzywna");
-        data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
-        data_zwrotuCol.setCellValueFactory(
-                new PropertyValueFactory<>("data_zwrotu"));
 
         for (String[] tab : dbload.ListHire) {
             String id_egzemplarze = tab[0];
@@ -229,7 +254,7 @@ public class yourHire extends home{
         //Dodaj wartości do kolumn
         lista.setItems(items);
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,przedluzCol);
+        lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,grzywnaCol,przedluzCol);
         //Ustaw wysokosc wierszy na 30px
         lista.setFixedCellSize(30);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
@@ -247,18 +272,7 @@ public class yourHire extends home{
         AnchorPane.setRightAnchor(lista, 0.0);
 
         lista.getStylesheets().add("/fxml.home/home.css");
-        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
-/*
-        lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                int row = tablePosition.getRow();
-                Integer data = (Integer) idCol.getCellObservableValue(row).getValue();
-                System.out.println(data);
-            }
-        });
 
- */
     }
     void avatar_view() {
         int radius = 28;
@@ -295,6 +309,7 @@ public class yourHire extends home{
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
         //dbload.yourHireInformation(Main.user.getId());
         items.clear();
+        lista.refresh();
         dbload.check_hire_information(Main.user.getId());
         for (String[] tab : dbload.ListHire) {
             String id_egzemplarze = tab[0];

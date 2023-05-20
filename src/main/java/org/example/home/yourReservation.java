@@ -142,8 +142,8 @@ public class yourReservation extends home{
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
 
                 cell.setOnMouseClicked(event -> {
-                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
-                        if(Integer.parseInt(przedluz_rezerwacjeCol.getCellData(rowIndex).toString()) > 3) {
+                    if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                        if(Integer.parseInt(przedluz_rezerwacjeCol.getCellValueFactory().toString())>3) {
                             Label notificationLabel = new Label("Przekroczono limit przedluzen rezerwacji.");
                             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
                             notificationLabel.setFont(pop_r_h1);
@@ -174,8 +174,8 @@ public class yourReservation extends home{
                             notificationLabel.setFont(pop_r_h1);
                             notificationLabel.setAlignment(Pos.CENTER); //TODO: zmienić wygląd?!
                             notificationLabel.setPrefSize(300, 50);
-                            notificationLabel.setLayoutX(700);
-                            notificationLabel.setLayoutY(320);
+                            notificationLabel.setLayoutX(150);
+                            notificationLabel.setLayoutY(70);
                             notificationLabel.setStyle("-fx-border-radius: 10;\n" +
                                     "    -fx-border-color: #004aad;\n" +
                                     "    -fx-background-radius: 10;\n" +
@@ -210,7 +210,7 @@ public class yourReservation extends home{
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
 
                     cell.setOnMouseClicked(event -> {
-                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1){
+                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                             if(anuluj_rezerwacjeCol.getCellData(rowIndex).toString().contentEquals("1")) {
                                 TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();

@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="92.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-      <AnchorPane styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <AnchorPane fx:id="anchor" styleClass="main_area" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <children>
               <AnchorPane fx:id="anchor_hire" cache="true" cacheHint="QUALITY" layoutX="2.0" layoutY="164.0" maxHeight="900.0" maxWidth="1097.0" prefHeight="550.0" prefWidth="1095.0" styleClass="main_area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="164.0" />
             <Label fx:id="Wyp" layoutX="51.0" layoutY="23.0" prefHeight="54.0" prefWidth="631.0" text="Wypożyczenia dla użytkownika ">
