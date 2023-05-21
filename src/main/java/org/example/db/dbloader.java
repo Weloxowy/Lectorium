@@ -216,16 +216,24 @@ public class dbloader {
 
     public ArrayList<String[]> copy = new ArrayList<>();
 
-    public void print_copies(int id) {
+    public void print_copies(int id) { //TODO do poprawy zapytanie; potrójne zagnieżdzenie?
         connectToDatabase();
-        String print = """
-                SELECT katalog.nazwa, egzemplarze.id_egzemplarze, egzemplarze.lokalizacja, egzemplarze.czy_dostepne,
-                  CASE WHEN wypozyczenia.data_zwrotu < date('now') THEN NULL ELSE wypozyczenia.data_zwrotu END AS data_zwrotu
-                FROM katalog
-                JOIN egzemplarze ON egzemplarze.katalog_id_katalog = katalog.id_katalog
-                LEFT JOIN wypozyczenia ON wypozyczenia.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze
-                WHERE katalog.id_katalog=?
-                ORDER BY data_zwrotu DESC;""";
+        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, egzemplarze.lokalizacja,\n" +
+                "       CASE\n" +
+                "           WHEN egzemplarze.czy_dostepne = 'N' AND rezerwacje.egzemplarze_id_egzemplarze IS NOT NULL THEN 'R'\n" +
+                "           WHEN egzemplarze.czy_dostepne = 'N' AND wypozyczenia.egzemplarze_id_egzemplarze IS NOT NULL THEN 'W'\n" +
+                "           ELSE egzemplarze.czy_dostepne\n" +
+                "       END AS skad,\n" +
+                "       CASE\n" +
+                "           WHEN (IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca) IS NULL OR IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca) > DATE('now')) THEN IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca)\n" +
+                "           ELSE NULL\n" +
+                "       END AS data_zwrotu\n" +
+                "FROM katalog\n" +
+                "JOIN egzemplarze ON egzemplarze.katalog_id_katalog = katalog.id_katalog\n" +
+                "LEFT JOIN wypozyczenia ON wypozyczenia.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
+                "LEFT JOIN rezerwacje ON rezerwacje.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
+                "WHERE katalog.id_katalog = ?\n" +
+                "ORDER BY data_zwrotu DESC;\n";
         try {
             copy.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
@@ -235,7 +243,7 @@ public class dbloader {
                 final String nazwa = resultSet.getString("nazwa");
                 int id_egzemplarze = resultSet.getInt("id_egzemplarze");
                 final String lokalizacja = resultSet.getString("lokalizacja");
-                final String czy_dostepne = resultSet.getString("czy_dostepne");
+                final String czy_dostepne = resultSet.getString("skad");
                 final String data_zwrotu = resultSet.getString("data_zwrotu");
                 String[] row = {nazwa, String.valueOf(id_egzemplarze), lokalizacja, czy_dostepne, data_zwrotu};
                 copy.add(row);
@@ -349,8 +357,6 @@ public class dbloader {
         closeConnection();
         return false;
     }
-
-    //public ArrayList<String[]> ListHire = new ArrayList<String[]>();
     public ArrayList<String[]> ListHire = new ArrayList<>();
     public void yourHireInformation(int id) {
         connectToDatabase();
@@ -573,6 +579,7 @@ public class dbloader {
     {
         connectToDatabase();
         String print = "DELETE from rezerwacje where uzytkownicy_id_uzytkownicy = ? AND egzemplarze_id_egzemplarze = ?;";
+        String print2 = "UPDATE egzemplarze SET czy_dostepne = 'T' where egzemplarze.id_egzemplarze = ?;";
         int resultSet = 0;
         try {
             PreparedStatement statement = connection.prepareStatement(print);
@@ -586,8 +593,21 @@ public class dbloader {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         }
+        try{
+            if(connection.isClosed()){
+                connectToDatabase();
+            }
+            PreparedStatement statement = connection.prepareStatement(print2);
+            statement.setInt(1,id_egzemplarz);
+            resultSet = statement.executeUpdate();
+            statement.close();
+            closeConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return resultSet;
     }
+
 
 
 

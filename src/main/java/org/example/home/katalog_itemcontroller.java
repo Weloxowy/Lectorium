@@ -122,7 +122,7 @@ public class katalog_itemcontroller extends home {
         avatar.setClip(clipCircle);
     }
 
-    public void egzemplarz_lista(int id) {
+    public void egzemplarz_lista(int id) { //TODO do poprawy
         dbload.print_copies(id);
         ObservableList<Egzemplarze> items = FXCollections.observableArrayList();
 
@@ -152,18 +152,72 @@ public class katalog_itemcontroller extends home {
         wypozyczCol.setCellFactory(col -> {
             TableCell<Egzemplarze, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
-                if (newVal != null && newVal.contentEquals("T")) { //tak
-                    Node centreBox = createPriorityGraphic();
+                if (newVal != null && newVal.contentEquals("T")) { //wolne
+                    Node centreBox = createAddGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+                }
+                else if(newVal != null && newVal.contentEquals("W")) { //wypozyczone przez tego uzytkownika
+                    Node centreBox = createConfirmGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+                }
+                else if(newVal != null && newVal.contentEquals("R")) { //rezerwacja dla tego uzytkownika
+                    Node centreBox = createDeleteGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
                 cell.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-                        if (dbload.rentlimit(Main.user.getId()) < 5) {
+                        if(cell.itemProperty().getValue().contentEquals("T")) {
+                            if (dbload.rentlimit(Main.user.getId()) < 5) {
+                                TablePosition<Egzemplarze, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                                int row = tablePosition.getRow();
+                                int data = (int) nrCol.getCellObservableValue(row).getValue();
+                                dbload.rent(data, Main.user.getId());
+                                Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER);
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("""
+                                        -fx-border-radius: 10;
+                                            -fx-border-color: #004aad;
+                                            -fx-background-radius: 10;
+                                            -fx-background-color: NULL;
+                                            -fx-border-width: 1;
+                                            -fx-text-fill: #004aad;""");
+                                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> {
+                                    notificationLabel.setVisible(false);
+                                    katalog_item(event, id);
+                                }));
+                                timeline.play();
+                                anchor.getChildren().add(notificationLabel);
+                            } else {
+                                Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER);
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("""
+                                        -fx-border-radius: 10;
+                                            -fx-border-color: #004aad;
+                                            -fx-background-radius: 10;
+                                            -fx-background-color: NULL;
+                                            -fx-border-width: 1;
+                                            -fx-text-fill: #004aad;""");
+                                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> notificationLabel.setVisible(false)));
+                                timeline.play();
+                                anchor.getChildren().add(notificationLabel);
+                            }
+                        }
+                        else if(cell.itemProperty().getValue().contentEquals("R")){
                             TablePosition<Egzemplarze, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                             int row = tablePosition.getRow();
                             int data = (int) nrCol.getCellObservableValue(row).getValue();
-                            dbload.rent(data, Main.user.getId());
-                            Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
+                            dbload.delete(data);
+                            Label notificationLabel = new Label("Anulowano rezerwację.");
                             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                             notificationLabel.setFont(pop_r_h1);
                             notificationLabel.setAlignment(Pos.CENTER);
@@ -171,34 +225,16 @@ public class katalog_itemcontroller extends home {
                             notificationLabel.setLayoutX(700);
                             notificationLabel.setLayoutY(320);
                             notificationLabel.setStyle("""
-                                    -fx-border-radius: 10;
-                                        -fx-border-color: #004aad;
-                                        -fx-background-radius: 10;
-                                        -fx-background-color: NULL;
-                                        -fx-border-width: 1;
-                                        -fx-text-fill: #004aad;""");
+                                        -fx-border-radius: 10;
+                                            -fx-border-color: #004aad;
+                                            -fx-background-radius: 10;
+                                            -fx-background-color: NULL;
+                                            -fx-border-width: 1;
+                                            -fx-text-fill: #004aad;""");
                             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> {
                                 notificationLabel.setVisible(false);
                                 katalog_item(event, id);
                             }));
-                            timeline.play();
-                            anchor.getChildren().add(notificationLabel);
-                        } else {
-                            Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
-                            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
-                            notificationLabel.setFont(pop_r_h1);
-                            notificationLabel.setAlignment(Pos.CENTER);
-                            notificationLabel.setPrefSize(300, 50);
-                            notificationLabel.setLayoutX(700);
-                            notificationLabel.setLayoutY(320);
-                            notificationLabel.setStyle("""
-                                    -fx-border-radius: 10;
-                                        -fx-border-color: #004aad;
-                                        -fx-background-radius: 10;
-                                        -fx-background-color: NULL;
-                                        -fx-border-width: 1;
-                                        -fx-text-fill: #004aad;""");
-                            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> notificationLabel.setVisible(false)));
                             timeline.play();
                             anchor.getChildren().add(notificationLabel);
                         }
@@ -239,7 +275,7 @@ public class katalog_itemcontroller extends home {
         lista.getStylesheets().add("/fxml.home/home.css");
     }
 
-    private Node createPriorityGraphic() {
+    private Node createAddGraphic() {//dodaj rezerwacje
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));
@@ -249,10 +285,20 @@ public class katalog_itemcontroller extends home {
         return graphicContainer;
     }
 
-    private Node createPriorityGraphic2() { //TODO usuwanie rezerwacji w katalog_item
+    private Node createDeleteGraphic() { // usuwanie rezerwacje
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/remove.png"))));
+        imageView.setFitHeight(25);
+        imageView.setPreserveRatio(true);
+        graphicContainer.getChildren().add(imageView);
+        return graphicContainer;
+    }
+
+    private Node createConfirmGraphic() {
+        HBox graphicContainer = new HBox();
+        graphicContainer.setAlignment(Pos.CENTER);
+        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/check.png"))));
         imageView.setFitHeight(25);
         imageView.setPreserveRatio(true);
         graphicContainer.getChildren().add(imageView);

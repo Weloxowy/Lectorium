@@ -183,7 +183,7 @@ public class yourHire extends home{
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue()); //pobieramy id egzemplarza
                                 String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue(); //pobieramy date wypozyczenia
                                 if (dbload.rent_date_update(data, Main.user.getId(), start_date)) { //wykonujemy zapytanie przedłuzajace wypozyczenie: przedluzy i da komunikat o wykonaniu ? da komunikat o braku mozliwosci przedluzenia
-                                    Label notificationLabel = new Label("Zarezerwowano pomyślnie."); //wygląd
+                                    Label notificationLabel = new Label("Przedłużono pomyślnie."); //wygląd
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
                                     notificationLabel.setAlignment(Pos.CENTER);
@@ -207,7 +207,7 @@ public class yourHire extends home{
                                     timeline.play(); //uruchamiamy ramke
                                     anchor.getChildren().add(notificationLabel); //wyswietlamy komunikat
                                 } else {
-                                    Label notificationLabel = new Label("Przekroczono limit rezerwacji.");
+                                    Label notificationLabel = new Label("Przedłużenie się nie powiodło.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
                                     notificationLabel.setAlignment(Pos.CENTER);
