@@ -25,10 +25,14 @@ import org.example.Main;
 import org.example.Wypozyczenia;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.Main.dbload;
 
@@ -82,6 +86,11 @@ public class yourHire extends home{
     @FXML
     private AnchorPane anchor;
 
+    @FXML
+    private Label yourHire_name;
+
+    double suma_zadluzenia = 0;
+
     public void init(String imie, String nazwisko, MouseEvent event) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(Main.user.getImage());
@@ -91,8 +100,11 @@ public class yourHire extends home{
         Wyp.setText(Wyp.getText()+" "+imie + " " + nazwisko);
         labelwypozyczenia.setStyle("-fx-text-fill:#808080");
         Wszystkie.setStyle("-fx-border-width: 2");
+
     }
+
     public void Lista_Hire(int id) {
+
         dbload.yourHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
@@ -125,16 +137,20 @@ public class yourHire extends home{
         grzywnaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
+
+
         grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
             TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
-
+            AtomicReference<Double> suma = new AtomicReference<>((double) 0);
             cell.itemProperty().addListener((obs, old, newVal) -> {
+                String debt;
+                List<Double> lista = new ArrayList<>();
                 int rowIndex = cell.getIndex();
                 if (data_zwrotuCol.getCellObservableValue(rowIndex) != null) {
                     String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
                     LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
                     LocalDate currentDate = LocalDate.now(); //aktualna data
-                    String debt;
+
                     if (dataZwrotu.isAfter(currentDate)) {
                         cell.setText(" - ");
                     } else if (dataZwrotu.isBefore(currentDate)) {
@@ -142,8 +158,22 @@ public class yourHire extends home{
                         int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
                         debt = String.valueOf(currency.format(diff*0.2));
                         cell.setText(debt+" zł");
+                            double konwert = 0;
+                            try {
+                                konwert = currency.parse(debt).doubleValue();
+                                lista.add(konwert);
+                                for(double pam : lista)
+                                {
+                                    suma_zadluzenia += pam ;
+                                }
+                                yourHire_name.setText("Suma zadłużenia użytkownika wynosi " + suma_zadluzenia + " zł");
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
+
             });
             return cell;
         });
@@ -283,7 +313,9 @@ public class yourHire extends home{
     void font(Scene scene){
         super.font(scene);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
         Wyp.setFont(pop_b_h2);
+        yourHire_name.setFont(pop_r_h2);
     }
 
     @FXML
@@ -323,11 +355,13 @@ public class yourHire extends home{
             Wszystkie.setStyle("-fx-border-width: 2");
             Aktualne.setStyle("");
             Aktualne.getStyleClass().add("button");
+            yourHire_name.setOpacity(1.0);
         }
         else{ //dla aktualnych
             Aktualne.setStyle("-fx-border-width: 2");
             Wszystkie.setStyle("");
             Wszystkie.getStyleClass().add("button");
+            yourHire_name.setOpacity(0.0);
         }
     }
 

@@ -36,6 +36,7 @@
             </Label>
             <Button fx:id="Aktualne" layoutX="693.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#check_hire_information" prefHeight="60.0" prefWidth="160.0" text="Aktualne wypożyczenia" />
             <Button fx:id="Wszystkie" layoutX="899.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#yourHire_clicked" prefHeight="60.0" prefWidth="160.0" text="Wszystkie wypożyczenia" />
+            <Label fx:id="yourHire_name" layoutX="693.0" layoutY="90.0" />
          </children>
       </AnchorPane>
         <HBox styleClass="menu_up" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
