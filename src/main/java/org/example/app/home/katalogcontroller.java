@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,10 +17,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.example.Katalog;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
 import static org.example.Main.dbload;
 
-public class katalogcontroller extends home{
+public class katalogcontroller extends appParent {
     @FXML
     private ImageView avatar;
 
@@ -131,6 +133,8 @@ public class katalogcontroller extends home{
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
+        //Ustaw wysokosc wierszy na 30px
+        lista.setFixedCellSize(30);
         //Dodaj kolumny do tabeli
         lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
@@ -232,6 +236,8 @@ public class katalogcontroller extends home{
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
+        //Ustaw wysokosc wierszy na 30px
+        lista.setFixedCellSize(30);
         //Dodaj kolumny do tabeli
         lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
@@ -290,7 +296,7 @@ public class katalogcontroller extends home{
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
         labelkatalog.setStyle("-fx-text-fill:#808080");

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" styleClass="main_area" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.nowosciController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" styleClass="main_area" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.app.home.nowosciController">
    <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
@@ -94,7 +94,7 @@
                <children>
                   <ImageView fx:id="cover1" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -116,7 +116,7 @@
                <children>
                   <ImageView fx:id="cover2" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -138,7 +138,7 @@
                <children>
                   <ImageView fx:id="cover3" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -160,7 +160,7 @@
                <children>
                   <ImageView fx:id="cover4" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -182,7 +182,7 @@
                <children>
                   <ImageView fx:id="cover5" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -204,7 +204,7 @@
                <children>
                   <ImageView fx:id="cover6" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -226,7 +226,7 @@
                <children>
                   <ImageView fx:id="cover7" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -248,7 +248,7 @@
                <children>
                   <ImageView fx:id="cover8" fitHeight="257.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Brakokładki.jpg" />
+                        <Image url="@../res/media/Brakokładki.jpg" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />

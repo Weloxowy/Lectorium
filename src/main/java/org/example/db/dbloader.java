@@ -2,6 +2,7 @@ package org.example.db;
 
 import javafx.scene.image.Image;
 import org.example.Main;
+import org.example.User;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -73,10 +74,10 @@ public class dbloader {
                 final String name = resultSet.getString("imie");
                 final String last_name = resultSet.getString("nazwisko");
                 final String czy_admin = resultSet.getString("czy_admin");
-                Main.user.setImie(name);
-                Main.user.setNazwisko(last_name);
-                Main.user.setCzy_admin(czy_admin);
-                Main.user.setId(id);
+                User.getInstance().setImie(name);
+                User.getInstance().setNazwisko(last_name);
+                User.getInstance().setCzy_admin(czy_admin);
+                User.getInstance().setId(id);
                 getimage(id);
                 resultSet.close();
                 closeConnection();
@@ -168,10 +169,10 @@ public class dbloader {
                     byte[] imageBytes = binaryStream.readAllBytes();
                     image = new Image(new ByteArrayInputStream(imageBytes));
                     binaryStream.close();
-                    Main.user.setImage(image);
+                    User.getInstance().setImage(image);
                 } else {
                     Image def = new Image("/res/icons/dark/avatar.png");
-                    Main.user.setImage(def);
+                    User.getInstance().setImage(def);
                 }
             }
         } catch (SQLException e) {
@@ -200,7 +201,7 @@ public class dbloader {
                     binaryStream.close();
                     Main.kat.setOkladka(image);
                 } else {
-                    Image def = new Image("/fxml.home/Brakokładki.jpg");
+                    Image def = new Image("/res/media/Brakokładki.jpg");
                     Main.kat.setOkladka(def);
                 }
             }
@@ -544,7 +545,7 @@ public class dbloader {
         try {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
-            statement.setInt(2, Main.user.getId());
+            statement.setInt(2, User.getInstance().getId());
             statement.executeUpdate();
             statement.close();
             closeConnection();
@@ -583,7 +584,7 @@ public class dbloader {
         int resultSet = 0;
         try {
             PreparedStatement statement = connection.prepareStatement(print);
-            statement.setInt(1, Main.user.getId());
+            statement.setInt(1, User.getInstance().getId());
             statement.setInt(2, id_egzemplarz);
             resultSet = statement.executeUpdate();
             statement.close();

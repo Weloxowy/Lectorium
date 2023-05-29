@@ -1,5 +1,5 @@
 
-package org.example.home;
+package org.example.app.home;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,7 +22,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.example.Main;
+import org.example.User;
 import org.example.Wypozyczenia;
+import org.example.app.appParent;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -36,7 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.Main.dbload;
 
-public class yourHire extends home{
+public class yourHire extends appParent {
     @FXML
     private ImageView avatar;
 
@@ -93,10 +95,10 @@ public class yourHire extends home{
 
     public void init(String imie, String nazwisko, MouseEvent event) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         actual_button(event,true);
-        Lista_Hire(Main.user.getId());
+        Lista_Hire(User.getInstance().getId());
         Wyp.setText(Wyp.getText()+" "+imie + " " + nazwisko);
         labelwypozyczenia.setStyle("-fx-text-fill:#808080");
         Wszystkie.setStyle("-fx-border-width: 2");
@@ -212,7 +214,7 @@ public class yourHire extends home{
                                 int row = tablePosition.getRow(); //pobieramy numer w tabeli wiersza
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue()); //pobieramy id egzemplarza
                                 String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue(); //pobieramy date wypozyczenia
-                                if (dbload.rent_date_update(data, Main.user.getId(), start_date)) { //wykonujemy zapytanie przedłuzajace wypozyczenie: przedluzy i da komunikat o wykonaniu ? da komunikat o braku mozliwosci przedluzenia
+                                if (dbload.rent_date_update(data, User.getInstance().getId(), start_date)) { //wykonujemy zapytanie przedłuzajace wypozyczenie: przedluzy i da komunikat o wykonaniu ? da komunikat o braku mozliwosci przedluzenia
                                     Label notificationLabel = new Label("Przedłużono pomyślnie."); //wygląd
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
@@ -310,7 +312,7 @@ public class yourHire extends home{
     }
 
     @FXML
-    void font(Scene scene){
+    public void font(Scene scene){
         super.font(scene);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
@@ -323,10 +325,10 @@ public class yourHire extends home{
     {
         actual_button(event,false);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
-        //dbload.yourHireInformation(Main.user.getId());
+        //dbload.yourHireInformation(User.getInstance().getId());
         items.clear();
         lista.refresh();
-        dbload.check_hire_information(Main.user.getId());
+        dbload.check_hire_information(User.getInstance().getId());
         for (String[] tab : dbload.ListHire) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];

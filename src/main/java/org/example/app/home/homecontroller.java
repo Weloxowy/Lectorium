@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,9 +11,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
 
-public class homecontroller extends home {
+public class homecontroller extends appParent {
     @FXML
     private ImageView avatar = new ImageView();
 
@@ -46,7 +48,7 @@ public class homecontroller extends home {
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         images_view();
         labelglowna.setStyle("-fx-text-fill:#808080");

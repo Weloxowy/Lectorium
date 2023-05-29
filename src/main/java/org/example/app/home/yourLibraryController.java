@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,8 +11,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
-public class yourLibraryController extends home{
+public class yourLibraryController extends appParent {
 
 
     @FXML
@@ -66,7 +68,7 @@ public class yourLibraryController extends home{
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         image_view();
         labelbiblioteka.setStyle("-fx-text-fill:#808080");
@@ -90,7 +92,7 @@ public class yourLibraryController extends home{
         gbs_dobrze_jest.setClip(rectanglea1);
     }
     @FXML
-    void font(Scene scene){
+    public void font(Scene scene){
         super.font(scene);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),20);
         gbs1.setFont(pop_b_h2);

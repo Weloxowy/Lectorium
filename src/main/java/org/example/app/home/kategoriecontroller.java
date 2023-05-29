@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,17 +11,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
 import static org.example.Main.dbload;
 
 
 
-public class kategoriecontroller extends home{
+public class kategoriecontroller extends appParent {
 
 
     public void init(String imie, String nazwisko){ //zamienic na image
         nametag.setText(imie+" "+nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         images_view();
         categories_init();

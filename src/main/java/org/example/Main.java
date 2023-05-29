@@ -7,10 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.example.app.PasswordSkin;
 import org.example.db.dbloader;
 import org.example.verify.logincontroller;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
     static public User user = new User();
@@ -32,6 +32,7 @@ public class Main extends Application {
             Parent parent = loader.load();
             logincontroller controller = loader.getController();
             controller.font();
+            controller.getHaslo().setSkin(new PasswordSkin(controller.getHaslo()));
             Scene loginScene = new Scene(parent);
             stage.initStyle(StageStyle.TRANSPARENT);
             loginScene.setOnMousePressed(event -> {

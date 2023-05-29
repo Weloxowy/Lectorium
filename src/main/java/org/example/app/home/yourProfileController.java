@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,6 +19,9 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import org.example.Main;
+import org.example.User;
+import org.example.app.PasswordSkin;
+import org.example.app.appParent;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,7 +29,7 @@ import java.io.*;
 
 import static org.example.Main.dbload;
 
-public class yourProfileController extends home {
+public class yourProfileController extends appParent {
     @FXML
     private Label Name;
 
@@ -141,7 +144,7 @@ public class yourProfileController extends home {
     }
 
     @FXML
-    void font(Scene scene) {
+    public void font(Scene scene) {
         super.font(scene);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
@@ -191,11 +194,19 @@ public class yourProfileController extends home {
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
-        avatar2115.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
+        avatar2115.setImage(User.getInstance().getImage());
         Name.setText("Imie: " + imie);
         Surname.setText("Nazwisko: " + nazwisko);
-        Rank.setText(Rank.getText()+": czytelnik");
+        if(User.getInstance().getCzy_admin().contentEquals("T")){
+            Rank.setText(Rank.getText()+": administrator");
+        }
+        else{
+            Rank.setText(Rank.getText()+": czytelnik");
+        }
+        curr_password.setSkin(new PasswordSkin(curr_password));
+        new_password.setSkin(new PasswordSkin(new_password));
+        delete_password.setSkin(new PasswordSkin(delete_password));
         avatar_view();
         avatar_view_profile();
         wash_effects();
@@ -233,7 +244,7 @@ public class yourProfileController extends home {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.login_update(new_l, Main.user.getId(), old_l)) {
+        if (dbload.login_update(new_l, User.getInstance().getId(), old_l)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -258,7 +269,7 @@ public class yourProfileController extends home {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.password_update(new_p, Main.user.getId(), old_p)) {
+        if (dbload.password_update(new_p, User.getInstance().getId(), old_p)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -288,7 +299,7 @@ public class yourProfileController extends home {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.profile_delete(password, Main.user.getId())) {
+        if (dbload.profile_delete(password, User.getInstance().getId())) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -316,12 +327,12 @@ public class yourProfileController extends home {
         if (file != null) {
             try (InputStream stream = new FileInputStream(file)) {
                 Image image = new Image(stream);
-                Main.user.setImage(image);
+                User.getInstance().setImage(image);
                 BufferedImage bimage = SwingFXUtils.fromFXImage(image, null);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 ImageIO.write(bimage, "jpg", bos);
                 byte[] imageData = bos.toByteArray();
-                int id = Main.user.getId();
+                int id = User.getInstance().getId();
                 dbload.avatar_change(imageData, id);
                 avatar.fireEvent(event);
             } catch (IOException ex) {

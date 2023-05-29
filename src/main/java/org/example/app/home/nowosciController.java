@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,13 +14,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.example.Main.dbload;
 
-public class nowosciController extends home{
+public class nowosciController extends appParent {
 
     @FXML
     private ImageView avatar;
@@ -62,7 +64,7 @@ public class nowosciController extends home{
 
 
     @Override
-    void font(Scene scene) {
+    public void font(Scene scene) {
         super.font(scene);
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
         Label header = (Label) grid_nowosci.lookup("#header");
@@ -72,7 +74,7 @@ public class nowosciController extends home{
     public void init(String imie, String nazwisko){
         dbload.get_top();
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
         int i=1;
         grid_nowosci.setPrefWidth(Region.USE_COMPUTED_SIZE);

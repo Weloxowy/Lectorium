@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="grid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" stylesheets="@home.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.home.kategoriecontroller">
+<GridPane fx:id="grid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="776.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.app.home.kategoriecontroller">
    <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="20.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" percentWidth="80.0" />
@@ -82,19 +82,19 @@
                      <children>
                         <ImageView fx:id="image_a1" fitHeight="147.0" fitWidth="319.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@b1.png" />
+                              <Image url="@../res/media/b1.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="image_a2" fitHeight="147.0" fitWidth="319.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@b2.png" />
+                              <Image url="@../res/media/b2.png" />
                            </image>
                         </ImageView>
                      </children>
                   </HBox>
                   <ImageView fx:id="image_a3" fitHeight="304.0" fitWidth="628.0" onMouseClicked="#menu_panels" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@a3.png" />
+                        <Image url="@../res/media/a3.png" />
                      </image>
                   </ImageView>
                </children>

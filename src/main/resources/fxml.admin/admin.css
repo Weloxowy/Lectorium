@@ -46,6 +46,34 @@
 /*ITEM*/
 
 
+/*PROFILE*/
+.button{
+    -fx-border-radius: 10;
+    -fx-border-color: #004aad;
+    -fx-background-radius: 10;
+    -fx-background-color: NULL;
+    -fx-border-width: 1;
+    -fx-text-fill: #004aad;
+}
+
+.button:hover{
+    -fx-border-width: 2;
+}
+
+
+.button_usun:hover{
+-fx-border-color: red;
+-fx-text-fill: red;
+}
+
+.fields{
+    -fx-background-color: NULL;
+    -fx-border-color: #004aad;
+    -fx-border-radius: 10;
+    -fx-text-fill: #004aad;
+}
+
+
 /*TABLE*/
 /*  usuwanie bialych elementow */
 .table-view, .table-view .column-header,

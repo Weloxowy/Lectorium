@@ -20,8 +20,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.Main;
+import org.example.User;
+import org.example.app.PasswordSkin;
 import org.example.db.dbloader;
-import org.example.home.homecontroller;
+import org.example.app.home.homecontroller;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -108,6 +110,7 @@ public class registercontroller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             parent = loader.load();
             logincontroller controller = loader.getController();
+            controller.getHaslo().setSkin(new PasswordSkin(controller.getHaslo()));
             controller.font();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -129,7 +132,7 @@ public class registercontroller {
     @FXML
     void onsubmit(MouseEvent event){
         hidefailuresign(event);
-        org.example.db.dbloader l = new dbloader();
+        dbloader l = new dbloader();
         String name = imie.getText();
         String last_name = nazwisko.getText();
         String log = login.getText();
@@ -168,10 +171,14 @@ public class registercontroller {
             parent = loader.load();
             homecontroller controller = loader.getController();
 
-            controller.init(Main.user.getImie(),Main.user.getNazwisko());
+            controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
             stage.setResizable(true);
             stage.setFullScreen(false);
-            stage.setTitle("Lectorium");
+            if(User.getInstance().getCzy_admin().contentEquals("T")){
+                stage.setTitle("Lectorium (zalogowano jako administrator)");
+            }else{
+                stage.setTitle("Lectorium");
+            }
             Scene scene = new Scene(parent);
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
             stage.setScene(scene);
@@ -211,4 +218,11 @@ public class registercontroller {
         }
     }
 
+    public PasswordField getHaslo() {
+        return haslo;
+    }
+
+    public void setHaslo(PasswordField haslo) {
+        this.haslo = haslo;
+    }
 }

@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,12 +21,14 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.example.Main;
 import org.example.Rezerwacje;
+import org.example.User;
+import org.example.app.appParent;
 
 import java.util.Objects;
 
 import static org.example.Main.dbload;
 
-public class yourReservation extends home{
+public class yourReservation extends appParent {
 
     @FXML
     private Label Name;
@@ -55,9 +57,9 @@ public class yourReservation extends home{
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         avatar_view();
-        Lista_Hire(Main.user.getId());
+        Lista_Hire(User.getInstance().getId());
         Name.setText(imie + " " + nazwisko);
         labelrezerwacje.setStyle("-fx-text-fill:#808080");
 
@@ -291,7 +293,7 @@ public class yourReservation extends home{
     }
 
     @FXML
-    void font(Scene scene){
+    public void font(Scene scene){
         super.font(scene);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
         Wyp.setFont(pop_b_h2);

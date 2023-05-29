@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.app.home;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,12 +23,14 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.example.Egzemplarze;
 import org.example.Main;
+import org.example.User;
+import org.example.app.appParent;
 
 import java.util.Objects;
 
 import static org.example.Main.dbload;
 
-public class katalog_itemcontroller extends home {
+public class katalog_itemcontroller extends appParent {
     @FXML
     private AnchorPane anchortable;
 
@@ -81,7 +83,7 @@ public class katalog_itemcontroller extends home {
         year_book.setFont(pop_r_h1);
     }
 
-    void load(int id) { //ladujemy po lp. wiersza z tabeli
+    public void load(int id) { //ladujemy po lp. wiersza z tabeli
         String[] tab = dbload.array.get(id);
         if (tab[0] != null) {
             author_book.setText("Autor: " + tab[2]);
@@ -102,7 +104,7 @@ public class katalog_itemcontroller extends home {
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
-        avatar.setImage(Main.user.getImage());
+        avatar.setImage(User.getInstance().getImage());
         cover_book.setImage(Main.kat.getOkladka());
         avatar_view();
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
@@ -167,11 +169,11 @@ public class katalog_itemcontroller extends home {
                 cell.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                         if(cell.itemProperty().getValue().contentEquals("T")) {
-                            if (dbload.rentlimit(Main.user.getId()) < 5) {
+                            if (dbload.rentlimit(User.getInstance().getId()) < 5) {
                                 TablePosition<Egzemplarze, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = (int) nrCol.getCellObservableValue(row).getValue();
-                                dbload.rent(data, Main.user.getId());
+                                dbload.rent(data, User.getInstance().getId());
                                 Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
                                 Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                 notificationLabel.setFont(pop_r_h1);
@@ -256,6 +258,8 @@ public class katalog_itemcontroller extends home {
         }
         //Dodaj wartości do kolumn
         lista.setItems(items);
+        //Ustaw wysokosc wierszy na 30px
+        lista.setFixedCellSize(30);
         //Dodaj kolumny do tabeli
         lista.getColumns().addAll(nazwaCol, nrCol, lokalizacjaCol, dostepneCol, zwrotCol, wypozyczCol);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
@@ -269,7 +273,7 @@ public class katalog_itemcontroller extends home {
         // Ustaw parametry kotwiczenia TableView na wartość 0
         AnchorPane.setTopAnchor(anchor, 0.0);
         AnchorPane.setLeftAnchor(anchortable, 0.0);
-        AnchorPane.setBottomAnchor(anchor, 0.0);
+        AnchorPane.setBottomAnchor(anchortable, 0.0);
         AnchorPane.setRightAnchor(anchortable, 0.0);
         //dodaj css
         lista.getStylesheets().add("/fxml.home/home.css");
