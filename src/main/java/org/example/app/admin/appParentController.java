@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.example.User;
 import org.example.app.appParent;
+import org.example.app.home.katalogcontroller;
 
 
 public class appParentController extends appParent {
@@ -44,6 +45,7 @@ public class appParentController extends appParent {
     private ImageView image_b2;
     @FXML
     private Label nametag;
+
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);

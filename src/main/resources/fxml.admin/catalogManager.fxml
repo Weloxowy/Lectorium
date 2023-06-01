@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -125,6 +126,40 @@
             <DropShadow height="35.57" radius="8.3925" width="0.0" />
          </effect>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <HBox layoutY="110.0" prefHeight="98.0" prefWidth="1095.0" spacing="40.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Dodaj pozycje">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Dodaj egzemplarz" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj pozycje" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj egzemplarz" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Usuń pozycje" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Usuń egzemplarz">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets top="25.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="searchbar1" cache="true" focusTraversable="false" layoutX="53.0" layoutY="44.0" pickOnBounds="false" prefHeight="49.0" prefWidth="563.0" promptText="Wpisz książkę, bądź ID egzemplarza aby go wyszukać..." styleClass="search_field">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="search_button1" fitHeight="30.0" fitWidth="30.0" layoutX="630.0" layoutY="54.0" onMouseClicked="#search_init" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icons/dark/search.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="anchortable" layoutY="227.0" prefHeight="488.0" prefWidth="1096.0" />
+         </children></AnchorPane>
    </children>
 </GridPane>

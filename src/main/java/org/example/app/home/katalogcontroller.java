@@ -181,6 +181,7 @@ public class katalogcontroller extends appParent {
             if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
+
                 katalog_item(event,data);//get data
             }
         });

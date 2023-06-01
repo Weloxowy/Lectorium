@@ -1,17 +1,24 @@
 package org.example.app;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.example.Katalog;
 import org.example.Main;
 import org.example.User;
 import org.example.app.admin.adminController;
@@ -26,7 +33,7 @@ import java.util.Objects;
 import static org.example.Main.dbload;
 
 public class appParent {
-
+    boolean zapamietaj;
     @FXML
     void logout_perform(MouseEvent event) {
         Stage stage = new Stage();
@@ -75,7 +82,22 @@ public class appParent {
     }
 
     @FXML
+    void check_click(MouseEvent event) {
+        if(zapamietaj == true)
+        {
+            katalog_clicked(event);
+        }
+        else
+        {
+            yourHire_clicked(event);
+        }
+    }//DO POPRAWY
+
+
+
+    @FXML
     protected void katalog_clicked(MouseEvent event, String query) {
+        zapamietaj = true;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
@@ -245,32 +267,38 @@ public class appParent {
         searchbar.setFont(pop_r_h1);
     }
 
-    protected void katalog_item(MouseEvent event, int row) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        size_guard(stage);
-        Parent parent;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
-            parent = loader.load();
-            dbload.get_cover(row);
-            katalog_itemcontroller kat = loader.getController();
-            kat.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
-            kat.load(row-1);
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-            stage.setScene(scene);
-            kat.font(scene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    protected void katalog_item(MouseEvent event, int row ) {
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            size_guard(stage);
+            Parent parent;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
+                parent = loader.load();
+                dbload.get_cover(row);
+                katalog_itemcontroller kat = loader.getController();
+                kat.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
+                kat.load(row-1);
+                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+                stage.setScene(scene);
+                kat.font(scene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
+
+
+
 
 
     @FXML
     void yourHire_clicked(MouseEvent event) {
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
         if(User.getInstance().getCzy_admin().contentEquals("T")){
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/catalogManager.fxml"));
                 parent = loader.load();
@@ -297,6 +325,123 @@ public class appParent {
             }
         }
 
+    }
+
+    final TableView<Katalog> lista = new TableView<>();
+    public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
+        dbload.print_book();
+        ObservableList<Katalog> items = FXCollections.observableArrayList();
+
+        TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
+        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<>("id_katalog"));
+        idCol.setVisible(false);
+
+        TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
+        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa_autora"));
+
+        TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
+        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa"));
+
+        TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
+        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setCellValueFactory(
+                new PropertyValueFactory<>("rok_wydania"));
+
+        TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
+        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setCellValueFactory(
+                new PropertyValueFactory<>("wydanie"));
+
+        TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
+        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setCellValueFactory(
+                new PropertyValueFactory<>("isbn"));
+
+        TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
+        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setCellValueFactory(
+                new PropertyValueFactory<>("jezyk"));
+
+        TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
+        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
+        uwagiCol.setCellValueFactory(
+                new PropertyValueFactory<>("uwagi"));
+
+        /*lista.addEventFilter(ScrollEvent.SCROLL, event -> {
+            ScrollBar verticalScrollBar = getVerticalScrollBar(lista);
+            double verticalValue = verticalScrollBar.getValue();
+            double verticalMax = verticalScrollBar.getMax();
+
+            if (verticalValue > 0.8 * verticalMax) {
+                // Załaduj kolejne rekordy
+                loadNextRecords(items);
+                lista.setItems(items);
+            }
+        });
+        loadNextRecords(items);*/
+        for (String[] tab: dbload.array) {
+            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
+        }
+        //Dodaj wartości do kolumn
+        lista.setItems(items);
+        //Ustaw wysokosc wierszy na 30px
+        lista.setFixedCellSize(30);
+        //Dodaj kolumny do tabeli
+        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+        lista.setPrefWidth(anchortable.getPrefWidth());
+        lista.setPrefHeight(anchortable.getPrefHeight());
+        // Powiąż preferowane wielkości TableView i AnchorPane
+        lista.prefWidthProperty().bind(anchortable.widthProperty());
+        lista.prefHeightProperty().bind(anchortable.heightProperty());
+        // Dodaj TableView do AnchorPane
+        anchortable.getChildren().addAll(lista);
+        // Ustaw parametry kotwiczenia TableView na wartość 0
+        AnchorPane.setTopAnchor(lista, 0.0);
+        AnchorPane.setLeftAnchor(lista, 0.0);
+        AnchorPane.setBottomAnchor(lista, 0.0);
+        AnchorPane.setRightAnchor(lista, 0.0);
+
+        lista.getStylesheets().add("/fxml.home/home.css");
+        //filtrowanie rekordów
+        //tworzenie nowej listy obiektow katalog
+        FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
+        //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
+        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
+            if(newValue.isEmpty() || newValue.isBlank()){ return true;}
+
+            String searchword = newValue.toLowerCase();
+            //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
+            if(Katalog.getNazwa().toLowerCase().contains(searchword)){
+                return true;
+            }
+            if(Katalog.getNazwa_autora().toLowerCase().contains(searchword)){
+                return true;
+            }
+            return Katalog.getIsbn().toLowerCase().contains(searchword);
+
+        }));
+        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
+        SortedList<Katalog> sortedList = new SortedList<>(filteredList);
+        //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
+        sortedList.comparatorProperty().bind(lista.comparatorProperty());
+        //umiesc elementy
+        lista.setItems(sortedList);
+
+        lista.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
+                zapamietaj = false;
+                katalog_item(event,data);//get data
+            }
+        });
     }
 
     @FXML

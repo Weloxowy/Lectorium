@@ -34,7 +34,7 @@
             </Label>
             <HBox layoutX="52.0" layoutY="31.0" prefHeight="383.0" prefWidth="1043.0">
                <children>
-                  <ImageView fitHeight="48.0" fitWidth="48.0" onMouseClicked="#katalog_clicked" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="48.0" onMouseClicked="#check_click" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../res/icons/dark/left.png" />
                      </image>
