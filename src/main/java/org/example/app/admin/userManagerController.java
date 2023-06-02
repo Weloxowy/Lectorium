@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import org.example.Katalog;
 import org.example.User;
+import org.example.Users;
 import org.example.app.appParent;
 
 import static org.example.Main.dbload;
@@ -65,12 +66,14 @@ public class userManagerController extends appParent {
     @FXML
     private ImageView search_button;
 
-    final TableView<User> lista = new TableView<>();
+    @FXML
+    final TableView<Users> lista = new TableView<>();
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
+
         Katalog_lista_adminUser();
         labelglowna.setStyle("-fx-text-fill:#808080");
     }
@@ -97,48 +100,35 @@ public class userManagerController extends appParent {
 
     public void Katalog_lista_adminUser() {
         dbload.print_users();
-        ObservableList<User> items = FXCollections.observableArrayList();
+        ObservableList<Users> items = FXCollections.observableArrayList();
 
-        TableColumn<User, ?> name = new TableColumn<>("Imie");
+        TableColumn<Users, ?> name = new TableColumn<>("Imie");
         name.setMinWidth(anchortable.getPrefWidth()*0.25);
         name.setCellValueFactory(
                 new PropertyValueFactory<>("imie"));
 
 
-        TableColumn<User, ?> surname = new TableColumn<>("Nazwisko");
+        TableColumn<Users, ?> surname = new TableColumn<>("Nazwisko");
         surname.setMinWidth(anchortable.getPrefWidth()*0.25);
         surname.setCellValueFactory(
                 new PropertyValueFactory<>("nazwisko"));
 
-        TableColumn<User, ?> id_user = new TableColumn<>("Id_użytkownika");
+        TableColumn<Users, ?> id_user = new TableColumn<>("Id_użytkownika");
         id_user.setMinWidth(anchortable.getPrefWidth()*0.25);
         id_user.setCellValueFactory(
                 new PropertyValueFactory<>("id"));
 
-        TableColumn<User, ?> check_admin = new TableColumn<>("Czy administrator?");
+        TableColumn<Users, ?> check_admin = new TableColumn<>("Czy administrator?");
         check_admin.setMinWidth(anchortable.getPrefWidth()*0.25);
         check_admin.setCellValueFactory(
                 new PropertyValueFactory<>("czy_admin"));
 
-         String imie = User.getInstance().getImie();
-         String nazwisko = User.getInstance().getNazwisko();
-         int id = User.getInstance().getId();
-         String czy_admin = User.getInstance().getCzy_admin();
 
-        for (String[] tab: dbload.lista) {
+        for(String[] tab: dbload.lista) {
             System.out.println(tab[0] + " " + tab[1] + " " + tab[2] + " " + tab[3]);
-           // items.add(new User(tab[0], tab[1],Integer.parseInt(tab[2]), tab[3]));
-            User.getInstance().setImie(tab[0]);
-            User.getInstance().setNazwisko(tab[1]);
-            User.getInstance().setId(Integer.parseInt(tab[2]));
-            User.getInstance().setCzy_admin(tab[3]);
-            items.add(User.getInstance());
-        }
-        User.getInstance().setImie(imie);
-        User.getInstance().setNazwisko(nazwisko);
-        User.getInstance().setId(id);
-        User.getInstance().setCzy_admin(czy_admin);
+            items.add(new Users(tab[0], tab[1],Integer.parseInt(tab[2]), tab[3]));
 
+        }
         //Dodaj wartości do kolumn
         lista.setItems(items);
         //Ustaw wysokosc wierszy na 30px
@@ -163,27 +153,28 @@ public class userManagerController extends appParent {
         lista.getStylesheets().add("/fxml.home/home.css");
         //filtrowanie rekordów
         //tworzenie nowej listy obiektow katalog
-        FilteredList<User> filteredList = new FilteredList<>(items, b -> true);
+        /*
+        FilteredList<Users> filteredList = new FilteredList<>(items, b -> true);
         //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
 
-        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(User -> {
+        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Users -> {
             if(newValue.isEmpty() || newValue.isBlank()){ return true;}
 
             String searchword = newValue.toLowerCase();
             //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
-            if(User.getImie().toLowerCase().contains(searchword)){
+            if(Users.getImie_katalog().toLowerCase().contains(searchword)){
                 return true;
             }
-            if(User.getNazwisko().toLowerCase().contains(searchword)){
+            if(Users.getNazwisko_katalog().toLowerCase().contains(searchword)){
                 return true;
             }
-            return User.getCzy_admin().toLowerCase().contains(searchword);
+            return Users.getCzy_admin_katalog().toLowerCase().contains(searchword);
 
         }));
 
 
         //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
-        SortedList<User> sortedList = new SortedList<>(filteredList);
+        SortedList<Users> sortedList = new SortedList<>(filteredList);
         //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
         sortedList.comparatorProperty().bind(lista.comparatorProperty());
         //umiesc elementy

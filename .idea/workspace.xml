@@ -8,13 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.1 - updatowane catalogMenager, poprawić">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.2 - updatowane gbesa">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,8 +98,8 @@
       <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\java\org\example" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="org.example.app" />
       <recent name="org.example" />
+      <recent name="org.example.app" />
     </key>
   </component>
   <component name="RunManager">
@@ -219,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685654371874</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="v0.7.2 - updatowane gbesa">
+      <created>1685704206601</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1685704206601</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,7 +265,8 @@
     <MESSAGE value="v 0.6.2 - yourHire działa, ale trzeba wyeliminować errory dla wartosci null, patrz (yourHire.java:143)" />
     <MESSAGE value="v0.6.2 - rezerwacje poprawione" />
     <MESSAGE value="v0.7.1 - updatowane catalogMenager, poprawić" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.7.1 - updatowane catalogMenager, poprawić" />
+    <MESSAGE value="v0.7.2 - updatowane gbesa" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.7.2 - updatowane gbesa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
