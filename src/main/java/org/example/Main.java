@@ -13,11 +13,10 @@ import org.example.verify.logincontroller;
 import java.io.IOException;
 
 public class Main extends Application {
-    static public User user = new User();
+    static public User user = new User(null, null, 0, null);
     static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null,null,null);
     static public dbloader dbload = new dbloader();
 
-    static public Wypozyczenia wypozyczenia = new Wypozyczenia(null,null,null,null,null,null);
 
 
     static public Rezerwacje rezerwacje = new Rezerwacje(null,null,null,null,null,null, null);

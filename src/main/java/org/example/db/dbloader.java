@@ -609,6 +609,32 @@ public class dbloader {
         return resultSet;
     }
 
+    public ArrayList<String[]> lista = new ArrayList<>();
+    public void print_users() {
+        connectToDatabase();
+        String print = "Select id_uzytkownicy, imie, nazwisko, czy_admin from uzytkownicy";
+        try {
+            lista.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            PreparedStatement statement = connection.prepareStatement(print);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id_uzytkownicy = resultSet.getInt("id_uzytkownicy");
+                String imie = resultSet.getString("imie");
+                String nazwisko = resultSet.getString("nazwisko");
+                String czy_admin = resultSet.getString("czy_admin");
+                String[] row = {imie, nazwisko,String.valueOf(id_uzytkownicy), czy_admin};
+                lista.add(row);
+                //System.out.println(imie + " " + nazwisko + " " + czy_admin + " " + id_uzytkownicy);
+            }
+            resultSet.close();
+            closeConnection();
+        } catch (SQLException e) { //Error while connecting with DB
+            System.out.println("Error while dowloading data from DB: " + e.getMessage());
+            System.exit(100);
+        } finally {
+            closeConnection();
+        }
+    }
 
 
 

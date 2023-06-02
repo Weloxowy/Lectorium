@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -125,6 +126,32 @@
             <DropShadow height="35.57" radius="8.3925" width="0.0" />
          </effect>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <HBox prefHeight="57.0" prefWidth="1096.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Dodaj użytkownika">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Zmodyfikuj użytkownika" />
+                  <Button mnemonicParsing="false" text="Usuń użytkownika" />
+                  <Button mnemonicParsing="false" text="Nadaj admina" />
+                  <Button mnemonicParsing="false" text="Zdegraduj admina" />
+                  <Button mnemonicParsing="false" text="Sprawdź wypożyczenia" />
+                  <Button mnemonicParsing="false" text="Sprawdź rezerwacje" />
+                  <Button mnemonicParsing="false" text="Zablokuj konto">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </HBox>
+            <AnchorPane fx:id="anchortable" layoutX="-2.0" layoutY="190.0" prefHeight="514.0" prefWidth="1096.0" />
+         </children></AnchorPane>
    </children>
 </GridPane>
