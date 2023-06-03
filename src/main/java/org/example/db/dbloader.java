@@ -728,11 +728,6 @@ public class dbloader {
                 String[] row = {String.valueOf(idEgzemplarza),nazwaKsiazki,lokalizacja,czyWypozyczone, String.valueOf(dataZwrotu)};
                 results.add(row);
             }
-
-            for (String str[] : results) {
-                System.out.println(str);
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

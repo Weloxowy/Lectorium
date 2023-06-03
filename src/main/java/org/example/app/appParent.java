@@ -63,7 +63,7 @@ public class appParent {
     }
 
     @FXML
-    void katalog_clicked(MouseEvent event) {
+    protected void katalog_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
@@ -80,20 +80,6 @@ public class appParent {
             throw new RuntimeException(e);
         }
     }
-
-    @FXML
-    void check_click(MouseEvent event) {
-        if(zapamietaj == true)
-        {
-            katalog_clicked(event);
-        }
-        else
-        {
-            yourHire_clicked(event);
-        }
-    }//DO POPRAWY
-
-
 
     @FXML
     protected void katalog_clicked(MouseEvent event, String query) {
@@ -267,8 +253,7 @@ public class appParent {
         searchbar.setFont(pop_r_h1);
     }
 
-    protected void katalog_item(MouseEvent event, int row ) {
-
+    protected void katalog_item(MouseEvent event, int row,boolean if_admin) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             size_guard(stage);
             Parent parent;
@@ -278,6 +263,7 @@ public class appParent {
                 dbload.get_cover(row);
                 katalog_itemcontroller kat = loader.getController();
                 kat.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
+                kat.if_adm = if_admin;
                 kat.load(row-1);
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
@@ -292,7 +278,7 @@ public class appParent {
 
 
     @FXML
-    void yourHire_clicked(MouseEvent event) {
+    protected void yourHire_clicked(MouseEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
@@ -439,7 +425,7 @@ public class appParent {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
                 zapamietaj = false;
-                katalog_item(event,data);//get data
+                katalog_item(event,data,true);//get data
             }
         });
     }

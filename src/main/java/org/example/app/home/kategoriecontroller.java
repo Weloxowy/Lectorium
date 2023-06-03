@@ -123,7 +123,7 @@ public class kategoriecontroller extends appParent {
     @FXML
     void menu_panels(MouseEvent event){
         if(event.getSource().equals(image_a1)){ //pokaz ksiazke o id 130
-            katalog_item(event,130);
+            katalog_item(event,130,false);
         }
         if(event.getSource().equals(image_a2)){ //pokaz wyszukiwania dla autora King
             String query = "Stephen King";

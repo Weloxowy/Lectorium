@@ -31,6 +31,7 @@ import java.util.Objects;
 import static org.example.Main.dbload;
 
 public class katalog_itemcontroller extends appParent {
+    public boolean if_adm = false;
     @FXML
     private AnchorPane anchortable;
 
@@ -190,7 +191,7 @@ public class katalog_itemcontroller extends appParent {
                                             -fx-text-fill: #004aad;""");
                                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> {
                                     notificationLabel.setVisible(false);
-                                    katalog_item(event, id);
+                                    katalog_item(event, id,if_adm);
                                 }));
                                 timeline.play();
                                 anchor.getChildren().add(notificationLabel);
@@ -235,7 +236,7 @@ public class katalog_itemcontroller extends appParent {
                                             -fx-text-fill: #004aad;""");
                             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event2 -> {
                                 notificationLabel.setVisible(false);
-                                katalog_item(event, id);
+                                katalog_item(event, id,if_adm);
                             }));
                             timeline.play();
                             anchor.getChildren().add(notificationLabel);
@@ -328,6 +329,16 @@ public class katalog_itemcontroller extends appParent {
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
+    }
+
+    @FXML
+    void back_to_prv(MouseEvent event){
+        if(if_adm){
+            yourHire_clicked(event);
+        }
+        else{
+            katalog_clicked(event);
+        }
     }
 
 }

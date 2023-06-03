@@ -184,7 +184,7 @@ public class katalogcontroller extends appParent {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
 
-                katalog_item(event,data);//get data
+                katalog_item(event,data,false);//get data
             }
         });
     }
@@ -292,7 +292,7 @@ public class katalogcontroller extends appParent {
                 TablePosition<org.example.Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
 
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
-                katalog_item(event,data);//get data
+                katalog_item(event,data,false);//get data
             }
         });
     }

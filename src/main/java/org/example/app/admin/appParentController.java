@@ -115,7 +115,7 @@ public class appParentController extends appParent {
             katalog_clicked(event, query);
         }
         if (event.getSource().equals(image_b1)) { //pokaz ksiazke o id 130
-            katalog_item(event, 130);
+            katalog_item(event, 130,false);
         }
         if (event.getSource().equals(image_b2)) { //pokaz wyszukiwania dla autora King
             String query = "King";

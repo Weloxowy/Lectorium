@@ -161,7 +161,7 @@ public class nowosciController extends appParent {
         }
         for (Map.Entry<Integer, VBox> act : vboxMap.entrySet()) {
             if (event.getSource().equals(act.getValue())) {
-                katalog_item(event,dbload.array.size()-i+1);
+                katalog_item(event,dbload.array.size()-i+1,false);
             }
             i++;
         }

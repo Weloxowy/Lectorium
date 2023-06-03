@@ -8,13 +8,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.2 - updatowane gbesa">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.3 - update katalog_itemcontroller dla usera">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/appParentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/appParentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/homecontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685704206601</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="v0.7.3 - update katalog_itemcontroller dla usera">
+      <created>1685780860141</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1685780860141</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,7 +288,8 @@
     <MESSAGE value="v0.6.2 - rezerwacje poprawione" />
     <MESSAGE value="v0.7.1 - updatowane catalogMenager, poprawić" />
     <MESSAGE value="v0.7.2 - updatowane gbesa" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.7.2 - updatowane gbesa" />
+    <MESSAGE value="v0.7.3 - update katalog_itemcontroller dla usera" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.7.3 - update katalog_itemcontroller dla usera" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
