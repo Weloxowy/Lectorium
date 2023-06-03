@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -636,7 +637,114 @@ public class dbloader {
         }
     }
 
+    public ArrayList<String[]> results = new ArrayList<>();
+    public void nowe_item(int idKatalog, int idUzytkownika) { //działa bardzo dobrze na malej grupie rekordow
+        results.clear();
+        try {
+            connectToDatabase();
+            // Pobranie danych dotyczących egzemplarzy dla danego katalogu
+            String query = "SELECT e.id_egzemplarze, k.nazwa, e.lokalizacja, e.czy_dostepne " +
+                    "FROM egzemplarze e " +
+                    "JOIN katalog k ON e.katalog_id_katalog = k.id_katalog " +
+                    "WHERE e.katalog_id_katalog = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idKatalog);
+            ResultSet resultSet = statement.executeQuery();
 
+            while (resultSet.next()) {
+                int idEgzemplarza = resultSet.getInt("id_egzemplarze");
+                String nazwaKsiazki = resultSet.getString("nazwa");
+                String lokalizacja = resultSet.getString("lokalizacja");
+                String czyDostepne = resultSet.getString("czy_dostepne");
+
+                String czyWypozyczone = czyDostepne;
+                LocalDate dataZwrotu = null;
+
+                if (czyDostepne.equals("N")) {
+                    // Sprawdzenie czy egzemplarz jest wypożyczony przez danego użytkownika
+                    query = "SELECT data_zwrotu FROM wypozyczenia WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy = ? " +
+                            "AND data_zwrotu > date('now')";
+                    statement = connection.prepareStatement(query);
+                    statement.setInt(1, idEgzemplarza);
+                    statement.setInt(2, idUzytkownika);
+                    ResultSet wypozyczeniaResultSet = statement.executeQuery();
+
+                    if (wypozyczeniaResultSet.next()) {
+                        czyWypozyczone = "W";
+                        String dataZwrotuStr = wypozyczeniaResultSet.getString("data_zwrotu");
+                        if (dataZwrotuStr != null) {
+                            dataZwrotu = LocalDate.parse(dataZwrotuStr);
+                        }
+                    } else {
+                        // Sprawdzenie czy egzemplarz jest wypożyczony przez innego użytkownika
+                        query = "SELECT data_zwrotu FROM wypozyczenia WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy != ? " +
+                                "AND data_zwrotu > date('now')";
+                        statement = connection.prepareStatement(query);
+                        statement.setInt(1, idEgzemplarza);
+                        statement.setInt(2, idUzytkownika);
+                        wypozyczeniaResultSet = statement.executeQuery();
+
+                        if (wypozyczeniaResultSet.next()) {
+                            czyWypozyczone = "NW";
+                            String dataZwrotuStr = wypozyczeniaResultSet.getString("data_zwrotu");
+                            if (dataZwrotuStr != null) {
+                                dataZwrotu = LocalDate.parse(dataZwrotuStr);
+                            }
+                        } else {
+                            // Sprawdzenie czy egzemplarz jest zarezerwowany przez danego użytkownika
+                            query = "SELECT data_konca FROM rezerwacje WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy = ? " +
+                                    "AND data_konca > date('now')";
+                            statement = connection.prepareStatement(query);
+                            statement.setInt(1, idEgzemplarza);
+                            statement.setInt(2, idUzytkownika);
+                            ResultSet rezerwacjeResultSet = statement.executeQuery();
+
+                            if (rezerwacjeResultSet.next()) {
+                                czyWypozyczone = "R";
+                                String dataKoncaStr = rezerwacjeResultSet.getString("data_konca");
+                                if (dataKoncaStr != null) {
+                                    dataZwrotu = LocalDate.parse(dataKoncaStr);
+                                }
+                            } else {
+                                // Sprawdzenie czy egzemplarz jest zarezerwowany przez innego użytkownika
+                                query = "SELECT data_konca FROM rezerwacje WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy != ? " +
+                                        "AND data_konca > date('now')";
+                                statement = connection.prepareStatement(query);
+                                statement.setInt(1, idEgzemplarza);
+                                statement.setInt(2, idUzytkownika);
+                                rezerwacjeResultSet = statement.executeQuery();
+
+                                if (rezerwacjeResultSet.next()) {
+                                    czyWypozyczone = "NR";
+                                    String dataKoncaStr = rezerwacjeResultSet.getString("data_konca");
+                                    if (dataKoncaStr != null) {
+                                        dataZwrotu = LocalDate.parse(dataKoncaStr);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                String[] row = {String.valueOf(idEgzemplarza),nazwaKsiazki,lokalizacja,czyWypozyczone, String.valueOf(dataZwrotu)};
+                results.add(row);
+            }
+
+            for (String str[] : results) {
+                System.out.println(str);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }
 

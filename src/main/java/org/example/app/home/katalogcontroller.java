@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -116,7 +117,7 @@ public class katalogcontroller extends appParent {
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        /*lista.addEventFilter(ScrollEvent.SCROLL, event -> {
+        lista.addEventFilter(ScrollEvent.SCROLL, event -> {
             ScrollBar verticalScrollBar = getVerticalScrollBar(lista);
             double verticalValue = verticalScrollBar.getValue();
             double verticalMax = verticalScrollBar.getMax();
@@ -127,10 +128,11 @@ public class katalogcontroller extends appParent {
                 lista.setItems(items);
             }
         });
-        loadNextRecords(items);*/
-        for (String[] tab: dbload.array) {
+
+        loadNextRecords(items);
+        /*for (String[] tab: dbload.array) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
-        }
+        }*/
         //Dodaj wartości do kolumn
         lista.setItems(items);
         //Ustaw wysokosc wierszy na 30px
@@ -152,7 +154,7 @@ public class katalogcontroller extends appParent {
         AnchorPane.setRightAnchor(lista, 0.0);
 
         lista.getStylesheets().add("/fxml.home/home.css");
-        //filtrowanie rekordów
+       /* //filtrowanie rekordów
         //tworzenie nowej listy obiektow katalog
         FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
         //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
@@ -176,7 +178,7 @@ public class katalogcontroller extends appParent {
         sortedList.comparatorProperty().bind(lista.comparatorProperty());
         //umiesc elementy
         lista.setItems(sortedList);
-
+*/
         lista.setOnMouseClicked(event -> {
             if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);

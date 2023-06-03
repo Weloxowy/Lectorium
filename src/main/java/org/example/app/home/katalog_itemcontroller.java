@@ -125,7 +125,7 @@ public class katalog_itemcontroller extends appParent {
     }
 
     public void egzemplarz_lista(int id) { //TODO do poprawy
-        dbload.print_copies(id);
+        dbload.nowe_item(id,User.getInstance().getId());
         ObservableList<Egzemplarze> items = FXCollections.observableArrayList();
 
         TableColumn<Egzemplarze, ?> nazwaCol = new TableColumn<>("Nazwa");
@@ -248,12 +248,18 @@ public class katalog_itemcontroller extends appParent {
         });
 
 
-        for (String[] tab : dbload.copy) {
-            String nazwa = tab[0];
-            Integer id_egzemplarze = Integer.valueOf(tab[1]);
+        for (String[] tab : dbload.results) {
+            Integer id_egzemplarze = Integer.valueOf(tab[0]);
+            String nazwa = tab[1];
             String lokalizacja = tab[2];
             String czy_dostepne = tab[3];
-            String data_zwrotu = tab[4];
+            String data_zwrotu;
+            if (tab[4].contentEquals("null")){
+                data_zwrotu = "";
+            }
+            else{
+                data_zwrotu = tab[4];
+            }
             items.add(new Egzemplarze(nazwa, id_egzemplarze, lokalizacja, czy_dostepne, data_zwrotu));
         }
         //Dodaj wartości do kolumn
