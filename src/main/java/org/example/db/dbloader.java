@@ -741,6 +741,28 @@ public class dbloader {
         }
     }
 
+
+    public int add_to_database(String czy_dostepne, String lokalizacja, String katalog) {
+        connectToDatabase();
+        String insertUserSQL = "INSERT INTO egzemplarze (czy_dostepne, lokalizacja, katalog_id_katalog)\n" +
+                "SELECT  ?, ?, k.id_katalog\n" +
+                "FROM katalog k\n" +
+                "WHERE k.nazwa = ?;\n";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, czy_dostepne);
+            statement.setString(2, lokalizacja);
+            statement.setString(3, katalog);
+           int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
 }
 
 

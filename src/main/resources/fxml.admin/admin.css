@@ -153,4 +153,13 @@
     -fx-background-color:  #037cb9;
 }
 
+.opacity{
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
+
+.color_change_add_egz{
+    -fx-background-color:#808080;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
