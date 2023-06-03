@@ -12,8 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.User;
@@ -84,7 +86,10 @@ public class catalogManagerController extends appParent{
     private Button button_add_egz;
 
     @FXML
-    private TextField localization_book;
+    private AnchorPane root_anchor;
+
+    @FXML
+    private GridPane grid;
 
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
@@ -92,13 +97,41 @@ public class catalogManagerController extends appParent{
         avatar_view();
         Katalog_lista(anchortable, searchbar1);
         pane_id_masked.setVisible(false);
-
-        labelglowna.setStyle("-fx-text-fill:#808080");
+        labelwypozyczenia.setStyle("-fx-text-fill:#808080");
+        root_anchor.setTopAnchor(grid,0.0);
+        root_anchor.setLeftAnchor(grid,0.0);
+        root_anchor.setRightAnchor(grid,0.0);
+        root_anchor.setBottomAnchor(grid,0.0);
+        root_anchor.setTopAnchor(pane_id_masked,0.0);
+        root_anchor.setLeftAnchor(pane_id_masked,0.0);
+        root_anchor.setRightAnchor(pane_id_masked,0.0);
+        root_anchor.setBottomAnchor(pane_id_masked,0.0);
     }
 
     @FXML
     public void font(Scene scene) {
         super.font(scene);
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
+        Label pane_tytul = (Label) scene.lookup("#pane_tytul");
+        pane_tytul.setFont(pop_b_h2);
+        TextField pane_txt_1 = (TextField) scene.lookup("#pane_txt_1");
+        pane_txt_1.setFont(pop_r_h2);
+        TextField pane_txt_2 = (TextField) scene.lookup("#pane_txt_2");
+        pane_txt_2.setFont(pop_r_h2);
+        TextField pane_txt_3 = (TextField) scene.lookup("#pane_txt_3");
+        pane_txt_3.setFont(pop_r_h2);
+        TextField pane_txt_4 = (TextField) scene.lookup("#pane_txt_4");
+        pane_txt_4.setFont(pop_r_h2);
+        TextField pane_txt_5 = (TextField) scene.lookup("#pane_txt_5");
+        pane_txt_5.setFont(pop_r_h2);
+        Button pane_button = (Button) scene.lookup("#pane_button");
+        pane_button.setFont(pop_b_h2);
+        Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+        pane_result_msg.setFont(pop_b_h2);
 
     }
 
@@ -117,33 +150,64 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void dodaj_egz_button()
+    public void dodaj_egz_button() //funkcja ustawiajaca dodawanie egzemplarza
     {
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(10),
-                event -> pane_id_masked.setVisible(false)
-        ));
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Dodaj egzemplarz książki");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj nazwę książki"); //ustawiamy to co jest widoczne jak pole jest puste
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(1.0);
+        pane_txt_2.setPromptText("Podaj lokalizację egzemplarza");
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Dodaj egzemplarz");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret = dbload.add_to_database("T", pane_txt_2.getText(),pane_txt_1.getText());
+            if(ret>0){
+                pane_result_msg.setText("Egzemplarz został dodany");
+            }
+            else{
+                pane_result_msg.setText("Egzemplarz nie został dodany");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 ->{
+                        pane_result_msg.setOpacity(0.0);
+                        pane_button.setDisable(false); //guzik znowu dziala
+                    }
+            ));
+            pane_result_msg.setOpacity(1.0);
+            pane_button.setDisable(true); //guzik nie dziala przez 3 s. - nie mozna spamowac; zastosuj do innych funkcji
+            System.out.println("TT");
+            timeline.play();
+        });
         pane_id_masked.setVisible(true);
-
-
-
-
-        timeline.play();
     }
 
     @FXML
-    public void press_button_add_egz(MouseEvent event)
-    {
-
-            String dodaj_textField = add_egz.getText();
-            String localization = localization_book.getText();
-            dbload.add_to_database("T", localization, dodaj_textField);
-
-
-
-
-
-
+    public void hide_pane(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
+        pane_txt_1.setOpacity(0.0);
+        pane_txt_1.clear();
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(0.0);
+        pane_txt_2.clear();
+        TextField pane_txt_3 = (TextField) pane_id_masked.lookup("#pane_txt_3");
+        pane_txt_3.setOpacity(0.0);
+        pane_txt_3.clear();
+        TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
+        pane_txt_4.setOpacity(0.0);
+        pane_txt_4.clear();
+        TextField pane_txt_5 = (TextField) pane_id_masked.lookup("#pane_txt_5");
+        pane_txt_5.setOpacity(0.0);
+        pane_txt_5.clear();
+        Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+        pane_result_msg.setOpacity(0.0);
+        ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
+        pane_add_cover.setOpacity(0.0);
+        pane_id_masked.setVisible(false);
     }
 
 

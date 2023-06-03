@@ -73,7 +73,7 @@ public class userManagerController extends appParent {
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
         Katalog_lista_adminUser();
-        labelglowna.setStyle("-fx-text-fill:#808080");
+        labelrezerwacje.setStyle("-fx-text-fill:#808080");
     }
 
     @FXML

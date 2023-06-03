@@ -47,6 +47,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             parent = loader.load();
             logincontroller controller = loader.getController();
+            controller.getHaslo().setSkin(new PasswordSkin(controller.getHaslo()));
             controller.font();
             stage.setResizable(true);
             stage.isMaximized();
@@ -389,10 +390,10 @@ public class appParent {
         // Dodaj TableView do AnchorPane
         anchortable.getChildren().addAll(lista);
         // Ustaw parametry kotwiczenia TableView na wartość 0
-        AnchorPane.setTopAnchor(lista, 0.0);
-        AnchorPane.setLeftAnchor(lista, 0.0);
-        AnchorPane.setBottomAnchor(lista, 0.0);
-        AnchorPane.setRightAnchor(lista, 0.0);
+        //AnchorPane.setTopAnchor(anchortable, 0.0);
+        AnchorPane.setLeftAnchor(anchortable, 0.0);
+        AnchorPane.setBottomAnchor(anchortable, 0.0);
+        AnchorPane.setRightAnchor(anchortable, 0.0);
 
         lista.getStylesheets().add("/fxml.home/home.css");
         //filtrowanie rekordów

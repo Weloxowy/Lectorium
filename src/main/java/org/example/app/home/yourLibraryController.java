@@ -88,7 +88,6 @@ public class yourLibraryController extends appParent {
         Rectangle rectanglea1 = new Rectangle(centerXa1, centerYa1);
         rectanglea1.setArcWidth(20.0);
         rectanglea1.setArcHeight(20.0);
-        //rectangle.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0)");
         gbs_dobrze_jest.setClip(rectanglea1);
     }
     @FXML

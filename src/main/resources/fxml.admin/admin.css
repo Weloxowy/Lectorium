@@ -154,12 +154,15 @@
 }
 
 .opacity{
-  background-color: rgba(0, 0, 0, 0.5);
+-fx-background-color: rgba(255, 255, 255, 0.4);
+-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 0, 4, 30, 0);
+-fx-border-color: rgba(255, 255, 255, 0.02);
+-fx-border-width: 1px;
 }
 
 
 .color_change_add_egz{
-    -fx-background-color:#808080;
+    -fx-background-color:#faf8ee;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }

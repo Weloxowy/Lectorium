@@ -144,6 +144,7 @@ public class katalog_itemcontroller extends appParent {
         TableColumn<Egzemplarze, ?>  dostepneCol = new TableColumn<>("Czy dostępne");
         dostepneCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         dostepneCol.setCellValueFactory(new PropertyValueFactory<>("czy_dostepne"));
+        dostepneCol.setVisible(false);
 
         TableColumn<Egzemplarze, ?>  zwrotCol = new TableColumn<>("Data zwrotu");
         zwrotCol.setMinWidth(anchortable.getPrefWidth() * 0.15);

@@ -16,7 +16,7 @@ public class adminController extends appParent {
     private ImageView avatar = new ImageView();
 
     @FXML
-    private Label labelglowna;
+    private Label labelbiblioteka;
 
 
     @FXML
@@ -29,7 +29,7 @@ public class adminController extends appParent {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
-        labelglowna.setStyle("-fx-text-fill:#808080");
+        labelbiblioteka.setStyle("-fx-text-fill:#808080");
     }
 
     @FXML
