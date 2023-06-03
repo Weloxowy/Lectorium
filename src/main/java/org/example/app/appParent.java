@@ -441,7 +441,6 @@ public class appParent {
                 parent = loader.load();
                 userManagerController Profile = loader.getController();
                 Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
-
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 Profile.font(scene);

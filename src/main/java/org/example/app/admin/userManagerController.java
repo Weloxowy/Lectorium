@@ -12,11 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import org.example.Users;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import org.example.Katalog;
 import org.example.User;
-import org.example.Users;
 import org.example.app.appParent;
 
 import static org.example.Main.dbload;
@@ -73,7 +72,6 @@ public class userManagerController extends appParent {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
-
         Katalog_lista_adminUser();
         labelglowna.setStyle("-fx-text-fill:#808080");
     }
@@ -105,28 +103,31 @@ public class userManagerController extends appParent {
         TableColumn<Users, ?> name = new TableColumn<>("Imie");
         name.setMinWidth(anchortable.getPrefWidth()*0.25);
         name.setCellValueFactory(
-                new PropertyValueFactory<>("imie"));
+                new PropertyValueFactory<>("imie_katalog"));
 
 
         TableColumn<Users, ?> surname = new TableColumn<>("Nazwisko");
         surname.setMinWidth(anchortable.getPrefWidth()*0.25);
         surname.setCellValueFactory(
-                new PropertyValueFactory<>("nazwisko"));
+                new PropertyValueFactory<>("nazwisko_katalog"));
 
         TableColumn<Users, ?> id_user = new TableColumn<>("Id_użytkownika");
         id_user.setMinWidth(anchortable.getPrefWidth()*0.25);
         id_user.setCellValueFactory(
-                new PropertyValueFactory<>("id"));
+                new PropertyValueFactory<>("id_katalog"));
 
         TableColumn<Users, ?> check_admin = new TableColumn<>("Czy administrator?");
         check_admin.setMinWidth(anchortable.getPrefWidth()*0.25);
         check_admin.setCellValueFactory(
-                new PropertyValueFactory<>("czy_admin"));
+                new PropertyValueFactory<>("czy_admin_katalog"));
 
 
         for(String[] tab: dbload.lista) {
-            System.out.println(tab[0] + " " + tab[1] + " " + tab[2] + " " + tab[3]);
-            items.add(new Users(tab[0], tab[1],Integer.parseInt(tab[2]), tab[3]));
+            Integer id = Integer.valueOf(tab[2]);
+            String imie = tab[0];
+            String nazwisko = tab[1];
+            String czy_dostepne = tab[3];
+            items.add(new Users(imie,nazwisko,id,czy_dostepne));
 
         }
         //Dodaj wartości do kolumn

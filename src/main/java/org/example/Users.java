@@ -6,15 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 public class Users {
      SimpleStringProperty imie_katalog;
     SimpleStringProperty nazwisko_katalog;
-
     ReadOnlyIntegerWrapper id_katalog;
      SimpleStringProperty czy_admin_katalog;
-    public Users(String imie, String nazwisko, int id, String czy_admin)
+    public Users(String imie_katalog, String nazwisko_katalog, int id_katalog, String czy_admin_katalog)
     {
-        this.imie_katalog = new SimpleStringProperty(imie);
-        this.nazwisko_katalog = new SimpleStringProperty(nazwisko);
-        this.id_katalog = new ReadOnlyIntegerWrapper(id);
-        this.czy_admin_katalog = new SimpleStringProperty(czy_admin);
+        this.imie_katalog = new SimpleStringProperty(imie_katalog);
+        this.nazwisko_katalog = new SimpleStringProperty(nazwisko_katalog);
+        this.id_katalog = new ReadOnlyIntegerWrapper(id_katalog);
+        this.czy_admin_katalog = new SimpleStringProperty(czy_admin_katalog);
     }
 
     public String getImie_katalog() {

@@ -8,17 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.3 - update katalog_itemcontroller dla usera">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.4 - update katalog_itemcontroller dla usera">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/appParentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/appParentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/homecontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685780860141</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="v0.7.4 - update katalog_itemcontroller dla usera">
+      <created>1685784671118</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1685784671118</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -289,7 +292,9 @@
     <MESSAGE value="v0.7.1 - updatowane catalogMenager, poprawić" />
     <MESSAGE value="v0.7.2 - updatowane gbesa" />
     <MESSAGE value="v0.7.3 - update katalog_itemcontroller dla usera" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.7.3 - update katalog_itemcontroller dla usera" />
+    <MESSAGE value="v0.7.4 - update katalog_itemcontroller dla usera" />
+    <MESSAGE value="v0.7.4 - p" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.7.4 - p" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -322,6 +327,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/home/yourHire.java</url>
           <line>195</line>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
