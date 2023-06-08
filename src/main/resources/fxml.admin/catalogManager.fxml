@@ -135,16 +135,16 @@
                <children>
                   <HBox layoutY="110.0" prefHeight="98.0" prefWidth="1095.0" spacing="40.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Dodaj pozycje">
+                        <Button mnemonicParsing="false" onMouseClicked="#add_position" prefHeight="50.0" prefWidth="225.0" text="Dodaj pozycje">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="dodaj_egzemplarz" mnemonicParsing="false" onMouseClicked="#dodaj_egz_button" prefHeight="50.0" prefWidth="225.0" text="Dodaj egzemplarz" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj pozycje" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj egzemplarz" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Usuń pozycje" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Usuń egzemplarz">
+                        <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_pozycje" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj pozycje" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_egzemplarze" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj egzemplarz" />
+                        <Button mnemonicParsing="false" onMouseClicked="#usun_pozycje_button" prefHeight="50.0" prefWidth="225.0" text="Usuń pozycje" />
+                        <Button fx:id="usun_egzemplarz" mnemonicParsing="false" onMouseClicked="#usun_egz_button" prefHeight="50.0" prefWidth="225.0" text="Usuń egzemplarz">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -174,11 +174,11 @@
             <AnchorPane layoutX="313.0" layoutY="173.0" prefHeight="432.0" prefWidth="781.0" styleClass="color_change_add_egz">
                <children>
                   <Label fx:id="pane_tytul" layoutX="377.0" layoutY="41.0" text="Tytuł funkcji" />
-                  <TextField fx:id="pane_txt_1" layoutX="51.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="385.0" promptText="Pole tekstowe 1" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_2" layoutX="52.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="386.0" promptText="Pole tekstowe 2" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_3" layoutX="52.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="386.0" promptText="Pole tekstowe 3" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_4" layoutX="52.0" layoutY="261.0" opacity="0.0" prefHeight="26.0" prefWidth="386.0" promptText="Pole tekstowe 4" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_5" layoutX="52.0" layoutY="316.0" opacity="0.0" prefHeight="26.0" prefWidth="386.0" promptText="Pole tekstowe 5" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_1" layoutX="51.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 1" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_2" layoutX="52.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 2" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_3" layoutX="52.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 3" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_4" layoutX="52.0" layoutY="261.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 4" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_5" layoutX="52.0" layoutY="316.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
                   <Button fx:id="pane_button" layoutX="363.0" layoutY="372.0" mnemonicParsing="false" text="GUZIK DODAJ" />
                   <ImageView fx:id="pane_add_cover" fitHeight="239.0" fitWidth="224.0" layoutX="538.0" layoutY="84.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -191,6 +191,11 @@
                         <Image url="@../res/icons/dark/close.png" />
                      </image>
                   </ImageView>
+                  <TextField fx:id="pane_txt_6" layoutX="420.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_7" layoutX="420.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_8" layoutX="420.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_9" layoutX="420.0" layoutY="261.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
+                  <TextField fx:id="pane_txt_10" layoutX="420.0" layoutY="316.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
                </children>
             </AnchorPane>
          </children>

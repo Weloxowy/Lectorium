@@ -763,6 +763,179 @@ public class dbloader {
         closeConnection();
         return 0;
     }
+
+    public int add_one_record_from_catalog(String nazwa, String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String imie_autora, String nazwisko_autora, String nazwa_gatunku, String nazwa_wydawnictwa)
+    {
+        connectToDatabase();
+        String insertUserSQL = "INSERT INTO katalog (nazwa, rok_wydania, wydanie, isbn, jezyk, uwagi, autor_id_autor, gatunek_id_gatunek, wydawnictwo_id_wydawnictwo)\n" +
+                "SELECT ?, ?, ?, ?, ?,  ?, a.id_autor, g.id_gatunek, w.id_wydawnictwo\n" +
+                "FROM (\n" +
+                "    SELECT id_autor\n" +
+                "    FROM autor\n" +
+                "    WHERE imie_autora = ? AND nazwisko_autora = ?\n" +
+                ") a\n" +
+                "CROSS JOIN (\n" +
+                "    SELECT id_gatunek\n" +
+                "    FROM gatunek\n" +
+                "    WHERE nazwa_gatunku = ?\n" +
+                ") g\n" +
+                "CROSS JOIN (\n" +
+                "    SELECT id_wydawnictwo\n" +
+                "    FROM wydawnictwo\n" +
+                "    WHERE nazwa_wydawnictwa = ?\n" +
+                ") w;\n" +
+                "\n";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, nazwa);
+            statement.setString(2, rok_wydania);
+            statement.setString(3, wydanie);
+            statement.setString(4, isbn);
+            statement.setString(5, jezyk);
+            statement.setString(6, uwagi);
+            statement.setString(7, imie_autora);
+            statement.setString(8, nazwisko_autora);
+            statement.setString(9, nazwa_gatunku);
+            statement.setString(10, nazwa_wydawnictwa);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
+
+    public int delete_one_record_from_database(String katalog, String egzemplarz)
+    {
+        connectToDatabase();
+        String insertUserSQL = "DELETE FROM egzemplarze\n" +
+                "WHERE katalog_id_katalog IN (\n" +
+                "    SELECT id_katalog\n" +
+                "    FROM katalog\n" +
+                "    WHERE nazwa = ?\n" +
+                ")\n" +
+                "AND id_egzemplarze = ?;\n";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, katalog);
+            statement.setString(2, egzemplarz);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
+
+    public int delete_one_position_from_database(String nazwa, String isbn, String nazwa_gatunku, String nazwa_wydawnictwa)
+    {
+        connectToDatabase();
+        String insertUserSQL = "DELETE FROM katalog\n" +
+                "WHERE nazwa = ?\n" +
+                "  AND isbn = ?\n" +
+                "  AND gatunek_id_gatunek = (\n" +
+                "    SELECT id_gatunek\n" +
+                "    FROM gatunek\n" +
+                "    WHERE nazwa_gatunku = ?\n" +
+                "  )\n" +
+                "  AND wydawnictwo_id_wydawnictwo = (\n" +
+                "    SELECT id_wydawnictwo\n" +
+                "    FROM wydawnictwo\n" +
+                "    WHERE nazwa_wydawnictwa = ?\n" +
+                "  );\n";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, nazwa);
+            statement.setString(2, isbn);
+            statement.setString(3, nazwa_gatunku);
+            statement.setString(4, nazwa_wydawnictwa);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
+
+
+    public int modify_egzemplarz(String czy_dostepne, String lokalizacja, String katalog, String id_egzemplarze)
+    {
+        connectToDatabase();
+        String insertUserSQL = "UPDATE egzemplarze\n" +
+                "SET czy_dostepne = ?,\n" +
+                "    lokalizacja = ?\n" +
+                "    \n" +
+                "WHERE katalog_id_katalog IN (\n" +
+                "    SELECT k.id_katalog\n" +
+                "    FROM katalog k\n" +
+                "    WHERE k.nazwa = ?\n" +
+                ")\n" +
+                "AND id_egzemplarze = ?;\n";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, czy_dostepne);
+            statement.setString(2, lokalizacja);
+            statement.setString(3, katalog);
+            statement.setString(4, id_egzemplarze);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+
+    }
+
+
+    public int modify_position(String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String id_katalog)
+    {
+        connectToDatabase();
+        String insertUserSQL = "UPDATE katalog\n" +
+                "SET rok_wydania = ?,\n" +
+                "    wydanie = ?,\n" +
+                "    isbn = ?,\n" +
+                "    jezyk = ?,\n" +
+                "    uwagi = ?\n" +
+                "WHERE id_katalog = ?;";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, rok_wydania);
+            statement.setString(2, wydanie);
+            statement.setString(3, isbn);
+            statement.setString(4, jezyk);
+            statement.setString(5, uwagi);
+            statement.setString(6, id_katalog);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+
+    }
 }
 
 
