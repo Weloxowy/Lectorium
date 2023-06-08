@@ -903,6 +903,39 @@ public class dbloader {
         return 0;
 
     }
+
+
+    public int modify_position(String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String id_katalog)
+    {
+        connectToDatabase();
+        String insertUserSQL = "UPDATE katalog\n" +
+                "SET rok_wydania = ?,\n" +
+                "    wydanie = ?,\n" +
+                "    isbn = ?,\n" +
+                "    jezyk = ?,\n" +
+                "    uwagi = ?\n" +
+                "WHERE id_katalog = ?;";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, rok_wydania);
+            statement.setString(2, wydanie);
+            statement.setString(3, isbn);
+            statement.setString(4, jezyk);
+            statement.setString(5, uwagi);
+            statement.setString(6, id_katalog);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+
+    }
 }
 
 

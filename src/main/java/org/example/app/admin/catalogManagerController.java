@@ -281,7 +281,7 @@ public class catalogManagerController extends appParent{
         pane_txt_4.setPromptText("Podaj katalog książki");
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
-        pane_button.setText("Modyfikuj pozycje");
+        pane_button.setText("Modyfikuj egzemplarz");
         pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.modify_egzemplarz(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
@@ -358,6 +358,57 @@ public class catalogManagerController extends appParent{
             }
             else{
                 pane_result_msg.setText("Pozycji nie udało się dodać");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 -> pane_result_msg.setOpacity(0.0)
+            ));
+            pane_result_msg.setOpacity(1.0);
+
+            timeline.play();
+        });
+        pane_id_masked.setVisible(true);
+    }
+
+    @FXML
+    public void zmodyfikuj_pozycje() //funkcja ustawiajaca dodawanie egzemplarza
+    {
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Zmodyfikuj pozycje książek");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj id katalogu"); //ustawiamy to co jest widoczne jak pole jest puste
+
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(1.0);
+        pane_txt_2.setPromptText("Podaj rok wydania książki");
+
+        TextField pane_txt_3 = (TextField) pane_id_masked.lookup("#pane_txt_3");
+        pane_txt_3.setOpacity(1.0);
+        pane_txt_3.setPromptText("Podaj wydanie książki");
+
+        TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
+        pane_txt_4.setOpacity(1.0);
+        pane_txt_4.setPromptText("Podaj isbn książki");
+
+        TextField pane_txt_5 = (TextField) pane_id_masked.lookup("#pane_txt_5");
+        pane_txt_5.setOpacity(1.0);
+        pane_txt_5.setPromptText("Podaj język książki");
+
+        TextField pane_txt_6 = (TextField) pane_id_masked.lookup("#pane_txt_6");
+        pane_txt_6.setOpacity(1.0);
+        pane_txt_6.setPromptText("Uwagi");
+
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Modyfikuj pozycje");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret = dbload.modify_position(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
+            if(ret>0){
+                pane_result_msg.setText("Modyfikacja udana");
+            }
+            else{
+                pane_result_msg.setText("Modyfikacja się nie powiodła");
             }
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.seconds(3),

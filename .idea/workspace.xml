@@ -8,13 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.7.4 - update katalog_itemcontroller dla usera">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685784671118</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;">
+      <created>1686245851247</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1686245851247</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -283,7 +288,8 @@
     <MESSAGE value="v0.7.3 - update katalog_itemcontroller dla usera" />
     <MESSAGE value="v0.7.4 - update katalog_itemcontroller dla usera" />
     <MESSAGE value="v0.7.4 - p" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.7.4 - p" />
+    <MESSAGE value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

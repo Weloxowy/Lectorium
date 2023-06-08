@@ -141,7 +141,7 @@
                            </HBox.margin>
                         </Button>
                         <Button fx:id="dodaj_egzemplarz" mnemonicParsing="false" onMouseClicked="#dodaj_egz_button" prefHeight="50.0" prefWidth="225.0" text="Dodaj egzemplarz" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj pozycje" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_pozycje" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj pozycje" />
                         <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_egzemplarze" prefHeight="50.0" prefWidth="225.0" text="Zmodyfikuj egzemplarz" />
                         <Button mnemonicParsing="false" onMouseClicked="#usun_pozycje_button" prefHeight="50.0" prefWidth="225.0" text="Usuń pozycje" />
                         <Button fx:id="usun_egzemplarz" mnemonicParsing="false" onMouseClicked="#usun_egz_button" prefHeight="50.0" prefWidth="225.0" text="Usuń egzemplarz">
