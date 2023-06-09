@@ -1,5 +1,7 @@
 package org.example.app.admin;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.example.Users;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -70,6 +73,9 @@ public class userManagerController extends appParent {
     @FXML
     private Pane pane_id_masked;
 
+
+    @FXML
+    private Pane pane_id_masked1;
     @FXML
     private AnchorPane root_anchor;
 
@@ -94,6 +100,11 @@ public class userManagerController extends appParent {
         root_anchor.setLeftAnchor(pane_id_masked,0.0);
         root_anchor.setRightAnchor(pane_id_masked,0.0);
         root_anchor.setBottomAnchor(pane_id_masked,0.0);
+
+        root_anchor.setTopAnchor(pane_id_masked1,0.0);
+        root_anchor.setLeftAnchor(pane_id_masked1,0.0);
+        root_anchor.setRightAnchor(pane_id_masked1,0.0);
+        root_anchor.setBottomAnchor(pane_id_masked1,0.0);
     }
 
     @FXML
@@ -207,6 +218,139 @@ public class userManagerController extends appParent {
                 katalog_item(event,data);//get data
             }
         }); */
+    }
+
+
+    @FXML
+    public void dodaj_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    {
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Dodawanie użytkownika");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj imie użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(1.0);
+        pane_txt_2.setPromptText("Podaj nazwisko");
+
+        TextField pane_txt_3 = (TextField) pane_id_masked.lookup("#pane_txt_3");
+        pane_txt_3.setOpacity(1.0);
+        pane_txt_3.setPromptText("Podaj login użytkownika");
+
+        TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
+        pane_txt_4.setOpacity(1.0);
+        pane_txt_4.setPromptText("Podaj hasło użytkownika");
+
+        TextField pane_txt_5 = (TextField) pane_id_masked.lookup("#pane_txt_5");
+        pane_txt_5.setOpacity(1.0);
+        pane_txt_5.setPromptText("Podaj czy użytkownika ma być adminem");
+
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Dodaj użytkownika");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret = dbload.add_user(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
+            if(ret>0){
+                pane_result_msg.setText("Użytkownik dodany");
+            }
+            else{
+                pane_result_msg.setText("Użytkownika nie udało sie dodać");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 -> pane_result_msg.setOpacity(0.0)
+            ));
+            pane_result_msg.setOpacity(1.0);
+
+            timeline.play();
+        });
+        pane_id_masked.setVisible(true);
+    }
+
+
+    @FXML
+    public void zmodyfikuj_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    {
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Modyfikacja użytkownika");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj imie użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(1.0);
+        pane_txt_2.setPromptText("Podaj nazwisko");
+
+        TextField pane_txt_3 = (TextField) pane_id_masked.lookup("#pane_txt_3");
+        pane_txt_3.setOpacity(1.0);
+        pane_txt_3.setPromptText("Podaj login użytkownika");
+
+        TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
+        pane_txt_4.setOpacity(1.0);
+        pane_txt_4.setPromptText("Podaj hasło użytkownika");
+
+        TextField pane_txt_5 = (TextField) pane_id_masked.lookup("#pane_txt_5");
+        pane_txt_5.setOpacity(1.0);
+        pane_txt_5.setPromptText("Podaj id użytkownika");
+
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Modyfikuj użytkownika");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret = dbload.change_user(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
+            if(ret>0){
+                pane_result_msg.setText("Użytkownik zmodyfikowany");
+            }
+            else{
+                pane_result_msg.setText("Użytkownika nie udało sie zmodyfikować");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 -> pane_result_msg.setOpacity(0.0)
+            ));
+            pane_result_msg.setOpacity(1.0);
+
+            timeline.play();
+        });
+        pane_id_masked.setVisible(true);
+    }
+
+    @FXML
+    public void zmodyfikuj_uprawnienia_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    {
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Modyfikacja uprawnienia użytkownika");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Zmodyfikuj uprawnienia (T-admin, N-użytkownik)"); //ustawiamy to co jest widoczne jak pole jest puste
+
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(1.0);
+        pane_txt_2.setPromptText("Podaj id użytkownika");
+
+
+
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Modyfikuj uprawnienia");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret = dbload.modify_uprawnienia(pane_txt_1.getText(),pane_txt_2.getText());
+            if(ret>0){
+                pane_result_msg.setText("Uprawnienia zmodyfikowane");
+            }
+            else{
+                pane_result_msg.setText("Uprawnień nie udało sie zmodyfikować");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 -> pane_result_msg.setOpacity(0.0)
+            ));
+            pane_result_msg.setOpacity(1.0);
+
+            timeline.play();
+        });
+        pane_id_masked.setVisible(true);
     }
 
     @FXML

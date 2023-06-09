@@ -974,6 +974,83 @@ public class dbloader {
         return 0;
 
     }
+
+    public int add_user(String imie, String nazwisko, String login, String haslo, String czy_admin) {
+        connectToDatabase();
+        String insertUserSQL = "Insert into uzytkownicy(imie, nazwisko, login, haslo, czy_admin)\n" +
+                "SELECT ?, ?, ?, ?, ?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, imie);
+            statement.setString(2, nazwisko);
+            statement.setString(3, login);
+            statement.setString(4, haslo);
+            statement.setString(5, czy_admin);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
+
+
+    public int change_user(String imie, String nazwisko, String login, String haslo, String id_uzytkownicy)
+    {
+        connectToDatabase();
+        String insertUserSQL = "Update uzytkownicy \n" +
+                "SET imie = ?,\n" +
+                "nazwisko = ?,\n" +
+                "login = ?,\n" +
+                "haslo = ?\n" +
+                "where id_uzytkownicy = ?;";
+
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, imie);
+            statement.setString(2, nazwisko);
+            statement.setString(3, login);
+            statement.setString(4, haslo);
+            statement.setString(5, id_uzytkownicy);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+
+    }
+
+
+    public int modify_uprawnienia(String czy_admin, String id_uzytkownicy)
+    {
+        connectToDatabase();
+        String insertUserSQL = "Update uzytkownicy \n" +
+                "SET czy_admin = ?\n" +
+                "where id_uzytkownicy =?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, czy_admin);
+            statement.setString(2, id_uzytkownicy);
+
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+
+    }
 }
 
 
