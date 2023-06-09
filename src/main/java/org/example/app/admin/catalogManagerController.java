@@ -91,6 +91,8 @@ public class catalogManagerController extends appParent{
     @FXML
     private GridPane grid;
 
+    boolean sec = false;
+
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -356,12 +358,39 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Dodaj pozycje");
         pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
-            if(ret>0){
-                pane_result_msg.setText("Pozycja dodana");
+            if(sec=true){ //dodawanie gatunku,autora lub wydawnictwa do bazy; nastepnie wykonaj add_one_record_from_catalog
+
+                int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
+                if(ret > 0)
+                    pane_result_msg.setText("Pozycja dodana");
+                else
+                    pane_result_msg.setText("Pozycji nie udało się dodać.");
             }
             else{
-                pane_result_msg.setText("Pozycji nie udało się dodać");
+                int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
+                if(ret>0 && ret<10){
+                    pane_result_msg.setText("Pozycja dodana");
+                }
+                else{
+                    if(ret < 1){
+                        pane_result_msg.setText("Pozycji nie udało się dodać.");
+                    }
+                    if(ret >= 100){
+                        sec = true;
+                        if(ret == 101){
+                            pane_result_msg.setText("Wydawnictwo nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                        }
+                        if(ret == 102){
+                            pane_result_msg.setText("Gatunek nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                        }
+                        if(ret == 104){
+                            pane_result_msg.setText("Autor nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                        }
+                        if(ret > 104 && ret == 103){
+                            pane_result_msg.setText("Przynajmniej jeden z parametrów nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                        }
+                    }
+            }
             }
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.seconds(3),
@@ -466,6 +495,7 @@ public class catalogManagerController extends appParent{
         pane_result_msg.setOpacity(0.0);
         ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
         pane_add_cover.setOpacity(0.0);
+        sec = false;
         pane_id_masked.setVisible(false);
     }
 

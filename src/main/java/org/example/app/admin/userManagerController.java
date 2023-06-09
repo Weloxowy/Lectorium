@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import org.example.Users;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
@@ -66,6 +68,15 @@ public class userManagerController extends appParent {
     private ImageView search_button;
 
     @FXML
+    private Pane pane_id_masked;
+
+    @FXML
+    private AnchorPane root_anchor;
+
+    @FXML
+    private GridPane grid;
+
+    @FXML
     final TableView<Users> lista = new TableView<>();
 
     public void init(String imie, String nazwisko) {
@@ -74,6 +85,15 @@ public class userManagerController extends appParent {
         avatar_view();
         Katalog_lista_adminUser();
         labelrezerwacje.setStyle("-fx-text-fill:#808080");
+        pane_id_masked.setVisible(false);
+        root_anchor.setTopAnchor(grid,0.0);
+        root_anchor.setLeftAnchor(grid,0.0);
+        root_anchor.setRightAnchor(grid,0.0);
+        root_anchor.setBottomAnchor(grid,0.0);
+        root_anchor.setTopAnchor(pane_id_masked,0.0);
+        root_anchor.setLeftAnchor(pane_id_masked,0.0);
+        root_anchor.setRightAnchor(pane_id_masked,0.0);
+        root_anchor.setBottomAnchor(pane_id_masked,0.0);
     }
 
     @FXML
@@ -145,10 +165,9 @@ public class userManagerController extends appParent {
         // Dodaj TableView do AnchorPane
         anchortable.getChildren().addAll(lista);
         // Ustaw parametry kotwiczenia TableView na wartość 0
-        AnchorPane.setTopAnchor(lista, 0.0);
-        AnchorPane.setLeftAnchor(lista, 0.0);
-        AnchorPane.setBottomAnchor(lista, 0.0);
-        AnchorPane.setRightAnchor(lista, 0.0);
+        AnchorPane.setLeftAnchor(anchortable, 0.0);
+        AnchorPane.setBottomAnchor(anchortable, 0.0);
+        AnchorPane.setRightAnchor(anchortable, 0.0);
 
 
         lista.getStylesheets().add("/fxml.home/home.css");
@@ -188,6 +207,50 @@ public class userManagerController extends appParent {
                 katalog_item(event,data);//get data
             }
         }); */
+    }
+
+    @FXML
+    public void hide_pane(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
+        pane_txt_1.setOpacity(0.0);
+        pane_txt_1.clear();
+        TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
+        pane_txt_2.setOpacity(0.0);
+        pane_txt_2.clear();
+        TextField pane_txt_3 = (TextField) pane_id_masked.lookup("#pane_txt_3");
+        pane_txt_3.setOpacity(0.0);
+        pane_txt_3.clear();
+        TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
+        pane_txt_4.setOpacity(0.0);
+        pane_txt_4.clear();
+        TextField pane_txt_5 = (TextField) pane_id_masked.lookup("#pane_txt_5");
+        pane_txt_5.setOpacity(0.0);
+        pane_txt_5.clear();
+
+        TextField pane_txt_6 = (TextField) pane_id_masked.lookup("#pane_txt_6");
+        pane_txt_6.setOpacity(0.0);
+        pane_txt_6.clear();
+
+        TextField pane_txt_7 = (TextField) pane_id_masked.lookup("#pane_txt_7");
+        pane_txt_7.setOpacity(0.0);
+        pane_txt_7.clear();
+
+        TextField pane_txt_8 = (TextField) pane_id_masked.lookup("#pane_txt_8");
+        pane_txt_8.setOpacity(0.0);
+        pane_txt_8.clear();
+
+        TextField pane_txt_9 = (TextField) pane_id_masked.lookup("#pane_txt_9");
+        pane_txt_9.setOpacity(0.0);
+        pane_txt_9.clear();
+
+        TextField pane_txt_10 = (TextField) pane_id_masked.lookup("#pane_txt_10");
+        pane_txt_10.setOpacity(0.0);
+        pane_txt_10.clear();
+        Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+        pane_result_msg.setOpacity(0.0);
+        ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
+        pane_add_cover.setOpacity(0.0);
+        pane_id_masked.setVisible(false);
     }
 
 }

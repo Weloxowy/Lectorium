@@ -390,7 +390,6 @@ public class appParent {
         // Dodaj TableView do AnchorPane
         anchortable.getChildren().addAll(lista);
         // Ustaw parametry kotwiczenia TableView na wartość 0
-        //AnchorPane.setTopAnchor(anchortable, 0.0);
         AnchorPane.setLeftAnchor(anchortable, 0.0);
         AnchorPane.setBottomAnchor(anchortable, 0.0);
         AnchorPane.setRightAnchor(anchortable, 0.0);

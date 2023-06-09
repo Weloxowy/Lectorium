@@ -798,6 +798,44 @@ public class dbloader {
             statement.setString(9, nazwa_gatunku);
             statement.setString(10, nazwa_wydawnictwa);
             int ret =  statement.executeUpdate();
+           //closeConnection();//NIE DZIAŁA OD TEGO MOMENTU
+            if(ret == 0){   //suma bledu: 4 jezeli brak autora, 2 jezeli brak gatunku, 1 jezeli brak wydawnictwa
+                ret += 100;
+                int size = 0;
+               String insert = "SELECT * FROM autor where imie_autora = ? AND nazwisko_autora=?";
+                statement.setString(1, imie_autora);
+                statement.setString(2, nazwisko_autora);
+                ResultSet resultSet = statement.executeQuery(insert);
+                while (resultSet.next()) {
+                    size++;
+                }
+                if (size < 1){
+                    ret += 4;
+                }
+
+                size = 0;
+                insert = "SELECT * FROM gatunek where nazwa_gatunku = ?";
+                resultSet = statement.executeQuery(insert);
+                statement.setString(1, nazwa_gatunku);
+                while (resultSet.next()) {
+                    size++;
+                }
+                if (size < 1){
+                    ret += 2;
+                }
+
+                size = 0;
+                insert = "SELECT * FROM wydawnictwo where nazwa_wydawnictwa = ?";
+                resultSet = statement.executeQuery(insert);
+                statement.setString(1, nazwa_wydawnictwa);
+                while (resultSet.next()) {
+                    size++;
+                }
+                if (size < 1){
+                    ret += 1;
+                }
+
+            }
             closeConnection();
             return ret;
         } catch (SQLException e) {
