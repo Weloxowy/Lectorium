@@ -137,7 +137,12 @@ public class logincontroller {
 
         boolean res = l.tryLogin(log, has);
         if (res) {
-            onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
+            if(User.getInstance().getCzy_zablokowany().contentEquals("T")){
+                onfailure();
+            }
+            else{
+                onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
+            }
         } else {
             onfailure();
         }
@@ -178,6 +183,12 @@ public class logincontroller {
     }
 
     void onfailure() {
+        if(User.getInstance().getCzy_zablokowany().contentEquals("T")){
+            error.setText("Konto zablokowane");
+        }
+        else{
+            error.setText("Błąd logowania");
+        }
         error.setOpacity(1.0);
     }
 }

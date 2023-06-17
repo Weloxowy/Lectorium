@@ -141,11 +141,11 @@
                            </HBox.margin>
                         </Button>
                         <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_uzytkownika" text="Zmodyfikuj użytkownika" />
-                        <Button mnemonicParsing="false" text="Usuń użytkownika" />
+                        <Button mnemonicParsing="false" onMouseClicked="#usun_uzytkownika" text="Usuń użytkownika" />
                         <Button mnemonicParsing="false" onMouseClicked="#zmodyfikuj_uprawnienia_uzytkownika" text="Zmodyfikuj uprawnienia" />
-                        <Button mnemonicParsing="false" text="Sprawdź wypożyczenia" />
-                        <Button mnemonicParsing="false" text="Sprawdź rezerwacje" />
-                        <Button mnemonicParsing="false" text="Zablokuj konto">
+                        <Button mnemonicParsing="false" onMouseClicked="#check_rent" text="Sprawdź wypożyczenia" />
+                        <Button mnemonicParsing="false" onMouseClicked="#check_res" text="Sprawdź rezerwacje" />
+                        <Button mnemonicParsing="false" onMouseClicked="#zablokuj_uzytkownika" text="Zablokuj konto">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -177,7 +177,7 @@
                      </image>
                   </ImageView>
                   <Label fx:id="pane_result_msg" layoutX="518.0" layoutY="326.0" opacity="0.0" prefHeight="57.0" prefWidth="236.0" text="Label" />
-                  <ImageView fitHeight="57.0" fitWidth="40.0" layoutX="727.0" layoutY="14.0" onMouseClicked="#hide_pane" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="57.0" fitWidth="40.0" layoutX="727.0" layoutY="14.0" onMouseClicked="#hide_panes" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../res/icons/dark/close.png" />
                      </image>
@@ -191,33 +191,17 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="pane_id_masked1" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="568.0" minWidth="1370.0" prefHeight="776.0" prefWidth="1015.0" styleClass="opacity">
+      <Pane fx:id="pane_id_masked_log" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="568.0" minWidth="1370.0" prefHeight="776.0" prefWidth="1015.0" styleClass="opacity">
          <children>
-            <AnchorPane layoutX="313.0" layoutY="173.0" prefHeight="432.0" prefWidth="781.0" styleClass="color_change_add_egz">
+            <AnchorPane fx:id="anchor" layoutX="313.0" layoutY="173.0" prefHeight="432.0" prefWidth="781.0" styleClass="color_change_add_egz">
                <children>
-                  <Label fx:id="pane_tytul1" layoutX="377.0" layoutY="41.0" text="Tytuł funkcji" />
-                  <TextField fx:id="pane_txt_11" layoutX="51.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 1" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_21" layoutX="52.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 2" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_31" layoutX="52.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 3" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_41" layoutX="52.0" layoutY="261.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 4" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_51" layoutX="52.0" layoutY="316.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
-                  <Button fx:id="pane_button1" layoutX="363.0" layoutY="372.0" mnemonicParsing="false" text="GUZIK DODAJ" />
-                  <ImageView fx:id="pane_add_cover1" fitHeight="239.0" fitWidth="224.0" layoutX="538.0" layoutY="84.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../res/media/Brakokładki.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="pane_result_msg1" layoutX="518.0" layoutY="326.0" opacity="0.0" prefHeight="57.0" prefWidth="236.0" text="Label" />
-                  <ImageView fitHeight="57.0" fitWidth="40.0" layoutX="727.0" layoutY="14.0" onMouseClicked="#hide_pane" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="pane_search_user" alignment="CENTER" layoutX="78.0" layoutY="30.0" onKeyPressed="#rent_activate" prefHeight="40.0" prefWidth="610.0" promptText="Wpisz numer karty użytkownika i naciśnij enter" styleClass="search_field" />
+                  <AnchorPane fx:id="pane_search_result" layoutY="93.0" opacity="0.0" prefHeight="340.0" prefWidth="781.0" />
+                  <ImageView fitHeight="57.0" fitWidth="40.0" layoutX="718.0" layoutY="5.0" onMouseClicked="#hide_panes" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../res/icons/dark/close.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="pane_txt_61" layoutX="420.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_71" layoutX="420.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_81" layoutX="420.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_91" layoutX="420.0" layoutY="261.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
-                  <TextField fx:id="pane_txt_101" layoutX="420.0" layoutY="316.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 5" styleClass="search_field" />
                </children>
             </AnchorPane>
          </children>

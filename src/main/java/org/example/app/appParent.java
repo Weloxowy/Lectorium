@@ -21,7 +21,6 @@ import javafx.stage.StageStyle;
 import org.example.Katalog;
 import org.example.Main;
 import org.example.User;
-import org.example.app.admin.adminController;
 import org.example.app.admin.catalogManagerController;
 import org.example.app.admin.userManagerController;
 import org.example.app.home.*;
@@ -161,20 +160,6 @@ public class appParent {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
-        if(User.getInstance().getCzy_admin().contentEquals("T")){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/adminPanel.fxml"));
-                parent = loader.load();
-                adminController controller = loader.getController();
-                controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-                stage.setScene(scene);
-                controller.font(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        else {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
                 parent = loader.load();
@@ -186,7 +171,6 @@ public class appParent {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
     }
 
     @FXML
@@ -254,18 +238,18 @@ public class appParent {
         searchbar.setFont(pop_r_h1);
     }
 
-    protected void katalog_item(MouseEvent event, int row,boolean if_admin) {
+    protected void katalog_item(MouseEvent event, int id_egz,boolean if_admin) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             size_guard(stage);
             Parent parent;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
                 parent = loader.load();
-                dbload.get_cover(row);
+                dbload.get_cover(id_egz);
                 katalog_itemcontroller kat = loader.getController();
                 kat.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
                 kat.if_adm = if_admin;
-                kat.load(row-1);
+                kat.load(id_egz);
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 kat.font(scene);
@@ -314,7 +298,7 @@ public class appParent {
 
     }
 
-    final TableView<Katalog> lista = new TableView<>();
+    final TableView<Katalog> lista = new TableView<>(); //wyciągnąć to do katalog_managera
     public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
         dbload.print_book();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
@@ -468,8 +452,6 @@ public class appParent {
             scene.getStylesheets().clear();
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.admin/admin.css")).toExternalForm());
             scene.getRoot().applyCss();
-            Label labelbiblioteka = (Label) scene.lookup("#labelbiblioteka");
-            labelbiblioteka.setText("Panel Administratora");
             Label labelrezerwacje = (Label) scene.lookup("#labelrezerwacje");
             labelrezerwacje.setText("Zarządzanie użytkownikami");
             Label labelwypozyczenia = (Label) scene.lookup("#labelwypozyczenia");
@@ -485,25 +467,6 @@ public class appParent {
     protected void size_guard(Stage stage){
         stage.setMinHeight(768);
         stage.setMinWidth(1250);
-    }
-
-    @FXML       //NIE USUWAĆ, NA POTEM
-    void Controller(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        size_guard(stage);
-        System.out.println(((Node) event.getSource()).getId().toString());
-        Parent parent;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/nowosci.fxml"));
-            parent = loader.load();
-            nowosciController nowosci = loader.getController();
-            nowosci.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-            stage.setScene(scene);
-            nowosci.font(scene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

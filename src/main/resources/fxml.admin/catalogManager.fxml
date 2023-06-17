@@ -173,7 +173,7 @@
          <children>
             <AnchorPane layoutX="313.0" layoutY="173.0" prefHeight="432.0" prefWidth="781.0" styleClass="color_change_add_egz">
                <children>
-                  <Label fx:id="pane_tytul" layoutX="377.0" layoutY="41.0" text="Tytuł funkcji" />
+                  <Label fx:id="pane_tytul" alignment="CENTER" layoutX="3.0" layoutY="41.0" prefHeight="18.0" prefWidth="771.0" text="Tytuł funkcji" />
                   <TextField fx:id="pane_txt_1" layoutX="51.0" layoutY="94.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 1" styleClass="search_field" />
                   <TextField fx:id="pane_txt_2" layoutX="52.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 2" styleClass="search_field" />
                   <TextField fx:id="pane_txt_3" layoutX="52.0" layoutY="203.0" opacity="0.0" prefHeight="26.0" prefWidth="346.0" promptText="Pole tekstowe 3" styleClass="search_field" />

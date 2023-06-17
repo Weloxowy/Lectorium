@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -91,6 +92,7 @@ public class catalogManagerController extends appParent{
     @FXML
     private GridPane grid;
 
+
     boolean sec = false;
 
     public void init(String imie, String nazwisko) {
@@ -108,6 +110,9 @@ public class catalogManagerController extends appParent{
         root_anchor.setLeftAnchor(pane_id_masked,0.0);
         root_anchor.setRightAnchor(pane_id_masked,0.0);
         root_anchor.setBottomAnchor(pane_id_masked,0.0);
+        if(dbload.array.isEmpty()){
+            dbload.print_book();
+        }
     }
 
     @FXML
@@ -130,6 +135,16 @@ public class catalogManagerController extends appParent{
         pane_txt_4.setFont(pop_r_h2);
         TextField pane_txt_5 = (TextField) scene.lookup("#pane_txt_5");
         pane_txt_5.setFont(pop_r_h2);
+        TextField pane_txt_6 = (TextField) scene.lookup("#pane_txt_6");
+        pane_txt_6.setFont(pop_r_h2);
+        TextField pane_txt_7 = (TextField) scene.lookup("#pane_txt_7");
+        pane_txt_7.setFont(pop_r_h2);
+        TextField pane_txt_8 = (TextField) scene.lookup("#pane_txt_8");
+        pane_txt_8.setFont(pop_r_h2);
+        TextField pane_txt_9 = (TextField) scene.lookup("#pane_txt_9");
+        pane_txt_9.setFont(pop_r_h2);
+        TextField pane_txt_10 = (TextField) scene.lookup("#pane_txt_10");
+        pane_txt_10.setFont(pop_r_h2);
         Button pane_button = (Button) scene.lookup("#pane_button");
         pane_button.setFont(pop_b_h2);
         Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
@@ -158,7 +173,7 @@ public class catalogManagerController extends appParent{
         pane_tytul.setText("Dodaj egzemplarz książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj nazwę książki"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj nazwę książki"); //ustawiamy to, co jest widoczne jak pole jest puste
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
         pane_txt_2.setPromptText("Podaj lokalizację egzemplarza");

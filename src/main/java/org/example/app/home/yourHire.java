@@ -106,7 +106,6 @@ public class yourHire extends appParent {
     }
 
     public void Lista_Hire(int id) {
-
         dbload.yourHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
@@ -168,6 +167,7 @@ public class yourHire extends appParent {
                                 {
                                     suma_zadluzenia += pam ;
                                 }
+                                suma_zadluzenia = currency.parse(String.valueOf(suma_zadluzenia)).doubleValue();
                                 yourHire_name.setText("Suma zadłużenia użytkownika wynosi " + suma_zadluzenia + " zł");
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -205,8 +205,8 @@ public class yourHire extends appParent {
                     LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
                     LocalDate currentDate = LocalDate.now(); //aktualna data
                     if (newVal != null && Integer.parseInt(newVal) < 3 && dataZwrotu.isAfter(currentDate)) { //jezeli nie przedluzylismy wiecej niz 2 razy i data_zwrotu nie mineła to tworzymy grafike
-                        Node centreBox = createPriorityGraphic(); //tworzenie grafiki -> funkcja na koncu klasy
-                        cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox)); //ustawianie granic wielkosci
+                        //Node centreBox = createPriorityGraphic(); //tworzenie grafiki -> funkcja na koncu klasy
+                        //cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox)); //ustawianie granic wielkosci
 
                         cell.setOnMouseClicked(event -> { //jezeli klikniemy na guzik dokonujemy przedluzenia o 30 dni
                             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) { //klikniecie nastapilo dwa razy PPM
@@ -339,16 +339,6 @@ public class yourHire extends appParent {
             items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
         }
         lista.setItems(items);
-    }
-
-    private Node createPriorityGraphic(){
-        HBox graphicContainer = new HBox();
-        graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));
-        imageView.setFitHeight(25);
-        imageView.setPreserveRatio(true);
-        graphicContainer.getChildren().add(imageView);
-        return graphicContainer;
     }
 
     @FXML

@@ -11,6 +11,7 @@ public class User {
     static String nazwisko;
     static int id;
     static String czy_admin;
+    static String czy_zablokowany;
     Image image;
 
     public static User getInstance() {
@@ -65,5 +66,11 @@ public class User {
         User.instance = instance;
     }
 
+    public String getCzy_zablokowany() {
+        return czy_zablokowany;
+    }
 
+    public void setCzy_zablokowany(String czy_zablokowany) {
+        User.czy_zablokowany = czy_zablokowany;
+    }
 }

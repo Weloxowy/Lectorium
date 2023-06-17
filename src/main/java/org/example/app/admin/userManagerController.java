@@ -2,26 +2,43 @@ package org.example.app.admin;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
+import org.example.Main;
 import org.example.Users;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import org.example.User;
+import org.example.Wypozyczenia;
 import org.example.app.appParent;
+
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.Main.dbload;
 
@@ -62,7 +79,7 @@ public class userManagerController extends appParent {
     private Label labelrezerwacje;
 
     @FXML
-    private Label labelwypozyczenia;
+    public Label labelwypozyczenia;
 
     @FXML
     private ImageView logout;
@@ -73,9 +90,12 @@ public class userManagerController extends appParent {
     @FXML
     private Pane pane_id_masked;
 
+    @FXML
+    private Pane pane_id_masked_log;
 
     @FXML
-    private Pane pane_id_masked1;
+    public AnchorPane pane_search_result;
+
     @FXML
     private AnchorPane root_anchor;
 
@@ -83,8 +103,14 @@ public class userManagerController extends appParent {
     private GridPane grid;
 
     @FXML
+    private TextField pane_search_user;
+    @FXML
     final TableView<Users> lista = new TableView<>();
 
+    @FXML
+    final TableView<Wypozyczenia> lista_rent = new TableView<>();
+
+    boolean activate_diff = false;
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -92,6 +118,7 @@ public class userManagerController extends appParent {
         Katalog_lista_adminUser();
         labelrezerwacje.setStyle("-fx-text-fill:#808080");
         pane_id_masked.setVisible(false);
+        pane_id_masked_log.setVisible(false);
         root_anchor.setTopAnchor(grid,0.0);
         root_anchor.setLeftAnchor(grid,0.0);
         root_anchor.setRightAnchor(grid,0.0);
@@ -100,17 +127,47 @@ public class userManagerController extends appParent {
         root_anchor.setLeftAnchor(pane_id_masked,0.0);
         root_anchor.setRightAnchor(pane_id_masked,0.0);
         root_anchor.setBottomAnchor(pane_id_masked,0.0);
+        root_anchor.setTopAnchor(pane_id_masked_log,0.0);
+        root_anchor.setLeftAnchor(pane_id_masked_log,0.0);
+        root_anchor.setRightAnchor(pane_id_masked_log,0.0);
+        root_anchor.setBottomAnchor(pane_id_masked_log,0.0);
 
-        root_anchor.setTopAnchor(pane_id_masked1,0.0);
-        root_anchor.setLeftAnchor(pane_id_masked1,0.0);
-        root_anchor.setRightAnchor(pane_id_masked1,0.0);
-        root_anchor.setBottomAnchor(pane_id_masked1,0.0);
     }
 
     @FXML
     public void font(Scene scene) {
         super.font(scene);
-
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
+        Label pane_tytul = (Label) scene.lookup("#pane_tytul");
+        pane_tytul.setFont(pop_b_h2);
+        TextField pane_txt_1 = (TextField) scene.lookup("#pane_txt_1");
+        pane_txt_1.setFont(pop_r_h2);
+        TextField pane_txt_2 = (TextField) scene.lookup("#pane_txt_2");
+        pane_txt_2.setFont(pop_r_h2);
+        TextField pane_txt_3 = (TextField) scene.lookup("#pane_txt_3");
+        pane_txt_3.setFont(pop_r_h2);
+        TextField pane_txt_4 = (TextField) scene.lookup("#pane_txt_4");
+        pane_txt_4.setFont(pop_r_h2);
+        TextField pane_txt_5 = (TextField) scene.lookup("#pane_txt_5");
+        pane_txt_5.setFont(pop_r_h2);
+        TextField pane_txt_6 = (TextField) scene.lookup("#pane_txt_6");
+        pane_txt_6.setFont(pop_r_h2);
+        TextField pane_txt_7 = (TextField) scene.lookup("#pane_txt_7");
+        pane_txt_7.setFont(pop_r_h2);
+        TextField pane_txt_8 = (TextField) scene.lookup("#pane_txt_8");
+        pane_txt_8.setFont(pop_r_h2);
+        TextField pane_txt_9 = (TextField) scene.lookup("#pane_txt_9");
+        pane_txt_9.setFont(pop_r_h2);
+        TextField pane_txt_10 = (TextField) scene.lookup("#pane_txt_10");
+        pane_txt_10.setFont(pop_r_h2);
+        Button pane_button = (Button) scene.lookup("#pane_button");
+        pane_button.setFont(pop_b_h2);
+        Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+        pane_result_msg.setFont(pop_b_h2);
     }
 
     void avatar_view() {
@@ -136,21 +193,25 @@ public class userManagerController extends appParent {
         name.setCellValueFactory(
                 new PropertyValueFactory<>("imie_katalog"));
 
-
         TableColumn<Users, ?> surname = new TableColumn<>("Nazwisko");
         surname.setMinWidth(anchortable.getPrefWidth()*0.25);
         surname.setCellValueFactory(
                 new PropertyValueFactory<>("nazwisko_katalog"));
 
         TableColumn<Users, ?> id_user = new TableColumn<>("Id_użytkownika");
-        id_user.setMinWidth(anchortable.getPrefWidth()*0.25);
+        id_user.setMinWidth(anchortable.getPrefWidth()*0.15);
         id_user.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
 
         TableColumn<Users, ?> check_admin = new TableColumn<>("Czy administrator?");
-        check_admin.setMinWidth(anchortable.getPrefWidth()*0.25);
+        check_admin.setMinWidth(anchortable.getPrefWidth()*0.15);
         check_admin.setCellValueFactory(
                 new PropertyValueFactory<>("czy_admin_katalog"));
+
+        TableColumn<Users, ?> block_user = new TableColumn<>("Czy użytkownik jest zablokowany?");
+        block_user.setMinWidth(anchortable.getPrefWidth()*0.15);
+        block_user.setCellValueFactory(
+                new PropertyValueFactory<>("czy_zablokowany"));
 
 
         for(String[] tab: dbload.lista) {
@@ -158,7 +219,8 @@ public class userManagerController extends appParent {
             String imie = tab[0];
             String nazwisko = tab[1];
             String czy_dostepne = tab[3];
-            items.add(new Users(imie,nazwisko,id,czy_dostepne));
+            String czy_zablokowany = tab[4];
+            items.add(new Users(imie,nazwisko,id,czy_dostepne,czy_zablokowany));
 
         }
         //Dodaj wartości do kolumn
@@ -166,7 +228,7 @@ public class userManagerController extends appParent {
         //Ustaw wysokosc wierszy na 30px
         lista.setFixedCellSize(30);
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll(name, surname, id_user, check_admin);
+        lista.getColumns().addAll(name, surname, id_user, check_admin,block_user);
         // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
@@ -248,8 +310,28 @@ public class userManagerController extends appParent {
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj użytkownika");
+
+        ArrayList<TextField> textFields = new ArrayList<>(); //przyda się do hurtowego sprawdzania warunków
+        textFields.add(pane_txt_1);
+        textFields.add(pane_txt_2);
+        textFields.add(pane_txt_3);
+        textFields.add(pane_txt_4);
+        textFields.add(pane_txt_5);
+
         pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+
+            for (TextField field: textFields) {
+                if(field.getText().isEmpty()) {
+                    pane_result_msg.setText("Użytkownika nie udało sie dodać");
+                    Timeline timeline = new Timeline(new KeyFrame(
+                        Duration.seconds(3),
+                        event2 -> pane_result_msg.setOpacity(0.0)
+                    ));
+                pane_result_msg.setOpacity(1.0);
+                timeline.play();
+                }}
+
             int ret = dbload.add_user(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
             if(ret>0){
                 pane_result_msg.setText("Użytkownik dodany");
@@ -354,7 +436,210 @@ public class userManagerController extends appParent {
     }
 
     @FXML
-    public void hide_pane(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
+    void usun_uzytkownika(){
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Usuwanie użytkownika");
+    TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj login użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+
+    Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Usuń użytkownika");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+            int ret;
+        if(Integer.parseInt(pane_txt_1.getText()) == User.getInstance().getId()){
+            ret=0;
+        }
+        else{
+            ret = dbload.delete_user(pane_txt_1.getText());
+        }
+        if(ret>0){
+            pane_result_msg.setText("Uprawnienia zmodyfikowane");
+        }
+        else{
+            pane_result_msg.setText("Uprawnień nie udało sie zmodyfikować");
+        }
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(3),
+                event2 -> pane_result_msg.setOpacity(0.0)
+        ));
+        pane_result_msg.setOpacity(1.0);
+
+        timeline.play();
+    });
+        pane_id_masked.setVisible(true);
+}
+
+    @FXML
+    void zablokuj_uzytkownika(){
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        pane_tytul.setText("Blokowanie/ Odblokowywanie użytkownika");
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        pane_txt_1.setOpacity(1.0);
+        pane_txt_1.setPromptText("Podaj login użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+
+        Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
+        pane_button.setText("Zablokuj/Oblokuj użytkownika");
+        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+            Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
+
+            int ret = 0;
+            for (String[] gbs: dbload.lista) {
+                if(gbs[0] == pane_txt_1.getText()){
+                    ret = dbload.block_user(pane_txt_1.getText(),gbs[4]);
+                }
+            }
+
+            if(ret>0){
+                pane_result_msg.setText("Zmieniony stan blokady.");
+            }
+            else{
+                pane_result_msg.setText("Błąd w zmienianiu stanu blokady.");
+            }
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event2 -> pane_result_msg.setOpacity(0.0)
+            ));
+            pane_result_msg.setOpacity(1.0);
+
+            timeline.play();
+        });
+        pane_id_masked.setVisible(true);
+    }
+
+    @FXML
+    public void rent_activate(KeyEvent event){
+        if (event.getCode() == KeyCode.ENTER) {
+            event.consume();
+            if(!pane_search_user.toString().isEmpty() && !pane_search_user.getText().isBlank()
+                    && pane_search_user.getText().matches("[0-9]+") ) {
+                init_rent_list(Integer.parseInt(pane_search_user.getText()));
+            }
+            pane_search_result.setOpacity(1.0);
+        }
+    }
+
+    @FXML
+    public void check_rent(MouseEvent event){
+        pane_id_masked_log.setVisible(true);
+        //activate_diff = true;
+    }
+
+    @FXML
+    public void check_res(MouseEvent event){
+        pane_id_masked_log.setVisible(true);
+        //activate_diff = false;
+    }
+
+    public void init_rent_list(int id){
+        dbload.yourHireInformation(id);
+        ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
+
+            TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
+            autorCol.setMinWidth(pane_search_result.getPrefWidth() * 0.2);
+            autorCol.setCellValueFactory(
+                    new PropertyValueFactory<>("nazwa_autora"));
+
+            TableColumn<Wypozyczenia, ?> nazwaCol = new TableColumn<>("Nazwa");
+            nazwaCol.setMinWidth(pane_search_result.getPrefWidth() * 0.2);
+            nazwaCol.setCellValueFactory(
+                    new PropertyValueFactory<>("nazwa"));
+
+            TableColumn<Wypozyczenia, ?> egzemplarzeCol = new TableColumn<>("Numer egzemplarza");
+            egzemplarzeCol.setMinWidth(pane_search_result.getPrefWidth() * 0.15);
+            egzemplarzeCol.setCellValueFactory(
+                    new PropertyValueFactory<>("id_egzemplarze"));
+
+            TableColumn<Wypozyczenia, ?> data_wypozyczeniaCol = new TableColumn<>("Data wypozyczenia");
+            data_wypozyczeniaCol.setMinWidth(pane_search_result.getPrefWidth() * 0.15);
+            data_wypozyczeniaCol.setCellValueFactory(
+                    new PropertyValueFactory<>("data_wypozyczenia"));
+
+            TableColumn<Wypozyczenia, ?> data_zwrotuCol = new TableColumn<>("Termin zwrotu");
+            data_zwrotuCol.setMinWidth(pane_search_result.getPrefWidth() * 0.1);
+            data_zwrotuCol.setCellValueFactory(
+                    new PropertyValueFactory<>("data_zwrotu"));
+            TableColumn<Wypozyczenia, String> grzywnaCol = new TableColumn<>("Grzywna");
+            grzywnaCol.setMinWidth(pane_search_result.getPrefWidth() * 0.1);
+            grzywnaCol.setCellValueFactory(
+                    new PropertyValueFactory<>("data_zwrotu"));
+
+            grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
+                TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
+                AtomicReference<Double> suma = new AtomicReference<>((double) 0);
+                cell.itemProperty().addListener((obs, old, newVal) -> {
+                    String debt;
+                    List<Double> lista_rent = new ArrayList<>();
+                    int rowIndex = cell.getIndex();
+                    if (data_zwrotuCol.getCellObservableValue(rowIndex) != null) {
+                        String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
+                        LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
+                        LocalDate currentDate = LocalDate.now(); //aktualna data
+
+                        if (dataZwrotu.isAfter(currentDate)) {
+                            cell.setText(" - ");
+                        } else if (dataZwrotu.isBefore(currentDate)) {
+                            DecimalFormat currency = new DecimalFormat("#0.00");
+                            int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
+                            debt = String.valueOf(currency.format(diff * 0.2));
+                            cell.setText(debt + " zł");
+                            double konwert = 0;
+                            try {
+                                konwert = currency.parse(debt).doubleValue();
+                                lista_rent.add(konwert);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
+                });
+                return cell;
+            });
+
+        for (String[] tab : dbload.ListHire) {
+            String id_egzemplarze = tab[0];
+            String nazwa = tab[1];
+            String nazwa_autora = tab[2];
+            String data_wypozyczenia = tab[3];
+            String data_zwrotu = tab[4];
+            String ilosc_przedluzen = tab[5];
+            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
+        }
+        //Dodaj wartości do kolumn
+        lista_rent.getItems().clear();
+        lista_rent.setItems(items);
+        //Dodaj kolumny do tabeli
+        if(lista_rent.getColumns().size() == 0) {
+            lista_rent.getColumns().addAll(nazwaCol, egzemplarzeCol, autorCol, data_wypozyczeniaCol, data_zwrotuCol, grzywnaCol);
+        }
+        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+        lista_rent.setPlaceholder(new Label("Brak rekordów. Sprawdź poprawność identyfikatora użytkownika."));
+        //Ustaw wysokosc wierszy na 30px
+        lista_rent.setFixedCellSize(30);
+        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+        lista_rent.prefWidthProperty().bind(pane_search_result.heightProperty());
+        lista_rent.prefWidthProperty().bind(pane_search_result.widthProperty());
+        // Powiąż preferowane wielkości TableView i AnchorPane
+        lista_rent.prefWidthProperty().bind(pane_search_result.widthProperty());
+        lista_rent.prefHeightProperty().bind(pane_search_result.heightProperty());
+        // Dodaj TableView do AnchorPane
+        pane_search_result.getChildren().clear();
+        pane_search_result.getChildren().addAll(lista_rent);
+        // Ustaw parametry kotwiczenia TableView na wartość 0
+        AnchorPane.setTopAnchor(lista_rent, 0.0);
+        AnchorPane.setLeftAnchor(lista_rent, 0.0);
+        AnchorPane.setBottomAnchor(lista_rent, 0.0);
+        AnchorPane.setRightAnchor(lista_rent, 0.0);
+
+        lista_rent.getStylesheets().add("/fxml.home/home.css");
+    }
+
+
+    @FXML
+    public void hide_panes(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(0.0);
         pane_txt_1.clear();
@@ -395,6 +680,9 @@ public class userManagerController extends appParent {
         ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
         pane_add_cover.setOpacity(0.0);
         pane_id_masked.setVisible(false);
+
+        pane_id_masked_log.setVisible(false);
     }
+
 
 }

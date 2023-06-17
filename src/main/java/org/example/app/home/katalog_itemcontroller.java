@@ -84,9 +84,17 @@ public class katalog_itemcontroller extends appParent {
         year_book.setFont(pop_r_h1);
     }
 
-    public void load(int id) { //ladujemy po lp. wiersza z tabeli
-        String[] tab = dbload.array.get(id);
-        if (tab[0] != null) {
+    public void load(int id_egz) { //ladujemy po id ksiazki
+        String[] tab = null;
+
+        for (String[] arrayItem : dbload.array) {
+            if (arrayItem.length > 0 && arrayItem[0].equals(String.valueOf(id_egz))) {
+                tab = arrayItem;
+                break;
+            }
+        }
+
+        if (tab != null) {
             author_book.setText("Autor: " + tab[2]);
             title_book.setText("\"" + tab[1] + "\"");
             year_book.setText("Rok wydania: " + tab[3]);
@@ -99,7 +107,7 @@ public class katalog_itemcontroller extends appParent {
                 text = tab[1];
             }
             background_tytul.setText(text);
-            egzemplarz_lista(id + 1);
+            egzemplarz_lista(id_egz);
         }
     }
 
@@ -153,6 +161,9 @@ public class katalog_itemcontroller extends appParent {
         TableColumn<Egzemplarze,String> wypozyczCol = new TableColumn<>("Zarezerwuj");
         wypozyczCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         wypozyczCol.setCellValueFactory(new PropertyValueFactory<>("czy_dostepne"));
+        if(User.getInstance().getCzy_admin().contentEquals("T")){
+            wypozyczCol.setVisible(false);
+        }
         wypozyczCol.setCellFactory(col -> {
             TableCell<Egzemplarze, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {

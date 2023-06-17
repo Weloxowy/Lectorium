@@ -75,10 +75,12 @@ public class dbloader {
                 final String name = resultSet.getString("imie");
                 final String last_name = resultSet.getString("nazwisko");
                 final String czy_admin = resultSet.getString("czy_admin");
+                final String czy_zablokowany = resultSet.getString("czy_zablokowany");
                 User.getInstance().setImie(name);
                 User.getInstance().setNazwisko(last_name);
                 User.getInstance().setCzy_admin(czy_admin);
                 User.getInstance().setId(id);
+                User.getInstance().setCzy_zablokowany(czy_zablokowany);
                 getimage(id);
                 resultSet.close();
                 closeConnection();
@@ -613,7 +615,7 @@ public class dbloader {
     public ArrayList<String[]> lista = new ArrayList<>();
     public void print_users() {
         connectToDatabase();
-        String print = "Select id_uzytkownicy, imie, nazwisko, czy_admin from uzytkownicy";
+        String print = "Select id_uzytkownicy, imie, nazwisko, czy_admin, czy_zablokowany from uzytkownicy";
         try {
             lista.clear(); //unikamy ładowania wiele razy tych samych rekordow
             PreparedStatement statement = connection.prepareStatement(print);
@@ -623,9 +625,10 @@ public class dbloader {
                 String imie = resultSet.getString("imie");
                 String nazwisko = resultSet.getString("nazwisko");
                 String czy_admin = resultSet.getString("czy_admin");
-                String[] row = {imie, nazwisko,String.valueOf(id_uzytkownicy), czy_admin};
+                String czy_zablokowany = resultSet.getString("czy_zablokowany");
+                String[] row = {imie, nazwisko,String.valueOf(id_uzytkownicy), czy_admin, czy_zablokowany};
                 lista.add(row);
-                //System.out.println(imie + " " + nazwisko + " " + czy_admin + " " + id_uzytkownicy);
+                //System.out.println(imie + " " + nazwisko + " " + czy_admin + " " + id_uzytkownicy+" "+czy_zablokowany);
             }
             resultSet.close();
             closeConnection();
@@ -741,13 +744,14 @@ public class dbloader {
         }
     }
 
-
     public int add_to_database(String czy_dostepne, String lokalizacja, String katalog) {
         connectToDatabase();
-        String insertUserSQL = "INSERT INTO egzemplarze (czy_dostepne, lokalizacja, katalog_id_katalog)\n" +
-                "SELECT  ?, ?, k.id_katalog\n" +
-                "FROM katalog k\n" +
-                "WHERE k.nazwa = ?;\n";
+        String insertUserSQL = """
+                INSERT INTO egzemplarze (czy_dostepne, lokalizacja, katalog_id_katalog)
+                SELECT  ?, ?, k.id_katalog
+                FROM katalog k
+                WHERE k.nazwa = ?;
+                """;
         try {
             PreparedStatement statement = connection.prepareStatement(insertUserSQL);
             statement.setString(1, czy_dostepne);
@@ -1049,7 +1053,43 @@ public class dbloader {
         }
         closeConnection();
         return 0;
+    }
 
+    public int delete_user(String id_user){
+        connectToDatabase();
+        String insertUserSQL = "DELETE uzytkownicy \n" +
+                "where id_uzytkownicy =?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, id_user);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
+    }
+
+    public int block_user(String id_user, String param){
+        connectToDatabase();
+        String insertUserSQL = "UPDATE uzytkownicy SET czy_zablokowany='?'\n" +
+                "where id_uzytkownicy =?;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertUserSQL);
+            statement.setString(1, param);
+            statement.setString(2, id_user);
+            int ret =  statement.executeUpdate();
+            closeConnection();
+            return ret;
+        } catch (SQLException e) {
+            /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
+            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+        }
+        closeConnection();
+        return 0;
     }
 }
 
