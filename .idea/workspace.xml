@@ -8,12 +8,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.8.2">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Egzemplarze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Egzemplarze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Rezerwacje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Rezerwacje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Wypozyczenia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Wypozyczenia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,14 +252,7 @@
       <option name="project" value="LOCAL" />
       <updated>1686245851247</updated>
     </task>
-    <task id="LOCAL-00019" summary="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki">
-      <created>1686992011491</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1686992011491</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -297,8 +296,7 @@
     <MESSAGE value="v0.7.4 - update katalog_itemcontroller dla usera" />
     <MESSAGE value="v0.7.4 - p" />
     <MESSAGE value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
-    <MESSAGE value="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -309,12 +307,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>240</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>320</line>
+          <line>275</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -334,13 +327,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java</url>
-          <line>117</line>
+          <line>114</line>
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java</url>
-          <line>137</line>
-          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -350,7 +338,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/abte$Main.ic" NAME="Main Coverage Results" MODIFIED="1681133045533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/verify$Main.ic" NAME="Main Coverage Results" MODIFIED="1679141270880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/abte$Main.ic" NAME="Main Coverage Results" MODIFIED="1681133045533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

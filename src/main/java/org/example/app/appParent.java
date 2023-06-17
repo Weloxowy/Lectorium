@@ -22,7 +22,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.Katalog;
-import org.example.Main;
 import org.example.User;
 import org.example.app.admin.catalogManagerController;
 import org.example.app.admin.userManagerController;
@@ -74,7 +73,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista();
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -94,7 +93,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
             katalogcontroller kat = loader.getController();
-            kat.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista(query);
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -113,7 +112,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/kategorie.fxml"));
             parent = loader.load();
             kategoriecontroller controller = loader.getController();
-            controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            controller.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             controller.font(scene);
@@ -131,7 +130,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
             parent = loader.load();
             contactcontroller contact = loader.getController();
-            contact.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            contact.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             contact.font(scene);
@@ -149,7 +148,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
             parent = loader.load();
             homecontroller controller = loader.getController();
-            controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            controller.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             controller.font(scene);
@@ -167,7 +166,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
                 parent = loader.load();
                 yourLibraryController library = loader.getController();
-                library.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+                library.init(User.getImie(), User.getNazwisko());
                 Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
                 stage.setScene(scene);
                 library.font(scene);
@@ -185,7 +184,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourProfileController.fxml"));
             parent = loader.load();
             yourProfileController Profile = loader.getController();
-            Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            Profile.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             Profile.font(scene);
@@ -203,7 +202,7 @@ public class appParent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/nowosci.fxml"));
             parent = loader.load();
             nowosciController nowosci = loader.getController();
-            nowosci.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            nowosci.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
             nowosci.font(scene);
@@ -216,8 +215,6 @@ public class appParent {
         overrideLabels(scene);
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
-        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
         Label nametag = (Label) scene.lookup("#nametag");
         nametag.setFont(ssp_sb_h1);
@@ -250,7 +247,7 @@ public class appParent {
                 parent = loader.load();
                 dbload.get_cover(id_egz);
                 katalog_itemcontroller kat = loader.getController();
-                kat.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
+                kat.init(User.getImie(), User.getNazwisko());
                 kat.if_adm = if_admin;
                 kat.load(id_egz);
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
@@ -277,7 +274,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/catalogManager.fxml"));
                 parent = loader.load();
                 catalogManagerController Profile = loader.getController();
-                Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+                Profile.init(User.getImie(), User.getNazwisko());
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 Profile.font(scene);
@@ -290,7 +287,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
                 parent = loader.load();
                 yourHire Profile = loader.getController();
-                Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko(), event);
+                Profile.init(User.getImie(), User.getNazwisko(), event);
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 Profile.font(scene);
@@ -346,19 +343,6 @@ public class appParent {
         uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
-
-        /*lista.addEventFilter(ScrollEvent.SCROLL, event -> {
-            ScrollBar verticalScrollBar = getVerticalScrollBar(lista);
-            double verticalValue = verticalScrollBar.getValue();
-            double verticalMax = verticalScrollBar.getMax();
-
-            if (verticalValue > 0.8 * verticalMax) {
-                // Załaduj kolejne rekordy
-                loadNextRecords(items);
-                lista.setItems(items);
-            }
-        });
-        loadNextRecords(items);*/
         for (String[] tab: dbload.array) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
@@ -427,7 +411,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/userManager.fxml"));
                 parent = loader.load();
                 userManagerController Profile = loader.getController();
-                Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+                Profile.init(User.getImie(), User.getNazwisko());
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 Profile.font(scene);
@@ -440,7 +424,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourReservation.fxml"));
                 parent = loader.load();
                 yourReservation Profile = loader.getController();
-                Profile.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+                Profile.init(User.getImie(), User.getNazwisko());
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
                 Profile.font(scene);

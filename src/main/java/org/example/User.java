@@ -1,7 +1,5 @@
 package org.example;
 
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
 public class User {
@@ -27,7 +25,7 @@ public class User {
     }
 
     public void setImie(String imie) {
-        this.imie = imie;
+        User.imie = imie;
     }
 
     public static String getNazwisko() {
@@ -35,7 +33,7 @@ public class User {
     }
 
     public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
+        User.nazwisko = nazwisko;
     }
 
     public int getId() {
@@ -43,7 +41,7 @@ public class User {
     }
 
     public void setId(int id) {
-        this.id = id;
+        User.id = id;
     }
 
     public String getCzy_admin() {
@@ -51,7 +49,7 @@ public class User {
     }
 
     public void setCzy_admin(String czy_admin) {
-        this.czy_admin = czy_admin;
+        User.czy_admin = czy_admin;
     }
 
     public Image getImage() {

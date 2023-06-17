@@ -13,7 +13,7 @@ import org.example.verify.logincontroller;
 import java.io.IOException;
 
 public class Main extends Application {
-    static public Users users = new Users(null, null, 0, null, null);
+    //static public Users users = new Users(null, null, 0, null, null);
     static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null,null,null);
     static public dbloader dbload = new dbloader();
 
@@ -21,7 +21,7 @@ public class Main extends Application {
 
     static public Rezerwacje rezerwacje = new Rezerwacje(null,null,null,null,null,null, null);
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage){
         Image icon = new Image("res/logo/Lectorium_logo.png");
         stage.getIcons().add(icon);
         try {

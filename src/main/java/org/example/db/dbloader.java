@@ -217,51 +217,6 @@ public class dbloader {
             closeConnection();
         }
     }
-
-    public ArrayList<String[]> copy = new ArrayList<>();
-
-    public void print_copies(int id) { //TODO do poprawy zapytanie; potrójne zagnieżdzenie?
-        connectToDatabase();
-        String print = "SELECT katalog.nazwa, egzemplarze.id_egzemplarze, egzemplarze.lokalizacja,\n" +
-                "       CASE\n" +
-                "           WHEN egzemplarze.czy_dostepne = 'N' AND rezerwacje.egzemplarze_id_egzemplarze IS NOT NULL THEN 'R'\n" +
-                "           WHEN egzemplarze.czy_dostepne = 'N' AND wypozyczenia.egzemplarze_id_egzemplarze IS NOT NULL THEN 'W'\n" +
-                "           ELSE egzemplarze.czy_dostepne\n" +
-                "       END AS skad,\n" +
-                "       CASE\n" +
-                "           WHEN (IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca) IS NULL OR IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca) > DATE('now')) THEN IFNULL(wypozyczenia.data_zwrotu, rezerwacje.data_konca)\n" +
-                "           ELSE NULL\n" +
-                "       END AS data_zwrotu\n" +
-                "FROM katalog\n" +
-                "JOIN egzemplarze ON egzemplarze.katalog_id_katalog = katalog.id_katalog\n" +
-                "LEFT JOIN wypozyczenia ON wypozyczenia.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
-                "LEFT JOIN rezerwacje ON rezerwacje.egzemplarze_id_egzemplarze = egzemplarze.id_egzemplarze\n" +
-                "WHERE katalog.id_katalog = ?\n" +
-                "ORDER BY data_zwrotu DESC;\n";
-        try {
-            copy.clear(); //unikamy ładowania wiele razy tych samych rekordow
-            PreparedStatement statement = connection.prepareStatement(print);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                final String nazwa = resultSet.getString("nazwa");
-                int id_egzemplarze = resultSet.getInt("id_egzemplarze");
-                final String lokalizacja = resultSet.getString("lokalizacja");
-                final String czy_dostepne = resultSet.getString("skad");
-                final String data_zwrotu = resultSet.getString("data_zwrotu");
-                String[] row = {nazwa, String.valueOf(id_egzemplarze), lokalizacja, czy_dostepne, data_zwrotu};
-                copy.add(row);
-            }
-            resultSet.close();
-            //closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
-            System.out.println("Error while dowloading data from DB: " + e.getMessage());
-            System.exit(100);
-        } finally {
-            closeConnection();
-        }
-    }
-
     public ArrayList<String[]> top = new ArrayList<>();
 
     public void get_top() {
@@ -584,12 +539,12 @@ public class dbloader {
         connectToDatabase();
         String print = "DELETE from rezerwacje where uzytkownicy_id_uzytkownicy = ? AND egzemplarze_id_egzemplarze = ?;";
         String print2 = "UPDATE egzemplarze SET czy_dostepne = 'T' where egzemplarze.id_egzemplarze = ?;";
-        int resultSet = 0;
+        int resultSet;
         try {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, User.getInstance().getId());
             statement.setInt(2, id_egzemplarz);
-            resultSet = statement.executeUpdate();
+            resultSet = statement.executeUpdate(); //tu nie jestem pewien
             statement.close();
             closeConnection();
         } catch (SQLException e) { //Error while connecting with DB
@@ -771,24 +726,26 @@ public class dbloader {
     public int add_one_record_from_catalog(String nazwa, String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String imie_autora, String nazwisko_autora, String nazwa_gatunku, String nazwa_wydawnictwa)
     {
         connectToDatabase();
-        String insertUserSQL = "INSERT INTO katalog (nazwa, rok_wydania, wydanie, isbn, jezyk, uwagi, autor_id_autor, gatunek_id_gatunek, wydawnictwo_id_wydawnictwo)\n" +
-                "SELECT ?, ?, ?, ?, ?,  ?, a.id_autor, g.id_gatunek, w.id_wydawnictwo\n" +
-                "FROM (\n" +
-                "    SELECT id_autor\n" +
-                "    FROM autor\n" +
-                "    WHERE imie_autora = ? AND nazwisko_autora = ?\n" +
-                ") a\n" +
-                "CROSS JOIN (\n" +
-                "    SELECT id_gatunek\n" +
-                "    FROM gatunek\n" +
-                "    WHERE nazwa_gatunku = ?\n" +
-                ") g\n" +
-                "CROSS JOIN (\n" +
-                "    SELECT id_wydawnictwo\n" +
-                "    FROM wydawnictwo\n" +
-                "    WHERE nazwa_wydawnictwa = ?\n" +
-                ") w;\n" +
-                "\n";
+        String insertUserSQL = """
+                INSERT INTO katalog (nazwa, rok_wydania, wydanie, isbn, jezyk, uwagi, autor_id_autor, gatunek_id_gatunek, wydawnictwo_id_wydawnictwo)
+                SELECT ?, ?, ?, ?, ?,  ?, a.id_autor, g.id_gatunek, w.id_wydawnictwo
+                FROM (
+                    SELECT id_autor
+                    FROM autor
+                    WHERE imie_autora = ? AND nazwisko_autora = ?
+                ) a
+                CROSS JOIN (
+                    SELECT id_gatunek
+                    FROM gatunek
+                    WHERE nazwa_gatunku = ?
+                ) g
+                CROSS JOIN (
+                    SELECT id_wydawnictwo
+                    FROM wydawnictwo
+                    WHERE nazwa_wydawnictwa = ?
+                ) w;
+
+                """;
         try {
             PreparedStatement statement = connection.prepareStatement(insertUserSQL);
             statement.setString(1, nazwa);
@@ -853,13 +810,15 @@ public class dbloader {
     public int delete_one_record_from_database(String katalog, String egzemplarz)
     {
         connectToDatabase();
-        String insertUserSQL = "DELETE FROM egzemplarze\n" +
-                "WHERE katalog_id_katalog IN (\n" +
-                "    SELECT id_katalog\n" +
-                "    FROM katalog\n" +
-                "    WHERE nazwa = ?\n" +
-                ")\n" +
-                "AND id_egzemplarze = ?;\n";
+        String insertUserSQL = """
+                DELETE FROM egzemplarze
+                WHERE katalog_id_katalog IN (
+                    SELECT id_katalog
+                    FROM katalog
+                    WHERE nazwa = ?
+                )
+                AND id_egzemplarze = ?;
+                """;
 
 
         try {
@@ -880,19 +839,21 @@ public class dbloader {
     public int delete_one_position_from_database(String nazwa, String isbn, String nazwa_gatunku, String nazwa_wydawnictwa)
     {
         connectToDatabase();
-        String insertUserSQL = "DELETE FROM katalog\n" +
-                "WHERE nazwa = ?\n" +
-                "  AND isbn = ?\n" +
-                "  AND gatunek_id_gatunek = (\n" +
-                "    SELECT id_gatunek\n" +
-                "    FROM gatunek\n" +
-                "    WHERE nazwa_gatunku = ?\n" +
-                "  )\n" +
-                "  AND wydawnictwo_id_wydawnictwo = (\n" +
-                "    SELECT id_wydawnictwo\n" +
-                "    FROM wydawnictwo\n" +
-                "    WHERE nazwa_wydawnictwa = ?\n" +
-                "  );\n";
+        String insertUserSQL = """
+                DELETE FROM katalog
+                WHERE nazwa = ?
+                  AND isbn = ?
+                  AND gatunek_id_gatunek = (
+                    SELECT id_gatunek
+                    FROM gatunek
+                    WHERE nazwa_gatunku = ?
+                  )
+                  AND wydawnictwo_id_wydawnictwo = (
+                    SELECT id_wydawnictwo
+                    FROM wydawnictwo
+                    WHERE nazwa_wydawnictwa = ?
+                  );
+                """;
 
 
         try {
@@ -916,16 +877,18 @@ public class dbloader {
     public int modify_egzemplarz(String czy_dostepne, String lokalizacja, String katalog, String id_egzemplarze)
     {
         connectToDatabase();
-        String insertUserSQL = "UPDATE egzemplarze\n" +
-                "SET czy_dostepne = ?,\n" +
-                "    lokalizacja = ?\n" +
-                "    \n" +
-                "WHERE katalog_id_katalog IN (\n" +
-                "    SELECT k.id_katalog\n" +
-                "    FROM katalog k\n" +
-                "    WHERE k.nazwa = ?\n" +
-                ")\n" +
-                "AND id_egzemplarze = ?;\n";
+        String insertUserSQL = """
+                UPDATE egzemplarze
+                SET czy_dostepne = ?,
+                    lokalizacja = ?
+                   \s
+                WHERE katalog_id_katalog IN (
+                    SELECT k.id_katalog
+                    FROM katalog k
+                    WHERE k.nazwa = ?
+                )
+                AND id_egzemplarze = ?;
+                """;
 
 
         try {
@@ -950,13 +913,14 @@ public class dbloader {
     public int modify_position(String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String id_katalog)
     {
         connectToDatabase();
-        String insertUserSQL = "UPDATE katalog\n" +
-                "SET rok_wydania = ?,\n" +
-                "    wydanie = ?,\n" +
-                "    isbn = ?,\n" +
-                "    jezyk = ?,\n" +
-                "    uwagi = ?\n" +
-                "WHERE id_katalog = ?;";
+        String insertUserSQL = """
+                UPDATE katalog
+                SET rok_wydania = ?,
+                    wydanie = ?,
+                    isbn = ?,
+                    jezyk = ?,
+                    uwagi = ?
+                WHERE id_katalog = ?;""";
 
 
         try {
@@ -1005,12 +969,13 @@ public class dbloader {
     public int change_user(String imie, String nazwisko, String login, String haslo, String id_uzytkownicy)
     {
         connectToDatabase();
-        String insertUserSQL = "Update uzytkownicy \n" +
-                "SET imie = ?,\n" +
-                "nazwisko = ?,\n" +
-                "login = ?,\n" +
-                "haslo = ?\n" +
-                "where id_uzytkownicy = ?;";
+        String insertUserSQL = """
+                Update uzytkownicy\s
+                SET imie = ?,
+                nazwisko = ?,
+                login = ?,
+                haslo = ?
+                where id_uzytkownicy = ?;""";
 
 
         try {
@@ -1036,9 +1001,10 @@ public class dbloader {
     public int modify_uprawnienia(String czy_admin, String id_uzytkownicy)
     {
         connectToDatabase();
-        String insertUserSQL = "Update uzytkownicy \n" +
-                "SET czy_admin = ?\n" +
-                "where id_uzytkownicy =?;";
+        String insertUserSQL = """
+                Update uzytkownicy\s
+                SET czy_admin = ?
+                where id_uzytkownicy =?;""";
         try {
             PreparedStatement statement = connection.prepareStatement(insertUserSQL);
             statement.setString(1, czy_admin);

@@ -1,5 +1,4 @@
 package org.example;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleStringProperty;
 public class Rezerwacje {
 
