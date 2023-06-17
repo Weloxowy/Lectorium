@@ -257,21 +257,21 @@ public class yourReservation extends appParent {
 
             items.add(new Rezerwacje(id_egzemplarze,nazwa, nazwa_autora, data_konca, data_rezerwacji,  przedluz_rezerwacje, anuluj_rezerwacje));
         }
-        //Dodaj wartości do kolumn
+
         lista.setItems(items);
-        //Dodaj kolumny do tabeli
+
         lista.getColumns().addAll(egzemplarzeCol, nazwaCol,  autorCol, data_koncaCol,data_rezerwacjiCol,przedluz_rezerwacjeCol, anuluj_rezerwacjeCol);
-        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista.setPrefWidth(anchor_hire.getPrefWidth());
         lista.setPrefHeight(anchor_hire.getPrefHeight());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista.prefWidthProperty().bind(anchor_hire.widthProperty());
         lista.prefHeightProperty().bind(anchor_hire.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         anchor_hire.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(lista, 0.0);
         AnchorPane.setLeftAnchor(lista, 0.0);
         AnchorPane.setBottomAnchor(lista, 0.0);

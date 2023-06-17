@@ -70,7 +70,7 @@ public class katalogcontroller extends appParent {
     @FXML
     private AnchorPane anchortable = new AnchorPane();
 
-    private int lastLoadedIndex = 0; // zmienna przechowująca numer ostatnio pobranego rekordu
+    private int lastLoadedIndex = 0;
 
 
     public void Katalog_lista() {
@@ -124,7 +124,7 @@ public class katalogcontroller extends appParent {
             double verticalMax = verticalScrollBar.getMax();
 
             if (verticalValue > 0.8 * verticalMax) {
-                // Załaduj kolejne rekordy
+
                 loadNextRecords(items);
                 lista.setItems(items);
             }
@@ -132,21 +132,21 @@ public class katalogcontroller extends appParent {
 
         loadNextRecords(items);
 
-        //Dodaj wartości do kolumn
+
         lista.setItems(items);
-        //Ustaw wysokosc wierszy na 30px
+
         lista.setFixedCellSize(30);
-        //Dodaj kolumny do tabeli
+
         lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         anchortable.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(lista, 0.0);
         AnchorPane.setLeftAnchor(lista, 0.0);
         AnchorPane.setBottomAnchor(lista, 0.0);
@@ -159,7 +159,7 @@ public class katalogcontroller extends appParent {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
 
-                katalog_item(event,data,false);//get data
+                katalog_item(event,data,false);
             }
         });
     }
@@ -212,37 +212,35 @@ public class katalogcontroller extends appParent {
         for (String[] tab: dbload.array) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
-        //Dodaj wartości do kolumn
+
         lista.setItems(items);
-        //Ustaw wysokosc wierszy na 30px
+
         lista.setFixedCellSize(30);
-        //Dodaj kolumny do tabeli
+
         lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         anchortable.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(lista, 0.0);
         AnchorPane.setLeftAnchor(lista, 0.0);
         AnchorPane.setBottomAnchor(lista, 0.0);
         AnchorPane.setRightAnchor(lista, 0.0);
 
         lista.getStylesheets().add("/fxml.home/home.css");
-        //filtrowanie rekordów
-        //tworzenie nowej listy obiektow katalog
+
         FilteredList<Katalog> filteredList = new FilteredList<>(items, b-> true);
-        //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
 
             filteredList.setPredicate(Katalog -> {
                 if(query.isEmpty() || query.isBlank()){ return true;}
 
                 String searchword = query.toLowerCase();
-                //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
+
                 if(Katalog.getNazwa().toLowerCase().contains(searchword)){
                     return true;
                 }
@@ -255,11 +253,11 @@ public class katalogcontroller extends appParent {
                 return Katalog.getNazwa_gatunku().toLowerCase().contains(searchword);
 
             });
-        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
+
         SortedList<Katalog> sortedList = new SortedList<>(filteredList);
-        //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
+
         sortedList.comparatorProperty().bind(lista.comparatorProperty());
-        //umiesc elementy
+
         lista.setItems(sortedList);
 
         lista.setOnMouseClicked(event -> {
@@ -267,7 +265,7 @@ public class katalogcontroller extends appParent {
                 TablePosition<org.example.Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
 
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
-                katalog_item(event,data,false);//get data
+                katalog_item(event,data,false);
             }
         });
     }
@@ -294,7 +292,7 @@ public class katalogcontroller extends appParent {
         katalog_clicked(event,query);
     }
 
-    private ScrollBar getVerticalScrollBar(TableView<?> tableView) { //poniższe funkcje są do lazyloading
+    private ScrollBar getVerticalScrollBar(TableView<?> tableView) {
         for (Node node : tableView.lookupAll(".scroll-bar")) {
             if (node instanceof ScrollBar scrollBar) {
                 if (scrollBar.getOrientation() == Orientation.VERTICAL) {

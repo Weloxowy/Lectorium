@@ -47,13 +47,13 @@ public class dbloader {
                 resultSet.close();
                 closeConnection();
                 return id == 0;
-            } else { //Wrong login or password
+            } else {
                 System.out.println("Błąd logowania");
                 resultSet.close();
                 closeConnection();
                 return false;
             }
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
         }
@@ -70,7 +70,7 @@ public class dbloader {
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) { //Accepted login
+            if (resultSet.next()) {
                 int id = resultSet.getInt("id_uzytkownicy");
                 final String name = resultSet.getString("imie");
                 final String last_name = resultSet.getString("nazwisko");
@@ -85,13 +85,13 @@ public class dbloader {
                 resultSet.close();
                 closeConnection();
                 return true;
-            } else { //Wrong login or password
+            } else {
                 System.out.println("Błąd logowania");
                 resultSet.close();
                 closeConnection();
                 return false;
             }
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error inserting user: " + e.getMessage());
             System.exit(100);
         }
@@ -130,7 +130,7 @@ public class dbloader {
                 FROM katalog, autor, wydawnictwo, gatunek WHERE katalog.autor_id_autor = autor.id_autor AND\s
                 katalog.wydawnictwo_id_wydawnictwo = wydawnictwo.id_wydawnictwo AND gatunek.id_gatunek = katalog.gatunek_id_gatunek;""";
         try {
-            array.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            array.clear();
             PreparedStatement statement = connection.prepareStatement(print);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -150,7 +150,7 @@ public class dbloader {
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         } finally {
@@ -237,7 +237,7 @@ public class dbloader {
                 }
                 resultSet.close();
                 closeConnection();
-            } catch (SQLException e) { //Error while connecting with DB
+            } catch (SQLException e) {
                 System.out.println("Error while dowloading data from DB: " + e.getMessage());
                 System.exit(100);
             } finally {
@@ -265,7 +265,7 @@ public class dbloader {
                     categories.add(row);
                 }
                 resultSet.close();
-            } catch (SQLException e) { //Error while connecting with DB
+            } catch (SQLException e) {
                 System.out.println("Error while dowloading data from DB: " + e.getMessage());
                 System.exit(100);
             } finally {
@@ -274,7 +274,7 @@ public class dbloader {
         }
     }
 
-    public void rent(int egz, int id) { //nie chce działać
+    public void rent(int egz, int id) {
         connectToDatabase();
         String insert = "INSERT INTO rezerwacje(data_rezerwacji,data_konca,egzemplarze_id_egzemplarze,uzytkownicy_id_uzytkownicy) VALUES (date('now'),date('now', '+7 day'),?,?);\n";
         String update = "UPDATE egzemplarze SET czy_dostepne=\"N\" where id_egzemplarze=?;";
@@ -289,7 +289,7 @@ public class dbloader {
             statement2.executeUpdate();
             statement2.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         } finally {
@@ -309,7 +309,7 @@ public class dbloader {
             statement.close();
             closeConnection();
             return result > 0;
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             e.printStackTrace();
         }
@@ -324,7 +324,7 @@ public class dbloader {
                 from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze
                 AND wypozyczenia.uzytkownicy_id_uzytkownicy = ?\s""";
         try {
-            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            ListHire.clear();
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -341,7 +341,7 @@ public class dbloader {
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         }
@@ -358,7 +358,7 @@ public class dbloader {
                 from katalog, egzemplarze, autor, wypozyczenia where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = wypozyczenia.egzemplarze_id_egzemplarze
                 AND wypozyczenia.data_zwrotu > date('now')  AND wypozyczenia.uzytkownicy_id_uzytkownicy = ?""";
         try {
-            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            ListHire.clear();
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -376,7 +376,7 @@ public class dbloader {
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         }
@@ -394,7 +394,7 @@ public class dbloader {
                 from katalog, egzemplarze, autor, rezerwacje where katalog.autor_id_autor = autor.id_autor AND katalog.id_katalog = egzemplarze.katalog_id_katalog AND egzemplarze.id_egzemplarze = rezerwacje.egzemplarze_id_egzemplarze
                 AND rezerwacje.uzytkownicy_id_uzytkownicy = ?""";
         try {
-            ListHire.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            ListHire.clear();
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -412,7 +412,7 @@ public class dbloader {
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         }
@@ -432,7 +432,7 @@ public class dbloader {
             statement.close();
             closeConnection();
             return result > 0;
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             e.printStackTrace();
         }
@@ -451,7 +451,7 @@ public class dbloader {
             statement.close();
             closeConnection();
             return result > 0;
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             e.printStackTrace();
         }
@@ -472,7 +472,7 @@ public class dbloader {
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             closeConnection();
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
@@ -507,7 +507,7 @@ public class dbloader {
             statement.executeUpdate();
             statement.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             closeConnection();
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
@@ -521,12 +521,12 @@ public class dbloader {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, id);
             statement.setInt(2, egz);
-            statement.setString(3, date); //data zla, sprawdzic poprawnosc
+            statement.setString(3, date);
             int result = statement.executeUpdate();
             statement.close();
             closeConnection();
             return result > 0;
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             e.printStackTrace();
         }
@@ -544,10 +544,10 @@ public class dbloader {
             PreparedStatement statement = connection.prepareStatement(print);
             statement.setInt(1, User.getInstance().getId());
             statement.setInt(2, id_egzemplarz);
-            resultSet = statement.executeUpdate(); //tu nie jestem pewien
+            resultSet = statement.executeUpdate();
             statement.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             closeConnection();
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
@@ -572,7 +572,7 @@ public class dbloader {
         connectToDatabase();
         String print = "Select id_uzytkownicy, imie, nazwisko, czy_admin, czy_zablokowany from uzytkownicy";
         try {
-            lista.clear(); //unikamy ładowania wiele razy tych samych rekordow
+            lista.clear();
             PreparedStatement statement = connection.prepareStatement(print);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -583,11 +583,11 @@ public class dbloader {
                 String czy_zablokowany = resultSet.getString("czy_zablokowany");
                 String[] row = {imie, nazwisko,String.valueOf(id_uzytkownicy), czy_admin, czy_zablokowany};
                 lista.add(row);
-                //System.out.println(imie + " " + nazwisko + " " + czy_admin + " " + id_uzytkownicy+" "+czy_zablokowany);
+
             }
             resultSet.close();
             closeConnection();
-        } catch (SQLException e) { //Error while connecting with DB
+        } catch (SQLException e) {
             System.out.println("Error while dowloading data from DB: " + e.getMessage());
             System.exit(100);
         } finally {
@@ -596,11 +596,10 @@ public class dbloader {
     }
 
     public ArrayList<String[]> results = new ArrayList<>();
-    public void nowe_item(int idKatalog, int idUzytkownika) { //działa bardzo dobrze na malej grupie rekordow
+    public void nowe_item(int idKatalog, int idUzytkownika) {
         results.clear();
         try {
             connectToDatabase();
-            // Pobranie danych dotyczących egzemplarzy dla danego katalogu
             String query = "SELECT e.id_egzemplarze, k.nazwa, e.lokalizacja, e.czy_dostepne " +
                     "FROM egzemplarze e " +
                     "JOIN katalog k ON e.katalog_id_katalog = k.id_katalog " +
@@ -619,7 +618,6 @@ public class dbloader {
                 LocalDate dataZwrotu = null;
 
                 if (czyDostepne.equals("N")) {
-                    // Sprawdzenie czy egzemplarz jest wypożyczony przez danego użytkownika
                     query = "SELECT data_zwrotu FROM wypozyczenia WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy = ? " +
                             "AND data_zwrotu > date('now')";
                     statement = connection.prepareStatement(query);
@@ -634,7 +632,6 @@ public class dbloader {
                             dataZwrotu = LocalDate.parse(dataZwrotuStr);
                         }
                     } else {
-                        // Sprawdzenie czy egzemplarz jest wypożyczony przez innego użytkownika
                         query = "SELECT data_zwrotu FROM wypozyczenia WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy != ? " +
                                 "AND data_zwrotu > date('now')";
                         statement = connection.prepareStatement(query);
@@ -649,7 +646,6 @@ public class dbloader {
                                 dataZwrotu = LocalDate.parse(dataZwrotuStr);
                             }
                         } else {
-                            // Sprawdzenie czy egzemplarz jest zarezerwowany przez danego użytkownika
                             query = "SELECT data_konca FROM rezerwacje WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy = ? " +
                                     "AND data_konca > date('now')";
                             statement = connection.prepareStatement(query);
@@ -664,7 +660,6 @@ public class dbloader {
                                     dataZwrotu = LocalDate.parse(dataKoncaStr);
                                 }
                             } else {
-                                // Sprawdzenie czy egzemplarz jest zarezerwowany przez innego użytkownika
                                 query = "SELECT data_konca FROM rezerwacje WHERE egzemplarze_id_egzemplarze = ? AND uzytkownicy_id_uzytkownicy != ? " +
                                         "AND data_konca > date('now')";
                                 statement = connection.prepareStatement(query);
@@ -759,7 +754,7 @@ public class dbloader {
             statement.setString(9, nazwa_gatunku);
             statement.setString(10, nazwa_wydawnictwa);
             int ret =  statement.executeUpdate();
-           //closeConnection();//NIE DZIAŁA OD TEGO MOMENTU
+
             if(ret == 0){   //suma bledu: 4 jezeli brak autora, 2 jezeli brak gatunku, 1 jezeli brak wydawnictwa
                 ret += 100;
                 int size = 0;

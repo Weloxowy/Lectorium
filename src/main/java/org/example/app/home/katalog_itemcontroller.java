@@ -84,7 +84,7 @@ public class katalog_itemcontroller extends appParent {
         year_book.setFont(pop_r_h1);
     }
 
-    public void load(int id_egz) { //ladujemy po id ksiazki
+    public void load(int id_egz) {
         String[] tab = null;
 
         for (String[] arrayItem : dbload.array) {
@@ -133,7 +133,7 @@ public class katalog_itemcontroller extends appParent {
         avatar.setClip(clipCircle);
     }
 
-    public void egzemplarz_lista(int id) { //TODO do poprawy
+    public void egzemplarz_lista(int id) {
         dbload.nowe_item(id,User.getInstance().getId());
         ObservableList<Egzemplarze> items = FXCollections.observableArrayList();
 
@@ -167,15 +167,15 @@ public class katalog_itemcontroller extends appParent {
         wypozyczCol.setCellFactory(col -> {
             TableCell<Egzemplarze, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
-                if (newVal != null && newVal.contentEquals("T")) { //wolne
+                if (newVal != null && newVal.contentEquals("T")) {
                     Node centreBox = createAddGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
-                else if(newVal != null && newVal.contentEquals("W")) { //wypozyczone przez tego uzytkownika
+                else if(newVal != null && newVal.contentEquals("W")) {
                     Node centreBox = createConfirmGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
-                else if(newVal != null && newVal.contentEquals("R")) { //rezerwacja dla tego uzytkownika
+                else if(newVal != null && newVal.contentEquals("R")) {
                     Node centreBox = createDeleteGraphic();
                     cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
                 }
@@ -275,30 +275,30 @@ public class katalog_itemcontroller extends appParent {
             }
             items.add(new Egzemplarze(nazwa, id_egzemplarze, lokalizacja, czy_dostepne, data_zwrotu));
         }
-        //Dodaj wartości do kolumn
+
         lista.setItems(items);
-        //Ustaw wysokosc wierszy na 30px
+
         lista.setFixedCellSize(30);
-        //Dodaj kolumny do tabeli
+
         lista.getColumns().addAll(nazwaCol, nrCol, lokalizacjaCol, dostepneCol, zwrotCol, wypozyczCol);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         anchortable.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(anchor, 0.0);
         AnchorPane.setLeftAnchor(anchortable, 0.0);
         AnchorPane.setBottomAnchor(anchortable, 0.0);
         AnchorPane.setRightAnchor(anchortable, 0.0);
-        //dodaj css
+
         lista.getStylesheets().add("/fxml.home/home.css");
     }
 
-    private Node createAddGraphic() {//dodaj rezerwacje
+    private Node createAddGraphic() {
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));

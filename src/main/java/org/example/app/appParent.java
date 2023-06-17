@@ -298,7 +298,7 @@ public class appParent {
 
     }
 
-    final TableView<Katalog> lista = new TableView<>(); //wyciągnąć to do katalog_managera
+    final TableView<Katalog> lista = new TableView<>();
     public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
         dbload.print_book();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
@@ -346,35 +346,35 @@ public class appParent {
         for (String[] tab: dbload.array) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
-        //Dodaj wartości do kolumn
+
         lista.setItems(items);
-        //Ustaw wysokosc wierszy na 30px
+
         lista.setFixedCellSize(30);
-        //Dodaj kolumny do tabeli
+
         lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         anchortable.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setLeftAnchor(anchortable, 0.0);
         AnchorPane.setBottomAnchor(anchortable, 0.0);
         AnchorPane.setRightAnchor(anchortable, 0.0);
 
         lista.getStylesheets().add("/fxml.home/home.css");
-        //filtrowanie rekordów
-        //tworzenie nowej listy obiektow katalog
+
+
         FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
-        //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
+
         searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
             if(newValue.isEmpty() || newValue.isBlank()){ return true;}
 
             String searchword = newValue.toLowerCase();
-            //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
+
             if(Katalog.getNazwa().toLowerCase().contains(searchword)){
                 return true;
             }
@@ -384,11 +384,11 @@ public class appParent {
             return Katalog.getIsbn().toLowerCase().contains(searchword);
 
         }));
-        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
+
         SortedList<Katalog> sortedList = new SortedList<>(filteredList);
-        //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
+
         sortedList.comparatorProperty().bind(lista.comparatorProperty());
-        //umiesc elementy
+
         lista.setItems(sortedList);
 
         lista.setOnMouseClicked(event -> {
@@ -396,7 +396,7 @@ public class appParent {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
                 zapamietaj = false;
-                katalog_item(event,data,true);//get data
+                katalog_item(event,data,true);
             }
         });
     }

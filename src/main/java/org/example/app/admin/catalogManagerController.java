@@ -3,21 +3,17 @@ package org.example.app.admin;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.User;
 import org.example.app.appParent;
@@ -26,8 +22,6 @@ import static org.example.Main.dbload;
 
 
 public class catalogManagerController extends appParent{
-    @FXML
-    private TextField add_egz;
 
     @FXML
     private AnchorPane anchortable;
@@ -83,8 +77,6 @@ public class catalogManagerController extends appParent{
     @FXML
     private TextField searchbar1;
 
-    @FXML
-    private Button button_add_egz;
 
     @FXML
     private AnchorPane root_anchor;
@@ -102,14 +94,14 @@ public class catalogManagerController extends appParent{
         Katalog_lista(anchortable, searchbar1);
         pane_id_masked.setVisible(false);
         labelwypozyczenia.setStyle("-fx-text-fill:#808080");
-        root_anchor.setTopAnchor(grid,0.0);
-        root_anchor.setLeftAnchor(grid,0.0);
-        root_anchor.setRightAnchor(grid,0.0);
-        root_anchor.setBottomAnchor(grid,0.0);
-        root_anchor.setTopAnchor(pane_id_masked,0.0);
-        root_anchor.setLeftAnchor(pane_id_masked,0.0);
-        root_anchor.setRightAnchor(pane_id_masked,0.0);
-        root_anchor.setBottomAnchor(pane_id_masked,0.0);
+        AnchorPane.setTopAnchor(grid,0.0);
+        AnchorPane.setLeftAnchor(grid,0.0);
+        AnchorPane.setRightAnchor(grid,0.0);
+        AnchorPane.setBottomAnchor(grid,0.0);
+        AnchorPane.setTopAnchor(pane_id_masked,0.0);
+        AnchorPane.setLeftAnchor(pane_id_masked,0.0);
+        AnchorPane.setRightAnchor(pane_id_masked,0.0);
+        AnchorPane.setBottomAnchor(pane_id_masked,0.0);
         if(dbload.array.isEmpty()){
             dbload.print_book();
         }
@@ -118,10 +110,7 @@ public class catalogManagerController extends appParent{
     @FXML
     public void font(Scene scene) {
         super.font(scene);
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
         Label pane_tytul = (Label) scene.lookup("#pane_tytul");
         pane_tytul.setFont(pop_b_h2);
@@ -167,19 +156,19 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void dodaj_egz_button() //funkcja ustawiajaca dodawanie egzemplarza
+    public void dodaj_egz_button()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodaj egzemplarz książki");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj nazwę książki"); //ustawiamy to, co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj nazwę książki");
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
         pane_txt_2.setPromptText("Podaj lokalizację egzemplarza");
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj egzemplarz");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.add_to_database("T", pane_txt_2.getText(),pane_txt_1.getText());
             if(ret>0){
@@ -192,11 +181,11 @@ public class catalogManagerController extends appParent{
                     Duration.seconds(3),
                     event2 ->{
                         pane_result_msg.setOpacity(0.0);
-                        pane_button.setDisable(false); //guzik znowu dziala
+                        pane_button.setDisable(false);
                     }
             ));
             pane_result_msg.setOpacity(1.0);
-            pane_button.setDisable(true); //guzik nie dziala przez 3 s. - nie mozna spamowac; zastosuj do innych funkcji
+            pane_button.setDisable(true);
             System.out.println("TT");
             timeline.play();
         });
@@ -204,19 +193,19 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void usun_egz_button() //funkcja ustawiajaca dodawanie egzemplarza
+    public void usun_egz_button()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Usuń egzemplarz książki");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz usunąć"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz usunąć");
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
         pane_txt_2.setPromptText("Podaj id egzemplarza");
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Usuń egzemplarz");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.delete_one_record_from_database(pane_txt_1.getText(),pane_txt_2.getText());
             if(ret>0){
@@ -238,13 +227,13 @@ public class catalogManagerController extends appParent{
 
 
     @FXML
-    public void usun_pozycje_button() //funkcja ustawiajaca dodawanie egzemplarza
+    public void usun_pozycje_button()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Usuń pozycje książki");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz usunąć"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz usunąć");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -260,7 +249,7 @@ public class catalogManagerController extends appParent{
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Usuń pozycje");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.delete_one_position_from_database(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
             if(ret>0){
@@ -281,13 +270,13 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void zmodyfikuj_egzemplarze() //funkcja ustawiajaca dodawanie egzemplarza
+    public void zmodyfikuj_egzemplarze()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Zmodyfikuj egzemplarze książek");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj id egzemplarza"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj id egzemplarza");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -303,7 +292,7 @@ public class catalogManagerController extends appParent{
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Modyfikuj egzemplarz");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.modify_egzemplarz(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
             if(ret>0){
@@ -324,14 +313,14 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void add_position() //funkcja ustawiajaca dodawanie egzemplarza
+    public void add_position()
     {
-        //String nazwa, String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String imie_autora, String nazwisko_autora, String nazwa_gatunku, String nazwa_wydawnictwa
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodaj pozycje książki");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz dodac"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj nazwę książki którą chcesz dodac");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -371,9 +360,9 @@ public class catalogManagerController extends appParent{
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj pozycje");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            if(sec=true){ //dodawanie gatunku,autora lub wydawnictwa do bazy; nastepnie wykonaj add_one_record_from_catalog
+            if(sec=true){
 
                 int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
                 if(ret > 0)
@@ -419,13 +408,13 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void zmodyfikuj_pozycje() //funkcja ustawiajaca dodawanie egzemplarza
+    public void zmodyfikuj_pozycje()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Zmodyfikuj pozycje książek");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj id katalogu"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj id katalogu");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -449,7 +438,7 @@ public class catalogManagerController extends appParent{
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Modyfikuj pozycje");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.modify_position(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
             if(ret>0){
@@ -470,7 +459,7 @@ public class catalogManagerController extends appParent{
     }
 
     @FXML
-    public void hide_pane(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
+    public void hide_pane(MouseEvent event){
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(0.0);
         pane_txt_1.clear();

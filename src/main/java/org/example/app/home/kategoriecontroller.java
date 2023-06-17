@@ -20,7 +20,7 @@ import static org.example.Main.dbload;
 public class kategoriecontroller extends appParent {
 
 
-    public void init(String imie, String nazwisko){ //zamienic na image
+    public void init(String imie, String nazwisko){
         nametag.setText(imie+" "+nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
@@ -79,13 +79,13 @@ public class kategoriecontroller extends appParent {
             for (String[] tab : dbload.categories) {
                     String input =tab[0]+" ("+tab[1]+" pozycji)";
                     String id = "cat"+i;
-                    Label label = new Label(input); //ustawianie id jest zbedne bo i tak robimy event do kazdego itemu osobno
+                    Label label = new Label(input);
                     label.setFont(pop_r_h2);
                     label.setVisible(true);
                     label.setTextAlignment(TextAlignment.CENTER);
                     label.setOnMouseClicked(event -> {
-                    String categoryName = tab[0]; // pobranie nazwy kategorii z tablicy
-                        katalog_clicked(event,categoryName); //przejscie do okna katalog z wybrana kategoria
+                    String categoryName = tab[0];
+                        katalog_clicked(event,categoryName);
                 });
                     label.setOnMouseEntered(event -> label.setUnderline(true));
                 label.setOnMouseExited(event -> label.setUnderline(false));
@@ -121,14 +121,14 @@ public class kategoriecontroller extends appParent {
 
     @FXML
     void menu_panels(MouseEvent event){
-        if(event.getSource().equals(image_a1)){ //pokaz ksiazke o id 130
+        if(event.getSource().equals(image_a1)){
             katalog_item(event,130,false);
         }
-        if(event.getSource().equals(image_a2)){ //pokaz wyszukiwania dla autora King
+        if(event.getSource().equals(image_a2)){
             String query = "Stephen King";
             katalog_clicked(event,query);
         }
-        if(event.getSource().equals(image_a3)){ //pokaz wyszukiwania dla autora Atwood
+        if(event.getSource().equals(image_a3)){
             String query = "Atwood";
             katalog_clicked(event,query);
         }
