@@ -3,7 +3,6 @@ package org.example;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Wypozyczenia {
-// JAK USUWA SIE GETTERY I SETTERY (zeby usunac warningi) to potem nie wyswietlaja sie wypozyczenia
     SimpleStringProperty id_egzemplarze;
     SimpleStringProperty nazwa;
     SimpleStringProperty data_wypozyczenia;

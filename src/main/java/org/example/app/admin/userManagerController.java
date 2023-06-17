@@ -30,8 +30,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.Main.dbload;
 
@@ -216,74 +214,33 @@ public class userManagerController extends appParent {
             items.add(new Users(imie,nazwisko,id,czy_dostepne,czy_zablokowany));
 
         }
-        //Dodaj wartości do kolumn
         lista.setItems(items);
-        //Ustaw wysokosc wierszy na 30px
         lista.setFixedCellSize(30);
-        //Dodaj kolumny do tabeli
         if(lista.getColumns().size() == 0) {
             lista.getColumns().addAll(name, surname, id_user, check_admin, block_user);
         }
-        // Powiąż preferowane wielkości TableView i AnchorPane
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
-        // Dodaj TableView do AnchorPane
         anchortable.getChildren().clear();
         anchortable.getChildren().addAll(lista);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
         AnchorPane.setLeftAnchor(anchortable, 0.0);
         AnchorPane.setBottomAnchor(anchortable, 0.0);
         AnchorPane.setRightAnchor(anchortable, 0.0);
 
 
         lista.getStylesheets().add("/fxml.home/home.css");
-        //filtrowanie rekordów
-        //tworzenie nowej listy obiektow katalog
-        /*
-        FilteredList<Users> filteredList = new FilteredList<>(items, b -> true);
-        //tworzenie lambdy z 3 wartosciami do obserowania zmian dla rekordow
 
-        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Users -> {
-            if(newValue.isEmpty() || newValue.isBlank()){ return true;}
-
-            String searchword = newValue.toLowerCase();
-            //jezeli dla nazwy, autora lub isbn bedzie zgodnosc, wtedy zwracamy
-            if(Users.getImie_katalog().toLowerCase().contains(searchword)){
-                return true;
-            }
-            if(Users.getNazwisko_katalog().toLowerCase().contains(searchword)){
-                return true;
-            }
-            return Users.getCzy_admin_katalog().toLowerCase().contains(searchword);
-
-        }));
-
-
-        //tworzenie listy posortowanych elementow dla tych ktore sa poprawne
-        SortedList<Users> sortedList = new SortedList<>(filteredList);
-        //zamien elementy na te, ktore zgadzaja sie z tekstem w polu wyszukiwania
-        sortedList.comparatorProperty().bind(lista.comparatorProperty());
-        //umiesc elementy
-        lista.setItems(sortedList);
-/*
-        lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
-                katalog_item(event,data);//get data
-            }
-        }); */
     }
 
 
     @FXML
-    public void dodaj_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    public void dodaj_uzytkownika()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodawanie użytkownika");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj imie użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj imie użytkownika");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -304,14 +261,14 @@ public class userManagerController extends appParent {
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj użytkownika");
 
-        ArrayList<TextField> textFields = new ArrayList<>(); //przyda się do hurtowego sprawdzania warunków
+        ArrayList<TextField> textFields = new ArrayList<>();
         textFields.add(pane_txt_1);
         textFields.add(pane_txt_2);
         textFields.add(pane_txt_3);
         textFields.add(pane_txt_4);
         textFields.add(pane_txt_5);
 
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
 
             for (TextField field: textFields) {
@@ -345,13 +302,13 @@ public class userManagerController extends appParent {
 
 
     @FXML
-    public void zmodyfikuj_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    public void zmodyfikuj_uzytkownika()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Modyfikacja użytkownika");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj imie użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj imie użytkownika");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -371,7 +328,7 @@ public class userManagerController extends appParent {
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Modyfikuj użytkownika");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.change_user(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
             if(ret>0){
@@ -392,13 +349,13 @@ public class userManagerController extends appParent {
     }
 
     @FXML
-    public void zmodyfikuj_uprawnienia_uzytkownika() //funkcja ustawiajaca dodawanie egzemplarza
+    public void zmodyfikuj_uprawnienia_uzytkownika()
     {
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Modyfikacja uprawnienia użytkownika");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Zmodyfikuj uprawnienia (T-admin, N-użytkownik)"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Zmodyfikuj uprawnienia (T-admin, N-użytkownik)");
 
         TextField pane_txt_2 = (TextField) pane_id_masked.lookup("#pane_txt_2");
         pane_txt_2.setOpacity(1.0);
@@ -408,7 +365,7 @@ public class userManagerController extends appParent {
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Modyfikuj uprawnienia");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = dbload.modify_uprawnienia(pane_txt_1.getText(),pane_txt_2.getText());
             if(ret>0){
@@ -430,15 +387,15 @@ public class userManagerController extends appParent {
 
     @FXML
     void usun_uzytkownika(){
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Usuwanie użytkownika");
-    TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+    TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj login użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj login użytkownika");
 
     Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Usuń użytkownika");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
         Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret;
         if(Integer.parseInt(pane_txt_1.getText()) == User.getInstance().getId()){
@@ -466,15 +423,15 @@ public class userManagerController extends appParent {
 
     @FXML
     void zablokuj_uzytkownika(){
-        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul"); //lapiemy label i ustawiamy tytul
+        Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Blokowanie/ Odblokowywanie użytkownika");
-        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1"); //lapiemy pole i ustawiamy widocznosc na 1
+        TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(1.0);
-        pane_txt_1.setPromptText("Podaj login użytkownika"); //ustawiamy to co jest widoczne jak pole jest puste
+        pane_txt_1.setPromptText("Podaj login użytkownika");
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Zablokuj/Oblokuj użytkownika");
-        pane_button.setOnMouseClicked(event -> { //reakcja na wcisniecie guzika dodaj w lambdzie; dzieki temu bedzie indywidualna dla kazdej funkcji
+        pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
 
             int ret = 0;
@@ -570,17 +527,15 @@ public class userManagerController extends appParent {
             grzywnaCol.setCellValueFactory(
                     new PropertyValueFactory<>("data_zwrotu"));
 
-            grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
-                TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
-                AtomicReference<Double> suma = new AtomicReference<>((double) 0);
+            grzywnaCol.setCellFactory(col -> {
+                TableCell<Wypozyczenia, String> cell = new TableCell<>();
                 cell.itemProperty().addListener((obs, old, newVal) -> {
                     String debt;
-                    List<Double> lista_rent = new ArrayList<>();
                     int rowIndex = cell.getIndex();
                     if (data_zwrotuCol.getCellObservableValue(rowIndex) != null) {
                         String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
-                        LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
-                        LocalDate currentDate = LocalDate.now(); //aktualna data
+                        LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        LocalDate currentDate = LocalDate.now();
 
                         if (dataZwrotu.isAfter(currentDate)) {
                             cell.setText(" - ");
@@ -605,27 +560,27 @@ public class userManagerController extends appParent {
             String ilosc_przedluzen = tab[5];
             items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
         }
-        //Dodaj wartości do kolumn
+
         lista_rent.getItems().clear();
         lista_rent.setItems(items);
-        //Dodaj kolumny do tabeli
+
         if(lista_rent.getColumns().size() == 0) {
             lista_rent.getColumns().addAll(nazwaCol, egzemplarzeCol, autorCol, data_wypozyczeniaCol, data_zwrotuCol, grzywnaCol);
         }
-        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+
         lista_rent.setPlaceholder(new Label("Brak rekordów. Sprawdź poprawność identyfikatora użytkownika."));
-        //Ustaw wysokosc wierszy na 30px
+
         lista_rent.setFixedCellSize(30);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+
         lista_rent.prefWidthProperty().bind(pane_search_result.heightProperty());
         lista_rent.prefWidthProperty().bind(pane_search_result.widthProperty());
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista_rent.prefWidthProperty().bind(pane_search_result.widthProperty());
         lista_rent.prefHeightProperty().bind(pane_search_result.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         pane_search_result.getChildren().clear();
         pane_search_result.getChildren().addAll(lista_rent);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(lista_rent, 0.0);
         AnchorPane.setLeftAnchor(lista_rent, 0.0);
         AnchorPane.setBottomAnchor(lista_rent, 0.0);
@@ -830,23 +785,22 @@ public class userManagerController extends appParent {
 
             items_res.add(new Rezerwacje(id_egzemplarze,nazwa, nazwa_autora, data_konca, data_rezerwacji,  przedluz_rezerwacje, anuluj_rezerwacje));
         }
-        //Dodaj wartości do kolumn
+
         lista_res.getItems().clear();
         lista_res.setItems(items_res);
-        //Dodaj kolumny do tabeli
+
         if(lista_res.getColumns().size() == 0) {
             lista_res.getColumns().addAll(egzemplarzeCol, nazwaCol,  autorCol, data_koncaCol,data_rezerwacjiCol,przedluz_rezerwacjeCol, anuluj_rezerwacjeCol);
         }
-        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+
         lista_res.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
-        // Powiąż preferowane wielkości TableView i AnchorPane
+
         lista_res.prefWidthProperty().bind(pane_search_result.widthProperty());
         lista_res.prefHeightProperty().bind(pane_search_result.heightProperty());
-        // Dodaj TableView do AnchorPane
+
         pane_search_result.getChildren().clear();
         pane_search_result.getChildren().addAll(lista_res);
-        // Ustaw parametry kotwiczenia TableView na wartość 0
+
         AnchorPane.setTopAnchor(lista, 0.0);
         AnchorPane.setLeftAnchor(lista, 0.0);
         AnchorPane.setBottomAnchor(lista, 0.0);
@@ -857,7 +811,7 @@ public class userManagerController extends appParent {
     }
 
     @FXML
-    public void hide_panes(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
+    public void hide_panes(MouseEvent event){
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(0.0);
         pane_txt_1.clear();

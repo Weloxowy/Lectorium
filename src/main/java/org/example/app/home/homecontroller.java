@@ -108,14 +108,14 @@ public class homecontroller extends appParent {
 
     @FXML
     void menu_panels(MouseEvent event) {
-        if (event.getSource().equals(image_a1)) { //pokaz wyszukiwania dla autora Houellebecq
+        if (event.getSource().equals(image_a1)) {
             String query = "Houellebecq";
             katalog_clicked(event, query);
         }
-        if (event.getSource().equals(image_b1)) { //pokaz ksiazke o id 130
+        if (event.getSource().equals(image_b1)) {
             katalog_item(event, 130,false);
         }
-        if (event.getSource().equals(image_b2)) { //pokaz wyszukiwania dla autora King
+        if (event.getSource().equals(image_b2)) {
             String query = "King";
             katalog_clicked(event, query);
         }

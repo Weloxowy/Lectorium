@@ -87,7 +87,6 @@ public class nowosciController extends appParent {
 
         grid_nowosci.setHgap(55.0);
         grid_nowosci.setVgap(30.0);
-        //dorzucic lambde do sledzenia lewego gornego rogu kazdego vboxa i umieszczanie tam cyfry
         Map<Integer, VBox> vboxMap = new HashMap<>();
             vboxMap.put(1, vbox1);
             vboxMap.put(2, vbox2);

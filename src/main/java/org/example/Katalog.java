@@ -16,7 +16,7 @@ public class Katalog {
     SimpleStringProperty uwagi;
     SimpleStringProperty nazwa_wydawnictwa;
     SimpleStringProperty nazwa_gatunku;
-    Image okladka; //okladka nie jest pobierana w tabeli bo szkoda pamieci
+    Image okladka;
 
     public Katalog(int id_katalog, String nazwa, String nazwa_autora, String rok_wydania, String wydanie, String isbn, String jezyk,String uwagi, String nazwa_wydawnictwa, String nazwa_gatunku) {
         this.id_katalog = new ReadOnlyIntegerWrapper(id_katalog);
