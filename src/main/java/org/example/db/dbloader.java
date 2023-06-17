@@ -1041,7 +1041,7 @@ public class dbloader {
 
     public int block_user(String id_user, String param){
         connectToDatabase();
-        String insertUserSQL = "UPDATE uzytkownicy SET czy_zablokowany='?'\n" +
+        String insertUserSQL = "UPDATE uzytkownicy SET czy_zablokowany=?\n" +
                 "where id_uzytkownicy =?;";
         try {
             PreparedStatement statement = connection.prepareStatement(insertUserSQL);

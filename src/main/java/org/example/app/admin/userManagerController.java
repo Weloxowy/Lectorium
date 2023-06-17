@@ -221,14 +221,14 @@ public class userManagerController extends appParent {
         //Ustaw wysokosc wierszy na 30px
         lista.setFixedCellSize(30);
         //Dodaj kolumny do tabeli
-        lista.getColumns().addAll(name, surname, id_user, check_admin,block_user);
-        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
-        lista.setPrefWidth(anchortable.getPrefWidth());
-        lista.setPrefHeight(anchortable.getPrefHeight());
+        if(lista.getColumns().size() == 0) {
+            lista.getColumns().addAll(name, surname, id_user, check_admin, block_user);
+        }
         // Powiąż preferowane wielkości TableView i AnchorPane
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
         // Dodaj TableView do AnchorPane
+        anchortable.getChildren().clear();
         anchortable.getChildren().addAll(lista);
         // Ustaw parametry kotwiczenia TableView na wartość 0
         AnchorPane.setLeftAnchor(anchortable, 0.0);
@@ -479,8 +479,14 @@ public class userManagerController extends appParent {
 
             int ret = 0;
             for (String[] gbs: dbload.lista) {
-                if(gbs[0] == pane_txt_1.getText()){
-                    ret = dbload.block_user(pane_txt_1.getText(),gbs[4]);
+                System.out.println(pane_txt_1.getText());
+                System.out.println(gbs[2]);
+                if(gbs[2].contentEquals(pane_txt_1.getText())){
+                    if(gbs[4].contentEquals("T"))
+                        ret = dbload.block_user(pane_txt_1.getText(),"N");
+                    else
+                        ret = dbload.block_user(pane_txt_1.getText(),"T");
+                    break;
                 }
             }
 
@@ -894,6 +900,7 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(false);
         pane_search_result.setVisible(false);
         pane_id_masked_log.setVisible(false);
+        Katalog_lista_adminUser();
     }
 
 
