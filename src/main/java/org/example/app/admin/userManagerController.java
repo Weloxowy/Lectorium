@@ -23,12 +23,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import org.example.Main;
-import org.example.Users;
+import org.example.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import org.example.User;
-import org.example.Wypozyczenia;
 import org.example.app.appParent;
 
 import java.text.DecimalFormat;
@@ -109,7 +106,10 @@ public class userManagerController extends appParent {
 
     @FXML
     final TableView<Wypozyczenia> lista_rent = new TableView<>();
-
+    @FXML
+    final TableView<Rezerwacje> lista_res = new TableView<>();
+    @FXML
+    private AnchorPane anchor;
     boolean activate_diff = false;
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
@@ -514,7 +514,12 @@ public class userManagerController extends appParent {
             event.consume();
             if(!pane_search_user.toString().isEmpty() && !pane_search_user.getText().isBlank()
                     && pane_search_user.getText().matches("[0-9]+") ) {
-                init_rent_list(Integer.parseInt(pane_search_user.getText()));
+                if(activate_diff==true) {
+                    init_rent_list(Integer.parseInt(pane_search_user.getText()));
+                }
+                if(activate_diff==false) {
+                    init_res_list(Integer.parseInt(pane_search_user.getText()));
+                }
             }
             pane_search_result.setOpacity(1.0);
         }
@@ -523,16 +528,17 @@ public class userManagerController extends appParent {
     @FXML
     public void check_rent(MouseEvent event){
         pane_id_masked_log.setVisible(true);
-        //activate_diff = true;
+        activate_diff = true;
     }
 
     @FXML
     public void check_res(MouseEvent event){
         pane_id_masked_log.setVisible(true);
-        //activate_diff = false;
+        activate_diff = false;
     }
 
     public void init_rent_list(int id){
+        pane_search_result.getChildren().clear();
         dbload.yourHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
@@ -579,19 +585,11 @@ public class userManagerController extends appParent {
 
                         if (dataZwrotu.isAfter(currentDate)) {
                             cell.setText(" - ");
-                        } else if (dataZwrotu.isBefore(currentDate)) {
+                        } else if (dataZwrotu.isBefore(currentDate) && !data_zwrotuCol.getCellData(rowIndex).toString().isEmpty()) {
                             DecimalFormat currency = new DecimalFormat("#0.00");
                             int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
                             debt = String.valueOf(currency.format(diff * 0.2));
                             cell.setText(debt + " zł");
-                            double konwert = 0;
-                            try {
-                                konwert = currency.parse(debt).doubleValue();
-                                lista_rent.add(konwert);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                                throw new RuntimeException(e);
-                            }
                         }
                     }
 
@@ -635,8 +633,229 @@ public class userManagerController extends appParent {
         AnchorPane.setRightAnchor(lista_rent, 0.0);
 
         lista_rent.getStylesheets().add("/fxml.home/home.css");
+        pane_search_result.setVisible(true);
+
     }
 
+    public void init_res_list(int id) {
+        pane_search_result.getChildren().clear();
+        System.out.println(pane_search_result.getChildren().isEmpty());
+        dbload.yourReservationInformation(id);
+        ObservableList<Rezerwacje> items_res = FXCollections.observableArrayList();
+
+
+        TableColumn<Rezerwacje, ?> autorCol = new TableColumn<>("Autor");
+        autorCol.setMinWidth(lista_res.getPrefWidth()*0.10);
+        autorCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa_autora"));
+
+        TableColumn<Rezerwacje, ?> nazwaCol = new TableColumn<>("Nazwa");
+        nazwaCol.setMinWidth(lista_res.getPrefWidth()*0.15);
+        nazwaCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa"));
+
+
+        TableColumn<Rezerwacje, ?> egzemplarzeCol = new TableColumn<>("Numer egzemplarze");
+        egzemplarzeCol.setMinWidth(lista_res.getPrefWidth()*0.05);
+        egzemplarzeCol.setCellValueFactory(
+                new PropertyValueFactory<>("id_egzemplarze"));
+
+        TableColumn<Rezerwacje, ?> data_koncaCol = new TableColumn<>("Data konca");
+        data_koncaCol.setMinWidth(lista_res.getPrefWidth()*0.10);
+        data_koncaCol.setCellValueFactory(
+                new PropertyValueFactory<>("data_konca"));
+
+        TableColumn<Rezerwacje, ?> data_rezerwacjiCol = new TableColumn<>("Data rezerwacji");
+        data_rezerwacjiCol.setMinWidth(lista_res.getPrefWidth()*0.10);
+        data_rezerwacjiCol.setCellValueFactory(
+                new PropertyValueFactory<>("data_rezerwacji"));
+
+        TableColumn<Rezerwacje, String> przedluz_rezerwacjeCol = new TableColumn<>("Przedluż rezerwacje");
+        przedluz_rezerwacjeCol.setMinWidth(lista_res.getPrefWidth()*0.2);
+        przedluz_rezerwacjeCol.setCellValueFactory(
+                new PropertyValueFactory<>("przedluz_rezerwacje"));
+
+        TableColumn<Rezerwacje, String> anuluj_rezerwacjeCol = new TableColumn<>("Anuluj rezerwacje");
+        anuluj_rezerwacjeCol.setMinWidth(lista_res.getPrefWidth()*0.15);
+        anuluj_rezerwacjeCol.setCellValueFactory(
+                new PropertyValueFactory<>("anuluj_rezerwacje"));
+
+        przedluz_rezerwacjeCol.setCellFactory(col -> {
+            TableCell<Rezerwacje, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                int rowIndex = cell.getIndex();
+                if (przedluz_rezerwacjeCol.getCellObservableValue(rowIndex) != null) {
+                    Node centreBox = createPriorityGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+
+                    cell.setOnMouseClicked(event -> {
+                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                            if(Integer.parseInt(przedluz_rezerwacjeCol.getCellObservableValue(rowIndex).getValue().toString())>2) {
+                                Label notificationLabel = new Label("Przekroczono limit przedluzen rezerwacji.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER);
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("""
+                                    -fx-border-radius: 10;
+                                        -fx-border-color: #004aad;
+                                        -fx-background-radius: 10;
+                                        -fx-background-color: NULL;
+                                        -fx-border-width: 1;
+                                        -fx-text-fill: #004aad;""");
+                                Timeline timeline = new Timeline(new KeyFrame(
+                                        Duration.seconds(3),
+                                        event2 -> notificationLabel.setVisible(false)
+                                ));
+                                timeline.play();
+                                anchor.getChildren().add(notificationLabel);
+                            }
+                            else{
+                                TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                                int row = tablePosition.getRow();
+                                int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                                dbload.update(data);
+                                Label notificationLabel = new Label("Przedłużono pomyślnie.");
+                                Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                notificationLabel.setFont(pop_r_h1);
+                                notificationLabel.setAlignment(Pos.CENTER);
+                                notificationLabel.setPrefSize(300, 50);
+                                notificationLabel.setLayoutX(700);
+                                notificationLabel.setLayoutY(320);
+                                notificationLabel.setStyle("""
+                                    -fx-border-radius: 10;
+                                        -fx-border-color: #004aad;
+                                        -fx-background-radius: 10;
+                                        -fx-background-color: NULL;
+                                        -fx-border-width: 1;
+                                        -fx-text-fill: #004aad;""");
+                                Timeline timeline = new Timeline(new KeyFrame(
+                                        Duration.seconds(3),
+                                        event2 -> {
+                                            notificationLabel.setVisible(false);
+                                            yourReservation_clicked(event);
+                                        }
+                                ));
+                                timeline.play();
+                                anchor.getChildren().add(notificationLabel);
+                            }
+                        }
+                    });
+                }
+            });
+            return cell;
+
+        });
+
+
+        anuluj_rezerwacjeCol.setCellFactory(col -> {
+            TableCell<Rezerwacje, String> cell = new TableCell<>();
+            cell.itemProperty().addListener((obs, old, newVal) -> {
+                int rowIndex = cell.getIndex();
+                if (anuluj_rezerwacjeCol.getCellObservableValue(rowIndex) != null) {
+                    Node centreBox = createDeleteGraphic();
+                    cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
+
+                    cell.setOnMouseClicked(event -> {
+                        if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                            if(anuluj_rezerwacjeCol.getCellData(rowIndex).contentEquals("1")) {
+                                TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                                int row = tablePosition.getRow();
+                                int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
+                                if(dbload.delete(data) > 0)
+                                {
+                                    Label notificationLabel = new Label("Anulowano rezerwacje.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER);
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
+                                    notificationLabel.setStyle("""
+                                            -fx-border-radius: 10;
+                                                -fx-border-color: #004aad;
+                                                -fx-background-radius: 10;
+                                                -fx-background-color: NULL;
+                                                -fx-border-width: 1;
+                                                -fx-text-fill: #004aad;""");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> {notificationLabel.setVisible(false); labelrezerwacje.fireEvent(event);}
+                                    ));
+                                    timeline.play();
+                                    anchor.getChildren().add(notificationLabel);
+                                }
+                                else
+                                {
+                                    Label notificationLabel = new Label("Nie udalo sie anulowac rezerwacji.");
+                                    Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
+                                    notificationLabel.setFont(pop_r_h1);
+                                    notificationLabel.setAlignment(Pos.CENTER);
+                                    notificationLabel.setPrefSize(300, 50);
+                                    notificationLabel.setLayoutX(150);
+                                    notificationLabel.setLayoutY(70);
+                                    notificationLabel.setStyle("""
+                                            -fx-border-radius: 10;
+                                                -fx-border-color: #004aad;
+                                                -fx-background-radius: 10;
+                                                -fx-background-color: NULL;
+                                                -fx-border-width: 1;
+                                                -fx-text-fill: #004aad;""");
+                                    Timeline timeline = new Timeline(new KeyFrame(
+                                            Duration.seconds(3),
+                                            event2 -> {notificationLabel.setVisible(false); labelrezerwacje.fireEvent(event);}
+                                    ));
+                                    timeline.play();
+                                    anchor.getChildren().add(notificationLabel);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+            return cell;
+
+        });
+
+
+        for (String[] tab : dbload.ListHire) {
+            String id_egzemplarze = tab[0];
+            String nazwa = tab[1];
+            String nazwa_autora = tab[2];
+            String data_konca = tab[3];
+            String data_rezerwacji = tab[4];
+            String przedluz_rezerwacje = tab[5];
+            String anuluj_rezerwacje = tab[6];
+
+            items_res.add(new Rezerwacje(id_egzemplarze,nazwa, nazwa_autora, data_konca, data_rezerwacji,  przedluz_rezerwacje, anuluj_rezerwacje));
+        }
+        //Dodaj wartości do kolumn
+        lista_res.getItems().clear();
+        lista_res.setItems(items_res);
+        //Dodaj kolumny do tabeli
+        if(lista_res.getColumns().size() == 0) {
+            lista_res.getColumns().addAll(egzemplarzeCol, nazwaCol,  autorCol, data_koncaCol,data_rezerwacjiCol,przedluz_rezerwacjeCol, anuluj_rezerwacjeCol);
+        }
+        //ustawiamy tekst wyswietlany gdy tabela jest pusta
+        lista_res.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
+        // Ustaw preferowaną wielkość TableView na zgodną z AnchorPane
+        // Powiąż preferowane wielkości TableView i AnchorPane
+        lista_res.prefWidthProperty().bind(pane_search_result.widthProperty());
+        lista_res.prefHeightProperty().bind(pane_search_result.heightProperty());
+        // Dodaj TableView do AnchorPane
+        pane_search_result.getChildren().clear();
+        pane_search_result.getChildren().addAll(lista_res);
+        // Ustaw parametry kotwiczenia TableView na wartość 0
+        AnchorPane.setTopAnchor(lista, 0.0);
+        AnchorPane.setLeftAnchor(lista, 0.0);
+        AnchorPane.setBottomAnchor(lista, 0.0);
+        AnchorPane.setRightAnchor(lista, 0.0);
+
+        lista.getStylesheets().add("/fxml.home/home.css");
+        pane_search_result.setVisible(true);
+    }
 
     @FXML
     public void hide_panes(MouseEvent event){ //funkcja chowajaca pola; dla wszystkich guzikow; wywolywana jak klikniemy x
@@ -680,7 +899,7 @@ public class userManagerController extends appParent {
         ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
         pane_add_cover.setOpacity(0.0);
         pane_id_masked.setVisible(false);
-
+        pane_search_result.setVisible(false);
         pane_id_masked_log.setVisible(false);
     }
 

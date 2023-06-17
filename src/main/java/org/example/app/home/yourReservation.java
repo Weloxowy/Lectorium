@@ -300,25 +300,4 @@ public class yourReservation extends appParent {
         Name.setFont(pop_b_h2);
     }
 
-    private Node createPriorityGraphic(){
-        HBox graphicContainer = new HBox();
-        graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));
-        imageView.setFitHeight(25);
-        imageView.setPreserveRatio(true);
-        graphicContainer.getChildren().add(imageView);
-        return graphicContainer;
-    }
-
-    private Node createDeleteGraphic(){
-        HBox graphicContainer = new HBox();
-        graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/remove.png"))));
-        imageView.setFitHeight(25);
-        imageView.setPreserveRatio(true);
-        graphicContainer.getChildren().add(imageView);
-        return graphicContainer;
-    }
-
-
 }

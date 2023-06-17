@@ -308,26 +308,6 @@ public class katalog_itemcontroller extends appParent {
         return graphicContainer;
     }
 
-    private Node createDeleteGraphic() { // usuwanie rezerwacje
-        HBox graphicContainer = new HBox();
-        graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/remove.png"))));
-        imageView.setFitHeight(25);
-        imageView.setPreserveRatio(true);
-        graphicContainer.getChildren().add(imageView);
-        return graphicContainer;
-    }
-
-    private Node createConfirmGraphic() {
-        HBox graphicContainer = new HBox();
-        graphicContainer.setAlignment(Pos.CENTER);
-        ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/check.png"))));
-        imageView.setFitHeight(25);
-        imageView.setPreserveRatio(true);
-        graphicContainer.getChildren().add(imageView);
-        return graphicContainer;
-    }
-
     void cover_view() {
         double centerX = cover_book.getBoundsInLocal().getWidth();
         double centerY = cover_book.getBoundsInLocal().getHeight();

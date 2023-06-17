@@ -8,29 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.8.3 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/rentList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2023_23_37__Changes_.xml" afterDir="false" />
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/adminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourHire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/adminPanel.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686245851247</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki">
+      <created>1686992011491</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1686992011491</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +297,8 @@
     <MESSAGE value="v0.7.4 - update katalog_itemcontroller dla usera" />
     <MESSAGE value="v0.7.4 - p" />
     <MESSAGE value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
+    <MESSAGE value="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.9 - poprawki dla katalog_item + usermanager, usuniecie panelu administratora, dodanie funkcji modyfikacji uzytkownikow (bez rezerwacji), drobne poprawki" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
