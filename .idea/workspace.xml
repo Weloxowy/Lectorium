@@ -100,8 +100,21 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
-      <module name="verify" />
+      <module name="Lectorium" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\karpa\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Lectorium" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Lectorium" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
