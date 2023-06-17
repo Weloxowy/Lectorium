@@ -18,7 +18,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import org.example.Main;
 import org.example.User;
 import org.example.app.PasswordSkin;
 import org.example.app.appParent;

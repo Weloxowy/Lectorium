@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import org.example.Main;
 import org.example.User;
 import org.example.app.appParent;
 

@@ -12,16 +12,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import org.example.Main;
 import org.example.User;
 import org.example.Wypozyczenia;
 import org.example.app.appParent;
@@ -33,8 +30,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.Main.dbload;
 
@@ -142,7 +137,7 @@ public class yourHire extends appParent {
 
         grzywnaCol.setCellFactory(col -> {  //Ustawiamy wartość pola dla kolumny przedluzCol
             TableCell<Wypozyczenia, String> cell = new TableCell<>(); //deklarujemy pojedyncze pole jako obiekt klasy TableCell
-            AtomicReference<Double> suma = new AtomicReference<>((double) 0);
+            //AtomicReference<Double> suma = new AtomicReference<>((double) 0);
             cell.itemProperty().addListener((obs, old, newVal) -> {
                 String debt;
                 List<Double> lista = new ArrayList<>();
@@ -159,7 +154,7 @@ public class yourHire extends appParent {
                         int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
                         debt = String.valueOf(currency.format(diff*0.2));
                         cell.setText(debt+" zł");
-                            double konwert = 0;
+                            double konwert;
                             try {
                                 konwert = currency.parse(debt).doubleValue();
                                 lista.add(konwert);
@@ -205,8 +200,8 @@ public class yourHire extends appParent {
                     LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd")); //konwersja daty z patternu, jaki mamy w bazie
                     LocalDate currentDate = LocalDate.now(); //aktualna data
                     if (newVal != null && Integer.parseInt(newVal) < 3 && dataZwrotu.isAfter(currentDate)) { //jezeli nie przedluzylismy wiecej niz 2 razy i data_zwrotu nie mineła to tworzymy grafike
-                        //Node centreBox = createPriorityGraphic(); //tworzenie grafiki -> funkcja na koncu klasy
-                        //cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox)); //ustawianie granic wielkosci
+                        Node centreBox = createPriorityGraphic(); //tworzenie grafiki -> funkcja na koncu klasy
+                        cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox)); //ustawianie granic wielkosci
 
                         cell.setOnMouseClicked(event -> { //jezeli klikniemy na guzik dokonujemy przedluzenia o 30 dni
                             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) { //klikniecie nastapilo dwa razy PPM

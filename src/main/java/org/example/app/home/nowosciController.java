@@ -155,7 +155,6 @@ public class nowosciController extends appParent {
         vboxMap.put(6, vbox6);
         vboxMap.put(7, vbox7);
         vboxMap.put(8, vbox8);
-        int i=1;
         if(dbload.array.size() == 0){
             dbload.print_book();
         }
@@ -164,7 +163,6 @@ public class nowosciController extends appParent {
                 String[] st = dbload.top.get(act.getKey()-1);
                 katalog_item(event, Integer.parseInt(st[0]),false);
             }
-            i++;
         }
     }
 }

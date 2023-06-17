@@ -113,7 +113,7 @@ public class yourReservation extends appParent {
 
                 cell.setOnMouseClicked(event -> {
                     if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                        if(Integer.parseInt(przedluz_rezerwacjeCol.getCellObservableValue(rowIndex).getValue().toString())>2) {
+                        if(Integer.parseInt(przedluz_rezerwacjeCol.getCellObservableValue(rowIndex).getValue())>2) {
                             Label notificationLabel = new Label("Przekroczono limit przedluzen rezerwacji.");
                             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
                             notificationLabel.setFont(pop_r_h1);

@@ -5,15 +5,12 @@ import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,7 +26,6 @@ import javafx.scene.shape.Circle;
 import org.example.app.appParent;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -119,28 +115,25 @@ public class userManagerController extends appParent {
         labelrezerwacje.setStyle("-fx-text-fill:#808080");
         pane_id_masked.setVisible(false);
         pane_id_masked_log.setVisible(false);
-        root_anchor.setTopAnchor(grid,0.0);
-        root_anchor.setLeftAnchor(grid,0.0);
-        root_anchor.setRightAnchor(grid,0.0);
-        root_anchor.setBottomAnchor(grid,0.0);
-        root_anchor.setTopAnchor(pane_id_masked,0.0);
-        root_anchor.setLeftAnchor(pane_id_masked,0.0);
-        root_anchor.setRightAnchor(pane_id_masked,0.0);
-        root_anchor.setBottomAnchor(pane_id_masked,0.0);
-        root_anchor.setTopAnchor(pane_id_masked_log,0.0);
-        root_anchor.setLeftAnchor(pane_id_masked_log,0.0);
-        root_anchor.setRightAnchor(pane_id_masked_log,0.0);
-        root_anchor.setBottomAnchor(pane_id_masked_log,0.0);
+        AnchorPane.setTopAnchor(grid,0.0);
+        AnchorPane.setLeftAnchor(grid,0.0);
+        AnchorPane.setRightAnchor(grid,0.0);
+        AnchorPane.setBottomAnchor(grid,0.0);
+        AnchorPane.setTopAnchor(pane_id_masked,0.0);
+        AnchorPane.setLeftAnchor(pane_id_masked,0.0);
+        AnchorPane.setRightAnchor(pane_id_masked,0.0);
+        AnchorPane.setBottomAnchor(pane_id_masked,0.0);
+        AnchorPane.setTopAnchor(pane_id_masked_log,0.0);
+        AnchorPane.setLeftAnchor(pane_id_masked_log,0.0);
+        AnchorPane.setRightAnchor(pane_id_masked_log,0.0);
+        AnchorPane.setBottomAnchor(pane_id_masked_log,0.0);
 
     }
 
     @FXML
     public void font(Scene scene) {
         super.font(scene);
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
         Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
         Label pane_tytul = (Label) scene.lookup("#pane_tytul");
         pane_tytul.setFont(pop_b_h2);
@@ -215,7 +208,7 @@ public class userManagerController extends appParent {
 
 
         for(String[] tab: dbload.lista) {
-            Integer id = Integer.valueOf(tab[2]);
+            int id = Integer.parseInt(tab[2]);
             String imie = tab[0];
             String nazwisko = tab[1];
             String czy_dostepne = tab[3];
@@ -514,10 +507,10 @@ public class userManagerController extends appParent {
             event.consume();
             if(!pane_search_user.toString().isEmpty() && !pane_search_user.getText().isBlank()
                     && pane_search_user.getText().matches("[0-9]+") ) {
-                if(activate_diff==true) {
+                if(activate_diff) {
                     init_rent_list(Integer.parseInt(pane_search_user.getText()));
                 }
-                if(activate_diff==false) {
+                if(!activate_diff) {
                     init_res_list(Integer.parseInt(pane_search_user.getText()));
                 }
             }
@@ -690,7 +683,7 @@ public class userManagerController extends appParent {
 
                     cell.setOnMouseClicked(event -> {
                         if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                            if(Integer.parseInt(przedluz_rezerwacjeCol.getCellObservableValue(rowIndex).getValue().toString())>2) {
+                            if(Integer.parseInt(przedluz_rezerwacjeCol.getCellObservableValue(rowIndex).getValue())>2) {
                                 Label notificationLabel = new Label("Przekroczono limit przedluzen rezerwacji.");
                                 Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
                                 notificationLabel.setFont(pop_r_h1);
