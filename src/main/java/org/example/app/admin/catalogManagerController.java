@@ -18,6 +18,9 @@ import javafx.util.Duration;
 import org.example.User;
 import org.example.app.appParent;
 
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static org.example.Main.dbload;
 
 
@@ -85,8 +88,6 @@ public class catalogManagerController extends appParent{
     private GridPane grid;
 
 
-    boolean sec = false;
-
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -102,8 +103,8 @@ public class catalogManagerController extends appParent{
         AnchorPane.setLeftAnchor(pane_id_masked,0.0);
         AnchorPane.setRightAnchor(pane_id_masked,0.0);
         AnchorPane.setBottomAnchor(pane_id_masked,0.0);
-        if(dbload.array.isEmpty()){
-            dbload.print_book();
+        if(dbload.books.isEmpty()){
+            dbload.getBooks();
         }
     }
 
@@ -170,7 +171,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Dodaj egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.add_to_database("T", pane_txt_2.getText(),pane_txt_1.getText());
+            int ret = dbload.setNewCopy("T", pane_txt_2.getText(),pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Egzemplarz został dodany");
             }
@@ -207,7 +208,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.delete_one_record_from_database(pane_txt_1.getText(),pane_txt_2.getText());
+            int ret = dbload.deleteCopyFromDatabase(pane_txt_1.getText(),pane_txt_2.getText());
             if(ret>0){
                 pane_result_msg.setText("Egzemplarz został usunięty");
             }
@@ -251,7 +252,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń pozycje");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.delete_one_position_from_database(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
+            int ret = dbload.deleteBookFromDatabase(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
             if(ret>0){
                 pane_result_msg.setText("Pozycja usunięta");
             }
@@ -288,13 +289,13 @@ public class catalogManagerController extends appParent{
 
         TextField pane_txt_4 = (TextField) pane_id_masked.lookup("#pane_txt_4");
         pane_txt_4.setOpacity(1.0);
-        pane_txt_4.setPromptText("Podaj katalog książki");
+        pane_txt_4.setPromptText("Podaj nazwę książki");
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Modyfikuj egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.modify_egzemplarz(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
+            int ret = dbload.modifyCopy(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Modyfikacja udana");
             }
@@ -315,7 +316,6 @@ public class catalogManagerController extends appParent{
     @FXML
     public void add_position()
     {
-
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodaj pozycje książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -360,42 +360,58 @@ public class catalogManagerController extends appParent{
 
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj pozycje");
+
+        boolean[][] process_data = {{false, false, false}};
+        AtomicBoolean[] sec = {new AtomicBoolean(false)}; //sec - secound, drugie podejscie czyli dodawanie gatunku, autora i wydawnictwa
+
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            if(sec=true){
 
-                int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
-                if(ret > 0)
+            if(!sec[0].get()) {
+                boolean[] ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
+
+                if (Arrays.equals(ret, new boolean[]{false, false, false})) {
                     pane_result_msg.setText("Pozycja dodana");
-                else
-                    pane_result_msg.setText("Pozycji nie udało się dodać.");
+                } else {
+                    if (Arrays.equals(ret,new boolean[]{true, false, false})) {
+                        pane_result_msg.setText("Autor nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                    } else if (Arrays.equals(ret,new boolean[]{false, true, false})) {
+                        pane_result_msg.setText("Gatunek nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                    } else if (Arrays.equals(ret,new boolean[]{false, false, true})) {
+                        pane_result_msg.setText("Wydawnictwo nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                    } else {
+                        pane_result_msg.setText("Przynajmniej jeden z parametrów agregujących nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
+                    }
+                    process_data[0] = ret;
+                    sec[0].set(true);
+                }
             }
             else{
-                int ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(),pane_txt_5.getText(),pane_txt_6.getText(),pane_txt_7.getText(),pane_txt_8.getText(),pane_txt_9.getText(),pane_txt_10.getText());
-                if(ret>0 && ret<10){
+                if (process_data[0][0]) {
+                    boolean res = dbload.addAuthor(pane_txt_7.getText(),pane_txt_8.getText());
+                    if(res)
+                        process_data[0][0] = false;
+                }
+                if(process_data[0][1]){
+                    boolean res = dbload.addGenre(pane_txt_9.getText());
+                    if(res)
+                        process_data[0][1] = false;
+                }
+                if(process_data[0][2]){
+                    boolean res = dbload.addPublisher(pane_txt_10.getText());
+                    if(res)
+                        process_data[0][2] = false;
+                }
+                boolean[] ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
+                if (Arrays.equals(ret,process_data[0])) {
                     pane_result_msg.setText("Pozycja dodana");
                 }
                 else{
-                    if(ret < 1){
-                        pane_result_msg.setText("Pozycji nie udało się dodać.");
-                    }
-                    if(ret >= 100){
-                        sec = true;
-                        if(ret == 101){
-                            pane_result_msg.setText("Wydawnictwo nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                        }
-                        if(ret == 102){
-                            pane_result_msg.setText("Gatunek nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                        }
-                        if(ret == 104){
-                            pane_result_msg.setText("Autor nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                        }
-                        if(ret > 104 && ret == 103){
-                            pane_result_msg.setText("Przynajmniej jeden z parametrów nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                        }
-                    }
+                    pane_result_msg.setText("Pozycja nie została dodana. Spróbuj ponownie.");
+                    sec[0].set(false);
+                }
             }
-            }
+
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.seconds(3),
                     event2 -> pane_result_msg.setOpacity(0.0)
@@ -440,7 +456,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Modyfikuj pozycje");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.modify_position(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
+            int ret = dbload.modifyBook(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Modyfikacja udana");
             }
@@ -499,7 +515,6 @@ public class catalogManagerController extends appParent{
         pane_result_msg.setOpacity(0.0);
         ImageView pane_add_cover = (ImageView) pane_id_masked.lookup("#pane_add_cover");
         pane_add_cover.setOpacity(0.0);
-        sec = false;
         pane_id_masked.setVisible(false);
     }
 

@@ -243,7 +243,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.login_update(new_l, User.getInstance().getId(), old_l)) {
+        if (dbload.loginUpdate(new_l, User.getInstance().getId(), old_l)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -268,7 +268,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.password_update(new_p, User.getInstance().getId(), old_p)) {
+        if (dbload.updatePassword(new_p, User.getInstance().getId(), old_p)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -298,7 +298,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.profile_delete(password, User.getInstance().getId())) {
+        if (dbload.deleteProfile(password, User.getInstance().getId())) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -332,7 +332,7 @@ public class yourProfileController extends appParent {
                 ImageIO.write(bimage, "jpg", bos);
                 byte[] imageData = bos.toByteArray();
                 int id = User.getInstance().getId();
-                dbload.avatar_change(imageData, id);
+                dbload.changeAvatar(imageData, id);
                 avatar.fireEvent(event);
             } catch (IOException ex) {
                 ex.printStackTrace();

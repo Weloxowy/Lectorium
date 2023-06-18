@@ -8,13 +8,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.app.PasswordSkin;
-import org.example.db.dbloader;
-import org.example.verify.logincontroller;
+import org.example.db.DbParent;
+import org.example.auth.logincontroller;
 import java.io.IOException;
 
 public class Main extends Application {
     static public Katalog kat = new Katalog(0,null,null,null,null,null,null,null,null,null);
-    static public dbloader dbload = new dbloader();
+    static public DbParent dbload = new DbParent();
 
 
 

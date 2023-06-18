@@ -74,7 +74,7 @@ public class katalogcontroller extends appParent {
 
 
     public void Katalog_lista() {
-        dbload.print_book();
+        dbload.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
@@ -165,7 +165,7 @@ public class katalogcontroller extends appParent {
     }
 
     public void Katalog_lista(String query) {
-        dbload.print_book();
+        dbload.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
@@ -209,7 +209,7 @@ public class katalogcontroller extends appParent {
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        for (String[] tab: dbload.array) {
+        for (String[] tab: dbload.books) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
 
@@ -305,10 +305,10 @@ public class katalogcontroller extends appParent {
 
     void loadNextRecords(ObservableList<Katalog> items){
         int recordsToLoad = 50;
-        int endIndex = Math.min(lastLoadedIndex + recordsToLoad, dbload.array.size());
+        int endIndex = Math.min(lastLoadedIndex + recordsToLoad, dbload.books.size());
 
         for (int i = lastLoadedIndex; i < endIndex; i++) {
-            String[] tab = dbload.array.get(i);
+            String[] tab = dbload.books.get(i);
 
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }

@@ -4,12 +4,42 @@
     <option name="ANALYZE_INJECTED_CODE" value="false" />
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Lectorium:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9.2 poprawkek c.d.">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9.3 refaktoring dbparent + pokrewnych, dodawanie książek, drobne poprawki">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Lectorium_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Run.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/db/DbAuth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tests/testsDbloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/userManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourHire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/DbParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/logincontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/verify/registercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/registercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/catalogManager.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.admin/userManager.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +80,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2MvtxtX6gMiNC2a6NO7KYfJ1rKv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -59,26 +92,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Studia 4 semestr/Java projekt/Prawidlowy_projekt/lectorium&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2908046&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;FeaturesTrainerSettingsPanel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "C:/Users/karpa/javafx-sdk-19.0.2.1/bin/vcruntime140_1.dll",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2908046",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;JAVA&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\karpa\IdeaProjects\abte\src\main\resources\fxml.admin" />
@@ -86,18 +119,18 @@
       <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources\fxml\Register" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources\fxml\verify" />
-      <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources\res" />
-      <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources\fxml\Loginandregister" />
-      <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\resources" />
-      <recent name="C:\Users\karpa\IdeaProjects\verify\src\main\java\org\example" />
+      <recent name="C:\Users\karpa\IdeaProjects\lectttt\src\main\java\org\example\db" />
+      <recent name="C:\Users\karpa\IdeaProjects\lectttt\src\main\resources\res\media" />
+      <recent name="C:\Users\karpa\IdeaProjects\lectttt" />
+      <recent name="C:\Users\karpa\IdeaProjects\lectttt\src\main\resources\res" />
+      <recent name="C:\Users\karpa\IdeaProjects\lectttt\src\main\java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.example" />
       <recent name="org.example.app" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="Lectorium" />
@@ -106,19 +139,116 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="Lectorium" />
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+    <configuration name="testsDbloader.testGetImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Lectorium" />
-      <option name="filePath" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="testGetImage" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="testsDbloader.testGetImageForMultipleUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Lectorium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="testGetImageForMultipleUsers(int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testsDbloader.testTryLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Lectorium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="testTryLogin(java.lang.String)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testsDbloader.testTryLoginInvalidCredentials" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Lectorium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="testTryLoginInvalidCredentials" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testsDbloader.testGetImage" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Lectorium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.testsDbloader" />
+      <option name="METHOD_NAME" value="testGetImage" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.Test" />
+      <item itemvalue="JUnit.testsDbloader.testGetImage" />
+      <item itemvalue="JUnit.testsDbloader.testTryLogin" />
+      <item itemvalue="JUnit.testsDbloader.testTryLoginInvalidCredentials" />
+      <item itemvalue="JUnit.testsDbloader.testGetImageForMultipleUsers" />
+      <item itemvalue="TestNG.testsDbloader.testGetImage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.testsDbloader.testGetImage" />
+        <item itemvalue="JUnit.testsDbloader.testTryLogin" />
+        <item itemvalue="JUnit.testsDbloader.testTryLoginInvalidCredentials" />
+        <item itemvalue="JUnit.testsDbloader.testGetImageForMultipleUsers" />
+        <item itemvalue="TestNG.testsDbloader.testGetImage" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -262,7 +392,28 @@
       <option name="project" value="LOCAL" />
       <updated>1686997602831</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="v0.9.2 poprawkek c.d.">
+      <created>1687027584434</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1687027584434</updated>
+    </task>
+    <task id="LOCAL-00021" summary="v0.9.2 poprawkek c.d.">
+      <created>1687027694004</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1687027694004</updated>
+    </task>
+    <task id="LOCAL-00022" summary="v0.9.2 poprawkek c.d.">
+      <created>1687027784753</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1687027784753</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +458,9 @@
     <MESSAGE value="v0.7.4 - p" />
     <MESSAGE value="v0.8 - sporo modyfikacji w zarzadzaj katalogiem. Dodać tylko &quot;Zmodyfikuj pozycje&quot;" />
     <MESSAGE value="v0.8.3 - poprawy warningow" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.8.3 - poprawy warningow" />
+    <MESSAGE value="v0.9.2 poprawkek c.d." />
+    <MESSAGE value="v0.9.3 refaktoring dbparent + pokrewnych, dodawanie książek, drobne poprawki" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.9.3 refaktoring dbparent + pokrewnych, dodawanie książek, drobne poprawki" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -317,8 +470,8 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/dbloader.java</url>
-          <line>275</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/db/DbParent.java</url>
+          <line>269</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -340,6 +493,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java</url>
           <line>114</line>
           <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java</url>
+          <line>367</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

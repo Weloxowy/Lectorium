@@ -66,7 +66,7 @@ public class kategoriecontroller extends appParent {
     }
 
     void categories_init(){
-        dbload.get_categories();
+        dbload.getCategories();
         if(dbload.categories != null) {
             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),18);
             Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),16);

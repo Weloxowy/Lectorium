@@ -72,7 +72,7 @@ public class nowosciController extends appParent {
     }
 
     public void init(String imie, String nazwisko){
-        dbload.get_top();
+        dbload.getTop();
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
@@ -122,7 +122,7 @@ public class nowosciController extends appParent {
                 label_a.setFont(pop_r_h1);
             }
         }
-        dbload.get_cover(id_katalog);
+        dbload.getCover(id_katalog);
         ImageView image = (ImageView) vb.lookup("#cover"+i);
         if(image != null){
             image.setImage(Main.kat.getOkladka());
@@ -154,8 +154,8 @@ public class nowosciController extends appParent {
         vboxMap.put(6, vbox6);
         vboxMap.put(7, vbox7);
         vboxMap.put(8, vbox8);
-        if(dbload.array.size() == 0){
-            dbload.print_book();
+        if(dbload.books.size() == 0){
+            dbload.getBooks();
         }
         for (Map.Entry<Integer, VBox> act : vboxMap.entrySet()) {
             if (event.getSource().equals(act.getValue())) {
