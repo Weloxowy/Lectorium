@@ -28,6 +28,11 @@ import org.example.app.home.homecontroller;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Kontroler interfejsu użytkownika obsługujący logowanie użytkownika.
+ * Ta klasa działa jako kontroler dla pliku FXML i obsługuje różne zdarzenia
+ * oraz interakcje użytkownika w interfejsie logowania.
+ */
 public class logincontroller {
     @FXML
     private ImageView closebutton;
@@ -54,15 +59,29 @@ public class logincontroller {
     @FXML
     private Label error;
 
+    /**
+     * Metoda zwracająca pole hasło.
+     *
+     * @return Pole hasło.
+     */
     public PasswordField getHaslo() {
         return haslo;
     }
 
+    /**
+     * Metoda ustawiająca pole hasło.
+     *
+     * @param haslo Pole hasło.
+     */
     public void setHaslo(PasswordField haslo) {
         this.haslo = haslo;
     }
 
 
+    /**
+     * Metoda ustawiająca odpowiednie czcionki dla elementów interfejsu użytkownika.
+     * Wczytuje czcionki z plików zasobów.
+     */
     public void font() {
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
@@ -76,18 +95,32 @@ public class logincontroller {
         switchtoregister.setFont(pop_r_h2);
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku zamknięcia okna.
+     * Zamyka okno logowania.
+     */
     @FXML
     void onclosewindow() {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku minimalizacji okna.
+     * Minimalizuje okno logowania.
+     */
     @FXML
     void onminimalizewindow() {
         Stage stage = (Stage) minimizebutton.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Metoda obsługująca naciśnięcie przycisku na klawiaturze.
+     * Przechwytuje naciśnięcie klawisza Enter i wywołuje zdarzenie kliknięcia przycisku submit.
+     *
+     * @param event Obiekt zdarzenia klawiatury.
+     */
     @FXML
     public void buttonPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -99,6 +132,12 @@ public class logincontroller {
         }
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku rejestracji.
+     * Przechodzi do ekranu rejestracji.
+     *
+     * @param event Obiekt zdarzenia myszy.
+     */
     @FXML
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -128,6 +167,12 @@ public class logincontroller {
         stage.setScene(scene);
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku submit (próba logowania).
+     * Sprawdza wprowadzone dane logowania i podejmuje odpowiednie działania.
+     *
+     * @param event Obiekt zdarzenia myszy.
+     */
     @FXML
     void onsubmit(MouseEvent event) {
         error.setOpacity(0.0);
@@ -149,6 +194,12 @@ public class logincontroller {
 
     }
 
+    /**
+     * Metoda obsługująca udane logowanie.
+     * Otwiera nowe okno główne aplikacji po zalogowaniu.
+     *
+     * @param event Obiekt zdarzenia myszy.
+     */
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
@@ -182,6 +233,12 @@ public class logincontroller {
         stage.show();
     }
 
+    /**
+     * Metoda obsługująca nieudane logowanie.
+     * Wyświetla komunikat o błędzie logowania.
+     *
+     * @param blockade Informacja, czy konto jest zablokowane.
+     */
     void onfailure(boolean blockade) {
         if(blockade==true){
             error.setText("Konto zablokowane");

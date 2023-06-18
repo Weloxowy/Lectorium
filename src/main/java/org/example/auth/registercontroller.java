@@ -22,12 +22,16 @@ import javafx.stage.StageStyle;
 import org.example.User;
 import org.example.app.PasswordSkin;
 import org.example.db.DbAuth;
-import org.example.db.DbParent;
 import org.example.app.home.homecontroller;
 
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Kontroler interfejsu użytkownika obsługujący rejestrację użytkownika.
+ * Ta klasa działa jako kontroler dla pliku FXML i obsługuje różne zdarzenia
+ * oraz interakcje użytkownika w interfejsie rejestracji.
+ */
 public class registercontroller {
 
     @FXML
@@ -69,12 +73,17 @@ public class registercontroller {
     @FXML
     private Label error_login;
 
+    /**
+     * Metoda ustawiająca odpowiednie czcionki dla elementów interfejsu użytkownika
+     */
     public void font(){
+        // Załadowanie czcionek z plików zasobów
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
 
+        // Przypisanie odpowiednich czcionek do poszczególnych elementów interfejsu
         zarejestrujsietext.setFont(ssp_sb_h1);
         submit.setFont(pop_r_h1);
         haslo.setFont(pop_r_h2);
@@ -85,21 +94,34 @@ public class registercontroller {
         error_dane.setFont(pop_b_h1);
         error_haslo.setFont(pop_b_h1);
         error_login.setFont(pop_b_h1);
-
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku zamknięcia okna.
+     * Zamyka okno logowania.
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     @FXML
     void onclosewindow(MouseEvent event) {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia przycisku minimalizacji okna.
+     * Minimalizuje okno logowania.
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     @FXML
     void onminimalizewindow(MouseEvent event) {
         Stage stage = (Stage) minimizebutton.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Obsługa zdarzenia rejestracji
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     @FXML
     void onregisterclicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -129,6 +151,11 @@ public class registercontroller {
         stage.setScene(scene);
     }
 
+
+    /**
+     * Obsługa zdarzenia przycisku submit (próba rejestracji)
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     @FXML
     void onsubmit(MouseEvent event){
         hidefailuresign(event);
@@ -158,6 +185,13 @@ public class registercontroller {
             error_login.setOpacity(1.0);
         }
     }
+
+    /**
+     * Funkcja obsługująca zdarzenie udanej rejestracji, czyli gdy funkcja tryLogin zwróci wartość true.
+     * Funkcja uruchamia zamyka okno logowania i otwiera okno aplikacji.
+     *
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     void onsuccess(MouseEvent event) {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.DECORATED);
@@ -171,7 +205,7 @@ public class registercontroller {
             parent = loader.load();
             homecontroller controller = loader.getController();
 
-            controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
+            controller.init(User.getImie(), User.getNazwisko());
             stage.setResizable(true);
             stage.setFullScreen(false);
             if(User.getInstance().getCzy_admin().contentEquals("T")){
@@ -191,14 +225,21 @@ public class registercontroller {
         stage.show();
     }
 
+    /**
+     * Obsługa zdarzenia nieudanej rejestracji polegająca na wyświetleniu komunikatu o błędzie.
+     */
     void onfailure() {
         error_login.setOpacity(1.0);
     }
 
+    /**
+     * Ukrycie komunikatów o błędach
+     * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
+     */
     @FXML
     void hidefailuresign(MouseEvent event) {
         if(error_dane.getOpacity() == 1.0){
-        error_dane.setOpacity(0.0);
+            error_dane.setOpacity(0.0);
         }
         if(error_haslo.getOpacity() == 1.0) {
             error_haslo.setOpacity(0.0);
@@ -207,6 +248,12 @@ public class registercontroller {
             error_login.setOpacity(0.0);
         }
     }
+
+    /**
+     * Funkcja która wywołuje funkcję submit poprzez emulację uruchomienia eventu kliknięcia guzika Submit.
+     * @param event obiekt klasy KeyEvent wywoływany kliknięciem przycisku na klawiaturze
+     */
+    //
     @FXML
     public void buttonPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
