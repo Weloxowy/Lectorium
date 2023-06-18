@@ -36,7 +36,11 @@ import java.util.ArrayList;
 
 import static org.example.Main.*;
 
-
+/**
+ * Klasa {@code userManagerController} jest kontrolerem widoku informacji o egzemplarzach danej pozycji z katalogu.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji, udostępnia funkcje zarządzaniem użytkownikami.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ */
 public class userManagerController extends appParent {
     @FXML
     private ImageView avatar = new ImageView();
@@ -109,6 +113,13 @@ public class userManagerController extends appParent {
     private AnchorPane anchor;
     boolean activate_diff = false;
 
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -132,6 +143,13 @@ public class userManagerController extends appParent {
 
     }
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene) {
         super.font(scene);
@@ -165,6 +183,9 @@ public class userManagerController extends appParent {
         pane_result_msg.setFont(pop_b_h2);
     }
 
+    /**
+     * Metoda {@code avatar_view} ustawia clipping dla obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -173,12 +194,26 @@ public class userManagerController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Metoda {@code search_init} obsługuje inicjalizację wyszukiwania po wciśnięciu przycisku lub klawisza Enter w polu searchbar.
+     * Pobiera zapytanie z pola searchbar i przekazuje je do metody katalog_clicked w celu obsługi wyszukiwania.
+     *
+     * @param event zdarzenie kliknięcia myszy
+     */
     @FXML
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
     }
 
+    /**
+     * Wyświetla listę użytkowników w panelu administratora.
+     * Pobiera dane użytkowników z bazy danych i tworzy tabelę z odpowiednimi kolumnami.
+     * Każdy wiersz tabeli reprezentuje jednego użytkownika.
+     * Możliwe jest dodawanie, modyfikowanie, zmienianie uprawnień i usuwanie użytkowników.
+     * Metoda korzysta z różnych kontrolek, takich jak TextField, Button, Label, oraz z metod dostępu do bazy danych.
+     * Wyświetla również komunikaty o wynikach operacji dodawania, modyfikacji, zmiany uprawnień i usuwania użytkowników.
+     */
     public void Katalog_lista_adminUser() {
         db_getData.printUsers();
         ObservableList<Users> items = FXCollections.observableArrayList();
@@ -236,7 +271,11 @@ public class userManagerController extends appParent {
 
     }
 
-
+    /**
+     * Obsługuje zdarzenie dodawania nowego użytkownika.
+     * Wyświetla formularz dodawania użytkownika oraz obsługuje logikę dodawania użytkownika do bazy danych.
+     * Wyświetla komunikat o wyniku operacji dodawania użytkownika.
+     */
     @FXML
     public void dodaj_uzytkownika() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
@@ -303,7 +342,11 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(true);
     }
 
-
+    /**
+     * Obsługuje zdarzenie modyfikowania użytkownika.
+     * Wyświetla formularz modyfikacji użytkownika oraz obsługuje logikę modyfikacji użytkownika w bazie danych.
+     * Wyświetla komunikat o wyniku operacji modyfikacji użytkownika.
+     */
     @FXML
     public void zmodyfikuj_uzytkownika() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
@@ -349,6 +392,11 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje zdarzenie zmiany uprawnień użytkownika.
+     * Wyświetla formularz zmiany uprawnień użytkownika oraz obsługuje logikę zmiany uprawnień w bazie danych.
+     * Wyświetla komunikat o wyniku operacji zmiany uprawnień użytkownika.
+     */
     @FXML
     public void zmodyfikuj_uprawnienia_uzytkownika() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
@@ -383,6 +431,11 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje zdarzenie usuwania użytkownika.
+     * Wyświetla formularz usuwania użytkownika oraz obsługuje logikę usuwania użytkownika z bazy danych.
+     * Wyświetla komunikat o wyniku operacji usuwania użytkownika.
+     */
     @FXML
     void usun_uzytkownika() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
@@ -417,6 +470,11 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Metoda odpowiedzialna za zablokowanie lub odblokowanie użytkownika.
+     * Aktualizuje stan blokady w bazie danych na podstawie podanego loginu użytkownika.
+     * Po wykonaniu operacji wyświetla odpowiedni komunikat.
+     */
     @FXML
     void zablokuj_uzytkownika() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
@@ -459,6 +517,13 @@ public class userManagerController extends appParent {
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Metoda obsługująca aktywację wypożyczeń użytkownika po naciśnięciu klawisza ENTER.
+     * Sprawdza poprawność wprowadzonego identyfikatora użytkownika i inicjalizuje listę wypożyczeń.
+     * Wyświetla wynik wyszukiwania.
+     *
+     * @param event Obiekt zdarzenia naciśnięcia klawisza
+     */
     @FXML
     public void rent_activate(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -476,18 +541,37 @@ public class userManagerController extends appParent {
         }
     }
 
+    /**
+     * Metoda obsługująca sprawdzanie wypożyczeń użytkownika.
+     * Ustawia flagę activate_diff na true i wyświetla listę wypożyczeń.
+     *
+     * @param event Obiekt zdarzenia kliknięcia myszą
+     */
     @FXML
     public void check_rent(MouseEvent event) {
         pane_id_masked_log.setVisible(true);
         activate_diff = true;
     }
 
+    /**
+     * Metoda obsługująca sprawdzanie rezerwacji użytkownika.
+     * Ustawia flagę activate_diff na false i wyświetla listę rezerwacji.
+     *
+     * @param event Obiekt zdarzenia kliknięcia myszą
+     */
     @FXML
     public void check_res(MouseEvent event) {
         pane_id_masked_log.setVisible(true);
         activate_diff = false;
     }
 
+    /**
+     * Metoda inicjalizująca listę wypożyczeń dla danego identyfikatora użytkownika.
+     * Pobiera informacje o wypożyczeniach z bazy danych i wyświetla je w tabeli.
+     * Oblicza ewentualną grzywnę za opóźnione zwroty.
+     *
+     * @param id Identyfikator użytkownika
+     */
     public void init_rent_list(int id) {
         pane_search_result.getChildren().clear();
         db_getData.getHireInformation(id);
@@ -586,6 +670,13 @@ public class userManagerController extends appParent {
 
     }
 
+    /**
+     * Metoda inicjalizująca listę rezerwacji dla danego identyfikatora użytkownika.
+     * Pobiera informacje o rezerwacjach z bazy danych i wyświetla je w tabeli.
+     * Tworzy przyciski do przedłużania i anulowania rezerwacji.
+     *
+     * @param id Identyfikator użytkownika
+     */
     public void init_res_list(int id) {
         pane_search_result.getChildren().clear();
         System.out.println(pane_search_result.getChildren().isEmpty());
@@ -807,6 +898,10 @@ public class userManagerController extends appParent {
         pane_search_result.setVisible(true);
     }
 
+    /**
+     * Funkcja chowa wszystkie elementy dla pop-upów.
+     * @param event Obiekt zdarzenia kliknięcia myszą
+     */
     @FXML
     public void hide_panes(MouseEvent event) {
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");

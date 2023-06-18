@@ -24,6 +24,11 @@ import java.util.Objects;
 
 import static org.example.Main.db_getData;
 
+/**
+ * Klasa {@code catalogController} jest kontrolerem widoku domowego ekranu aplikacji.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji oraz inicjalizację widoku katalogu książek.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ */
 public class catalogController extends appParent {
     @FXML
     private ImageView avatar;
@@ -72,7 +77,14 @@ public class catalogController extends appParent {
 
     private int lastLoadedIndex = 0;
 
-
+    /**
+     * Metoda odpowiedzialna za wyświetlanie listy katalogu.
+     * Pobiera dane z bazy danych, inicjalizuje tabelę i wyświetla listę książek.
+     * Przyjmuje wszystkie dostępne rekordy z katalogu i wyświetla je w tabeli.
+     * Umożliwia filtrowanie i wyszukiwanie po nazwie, autorze, ISBN lub gatunku.
+     * Obsługuje podwójne kliknięcie myszą na rekord, które otwiera szczegóły książki.
+     *
+     */
     public void Katalog_lista() {
         db_getData.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
@@ -164,6 +176,15 @@ public class catalogController extends appParent {
         });
     }
 
+    /**
+     * Metoda odpowiedzialna za wyświetlanie listy katalogu.
+     * Pobiera dane z bazy danych, inicjalizuje tabelę i wyświetla listę książek.
+     * Przyjmuje wszystkie dostępne rekordy z katalogu i wyświetla je w tabeli.
+     * Umożliwia filtrowanie i wyszukiwanie po nazwie, autorze, ISBN lub gatunku.
+     * Obsługuje podwójne kliknięcie myszą na rekord, które otwiera szczegóły książki.
+     *
+     * @param query Opcjonalny parametr - dodaje od razu filtr do przeszukania katalogu (opcjonalne)
+     */
     public void Katalog_lista(String query) {
         db_getData.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
@@ -272,6 +293,13 @@ public class catalogController extends appParent {
         });
     }
 
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -280,6 +308,11 @@ public class catalogController extends appParent {
         labelkatalog.setStyle("-fx-text-fill:#808080");
     }
 
+    /**
+     * Metoda odpowiedzialna za wyświetlanie awatara użytkownika.
+     * Tworzy okrągły wycinek (clip) o określonym promieniu wokół awatara,
+     * który jest ustawiany jako wycinek dla elementu avatar.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -288,12 +321,24 @@ public class catalogController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Inicjalizuje wyszukiwanie w katalogu na podstawie wprowadzonego zapytania.
+     * Pobiera tekst z pola wyszukiwania (searchbar) i wywołuje metodę katalog_clicked(event, query).
+     *
+     * @param event Obiekt zdarzenia myszy (MouseEvent)
+     */
     @FXML
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
     }
 
+    /**
+     * Pobiera pasek przewijania wertykalnego dla podanej tabeli (TableView).
+     *
+     * @param tableView Tabela, dla której ma zostać pobrany pasek przewijania (TableView)
+     * @return Pasek przewijania wertykalnego dla tabeli (ScrollBar) lub null, jeśli nie znaleziono
+     */
     private ScrollBar getVerticalScrollBar(TableView<?> tableView) {
         for (Node node : tableView.lookupAll(".scroll-bar")) {
             if (node instanceof ScrollBar scrollBar) {
@@ -305,6 +350,14 @@ public class catalogController extends appParent {
         return null;
     }
 
+    /**
+     * Ładuje kolejne rekordy do listy katalogu.
+     * Dodaje do listy katalogu kolejne rekordy z bazy danych,
+     * zaczynając od ostatnio wczytanego indeksu.
+     * Określa ilość rekordów do wczytania i zwiększa indeks ostatnio wczytanego rekordu.
+     *
+     * @param items Lista obserwowalna, do której mają zostać dodane kolejne rekordy katalogu (ObservableList)
+     */
     void loadNextRecords(ObservableList<Katalog> items) {
         int recordsToLoad = 50;
         int endIndex = Math.min(lastLoadedIndex + recordsToLoad, db_getData.books.size());
