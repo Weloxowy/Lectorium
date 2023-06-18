@@ -14,7 +14,7 @@ import org.example.User;
 import org.example.app.appParent;
 
 
-public class homecontroller extends appParent {
+public class homeController extends appParent {
     @FXML
     private ImageView avatar = new ImageView();
 

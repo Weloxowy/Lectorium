@@ -33,7 +33,7 @@ import java.util.List;
 
 import static org.example.Main.*;
 
-public class yourHire extends appParent {
+public class yourRentsController extends appParent {
     @FXML
     private ImageView avatar;
 

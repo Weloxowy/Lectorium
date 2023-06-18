@@ -23,9 +23,8 @@ import org.example.app.appParent;
 import java.util.Objects;
 
 import static org.example.Main.db_getData;
-import static org.example.Main.db_parent;
 
-public class katalogcontroller extends appParent {
+public class catalogController extends appParent {
     @FXML
     private ImageView avatar;
 

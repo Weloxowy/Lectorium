@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.app.PasswordSkin;
 import org.example.db.*;
-import org.example.auth.logincontroller;
+import org.example.auth.loginController;
 
 import java.io.IOException;
 
@@ -54,7 +54,7 @@ public class Main extends Application {
             final double[] y = {0};
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             Parent parent = loader.load();
-            logincontroller controller = loader.getController();
+            loginController controller = loader.getController();
             controller.font();
             controller.getHaslo().setSkin(new PasswordSkin(controller.getHaslo()));
             Scene loginScene = new Scene(parent);

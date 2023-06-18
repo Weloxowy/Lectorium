@@ -30,7 +30,7 @@ import java.util.Objects;
 
 import static org.example.Main.*;
 
-public class katalog_itemcontroller extends appParent {
+public class catalogItemController extends appParent {
     public boolean if_adm = false;
     @FXML
     private AnchorPane anchortable;

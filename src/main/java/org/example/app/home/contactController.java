@@ -14,7 +14,7 @@ import org.example.User;
 import org.example.app.appParent;
 
 
-public class contactcontroller extends appParent {
+public class contactController extends appParent {
     @FXML
     private VBox kontakt_id;
     @FXML

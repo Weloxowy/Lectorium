@@ -2,12 +2,16 @@ package org.example.app.admin;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -15,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import org.example.Katalog;
 import org.example.User;
 import org.example.app.appParent;
 
@@ -24,6 +29,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.example.Main.*;
 
 
+/**
+ * Klasa kontrolera zarządzającego katalogiem.
+ */
 public class catalogManagerController extends appParent{
 
     @FXML
@@ -36,25 +44,7 @@ public class catalogManagerController extends appParent{
     private Button dodaj_egzemplarz;
 
     @FXML
-    private Label labelbiblioteka;
-
-    @FXML
-    private Label labelglowna;
-
-    @FXML
     private Label labelkatalog;
-
-    @FXML
-    private Label labelkategorie;
-
-    @FXML
-    private Label labelkontakt;
-
-    @FXML
-    private Label labelnowosci;
-
-    @FXML
-    private Label labelrezerwacje;
 
     @FXML
     private Label labelwypozyczenia;
@@ -82,13 +72,18 @@ public class catalogManagerController extends appParent{
 
 
     @FXML
-    private AnchorPane root_anchor;
-
-    @FXML
     private GridPane grid;
 
+    boolean zapamietaj;
 
+
+    /**
+     * Inicjalizuje kontroler.
+     * @param imie imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
+        zapamietaj = true;
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
@@ -108,6 +103,116 @@ public class catalogManagerController extends appParent{
         }
     }
 
+    final TableView<Katalog> lista = new TableView<>();
+
+    /**
+     * Tworzy tabelę z listą książek w określonym panelu.
+     * @param anchortable panel, w którym ma zostać wyświetlona tabela
+     * @param searchbar pole tekstowe do filtrowania listy książek
+     */
+    public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
+        db_getData.getBooks(); //pobieranie danych
+        ObservableList<Katalog> items = FXCollections.observableArrayList();
+        //tworzenie kolumn tabeli
+        TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
+        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<>("id_katalog"));
+        idCol.setVisible(false);
+
+        TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
+        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa_autora"));
+
+        TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
+        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setCellValueFactory(
+                new PropertyValueFactory<>("nazwa"));
+
+        TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
+        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setCellValueFactory(
+                new PropertyValueFactory<>("rok_wydania"));
+
+        TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
+        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setCellValueFactory(
+                new PropertyValueFactory<>("wydanie"));
+
+        TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
+        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setCellValueFactory(
+                new PropertyValueFactory<>("isbn"));
+
+        TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
+        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setCellValueFactory(
+                new PropertyValueFactory<>("jezyk"));
+
+        TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
+        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
+        uwagiCol.setCellValueFactory(
+                new PropertyValueFactory<>("uwagi"));
+        for (String[] tab: db_getData.books) {
+            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
+        }
+        //dodawanie elementów do tabeli
+        lista.setItems(items);
+        //ustawianie stałej wysokości wierszy
+        lista.setFixedCellSize(30);
+        //dodawanie kolumn do tabeli
+        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        //ustawianie bindów, żeby tabela się zwiększała wraz z oknem
+        lista.prefWidthProperty().bind(anchortable.widthProperty());
+        lista.prefHeightProperty().bind(anchortable.heightProperty());
+        //zakotwiczenie listy w anchortable
+        anchortable.getChildren().addAll(lista);
+        AnchorPane.setLeftAnchor(anchortable, 0.0);
+        AnchorPane.setBottomAnchor(anchortable, 0.0);
+        AnchorPane.setRightAnchor(anchortable, 0.0);
+        //dodawanie wyglądu
+        lista.getStylesheets().add("/fxml.home/home.css");
+
+        //dodawanie aktywnego filtra ksiazek po tytule, autorze i gatunku
+        FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
+
+        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
+            if(newValue.isEmpty() || newValue.isBlank()){ return true;}
+
+            String searchword = newValue.toLowerCase();
+
+            if(Katalog.getNazwa().toLowerCase().contains(searchword)){
+                return true;
+            }
+            if(Katalog.getNazwa_autora().toLowerCase().contains(searchword)){
+                return true;
+            }
+            return Katalog.getIsbn().toLowerCase().contains(searchword);
+
+        }));
+
+        SortedList<Katalog> sortedList = new SortedList<>(filteredList);
+
+        sortedList.comparatorProperty().bind(lista.comparatorProperty());
+
+        lista.setItems(sortedList);
+
+        //gdy klikniemy 2 razy, przechodzimy do sceny wyłącznie dla danej książki i jej egzemplarzy.
+        lista.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+                TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
+                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
+                zapamietaj = false;
+                katalog_item(event,data,true);
+            }
+        });
+    }
+
+    /**
+     * Ustawia styl czcionki dla elementów unikalnych dla tej sceny.
+     * @param scene scena, dla której ma zostać ustawiony styl czcionki
+     */
     @FXML
     public void font(Scene scene) {
         super.font(scene);
@@ -142,6 +247,9 @@ public class catalogManagerController extends appParent{
 
     }
 
+    /**
+     * Ustawia sposób wyświetlania się awatara użytkownika.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -150,12 +258,20 @@ public class catalogManagerController extends appParent{
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Inicjuje wyszukiwanie na podstawie podanego zapytania.
+     * @param event zdarzenie kliknięcia przycisku
+     */
     @FXML
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
     }
 
+    /**
+     * Obsługuje dodawanie nowego egzemplarza książki. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     */
     @FXML
     public void dodaj_egz_button()
     {
@@ -169,7 +285,7 @@ public class catalogManagerController extends appParent{
         pane_txt_2.setPromptText("Podaj lokalizację egzemplarza");
         Button pane_button = (Button) pane_id_masked.lookup("#pane_button");
         pane_button.setText("Dodaj egzemplarz");
-        pane_button.setOnMouseClicked(event -> {
+        pane_button.setOnMouseClicked(event -> { //lambda wykonywana gdy klikniemy w guzik
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = db_setData.setNewCopy("T", pane_txt_2.getText(),pane_txt_1.getText());
             if(ret>0){
@@ -178,7 +294,7 @@ public class catalogManagerController extends appParent{
             else{
                 pane_result_msg.setText("Egzemplarz nie został dodany");
             }
-            Timeline timeline = new Timeline(new KeyFrame(
+            Timeline timeline = new Timeline(new KeyFrame( //timeline uruchamia się i wyświetla komunikat przez 3 sekundy
                     Duration.seconds(3),
                     event2 ->{
                         pane_result_msg.setOpacity(0.0);
@@ -193,6 +309,10 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje usunięcie egzemplarza książki. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     */
     @FXML
     public void usun_egz_button()
     {
@@ -226,7 +346,10 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
-
+    /**
+     * Obsługuje usunięcie książki z katalogu. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     */
     @FXML
     public void usun_pozycje_button()
     {
@@ -270,6 +393,10 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje modyfikacje egzemplarza książki. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     */
     @FXML
     public void zmodyfikuj_egzemplarze()
     {
@@ -313,6 +440,17 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje dodanie książki do katalogu. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     * Wynik jest zwracany w postaci 3-elementowej tablicy typu boolean.
+     * Odpowiadają one odpowiednio istnienie danego rekordu dla tabel: Autor,Gatunek,Wydawnictwo.
+     * Wartość true oznacza, że wprowadzony rodzaj elementu nie istnieje w bazie, false - przeciwnie.
+     * Następnie ustawiamy pole sec na true i wywołujemy komunikat.
+     * Jeżeli użytkownik kliknie znowu w guzik, wchodzimy w drugi obieg tej samej funkcji i dodajemy
+     * nieistniejące dotychczas parametry do docelowych tabel.
+     * Na sam koniec przeprowadzamy dodanie książki do katalogu.
+     */
     @FXML
     public void add_position()
     {
@@ -423,6 +561,10 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Obsługuje modyfikacje książki z katalogu. Metoda ustawia nazwy pól.
+     * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
+     */
     @FXML
     public void zmodyfikuj_pozycje()
     {
@@ -474,6 +616,10 @@ public class catalogManagerController extends appParent{
         pane_id_masked.setVisible(true);
     }
 
+    /**
+     * Metoda wywoływana jest po kliknięciu guzika zamknięcia panelu pop-up.
+     * Przy kliknięciu w guzik chowane są wszystkie przymioty funkcji
+     */
     @FXML
     public void hide_pane(MouseEvent event){
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");

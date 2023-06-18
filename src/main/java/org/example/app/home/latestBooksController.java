@@ -21,9 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.example.Main.db_getData;
-import static org.example.Main.db_parent;
 
-public class nowosciController extends appParent {
+public class latestBooksController extends appParent {
 
     @FXML
     private ImageView avatar;

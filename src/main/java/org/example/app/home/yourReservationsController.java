@@ -23,7 +23,7 @@ import org.example.app.appParent;
 
 import static org.example.Main.*;
 
-public class yourReservation extends appParent {
+public class yourReservationsController extends appParent {
 
     @FXML
     private Label Name;

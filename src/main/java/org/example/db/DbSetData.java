@@ -301,7 +301,7 @@ public class DbSetData extends DbParent{
             return tab;
         } catch (SQLException e) {
             /*Jezeli wystapi blad, to oznacza ze taki uzytkownik istnieje. Catch jest pusty, poniewaz dalej funkcja zamknie
-            polaczenie i zwroci false, a nastepnie funkcja z registercontroller pokaze monit */
+            polaczenie i zwroci false, a nastepnie funkcja z registerController pokaze monit */
         }
         closeConnection();
         return tab;

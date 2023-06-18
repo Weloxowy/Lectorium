@@ -12,17 +12,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9.4 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3">
+    <list default="true" id="879272e9-8f89-4ce1-bf53-3636f69a3be7" name="Changes" comment="v0.9.5 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Egzemplarze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Egzemplarze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Katalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Rezerwacje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Rezerwacje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/auth/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/logincontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/auth/registercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/registercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/PasswordSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/PasswordSkin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/appParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/contactcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/contactController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/homecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/homeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalog_itemcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/catalogItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/katalogcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/catalogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/kategoriecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/categoriesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/nowosciController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/latestBooksController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourHire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourRentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/auth/logincontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/auth/registercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/auth/registerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/DbAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/DbAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/db/DbSetData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/db/DbSetData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/contact.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/katalog_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/kategorie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/nowosci.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourHire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.home/yourReservation.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml.verify/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +100,7 @@
     "TODO_SCOPE": "All Places",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "last_opened_file_path": "C:/Users/karpa/javafx-sdk-19.0.2.1/bin/vcruntime140_1.dll",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2908046",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -410,7 +427,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687105117223</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="v0.9.5 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3">
+      <created>1687109531050</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687109531051</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -458,7 +482,8 @@
     <MESSAGE value="v0.9.2 poprawkek c.d." />
     <MESSAGE value="v0.9.3 refaktoring dbparent + pokrewnych, dodawanie książek, drobne poprawki" />
     <MESSAGE value="v0.9.4 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.9.4 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3" />
+    <MESSAGE value="v0.9.5 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.9.5 refaktoringu ciąg dalszy.&#10;PS. jeżeli nie działa to cofnąć się do commita o nazwie 0.9.3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -488,13 +513,13 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservation.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/app/home/yourReservationsController.java</url>
           <line>112</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/app/admin/catalogManagerController.java</url>
-          <line>367</line>
+          <line>490</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>

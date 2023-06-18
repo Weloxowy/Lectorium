@@ -14,11 +14,9 @@ import org.example.User;
 import org.example.app.appParent;
 
 import static org.example.Main.db_getData;
-import static org.example.Main.db_parent;
 
 
-
-public class kategoriecontroller extends appParent {
+public class categoriesController extends appParent {
 
 
     public void init(String imie, String nazwisko){

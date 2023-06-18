@@ -1,9 +1,5 @@
 package org.example.app;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -11,32 +7,35 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.example.Katalog;
 import org.example.Main;
 import org.example.User;
 import org.example.app.admin.catalogManagerController;
 import org.example.app.admin.userManagerController;
 import org.example.app.home.*;
-import org.example.auth.logincontroller;
+import org.example.auth.loginController;
 
 import java.io.IOException;
 import java.util.Objects;
 
-import static org.example.Main.db_getData;
-import static org.example.Main.db_parent;
-
+/**
+ * Klasa appParent reprezentuje kontroler głównego okna aplikacji.
+ * Zawiera metody obsługujące zdarzenia interakcji użytkownika oraz
+ * inicjalizujące interfejs użytkownika.
+ */
 public class appParent {
-    boolean zapamietaj;
+
+    /**
+     * Metoda obsługuje zdarzenie wylogowania użytkownika.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void logout_perform(MouseEvent event) {
         Stage stage = new Stage();
@@ -49,7 +48,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.verify/login.fxml"));
             parent = loader.load();
-            logincontroller controller = loader.getController();
+            loginController controller = loader.getController();
             controller.getHaslo().setSkin(new PasswordSkin(controller.getHaslo()));
             controller.font();
             stage.setResizable(true);
@@ -66,6 +65,11 @@ public class appParent {
         stage.show();
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk katalogu.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     protected void katalog_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -74,7 +78,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
-            katalogcontroller kat = loader.getController();
+            catalogController kat = loader.getController();
             kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista();
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
@@ -85,16 +89,21 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk katalogu z zapytaniem wziętym z pola wyszukiwania.
+     *
+     * @param event  zdarzenie myszy
+     * @param query  zapytanie z wyszukiwania
+     */
     @FXML
     protected void katalog_clicked(MouseEvent event, String query) {
-        zapamietaj = true;
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog.fxml"));
             parent = loader.load();
-            katalogcontroller kat = loader.getController();
+            catalogController kat = loader.getController();
             kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista(query);
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
@@ -105,6 +114,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk kategorii.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void kategorie_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -113,7 +127,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/kategorie.fxml"));
             parent = loader.load();
-            kategoriecontroller controller = loader.getController();
+            categoriesController controller = loader.getController();
             controller.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -123,6 +137,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk kontaktu.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void contact_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -131,7 +150,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/contact.fxml"));
             parent = loader.load();
-            contactcontroller contact = loader.getController();
+            contactController contact = loader.getController();
             contact.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -141,6 +160,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk strony głównej.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void glowna_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -149,7 +173,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/home.fxml"));
             parent = loader.load();
-            homecontroller controller = loader.getController();
+            homeController controller = loader.getController();
             controller.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -159,6 +183,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk biblioteki.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void library_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -177,6 +206,11 @@ public class appParent {
             }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk profilu użytkownika.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void yourProfileController_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -195,6 +229,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na przycisk nowości.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     void nowosciController_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -203,7 +242,7 @@ public class appParent {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/nowosci.fxml"));
             parent = loader.load();
-            nowosciController nowosci = loader.getController();
+            latestBooksController nowosci = loader.getController();
             nowosci.init(User.getImie(), User.getNazwisko());
             Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
             stage.setScene(scene);
@@ -213,6 +252,11 @@ public class appParent {
         }
     }
 
+    /**
+     * Metoda wykorzystuje aktualny interfejs użytkownika i ustawia czcionki.
+     *
+     * @param scene obiekt reprezentujący aktualnie przetwarzaną scenę aplikacji
+     */
     public void font(Scene scene) {
         overrideLabels(scene);
         Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
@@ -240,6 +284,13 @@ public class appParent {
         searchbar.setFont(pop_r_h1);
     }
 
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na wiersz danej książki w katalogu, bądź inne pole.
+     *
+     * @param event zdarzenie myszy
+     * @param id_egz numer id ksiazki w katalogu
+     * @param if_admin boolean sprawdzający czy wchodzi admin czy zwykły użytkownik
+     */
     protected void katalog_item(MouseEvent event, int id_egz,boolean if_admin) {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             size_guard(stage);
@@ -248,7 +299,7 @@ public class appParent {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
                 parent = loader.load();
                 Main.db_getData.getCover(id_egz);
-                katalog_itemcontroller kat = loader.getController();
+                catalogItemController kat = loader.getController();
                 kat.init(User.getImie(), User.getNazwisko());
                 kat.if_adm = if_admin;
                 kat.load(id_egz);
@@ -260,10 +311,11 @@ public class appParent {
             }
         }
 
-
-
-
-
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na pole twoje wypożyczenia.
+     *
+     * @param event zdarzenie myszy
+     * */
     @FXML
     protected void yourHire_clicked(MouseEvent event) {
 
@@ -288,7 +340,7 @@ public class appParent {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
                 parent = loader.load();
-                yourHire Profile = loader.getController();
+                yourRentsController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko(), event);
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
@@ -300,109 +352,11 @@ public class appParent {
 
     }
 
-    final TableView<Katalog> lista = new TableView<>();
-    public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
-        db_getData.getBooks();
-        ObservableList<Katalog> items = FXCollections.observableArrayList();
-
-        TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
-        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
-        idCol.setCellValueFactory(
-                new PropertyValueFactory<>("id_katalog"));
-        idCol.setVisible(false);
-
-        TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
-        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
-        autorCol.setCellValueFactory(
-                new PropertyValueFactory<>("nazwa_autora"));
-
-        TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
-        nazwaCol.setCellValueFactory(
-                new PropertyValueFactory<>("nazwa"));
-
-        TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
-        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
-        rokCol.setCellValueFactory(
-                new PropertyValueFactory<>("rok_wydania"));
-
-        TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
-        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
-        wydanieCol.setCellValueFactory(
-                new PropertyValueFactory<>("wydanie"));
-
-        TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
-        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
-        isbnCol.setCellValueFactory(
-                new PropertyValueFactory<>("isbn"));
-
-        TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
-        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
-        jezykCol.setCellValueFactory(
-                new PropertyValueFactory<>("jezyk"));
-
-        TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
-        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
-        uwagiCol.setCellValueFactory(
-                new PropertyValueFactory<>("uwagi"));
-        for (String[] tab: db_getData.books) {
-            items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
-        }
-
-        lista.setItems(items);
-
-        lista.setFixedCellSize(30);
-
-        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
-
-        lista.setPrefWidth(anchortable.getPrefWidth());
-        lista.setPrefHeight(anchortable.getPrefHeight());
-
-        lista.prefWidthProperty().bind(anchortable.widthProperty());
-        lista.prefHeightProperty().bind(anchortable.heightProperty());
-
-        anchortable.getChildren().addAll(lista);
-
-        AnchorPane.setLeftAnchor(anchortable, 0.0);
-        AnchorPane.setBottomAnchor(anchortable, 0.0);
-        AnchorPane.setRightAnchor(anchortable, 0.0);
-
-        lista.getStylesheets().add("/fxml.home/home.css");
-
-
-        FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
-
-        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
-            if(newValue.isEmpty() || newValue.isBlank()){ return true;}
-
-            String searchword = newValue.toLowerCase();
-
-            if(Katalog.getNazwa().toLowerCase().contains(searchword)){
-                return true;
-            }
-            if(Katalog.getNazwa_autora().toLowerCase().contains(searchword)){
-                return true;
-            }
-            return Katalog.getIsbn().toLowerCase().contains(searchword);
-
-        }));
-
-        SortedList<Katalog> sortedList = new SortedList<>(filteredList);
-
-        sortedList.comparatorProperty().bind(lista.comparatorProperty());
-
-        lista.setItems(sortedList);
-
-        lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
-                TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
-                Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
-                zapamietaj = false;
-                katalog_item(event,data,true);
-            }
-        });
-    }
-
+    /**
+     * Metoda obsługuje zdarzenie kliknięcia na pole twoje rezerwacje.
+     *
+     * @param event zdarzenie myszy
+     */
     @FXML
     protected void yourReservation_clicked(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -425,7 +379,7 @@ public class appParent {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourReservation.fxml"));
                 parent = loader.load();
-                yourReservation Profile = loader.getController();
+                yourReservationsController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko());
                 Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
                 stage.setScene(scene);
@@ -436,6 +390,12 @@ public class appParent {
         }
 
     }
+
+    /**
+     * Metoda dostosowuje wygląd programu i treść bocznego menu,
+     * w zależności od tego czy zalogowany jest student, czy administrator.
+     * @param scene obiekt reprezentujący aktualnie przetwarzaną scenę aplikacji
+     */
     void overrideLabels(Scene scene){
         if(User.getInstance().getCzy_admin().contentEquals("T")){
             scene.getStylesheets().clear();
@@ -453,11 +413,21 @@ public class appParent {
         }
     }
 
+    /**
+     * Ustala minimalne wymiary okna.
+     *
+     * @param stage referencja do obiektu Stage
+     */
     protected void size_guard(Stage stage){
         stage.setMinHeight(768);
         stage.setMinWidth(1250);
     }
 
+    /**
+     * Tworzy grafikę plusa dla pola w tabeli.
+     *
+     * @return obiekt Node reprezentujący grafikę plusa
+     */
     protected Node createPriorityGraphic(){
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
@@ -467,6 +437,12 @@ public class appParent {
         graphicContainer.getChildren().add(imageView);
         return graphicContainer;
     }
+
+    /**
+     * Tworzy grafikę ticka dla pola w tabeli.
+     *
+     * @return obiekt Node reprezentujący grafikę tick (fajki)
+     */
     protected Node createConfirmGraphic() {
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
@@ -477,6 +453,11 @@ public class appParent {
         return graphicContainer;
     }
 
+    /**
+     * Tworzy grafikę minusa dla pola w tabeli.
+     *
+     * @return obiekt Node reprezentujący grafikę minusa
+     */
     protected Node createDeleteGraphic(){
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
