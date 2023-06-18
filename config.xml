@@ -2,22 +2,21 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\karpa\IdeaProjects\lectttt\out\artifacts\Lectorium_jar\Lectorium.jar</jar>
+  <jar>..\out\artifacts\Lectorium_jar\Lectorium.jar</jar>
   <outfile>Lectorium.exe</outfile>
   <errTitle>Error</errTitle>
   <cmdLine>-jar out/artifacts/Lectorium_jar/Lectorium.jar</cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
-  <supportUrl></supportUrl>
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest>                       </manifest>
-  <icon>C:\Users\karpa\IdeaProjects\lectttt\src\main\resources\res\logo\Lectorium_logo.png</icon>
+  <icon>..\src\main\resources\res\logo\Lectorium_logo.png</icon>
   <classPath>
     <mainClass>com.example.Run</mainClass>
-    <cp>C:\Users\karpa\IdeaProjects\lectttt\out\artifacts\Lectorium_jar\Lectorium.jar</cp>
-    <cp>C:\Users\karpa\IdeaProjects\lectttt\database.db</cp>
+    <cp>..\out\artifacts\Lectorium_jar\Lectorium.jar</cp>
+    <cp>..\database.db</cp>
   </classPath>
   <jre>
     <path>%JAVA_HOME%</path>

@@ -1,0 +1,7 @@
+org.example
+org.example.app
+org.example.app.admin
+org.example.app.home
+org.example.auth
+org.example.db
+tests
