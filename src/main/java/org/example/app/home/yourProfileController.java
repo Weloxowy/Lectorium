@@ -26,7 +26,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 public class yourProfileController extends appParent {
     @FXML
@@ -243,7 +243,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.loginUpdate(new_l, User.getInstance().getId(), old_l)) {
+        if (db_updateData.loginUpdate(new_l, User.getInstance().getId(), old_l)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -268,7 +268,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.updatePassword(new_p, User.getInstance().getId(), old_p)) {
+        if (db_updateData.updatePassword(new_p, User.getInstance().getId(), old_p)) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -298,7 +298,7 @@ public class yourProfileController extends appParent {
                 Duration.seconds(2),
                 event2 -> info.setOpacity(0.0)
         ));
-        if (dbload.deleteProfile(password, User.getInstance().getId())) {
+        if (db_deleteData.deleteProfile(password, User.getInstance().getId())) {
             info.setText("Zmiana wykonana pomyślnie.");
             info.setOpacity(1.0);
         } else {
@@ -332,7 +332,7 @@ public class yourProfileController extends appParent {
                 ImageIO.write(bimage, "jpg", bos);
                 byte[] imageData = bos.toByteArray();
                 int id = User.getInstance().getId();
-                dbload.changeAvatar(imageData, id);
+                db_updateData.changeAvatar(imageData, id);
                 avatar.fireEvent(event);
             } catch (IOException ex) {
                 ex.printStackTrace();

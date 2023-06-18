@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.User;
 import org.example.app.PasswordSkin;
+import org.example.db.DbAuth;
 import org.example.db.DbParent;
 import org.example.app.home.homecontroller;
 
@@ -130,20 +131,20 @@ public class logincontroller {
     @FXML
     void onsubmit(MouseEvent event) {
         error.setOpacity(0.0);
-        DbParent l = new DbParent();
+        DbAuth auth = new DbAuth();
         String log = login.getText();
         String has = haslo.getText();
 
-        boolean res = l.tryLogin(log, has);
+        boolean res = auth.tryLogin(log, has);
         if (res) {
             if(User.getInstance().getCzy_zablokowany().contentEquals("T")){
-                onfailure();
+                onfailure(true);
             }
             else{
                 onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
             }
         } else {
-            onfailure();
+            onfailure(false);
         }
 
     }
@@ -181,8 +182,8 @@ public class logincontroller {
         stage.show();
     }
 
-    void onfailure() {
-        if(User.getInstance().getCzy_zablokowany().contentEquals("T")){
+    void onfailure(boolean blockade) {
+        if(blockade==true){
             error.setText("Konto zablokowane");
         }
         else{

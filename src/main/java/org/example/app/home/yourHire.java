@@ -31,7 +31,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 public class yourHire extends appParent {
     @FXML
@@ -101,7 +101,7 @@ public class yourHire extends appParent {
     }
 
     public void Lista_Hire(int id) {
-        dbload.getHireInformation(id);
+        db_getData.getHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
         TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
@@ -198,7 +198,7 @@ public class yourHire extends appParent {
                                 int row = tablePosition.getRow();
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
                                 String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
-                                if (dbload.updateRentalDate(data, User.getInstance().getId(), start_date)) {
+                                if (db_updateData.updateRentalDate(data, User.getInstance().getId(), start_date)) {
                                     Label notificationLabel = new Label("Przedłużono pomyślnie.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                     notificationLabel.setFont(pop_r_h1);
@@ -253,7 +253,7 @@ public class yourHire extends appParent {
             return cell;
         });
 
-        for (String[] tab : dbload.rental) {
+        for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
             String nazwa_autora = tab[2];
@@ -312,8 +312,8 @@ public class yourHire extends appParent {
 
         items.clear();
         lista.refresh();
-        dbload.checkHireInformation(User.getInstance().getId());
-        for (String[] tab : dbload.rental) {
+        db_getData.checkHireInformation(User.getInstance().getId());
+        for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
             String nazwa_autora = tab[2];

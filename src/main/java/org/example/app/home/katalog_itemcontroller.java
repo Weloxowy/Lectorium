@@ -28,7 +28,7 @@ import org.example.app.appParent;
 
 import java.util.Objects;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 public class katalog_itemcontroller extends appParent {
     public boolean if_adm = false;
@@ -87,7 +87,7 @@ public class katalog_itemcontroller extends appParent {
     public void load(int id_egz) {
         String[] tab = null;
 
-        for (String[] arrayItem : dbload.books) {
+        for (String[] arrayItem : db_getData.books) {
             if (arrayItem.length > 0 && arrayItem[0].equals(String.valueOf(id_egz))) {
                 tab = arrayItem;
                 break;
@@ -134,7 +134,7 @@ public class katalog_itemcontroller extends appParent {
     }
 
     public void egzemplarz_lista(int id) {
-        dbload.getCopies(id,User.getInstance().getId());
+        db_getData.getCopies(id,User.getInstance().getId());
         ObservableList<Egzemplarze> items = FXCollections.observableArrayList();
 
         TableColumn<Egzemplarze, ?> nazwaCol = new TableColumn<>("Nazwa");
@@ -182,11 +182,11 @@ public class katalog_itemcontroller extends appParent {
                 cell.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                         if(cell.itemProperty().getValue().contentEquals("T")) {
-                            if (dbload.getRentLimit(User.getInstance().getId()) < 5) {
+                            if (db_getData.getRentLimit(User.getInstance().getId()) < 5) {
                                 TablePosition<Egzemplarze, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = (int) nrCol.getCellObservableValue(row).getValue();
-                                dbload.setRent(data, User.getInstance().getId());
+                                db_setData.setRent(data, User.getInstance().getId());
                                 Label notificationLabel = new Label("Zarezerwowano pomyślnie.");
                                 Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                                 notificationLabel.setFont(pop_r_h1);
@@ -231,7 +231,7 @@ public class katalog_itemcontroller extends appParent {
                             TablePosition<Egzemplarze, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                             int row = tablePosition.getRow();
                             int data = (int) nrCol.getCellObservableValue(row).getValue();
-                            dbload.deleteReservation(data,User.getInstance().getId());
+                            db_deleteData.deleteReservation(data,User.getInstance().getId());
                             Label notificationLabel = new Label("Anulowano rezerwację.");
                             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
                             notificationLabel.setFont(pop_r_h1);
@@ -261,7 +261,7 @@ public class katalog_itemcontroller extends appParent {
         });
 
 
-        for (String[] tab : dbload.copies) {
+        for (String[] tab : db_getData.copies) {
             Integer id_egzemplarze = Integer.valueOf(tab[0]);
             String nazwa = tab[1];
             String lokalizacja = tab[2];

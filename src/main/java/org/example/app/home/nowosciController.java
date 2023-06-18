@@ -20,7 +20,8 @@ import org.example.app.appParent;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.example.Main.dbload;
+import static org.example.Main.db_getData;
+import static org.example.Main.db_parent;
 
 public class nowosciController extends appParent {
 
@@ -72,7 +73,7 @@ public class nowosciController extends appParent {
     }
 
     public void init(String imie, String nazwisko){
-        dbload.getTop();
+        db_getData.getTop();
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
@@ -97,7 +98,7 @@ public class nowosciController extends appParent {
             vboxMap.put(7, vbox7);
             vboxMap.put(8, vbox8);
 
-        for (String[] tab : dbload.top) {
+        for (String[] tab : db_getData.top) {
             int id_katalog = Integer.parseInt(tab[0]);
             String nazwa = tab[1];
             String nazwa_autora = tab[2];
@@ -122,7 +123,7 @@ public class nowosciController extends appParent {
                 label_a.setFont(pop_r_h1);
             }
         }
-        dbload.getCover(id_katalog);
+        db_getData.getCover(id_katalog);
         ImageView image = (ImageView) vb.lookup("#cover"+i);
         if(image != null){
             image.setImage(Main.kat.getOkladka());
@@ -154,12 +155,12 @@ public class nowosciController extends appParent {
         vboxMap.put(6, vbox6);
         vboxMap.put(7, vbox7);
         vboxMap.put(8, vbox8);
-        if(dbload.books.size() == 0){
-            dbload.getBooks();
+        if(db_getData.books.size() == 0){
+            db_getData.getBooks();
         }
         for (Map.Entry<Integer, VBox> act : vboxMap.entrySet()) {
             if (event.getSource().equals(act.getValue())) {
-                String[] st = dbload.top.get(act.getKey()-1);
+                String[] st = db_getData.top.get(act.getKey()-1);
                 katalog_item(event, Integer.parseInt(st[0]),false);
             }
         }

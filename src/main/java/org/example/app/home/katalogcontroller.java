@@ -22,7 +22,8 @@ import org.example.app.appParent;
 
 import java.util.Objects;
 
-import static org.example.Main.dbload;
+import static org.example.Main.db_getData;
+import static org.example.Main.db_parent;
 
 public class katalogcontroller extends appParent {
     @FXML
@@ -74,7 +75,7 @@ public class katalogcontroller extends appParent {
 
 
     public void Katalog_lista() {
-        dbload.getBooks();
+        db_getData.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
@@ -165,7 +166,7 @@ public class katalogcontroller extends appParent {
     }
 
     public void Katalog_lista(String query) {
-        dbload.getBooks();
+        db_getData.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
@@ -209,7 +210,7 @@ public class katalogcontroller extends appParent {
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        for (String[] tab: dbload.books) {
+        for (String[] tab: db_getData.books) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
 
@@ -305,10 +306,10 @@ public class katalogcontroller extends appParent {
 
     void loadNextRecords(ObservableList<Katalog> items){
         int recordsToLoad = 50;
-        int endIndex = Math.min(lastLoadedIndex + recordsToLoad, dbload.books.size());
+        int endIndex = Math.min(lastLoadedIndex + recordsToLoad, db_getData.books.size());
 
         for (int i = lastLoadedIndex; i < endIndex; i++) {
-            String[] tab = dbload.books.get(i);
+            String[] tab = db_getData.books.get(i);
 
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }

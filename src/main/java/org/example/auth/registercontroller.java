@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.User;
 import org.example.app.PasswordSkin;
+import org.example.db.DbAuth;
 import org.example.db.DbParent;
 import org.example.app.home.homecontroller;
 
@@ -131,7 +132,7 @@ public class registercontroller {
     @FXML
     void onsubmit(MouseEvent event){
         hidefailuresign(event);
-        DbParent l = new DbParent();
+        DbAuth auth = new DbAuth();
         String name = imie.getText();
         String last_name = nazwisko.getText();
         String log = login.getText();
@@ -144,9 +145,9 @@ public class registercontroller {
             error_haslo.setOpacity(1.0);
             return;
         }
-        if(l.testRegister(log)) {
-            boolean res = l.tryRegister(name, last_name, log, has);
-            res = l.tryLogin(log, has);
+        if(auth.testRegister(log)) {
+            boolean res = auth.tryRegister(name, last_name, log, has);
+            res = auth.tryLogin(log, has);
             if (res) {
                 onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
             } else {

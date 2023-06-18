@@ -13,7 +13,8 @@ import javafx.scene.text.TextAlignment;
 import org.example.User;
 import org.example.app.appParent;
 
-import static org.example.Main.dbload;
+import static org.example.Main.db_getData;
+import static org.example.Main.db_parent;
 
 
 
@@ -66,8 +67,8 @@ public class kategoriecontroller extends appParent {
     }
 
     void categories_init(){
-        dbload.getCategories();
-        if(dbload.categories != null) {
+        db_getData.getCategories();
+        if(db_getData.categories != null) {
             Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),18);
             Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),16);
             Label lab = (Label) images_vbox.lookup("#header");
@@ -76,7 +77,7 @@ public class kategoriecontroller extends appParent {
             cat.setFont(pop_r_h1);
             cat_vbox.getChildren().add(cat);
             int i=1;
-            for (String[] tab : dbload.categories) {
+            for (String[] tab : db_getData.categories) {
                     String input =tab[0]+" ("+tab[1]+" pozycji)";
                     String id = "cat"+i;
                     Label label = new Label(input);

@@ -31,7 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 
 public class userManagerController extends appParent {
@@ -176,7 +176,7 @@ public class userManagerController extends appParent {
     }
 
     public void Katalog_lista_adminUser() {
-        dbload.printUsers();
+        db_getData.printUsers();
         ObservableList<Users> items = FXCollections.observableArrayList();
 
         TableColumn<Users, ?> name = new TableColumn<>("Imie");
@@ -205,7 +205,7 @@ public class userManagerController extends appParent {
                 new PropertyValueFactory<>("czy_zablokowany"));
 
 
-        for(String[] tab: dbload.users) {
+        for(String[] tab: db_getData.users) {
             int id = Integer.parseInt(tab[2]);
             String imie = tab[0];
             String nazwisko = tab[1];
@@ -282,7 +282,7 @@ public class userManagerController extends appParent {
                 timeline.play();
                 }}
 
-            int ret = dbload.addUser(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
+            int ret = db_setData.addUser(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
             if(ret>0){
                 pane_result_msg.setText("Użytkownik dodany");
             }
@@ -330,7 +330,7 @@ public class userManagerController extends appParent {
         pane_button.setText("Modyfikuj użytkownika");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.changeUser(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
+            int ret = db_updateData.changeUser(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText());
             if(ret>0){
                 pane_result_msg.setText("Użytkownik zmodyfikowany");
             }
@@ -367,7 +367,7 @@ public class userManagerController extends appParent {
         pane_button.setText("Modyfikuj uprawnienia");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.modifyUprawnienia(pane_txt_1.getText(),pane_txt_2.getText());
+            int ret = db_updateData.modifyUprawnienia(pane_txt_1.getText(),pane_txt_2.getText());
             if(ret>0){
                 pane_result_msg.setText("Uprawnienia zmodyfikowane");
             }
@@ -402,7 +402,7 @@ public class userManagerController extends appParent {
             ret=0;
         }
         else{
-            ret = dbload.deleteUser(pane_txt_1.getText());
+            ret = db_deleteData.deleteUser(pane_txt_1.getText());
         }
         if(ret>0){
             pane_result_msg.setText("Uprawnienia zmodyfikowane");
@@ -435,14 +435,14 @@ public class userManagerController extends appParent {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
 
             int ret = 0;
-            for (String[] gbs: dbload.users) {
+            for (String[] gbs: db_getData.users) {
                 System.out.println(pane_txt_1.getText());
                 System.out.println(gbs[2]);
                 if(gbs[2].contentEquals(pane_txt_1.getText())){
                     if(gbs[4].contentEquals("T"))
-                        ret = dbload.blockUser(pane_txt_1.getText(),"N");
+                        ret = db_updateData.blockUser(pane_txt_1.getText(),"N");
                     else
-                        ret = dbload.blockUser(pane_txt_1.getText(),"T");
+                        ret = db_updateData.blockUser(pane_txt_1.getText(),"T");
                     break;
                 }
             }
@@ -495,7 +495,7 @@ public class userManagerController extends appParent {
 
     public void init_rent_list(int id){
         pane_search_result.getChildren().clear();
-        dbload.getHireInformation(id);
+        db_getData.getHireInformation(id);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
             TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
@@ -551,7 +551,7 @@ public class userManagerController extends appParent {
                 return cell;
             });
 
-        for (String[] tab : dbload.rental) {
+        for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
             String nazwa_autora = tab[2];
@@ -594,7 +594,7 @@ public class userManagerController extends appParent {
     public void init_res_list(int id) {
         pane_search_result.getChildren().clear();
         System.out.println(pane_search_result.getChildren().isEmpty());
-        dbload.getReservationInformation(id);
+        db_getData.getReservationInformation(id);
         ObservableList<Rezerwacje> items_res = FXCollections.observableArrayList();
 
 
@@ -670,7 +670,7 @@ public class userManagerController extends appParent {
                                 TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                                dbload.updateReservation(data);
+                                db_updateData.updateReservation(data);
                                 Label notificationLabel = new Label("Przedłużono pomyślnie.");
                                 Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
                                 notificationLabel.setFont(pop_r_h1);
@@ -718,7 +718,7 @@ public class userManagerController extends appParent {
                                 TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                                if(dbload.deleteReservation(data,User.getInstance().getId()) > 0)
+                                if(db_deleteData.deleteReservation(data,User.getInstance().getId()) > 0)
                                 {
                                     Label notificationLabel = new Label("Anulowano rezerwacje.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
@@ -774,7 +774,7 @@ public class userManagerController extends appParent {
         });
 
 
-        for (String[] tab : dbload.rental) {
+        for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
             String nazwa_autora = tab[2];

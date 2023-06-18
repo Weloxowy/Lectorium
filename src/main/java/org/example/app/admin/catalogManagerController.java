@@ -21,7 +21,7 @@ import org.example.app.appParent;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 
 public class catalogManagerController extends appParent{
@@ -103,8 +103,8 @@ public class catalogManagerController extends appParent{
         AnchorPane.setLeftAnchor(pane_id_masked,0.0);
         AnchorPane.setRightAnchor(pane_id_masked,0.0);
         AnchorPane.setBottomAnchor(pane_id_masked,0.0);
-        if(dbload.books.isEmpty()){
-            dbload.getBooks();
+        if(db_getData.books.isEmpty()){
+            db_getData.getBooks();
         }
     }
 
@@ -171,7 +171,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Dodaj egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.setNewCopy("T", pane_txt_2.getText(),pane_txt_1.getText());
+            int ret = db_setData.setNewCopy("T", pane_txt_2.getText(),pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Egzemplarz został dodany");
             }
@@ -208,7 +208,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.deleteCopyFromDatabase(pane_txt_1.getText(),pane_txt_2.getText());
+            int ret = db_deleteData.deleteCopyFromDatabase(pane_txt_1.getText(),pane_txt_2.getText());
             if(ret>0){
                 pane_result_msg.setText("Egzemplarz został usunięty");
             }
@@ -252,7 +252,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń pozycje");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.deleteBookFromDatabase(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
+            int ret = db_deleteData.deleteBookFromDatabase(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
             if(ret>0){
                 pane_result_msg.setText("Pozycja usunięta");
             }
@@ -295,7 +295,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Modyfikuj egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.modifyCopy(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
+            int ret = db_updateData.modifyCopy(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Modyfikacja udana");
             }
@@ -368,7 +368,7 @@ public class catalogManagerController extends appParent{
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
 
             if(!sec[0].get()) {
-                boolean[] ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
+                boolean[] ret = db_setData.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
 
                 if (Arrays.equals(ret, new boolean[]{false, false, false})) {
                     pane_result_msg.setText("Pozycja dodana");
@@ -388,21 +388,21 @@ public class catalogManagerController extends appParent{
             }
             else{
                 if (process_data[0][0]) {
-                    boolean res = dbload.addAuthor(pane_txt_7.getText(),pane_txt_8.getText());
+                    boolean res = db_setData.addAuthor(pane_txt_7.getText(),pane_txt_8.getText());
                     if(res)
                         process_data[0][0] = false;
                 }
                 if(process_data[0][1]){
-                    boolean res = dbload.addGenre(pane_txt_9.getText());
+                    boolean res = db_setData.addGenre(pane_txt_9.getText());
                     if(res)
                         process_data[0][1] = false;
                 }
                 if(process_data[0][2]){
-                    boolean res = dbload.addPublisher(pane_txt_10.getText());
+                    boolean res = db_setData.addPublisher(pane_txt_10.getText());
                     if(res)
                         process_data[0][2] = false;
                 }
-                boolean[] ret = dbload.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
+                boolean[] ret = db_setData.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
                 if (Arrays.equals(ret,process_data[0])) {
                     pane_result_msg.setText("Pozycja dodana");
                 }
@@ -456,7 +456,7 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Modyfikuj pozycje");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = dbload.modifyBook(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
+            int ret = db_updateData.modifyBook(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
             if(ret>0){
                 pane_result_msg.setText("Modyfikacja udana");
             }

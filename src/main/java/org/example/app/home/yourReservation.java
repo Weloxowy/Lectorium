@@ -21,9 +21,7 @@ import org.example.Rezerwacje;
 import org.example.User;
 import org.example.app.appParent;
 
-
-
-import static org.example.Main.dbload;
+import static org.example.Main.*;
 
 public class yourReservation extends appParent {
 
@@ -63,7 +61,7 @@ public class yourReservation extends appParent {
     }
 
     public void Lista_Hire(int id) {
-        dbload.getReservationInformation(id);
+        db_getData.getReservationInformation(id);
         ObservableList<Rezerwacje> items = FXCollections.observableArrayList();
 
 
@@ -139,7 +137,7 @@ public class yourReservation extends appParent {
                             TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                             int row = tablePosition.getRow();
                             int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                            int result = dbload.updateReservation(data);
+                            int result = db_updateData.updateReservation(data);
                             Label notificationLabel = new Label();
                             if(result> 0){
                                 notificationLabel.setText("Przedłużono pomyślnie.");
@@ -193,7 +191,7 @@ public class yourReservation extends appParent {
                                 TablePosition<Rezerwacje, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
-                                if(dbload.deleteReservation(data,User.getInstance().getId()) > 0)
+                                if(db_deleteData.deleteReservation(data,User.getInstance().getId()) > 0)
                                 {
                                     Label notificationLabel = new Label("Anulowano rezerwacje.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
@@ -252,7 +250,7 @@ public class yourReservation extends appParent {
 
 
 
-        for (String[] tab : dbload.rental) {
+        for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
             String nazwa_autora = tab[2];

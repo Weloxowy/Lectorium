@@ -1,6 +1,7 @@
 package tests;
 import javafx.scene.image.Image;
 import org.example.User;
+import org.example.db.DbAuth;
 import org.example.db.DbParent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,11 +17,11 @@ public class testsDbloader{
     public void testGetImage() {
         // Przygotowanie
 
-        DbParent dbload = new DbParent();
+        DbAuth auth = new DbAuth();
 
         // Wykonanie
         int id = 1; // ID testowego użytkownika
-        dbload.getImage(id);
+        auth.getImage(id);
 
         // Sprawdzenie
         Image image = User.getInstance().getImage();
@@ -34,10 +35,10 @@ public class testsDbloader{
         String[] credentials = loginAndPassword.split(",");
         String login = credentials[0];
         String password = credentials[1];
-        DbParent dbload = new DbParent();
+        DbAuth auth = new DbAuth();
 
         // Wykonanie
-        boolean result = dbload.tryLogin(login, password);
+        boolean result = auth.tryLogin(login, password);
 
         // Sprawdzenie
         assertTrue(result, "Nie udało się zalogować dla loginu: " + login);

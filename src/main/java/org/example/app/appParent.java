@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.Katalog;
+import org.example.Main;
 import org.example.User;
 import org.example.app.admin.catalogManagerController;
 import org.example.app.admin.userManagerController;
@@ -31,7 +32,8 @@ import org.example.auth.logincontroller;
 import java.io.IOException;
 import java.util.Objects;
 
-import static org.example.Main.dbload;
+import static org.example.Main.db_getData;
+import static org.example.Main.db_parent;
 
 public class appParent {
     boolean zapamietaj;
@@ -245,7 +247,7 @@ public class appParent {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
                 parent = loader.load();
-                dbload.getCover(id_egz);
+                Main.db_getData.getCover(id_egz);
                 katalog_itemcontroller kat = loader.getController();
                 kat.init(User.getImie(), User.getNazwisko());
                 kat.if_adm = if_admin;
@@ -300,7 +302,7 @@ public class appParent {
 
     final TableView<Katalog> lista = new TableView<>();
     public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
-        dbload.getBooks();
+        db_getData.getBooks();
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
@@ -343,7 +345,7 @@ public class appParent {
         uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
-        for (String[] tab: dbload.books) {
+        for (String[] tab: db_getData.books) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
 
