@@ -15,9 +15,8 @@ import java.sql.SQLException;
  * Posiada ona metody dotyczące logowania i rejestrowania się użytkowników.
  *
  * @see org.example.db.DbParent
- *
  */
-public class DbAuth extends DbParent{
+public class DbAuth extends DbParent {
 
     /**
      * Metoda sprawdzająca dostępność podanego loginu podczas rejestracji.
@@ -123,7 +122,6 @@ public class DbAuth extends DbParent{
      * Następnie metoda przerabia zdjęcie z formy bitowej na obiekt klasy Image i umieszcza je w instancji User.
      *
      * @param id ID użytkownika
-     *
      */
     public void getImage(int id) {
         connectToDatabase();

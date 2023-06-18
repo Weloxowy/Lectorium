@@ -11,9 +11,8 @@ import java.sql.SQLException;
  * Posiada ona metody, które usuwają dane.
  *
  * @see org.example.db.DbParent
- *
  */
-public class DbUpdateData extends DbParent{
+public class DbUpdateData extends DbParent {
 
     /**
      * Metoda do aktualizacji danych logowania dla danego użytkownika.
@@ -73,12 +72,11 @@ public class DbUpdateData extends DbParent{
     }
 
 
-
     /**
      * Metoda zmieniająca avatar użytkownika.
      *
      * @param imageData ciąg bitowy nowego obrazu
-     * @param id ID użytkownika
+     * @param id        ID użytkownika
      * @throws IOException w przypadku problemów z zapisem danych obrazu
      */
     public void changeAvatar(byte[] imageData, int id) throws IOException {
@@ -101,9 +99,9 @@ public class DbUpdateData extends DbParent{
     /**
      * Metoda zmienia dane danego egzemplarza.
      *
-     * @param czyDostepne czy książka jest dostępna (parametr wykorzystywany przy wyświetlaniu stanu książki)
-     * @param lokalizacja lokalizacja, gdzie dana książka ma swoje miejsce w bibliotece
-     * @param katalog nazwa pozycji
+     * @param czyDostepne   czy książka jest dostępna (parametr wykorzystywany przy wyświetlaniu stanu książki)
+     * @param lokalizacja   lokalizacja, gdzie dana książka ma swoje miejsce w bibliotece
+     * @param katalog       nazwa pozycji
      * @param idEgzemplarze id egzemplarza danej pozycji
      * @return zwraca ilość zmodyfikowanych rekordów
      */
@@ -136,11 +134,11 @@ public class DbUpdateData extends DbParent{
      * Metoda pozwala na modyfikację danych, dla książki o danym id katalogu.
      *
      * @param rokWydania rok wydania
-     * @param wydanie wydanie
-     * @param isbn kod ISBN
-     * @param jezyk język w którym książka jest napisana
-     * @param uwagi uwagi
-     * @param idKatalog id danej książki w katalogu
+     * @param wydanie    wydanie
+     * @param isbn       kod ISBN
+     * @param jezyk      język w którym książka jest napisana
+     * @param uwagi      uwagi
+     * @param idKatalog  id danej książki w katalogu
      * @return zwraca ilość zmodyfikowanych rekordów
      */
     public int modifyBook(String rokWydania, String wydanie, String isbn, String jezyk, String uwagi, String idKatalog) {
@@ -175,10 +173,10 @@ public class DbUpdateData extends DbParent{
     /**
      * Metoda modyfikuje dane użytkownika, o podanym id_uzytkownicy.
      *
-     * @param imie imie użytkownika
-     * @param nazwisko nazwisko użytkownika
-     * @param login login użytkownika
-     * @param haslo hasło użytkownika
+     * @param imie           imie użytkownika
+     * @param nazwisko       nazwisko użytkownika
+     * @param login          login użytkownika
+     * @param haslo          hasło użytkownika
      * @param id_uzytkownicy id użytkownika
      * @return zwraca ilość zmodyfikowanych rekordów
      */
@@ -210,7 +208,7 @@ public class DbUpdateData extends DbParent{
      * Metoda zmienia użytkownika na admina i odwrotnie. Dzięki tej metodzie admin może zostać zwykłym
      * użytkownikiem i korzystać w zwykły sposób z biblioteki.
      *
-     * @param czy_admin pole w bazie przyjmuje wartości "T" i "N". Inne są odrzucane.
+     * @param czy_admin      pole w bazie przyjmuje wartości "T" i "N". Inne są odrzucane.
      * @param id_uzytkownicy id użytkownika
      * @return ilość zmodyfikowanych rekordów
      */
@@ -239,7 +237,7 @@ public class DbUpdateData extends DbParent{
      * Metoda zmienia status użytkownika dając bądź odbierając możliwość zalogowania się użytkownika do programu.
      *
      * @param id_user id użytkownika
-     * @param block parametr "T" oznacza ustawienie blokady, "N" zdjęcie jej.
+     * @param block   parametr "T" oznacza ustawienie blokady, "N" zdjęcie jej.
      * @return zwraca ilość zmodyfikowanych rekordów w bazie (ilość użytkowników)
      */
     public int blockUser(String id_user, String block) {
@@ -293,7 +291,7 @@ public class DbUpdateData extends DbParent{
      *
      * @param id_egzemplarz id egzemplarza danej książki
      * @param id_uzytkownik id użytkownika
-     * @param rentalDate data końca wypożyczenia
+     * @param rentalDate    data końca wypożyczenia
      * @return true, jeśli przedłużenie się powiodło, false w przeciwnym przypadku
      */
     public boolean updateRentalDate(int id_egzemplarz, int id_uzytkownik, String rentalDate) {

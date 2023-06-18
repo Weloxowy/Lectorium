@@ -68,9 +68,9 @@ public class latestBooksController extends appParent {
      * @param event zdarzenie kliknięcia myszą
      */
     @FXML
-    void search_init(MouseEvent event){
+    void search_init(MouseEvent event) {
         String query = searchbar.getText();
-        katalog_clicked(event,query);
+        katalog_clicked(event, query);
     }
 
     /**
@@ -83,10 +83,11 @@ public class latestBooksController extends appParent {
     @Override
     public void font(Scene scene) {
         super.font(scene);
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
         Label header = (Label) grid_nowosci.lookup("#header");
         header.setFont(ssp_sb_h1);
     }
+
     /**
      * Metoda inicjalizująca kontroler widoku najnowszych książek.
      * Ustawia informacje o użytkowniku, inicjalizuje dane dotyczące najnowszych książek,
@@ -95,12 +96,12 @@ public class latestBooksController extends appParent {
      * @param imie     imię użytkownika
      * @param nazwisko nazwisko użytkownika
      */
-    public void init(String imie, String nazwisko){
+    public void init(String imie, String nazwisko) {
         db_getData.getTop();
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
-        int i=1;
+        int i = 1;
         grid_nowosci.setPrefWidth(Region.USE_COMPUTED_SIZE);
         grid_nowosci.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
@@ -112,21 +113,21 @@ public class latestBooksController extends appParent {
         grid_nowosci.setHgap(55.0);
         grid_nowosci.setVgap(30.0);
         Map<Integer, VBox> vboxMap = new HashMap<>();
-            vboxMap.put(1, vbox1);
-            vboxMap.put(2, vbox2);
-            vboxMap.put(3, vbox3);
-            vboxMap.put(4, vbox4);
-            vboxMap.put(5, vbox5);
-            vboxMap.put(6, vbox6);
-            vboxMap.put(7, vbox7);
-            vboxMap.put(8, vbox8);
+        vboxMap.put(1, vbox1);
+        vboxMap.put(2, vbox2);
+        vboxMap.put(3, vbox3);
+        vboxMap.put(4, vbox4);
+        vboxMap.put(5, vbox5);
+        vboxMap.put(6, vbox6);
+        vboxMap.put(7, vbox7);
+        vboxMap.put(8, vbox8);
 
         for (String[] tab : db_getData.top) {
             int id_katalog = Integer.parseInt(tab[0]);
             String nazwa = tab[1];
             String nazwa_autora = tab[2];
             VBox vbox = vboxMap.get(i);
-            setLabelText(vbox,nazwa,nazwa_autora,id_katalog,i);
+            setLabelText(vbox, nazwa, nazwa_autora, id_katalog, i);
             i++;
         }
         labelnowosci.setStyle("-fx-text-fill:#808080");
@@ -141,14 +142,14 @@ public class latestBooksController extends appParent {
      * @param id_katalog identyfikator katalogowy książki
      * @param i          numer indeksu VBoxa
      */
-    public void setLabelText(VBox vb, String nazwa, String autor,int id_katalog, int i) {
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-        Label label_a = (Label) vb.lookup("#author"+i);
+    public void setLabelText(VBox vb, String nazwa, String autor, int id_katalog, int i) {
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Label label_a = (Label) vb.lookup("#author" + i);
         if (label_a != null) {
             label_a.setText(autor);
             label_a.setFont(pop_r_h1);
         }
-        Label label_n = (Label) vb.lookup("#title"+i);
+        Label label_n = (Label) vb.lookup("#title" + i);
         if (label_n != null) {
             label_n.setText(nazwa);
             if (label_a != null) {
@@ -156,8 +157,8 @@ public class latestBooksController extends appParent {
             }
         }
         db_getData.getCover(id_katalog);
-        ImageView image = (ImageView) vb.lookup("#cover"+i);
-        if(image != null){
+        ImageView image = (ImageView) vb.lookup("#cover" + i);
+        if (image != null) {
             image.setImage(Main.kat.getOkladka());
             double centerX = image.getBoundsInLocal().getWidth();
             double centerY = image.getBoundsInLocal().getHeight();
@@ -183,10 +184,9 @@ public class latestBooksController extends appParent {
 
     /**
      * Metoda ustawiająca przejście do danej książki po kliknięciu jej okładki.
-     *
      */
     @FXML
-    void refer_to_book(MouseEvent event){
+    void refer_to_book(MouseEvent event) {
         Map<Integer, VBox> vboxMap = new HashMap<>();
         vboxMap.put(1, vbox1);
         vboxMap.put(2, vbox2);
@@ -196,13 +196,13 @@ public class latestBooksController extends appParent {
         vboxMap.put(6, vbox6);
         vboxMap.put(7, vbox7);
         vboxMap.put(8, vbox8);
-        if(db_getData.books.size() == 0){
+        if (db_getData.books.size() == 0) {
             db_getData.getBooks();
         }
         for (Map.Entry<Integer, VBox> act : vboxMap.entrySet()) {
             if (event.getSource().equals(act.getValue())) {
-                String[] st = db_getData.top.get(act.getKey()-1);
-                katalog_item(event, Integer.parseInt(st[0]),false);
+                String[] st = db_getData.top.get(act.getKey() - 1);
+                katalog_item(event, Integer.parseInt(st[0]), false);
             }
         }
     }

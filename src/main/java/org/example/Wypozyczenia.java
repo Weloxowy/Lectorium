@@ -16,12 +16,12 @@ public class Wypozyczenia {
     /**
      * Konstruktor klasy {@code Wypozyczenia}.
      *
-     * @param id_egz             ID egzemplarza.
-     * @param naz                Nazwa egzemplarza.
-     * @param data_wypo          Data wypożyczenia.
-     * @param data_zwr           Data zwrotu.
-     * @param nazwa_autor        Nazwa autora egzemplarza.
-     * @param ilosc_przedluzen   Ilość przedłużeń wypożyczenia.
+     * @param id_egz           ID egzemplarza.
+     * @param naz              Nazwa egzemplarza.
+     * @param data_wypo        Data wypożyczenia.
+     * @param data_zwr         Data zwrotu.
+     * @param nazwa_autor      Nazwa autora egzemplarza.
+     * @param ilosc_przedluzen Ilość przedłużeń wypożyczenia.
      */
     public Wypozyczenia(String id_egz, String naz, String data_wypo, String data_zwr, String nazwa_autor, String ilosc_przedluzen) {
         this.id_egzemplarze = new SimpleStringProperty(id_egz);

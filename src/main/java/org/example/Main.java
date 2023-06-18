@@ -9,8 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.app.PasswordSkin;
-import org.example.db.*;
 import org.example.auth.loginController;
+import org.example.db.*;
 
 import java.io.IOException;
 

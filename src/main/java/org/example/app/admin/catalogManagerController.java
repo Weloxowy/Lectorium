@@ -32,7 +32,7 @@ import static org.example.Main.*;
 /**
  * Klasa kontrolera zarządzającego katalogiem.
  */
-public class catalogManagerController extends appParent{
+public class catalogManagerController extends appParent {
 
     @FXML
     private AnchorPane anchortable;
@@ -79,7 +79,8 @@ public class catalogManagerController extends appParent{
 
     /**
      * Inicjalizuje kontroler.
-     * @param imie imię użytkownika
+     *
+     * @param imie     imię użytkownika
      * @param nazwisko nazwisko użytkownika
      */
     public void init(String imie, String nazwisko) {
@@ -90,15 +91,15 @@ public class catalogManagerController extends appParent{
         Katalog_lista(anchortable, searchbar1);
         pane_id_masked.setVisible(false);
         labelwypozyczenia.setStyle("-fx-text-fill:#808080");
-        AnchorPane.setTopAnchor(grid,0.0);
-        AnchorPane.setLeftAnchor(grid,0.0);
-        AnchorPane.setRightAnchor(grid,0.0);
-        AnchorPane.setBottomAnchor(grid,0.0);
-        AnchorPane.setTopAnchor(pane_id_masked,0.0);
-        AnchorPane.setLeftAnchor(pane_id_masked,0.0);
-        AnchorPane.setRightAnchor(pane_id_masked,0.0);
-        AnchorPane.setBottomAnchor(pane_id_masked,0.0);
-        if(db_getData.books.isEmpty()){
+        AnchorPane.setTopAnchor(grid, 0.0);
+        AnchorPane.setLeftAnchor(grid, 0.0);
+        AnchorPane.setRightAnchor(grid, 0.0);
+        AnchorPane.setBottomAnchor(grid, 0.0);
+        AnchorPane.setTopAnchor(pane_id_masked, 0.0);
+        AnchorPane.setLeftAnchor(pane_id_masked, 0.0);
+        AnchorPane.setRightAnchor(pane_id_masked, 0.0);
+        AnchorPane.setBottomAnchor(pane_id_masked, 0.0);
+        if (db_getData.books.isEmpty()) {
             db_getData.getBooks();
         }
     }
@@ -107,54 +108,55 @@ public class catalogManagerController extends appParent{
 
     /**
      * Tworzy tabelę z listą książek w określonym panelu.
+     *
      * @param anchortable panel, w którym ma zostać wyświetlona tabela
-     * @param searchbar pole tekstowe do filtrowania listy książek
+     * @param searchbar   pole tekstowe do filtrowania listy książek
      */
     public void Katalog_lista(AnchorPane anchortable, TextField searchbar) {
         db_getData.getBooks(); //pobieranie danych
         ObservableList<Katalog> items = FXCollections.observableArrayList();
         //tworzenie kolumn tabeli
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
-        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
         idCol.setVisible(false);
 
         TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
-        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setMinWidth(anchortable.getPrefWidth() * 0.25);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
         TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
-        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         rokCol.setCellValueFactory(
                 new PropertyValueFactory<>("rok_wydania"));
 
         TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
-        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         wydanieCol.setCellValueFactory(
                 new PropertyValueFactory<>("wydanie"));
 
         TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
-        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         isbnCol.setCellValueFactory(
                 new PropertyValueFactory<>("isbn"));
 
         TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
-        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         jezykCol.setCellValueFactory(
                 new PropertyValueFactory<>("jezyk"));
 
         TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
-        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
+        uwagiCol.setMinWidth(anchortable.getWidth() * 0.4);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
-        for (String[] tab: db_getData.books) {
+        for (String[] tab : db_getData.books) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
         //dodawanie elementów do tabeli
@@ -162,7 +164,7 @@ public class catalogManagerController extends appParent{
         //ustawianie stałej wysokości wierszy
         lista.setFixedCellSize(30);
         //dodawanie kolumn do tabeli
-        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        lista.getColumns().addAll(idCol, nazwaCol, autorCol, rokCol, wydanieCol, isbnCol, jezykCol, uwagiCol);
         //ustawianie bindów, żeby tabela się zwiększała wraz z oknem
         lista.prefWidthProperty().bind(anchortable.widthProperty());
         lista.prefHeightProperty().bind(anchortable.heightProperty());
@@ -177,15 +179,17 @@ public class catalogManagerController extends appParent{
         //dodawanie aktywnego filtra ksiazek po tytule, autorze i gatunku
         FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
 
-        searchbar.textProperty().addListener((observable,newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
-            if(newValue.isEmpty() || newValue.isBlank()){ return true;}
+        searchbar.textProperty().addListener((observable, newValue, oldValue) -> filteredList.setPredicate(Katalog -> {
+            if (newValue.isEmpty() || newValue.isBlank()) {
+                return true;
+            }
 
             String searchword = newValue.toLowerCase();
 
-            if(Katalog.getNazwa().toLowerCase().contains(searchword)){
+            if (Katalog.getNazwa().toLowerCase().contains(searchword)) {
                 return true;
             }
-            if(Katalog.getNazwa_autora().toLowerCase().contains(searchword)){
+            if (Katalog.getNazwa_autora().toLowerCase().contains(searchword)) {
                 return true;
             }
             return Katalog.getIsbn().toLowerCase().contains(searchword);
@@ -200,17 +204,18 @@ public class catalogManagerController extends appParent{
 
         //gdy klikniemy 2 razy, przechodzimy do sceny wyłącznie dla danej książki i jej egzemplarzy.
         lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
                 zapamietaj = false;
-                katalog_item(event,data,true);
+                katalog_item(event, data, true);
             }
         });
     }
 
     /**
      * Ustawia styl czcionki dla elementów unikalnych dla tej sceny.
+     *
      * @param scene scena, dla której ma zostać ustawiony styl czcionki
      */
     @FXML
@@ -260,6 +265,7 @@ public class catalogManagerController extends appParent{
 
     /**
      * Inicjuje wyszukiwanie na podstawie podanego zapytania.
+     *
      * @param event zdarzenie kliknięcia przycisku
      */
     @FXML
@@ -273,8 +279,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
      */
     @FXML
-    public void dodaj_egz_button()
-    {
+    public void dodaj_egz_button() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodaj egzemplarz książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -287,16 +292,15 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Dodaj egzemplarz");
         pane_button.setOnMouseClicked(event -> { //lambda wykonywana gdy klikniemy w guzik
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = db_setData.setNewCopy("T", pane_txt_2.getText(),pane_txt_1.getText());
-            if(ret>0){
+            int ret = db_setData.setNewCopy("T", pane_txt_2.getText(), pane_txt_1.getText());
+            if (ret > 0) {
                 pane_result_msg.setText("Egzemplarz został dodany");
-            }
-            else{
+            } else {
                 pane_result_msg.setText("Egzemplarz nie został dodany");
             }
             Timeline timeline = new Timeline(new KeyFrame( //timeline uruchamia się i wyświetla komunikat przez 3 sekundy
                     Duration.seconds(3),
-                    event2 ->{
+                    event2 -> {
                         pane_result_msg.setOpacity(0.0);
                         pane_button.setDisable(false);
                     }
@@ -314,8 +318,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
      */
     @FXML
-    public void usun_egz_button()
-    {
+    public void usun_egz_button() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Usuń egzemplarz książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -328,11 +331,10 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = db_deleteData.deleteCopyFromDatabase(pane_txt_1.getText(),pane_txt_2.getText());
-            if(ret>0){
+            int ret = db_deleteData.deleteCopyFromDatabase(pane_txt_1.getText(), pane_txt_2.getText());
+            if (ret > 0) {
                 pane_result_msg.setText("Egzemplarz został usunięty");
-            }
-            else{
+            } else {
                 pane_result_msg.setText("Egzemplarz nie został usunięty");
             }
             Timeline timeline = new Timeline(new KeyFrame(
@@ -351,8 +353,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
      */
     @FXML
-    public void usun_pozycje_button()
-    {
+    public void usun_pozycje_button() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Usuń pozycje książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -375,11 +376,10 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Usuń pozycje");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = db_deleteData.deleteBookFromDatabase(pane_txt_1.getText(),pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
-            if(ret>0){
+            int ret = db_deleteData.deleteBookFromDatabase(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText());
+            if (ret > 0) {
                 pane_result_msg.setText("Pozycja usunięta");
-            }
-            else{
+            } else {
                 pane_result_msg.setText("Pozycja nie została usunięta");
             }
             Timeline timeline = new Timeline(new KeyFrame(
@@ -398,8 +398,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
      */
     @FXML
-    public void zmodyfikuj_egzemplarze()
-    {
+    public void zmodyfikuj_egzemplarze() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Zmodyfikuj egzemplarze książek");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -422,11 +421,10 @@ public class catalogManagerController extends appParent{
         pane_button.setText("Modyfikuj egzemplarz");
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
-            int ret = db_updateData.modifyCopy(pane_txt_2.getText(),pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
-            if(ret>0){
+            int ret = db_updateData.modifyCopy(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_1.getText());
+            if (ret > 0) {
                 pane_result_msg.setText("Modyfikacja udana");
-            }
-            else{
+            } else {
                 pane_result_msg.setText("Modyfikacja się nie powiodła");
             }
             Timeline timeline = new Timeline(new KeyFrame(
@@ -452,8 +450,7 @@ public class catalogManagerController extends appParent{
      * Na sam koniec przeprowadzamy dodanie książki do katalogu.
      */
     @FXML
-    public void add_position()
-    {
+    public void add_position() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Dodaj pozycje książki");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -505,17 +502,17 @@ public class catalogManagerController extends appParent{
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
 
-            if(!sec[0].get()) {
+            if (!sec[0].get()) {
                 boolean[] ret = db_setData.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
 
                 if (Arrays.equals(ret, new boolean[]{false, false, false})) {
                     pane_result_msg.setText("Pozycja dodana");
                 } else {
-                    if (Arrays.equals(ret,new boolean[]{true, false, false})) {
+                    if (Arrays.equals(ret, new boolean[]{true, false, false})) {
                         pane_result_msg.setText("Autor nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                    } else if (Arrays.equals(ret,new boolean[]{false, true, false})) {
+                    } else if (Arrays.equals(ret, new boolean[]{false, true, false})) {
                         pane_result_msg.setText("Gatunek nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
-                    } else if (Arrays.equals(ret,new boolean[]{false, false, true})) {
+                    } else if (Arrays.equals(ret, new boolean[]{false, false, true})) {
                         pane_result_msg.setText("Wydawnictwo nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
                     } else {
                         pane_result_msg.setText("Przynajmniej jeden z parametrów agregujących nie istnieje w bazie. Kliknij guzik ponownie aby dodać je wraz z książką.");
@@ -523,28 +520,26 @@ public class catalogManagerController extends appParent{
                     process_data[0] = ret;
                     sec[0].set(true);
                 }
-            }
-            else{
+            } else {
                 if (process_data[0][0]) {
-                    boolean res = db_setData.addAuthor(pane_txt_7.getText(),pane_txt_8.getText());
-                    if(res)
+                    boolean res = db_setData.addAuthor(pane_txt_7.getText(), pane_txt_8.getText());
+                    if (res)
                         process_data[0][0] = false;
                 }
-                if(process_data[0][1]){
+                if (process_data[0][1]) {
                     boolean res = db_setData.addGenre(pane_txt_9.getText());
-                    if(res)
+                    if (res)
                         process_data[0][1] = false;
                 }
-                if(process_data[0][2]){
+                if (process_data[0][2]) {
                     boolean res = db_setData.addPublisher(pane_txt_10.getText());
-                    if(res)
+                    if (res)
                         process_data[0][2] = false;
                 }
                 boolean[] ret = db_setData.add_one_record_from_catalog(pane_txt_1.getText(), pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_7.getText(), pane_txt_8.getText(), pane_txt_9.getText(), pane_txt_10.getText(), process_data[0]);
-                if (Arrays.equals(ret,process_data[0])) {
+                if (Arrays.equals(ret, process_data[0])) {
                     pane_result_msg.setText("Pozycja dodana");
-                }
-                else{
+                } else {
                     pane_result_msg.setText("Pozycja nie została dodana. Spróbuj ponownie.");
                     sec[0].set(false);
                 }
@@ -566,8 +561,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik wywołuje funkcje z bazy i zwraca odpowiedni wynik.
      */
     @FXML
-    public void zmodyfikuj_pozycje()
-    {
+    public void zmodyfikuj_pozycje() {
         Label pane_tytul = (Label) pane_id_masked.lookup("#pane_tytul");
         pane_tytul.setText("Zmodyfikuj pozycje książek");
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
@@ -599,10 +593,9 @@ public class catalogManagerController extends appParent{
         pane_button.setOnMouseClicked(event -> {
             Label pane_result_msg = (Label) pane_id_masked.lookup("#pane_result_msg");
             int ret = db_updateData.modifyBook(pane_txt_2.getText(), pane_txt_3.getText(), pane_txt_4.getText(), pane_txt_5.getText(), pane_txt_6.getText(), pane_txt_1.getText());
-            if(ret>0){
+            if (ret > 0) {
                 pane_result_msg.setText("Modyfikacja udana");
-            }
-            else{
+            } else {
                 pane_result_msg.setText("Modyfikacja się nie powiodła");
             }
             Timeline timeline = new Timeline(new KeyFrame(
@@ -621,7 +614,7 @@ public class catalogManagerController extends appParent{
      * Przy kliknięciu w guzik chowane są wszystkie przymioty funkcji
      */
     @FXML
-    public void hide_pane(MouseEvent event){
+    public void hide_pane(MouseEvent event) {
         TextField pane_txt_1 = (TextField) pane_id_masked.lookup("#pane_txt_1");
         pane_txt_1.setOpacity(0.0);
         pane_txt_1.clear();

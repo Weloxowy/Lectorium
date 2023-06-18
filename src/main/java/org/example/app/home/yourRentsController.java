@@ -1,4 +1,3 @@
-
 package org.example.app.home;
 
 import javafx.animation.KeyFrame;
@@ -31,13 +30,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.Main.*;
+import static org.example.Main.db_getData;
+import static org.example.Main.db_updateData;
 
 /**
  * Klasa {@code yourRentsController} jest kontrolerem widoku informacji o wypożyczeniach aktualnie zalogowanego użytkownika.
  * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji, udostępnia funkcje przedłużania wypożyczenia oraz inicjalizację widoku.
  * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
- *
  */
 public class yourRentsController extends appParent {
     @FXML
@@ -105,9 +104,9 @@ public class yourRentsController extends appParent {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
-        actual_button(event,true);
+        actual_button(event, true);
         Lista_Hire(User.getInstance().getId());
-        Wyp.setText(Wyp.getText()+" "+imie + " " + nazwisko);
+        Wyp.setText(Wyp.getText() + " " + imie + " " + nazwisko);
         labelwypozyczenia.setStyle("-fx-text-fill:#808080");
         Wszystkie.setStyle("-fx-border-width: 2");
 
@@ -125,31 +124,31 @@ public class yourRentsController extends appParent {
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
         // Tworzenie kolumn tabeli
         TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
-        autorCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
+        autorCol.setMinWidth(anchor_hire.getPrefWidth() * 0.2);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn<Wypozyczenia, ?> nazwaCol = new TableColumn<>("Nazwa");
-        nazwaCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
+        nazwaCol.setMinWidth(anchor_hire.getPrefWidth() * 0.2);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
         TableColumn<Wypozyczenia, ?> egzemplarzeCol = new TableColumn<>("Numer egzemplarza");
-        egzemplarzeCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
+        egzemplarzeCol.setMinWidth(anchor_hire.getPrefWidth() * 0.15);
         egzemplarzeCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_egzemplarze"));
 
         TableColumn<Wypozyczenia, ?> data_wypozyczeniaCol = new TableColumn<>("Data wypozyczenia");
-        data_wypozyczeniaCol.setMinWidth(anchor_hire.getPrefWidth()*0.15);
+        data_wypozyczeniaCol.setMinWidth(anchor_hire.getPrefWidth() * 0.15);
         data_wypozyczeniaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_wypozyczenia"));
 
         TableColumn<Wypozyczenia, ?> data_zwrotuCol = new TableColumn<>("Termin zwrotu");
-        data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
+        data_zwrotuCol.setMinWidth(anchor_hire.getPrefWidth() * 0.1);
         data_zwrotuCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
         TableColumn<Wypozyczenia, String> grzywnaCol = new TableColumn<>("Grzywna");
-        grzywnaCol.setMinWidth(anchor_hire.getPrefWidth()*0.1);
+        grzywnaCol.setMinWidth(anchor_hire.getPrefWidth() * 0.1);
         grzywnaCol.setCellValueFactory(
                 new PropertyValueFactory<>("data_zwrotu"));
 
@@ -174,21 +173,20 @@ public class yourRentsController extends appParent {
                     } else if (dataZwrotu.isBefore(currentDate)) {
                         DecimalFormat currency = new DecimalFormat("#0.00");
                         int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
-                        debt = String.valueOf(currency.format(diff*0.2));
-                        cell.setText(debt+" zł");
-                            double konwert;
-                            try {
-                                konwert = currency.parse(debt).doubleValue();
-                                lista.add(konwert);
-                                //liczenie sumy zadluzenia
-                                for(double pam : lista)
-                                {
-                                    suma_zadluzenia += pam ;
-                                }
-                                suma_zadluzenia = currency.parse(String.valueOf(suma_zadluzenia)).doubleValue();
-                                yourHire_name.setText("Suma zadłużenia użytkownika wynosi " + suma_zadluzenia + " zł");
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                        debt = String.valueOf(currency.format(diff * 0.2));
+                        cell.setText(debt + " zł");
+                        double konwert;
+                        try {
+                            konwert = currency.parse(debt).doubleValue();
+                            lista.add(konwert);
+                            //liczenie sumy zadluzenia
+                            for (double pam : lista) {
+                                suma_zadluzenia += pam;
+                            }
+                            suma_zadluzenia = currency.parse(String.valueOf(suma_zadluzenia)).doubleValue();
+                            yourHire_name.setText("Suma zadłużenia użytkownika wynosi " + suma_zadluzenia + " zł");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                             throw new RuntimeException(e);
                         }
                     }
@@ -200,7 +198,7 @@ public class yourRentsController extends appParent {
 
 
         TableColumn<Wypozyczenia, String> przedluzCol = new TableColumn<>("Przedłuż");
-        przedluzCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        przedluzCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         przedluzCol.setCellValueFactory(
                 new PropertyValueFactory<>("ilosc_przedluzen"));
 
@@ -287,13 +285,13 @@ public class yourRentsController extends appParent {
             String data_wypozyczenia = tab[3];
             String data_zwrotu = tab[4];
             String ilosc_przedluzen = tab[5];
-            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
+            items.add(new Wypozyczenia(id_egzemplarze, nazwa, data_wypozyczenia, data_zwrotu, nazwa_autora, ilosc_przedluzen));
         }
 
         // Ustawianie elementów wypożyczeń jako dane dla tabeli
         lista.setItems(items);
         // Dodawanie kolumn do tabeli
-        lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,grzywnaCol,przedluzCol);
+        lista.getColumns().addAll(nazwaCol, egzemplarzeCol, autorCol, data_wypozyczeniaCol, data_zwrotuCol, grzywnaCol, przedluzCol);
         // Ustawianie tekstu zastępczego, gdy lista jest pusta
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
         // Ustawianie wymiarów tabeli
@@ -335,9 +333,9 @@ public class yourRentsController extends appParent {
      * @see appParent#font(Scene)
      */
     @FXML
-    public void font(Scene scene){
+    public void font(Scene scene) {
         super.font(scene);
-        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),21);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 21);
         Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
         Wyp.setFont(pop_b_h2);
         yourHire_name.setFont(pop_r_h2);
@@ -349,9 +347,8 @@ public class yourRentsController extends appParent {
      * @param event Obiekt reprezentujący zdarzenie kliknięcia myszą
      */
     @FXML
-    void check_hire_information(MouseEvent event)
-    {
-        actual_button(event,false);
+    void check_hire_information(MouseEvent event) {
+        actual_button(event, false);
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
 
         items.clear();
@@ -364,7 +361,7 @@ public class yourRentsController extends appParent {
             String data_wypozyczenia = tab[3];
             String data_zwrotu = tab[4];
             String ilosc_przedluzen = tab[5];
-            items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
+            items.add(new Wypozyczenia(id_egzemplarze, nazwa, data_wypozyczenia, data_zwrotu, nazwa_autora, ilosc_przedluzen));
         }
         lista.setItems(items);
     }
@@ -376,14 +373,13 @@ public class yourRentsController extends appParent {
      * @param type  Typ przycisku (true - "Aktualne", false - "Wszystkie")
      */
     @FXML
-    void actual_button(MouseEvent event,boolean type){
-        if(type){
+    void actual_button(MouseEvent event, boolean type) {
+        if (type) {
             Wszystkie.setStyle("-fx-border-width: 2");
             Aktualne.setStyle("");
             Aktualne.getStyleClass().add("button");
             yourHire_name.setOpacity(1.0);
-        }
-        else{
+        } else {
             Aktualne.setStyle("-fx-border-width: 2");
             Wszystkie.setStyle("");
             Wszystkie.getStyleClass().add("button");

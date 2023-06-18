@@ -19,7 +19,6 @@ import static org.example.Main.db_getData;
  * Klasa {@code categoriesController} reprezentuje kontroler widoku kategorii.
  * Zarządza interakcjami i logiką związaną z widokiem kategorii.
  * Rozszerza klasę {@link appParent}, aby dziedziczyć pewne funkcjonalności z klasy nadrzędnej.
- *
  */
 public class categoriesController extends appParent {
 
@@ -53,8 +52,8 @@ public class categoriesController extends appParent {
      * @param imie     imię użytkownika
      * @param nazwisko nazwisko użytkownika
      */
-    public void init(String imie, String nazwisko){
-        nametag.setText(imie+" "+nazwisko);
+    public void init(String imie, String nazwisko) {
+        nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
         avatar_view();
         images_view();
@@ -82,42 +81,42 @@ public class categoriesController extends appParent {
      * @param event zdarzenie kliknięcia myszą
      */
     @FXML
-    void search_init(MouseEvent event){
+    void search_init(MouseEvent event) {
         String query = searchbar.getText();
-        katalog_clicked(event,query);
+        katalog_clicked(event, query);
     }
 
     /**
      * Metoda {@code categories_init} inicjalizuje kategorie.
      * Pobiera dane kategorii z bazy danych i tworzy widok kategorii na podstawie tych danych.
      */
-    void categories_init(){
+    void categories_init() {
         db_getData.getCategories();
-        if(db_getData.categories != null) {
-            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),18);
-            Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),16);
+        if (db_getData.categories != null) {
+            Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 18);
+            Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 16);
             Label lab = (Label) images_vbox.lookup("#header");
             lab.setFont(pop_r_h1);
             Label cat = new Label("Kategorie:");
             cat.setFont(pop_r_h1);
             cat_vbox.getChildren().add(cat);
-            int i=1;
+            int i = 1;
             for (String[] tab : db_getData.categories) {
-                    String input =tab[0]+" ("+tab[1]+" pozycji)";
-                    String id = "cat"+i;
-                    Label label = new Label(input);
-                    label.setFont(pop_r_h2);
-                    label.setVisible(true);
-                    label.setTextAlignment(TextAlignment.CENTER);
-                    label.setOnMouseClicked(event -> {
+                String input = tab[0] + " (" + tab[1] + " pozycji)";
+                String id = "cat" + i;
+                Label label = new Label(input);
+                label.setFont(pop_r_h2);
+                label.setVisible(true);
+                label.setTextAlignment(TextAlignment.CENTER);
+                label.setOnMouseClicked(event -> {
                     String categoryName = tab[0];
-                        katalog_clicked(event,categoryName);
+                    katalog_clicked(event, categoryName);
                 });
-                    label.setOnMouseEntered(event -> label.setUnderline(true));
+                label.setOnMouseEntered(event -> label.setUnderline(true));
                 label.setOnMouseExited(event -> label.setUnderline(false));
-                    cat_vbox.getChildren().add(label);
-                    label.setId(id);
-                    i++;
+                cat_vbox.getChildren().add(label);
+                label.setId(id);
+                i++;
             }
         }
     }
@@ -155,17 +154,17 @@ public class categoriesController extends appParent {
      * @param event zdarzenie kliknięcia myszą
      */
     @FXML
-    void menu_panels(MouseEvent event){
-        if(event.getSource().equals(image_a1)){
-            katalog_item(event,130,false);
+    void menu_panels(MouseEvent event) {
+        if (event.getSource().equals(image_a1)) {
+            katalog_item(event, 130, false);
         }
-        if(event.getSource().equals(image_a2)){
+        if (event.getSource().equals(image_a2)) {
             String query = "Stephen King";
-            katalog_clicked(event,query);
+            katalog_clicked(event, query);
         }
-        if(event.getSource().equals(image_a3)){
+        if (event.getSource().equals(image_a3)) {
             String query = "Atwood";
-            katalog_clicked(event,query);
+            katalog_clicked(event, query);
         }
 
     }

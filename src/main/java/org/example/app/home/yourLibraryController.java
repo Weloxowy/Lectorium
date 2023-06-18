@@ -17,7 +17,6 @@ import org.example.app.appParent;
  * Klasa {@code yourLibraryController} jest kontrolerem widoku informacji o bibliotece.
  * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji o blibliotece oraz inicjalizację widoku.
  * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
- *
  */
 public class yourLibraryController extends appParent {
 
@@ -98,8 +97,7 @@ public class yourLibraryController extends appParent {
     /**
      * Metoda {@code images_view} ustawia clipping dla obrazków
      */
-    void image_view()
-    {
+    void image_view() {
         double centerXa1 = gbs_dobrze_jest.getBoundsInLocal().getWidth();
         double centerYa1 = gbs_dobrze_jest.getBoundsInLocal().getHeight();
         Rectangle rectanglea1 = new Rectangle(centerXa1, centerYa1);
@@ -116,9 +114,9 @@ public class yourLibraryController extends appParent {
      * @see appParent#font(Scene)
      */
     @FXML
-    public void font(Scene scene){
+    public void font(Scene scene) {
         super.font(scene);
-        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),20);
+        Font pop_b_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 20);
         gbs1.setFont(pop_b_h2);
         gbs2.setFont(pop_b_h2);
         gbs3.setFont(pop_b_h2);
@@ -131,8 +129,8 @@ public class yourLibraryController extends appParent {
      * @param event zdarzenie kliknięcia myszy
      */
     @FXML
-    void search_init(MouseEvent event){
+    void search_init(MouseEvent event) {
         String query = searchbar.getText();
-        katalog_clicked(event,query);
+        katalog_clicked(event, query);
     }
 }

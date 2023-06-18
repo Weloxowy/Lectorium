@@ -17,9 +17,8 @@ import java.util.ArrayList;
  * Posiada ona metody, które pobierają dane z bazy danych.
  *
  * @see org.example.db.DbParent
- *
  */
-public class DbGetData extends DbParent{
+public class DbGetData extends DbParent {
 
     /**
      * Pole {@code books} reprezentuje kolekcję książek.
@@ -96,13 +95,11 @@ public class DbGetData extends DbParent{
     }
 
 
-
-
     /**
      * Metoda pobiera okładkę dla danej książki na podstawie jej ID z tabeli katalog.
      * Jeżeli w bazie okładki nie ma, zastępuje ją odpowiednim obrazem.
-     * @param id ID książki
      *
+     * @param id ID książki
      */
     public void getCover(int id) {
         connectToDatabase();
@@ -307,13 +304,13 @@ public class DbGetData extends DbParent{
      * Metoda składa się z głównego zapytania query, które pobiera wszystkie rekordy odnośnie egzemplarzy danej
      * książki, jakie się znajdują w bazie.
      * Następnie, bazując na pobranej danej "czy_dostepne", funkcja w zależności od parametru sprawdza warunki.
-     *
+     * <p>
      * Jeżeli "czy_dostępne" = "T", to takie pozostaje, jeżeli "N" to sprawdzane jest kolejno czy została ona wypożyczona,
      * bądź zarezerwowana. W każdej możliwości sprawdzane jest czy zrobił to uzytkownik o danym idUzytkownika, czy inny.
      * Jeżeli żadna z możliwości nie jest spełniona, parametr pozostaje równy "N".
      *
-     * @param idKatalog      identyfikator katalogu
-     * @param idUzytkownika  identyfikator użytkownika
+     * @param idKatalog     identyfikator katalogu
+     * @param idUzytkownika identyfikator użytkownika
      * @see #copies
      */
     public void getCopies(int idKatalog, int idUzytkownika) {

@@ -6,7 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -81,7 +82,7 @@ public class appParent {
             catalogController kat = loader.getController();
             kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista();
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             kat.font(scene);
         } catch (IOException e) {
@@ -92,8 +93,8 @@ public class appParent {
     /**
      * Metoda obsługuje zdarzenie kliknięcia na przycisk katalogu z zapytaniem wziętym z pola wyszukiwania.
      *
-     * @param event  zdarzenie myszy
-     * @param query  zapytanie z wyszukiwania
+     * @param event zdarzenie myszy
+     * @param query zapytanie z wyszukiwania
      */
     @FXML
     protected void katalog_clicked(MouseEvent event, String query) {
@@ -106,7 +107,7 @@ public class appParent {
             catalogController kat = loader.getController();
             kat.init(User.getImie(), User.getNazwisko());
             kat.Katalog_lista(query);
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             kat.font(scene);
         } catch (IOException e) {
@@ -129,7 +130,7 @@ public class appParent {
             parent = loader.load();
             categoriesController controller = loader.getController();
             controller.init(User.getImie(), User.getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             controller.font(scene);
         } catch (IOException e) {
@@ -152,7 +153,7 @@ public class appParent {
             parent = loader.load();
             contactController contact = loader.getController();
             contact.init(User.getImie(), User.getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             contact.font(scene);
         } catch (IOException e) {
@@ -175,7 +176,7 @@ public class appParent {
             parent = loader.load();
             homeController controller = loader.getController();
             controller.init(User.getImie(), User.getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             controller.font(scene);
         } catch (IOException e) {
@@ -193,17 +194,17 @@ public class appParent {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
-                parent = loader.load();
-                yourLibraryController library = loader.getController();
-                library.init(User.getImie(), User.getNazwisko());
-                Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
-                stage.setScene(scene);
-                library.font(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourLibrary.fxml"));
+            parent = loader.load();
+            yourLibraryController library = loader.getController();
+            library.init(User.getImie(), User.getNazwisko());
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
+            stage.setScene(scene);
+            library.font(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -221,7 +222,7 @@ public class appParent {
             parent = loader.load();
             yourProfileController Profile = loader.getController();
             Profile.init(User.getImie(), User.getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             Profile.font(scene);
         } catch (IOException e) {
@@ -244,7 +245,7 @@ public class appParent {
             parent = loader.load();
             latestBooksController nowosci = loader.getController();
             nowosci.init(User.getImie(), User.getNazwisko());
-            Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
             stage.setScene(scene);
             nowosci.font(scene);
         } catch (IOException e) {
@@ -287,62 +288,61 @@ public class appParent {
     /**
      * Metoda obsługuje zdarzenie kliknięcia na wiersz danej książki w katalogu, bądź inne pole.
      *
-     * @param event zdarzenie myszy
-     * @param id_egz numer id ksiazki w katalogu
+     * @param event    zdarzenie myszy
+     * @param id_egz   numer id ksiazki w katalogu
      * @param if_admin boolean sprawdzający czy wchodzi admin czy zwykły użytkownik
      */
-    protected void katalog_item(MouseEvent event, int id_egz,boolean if_admin) {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            size_guard(stage);
-            Parent parent;
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
-                parent = loader.load();
-                Main.db_getData.getCover(id_egz);
-                catalogItemController kat = loader.getController();
-                kat.init(User.getImie(), User.getNazwisko());
-                kat.if_adm = if_admin;
-                kat.load(id_egz);
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
-                stage.setScene(scene);
-                kat.font(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    protected void katalog_item(MouseEvent event, int id_egz, boolean if_admin) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        size_guard(stage);
+        Parent parent;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/katalog_item.fxml"));
+            parent = loader.load();
+            Main.db_getData.getCover(id_egz);
+            catalogItemController kat = loader.getController();
+            kat.init(User.getImie(), User.getNazwisko());
+            kat.if_adm = if_admin;
+            kat.load(id_egz);
+            Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
+            stage.setScene(scene);
+            kat.font(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
 
     /**
      * Metoda obsługuje zdarzenie kliknięcia na pole twoje wypożyczenia.
      *
      * @param event zdarzenie myszy
-     * */
+     */
     @FXML
     protected void yourHire_clicked(MouseEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
-        if(User.getInstance().getCzy_admin().contentEquals("T")){
+        if (User.getInstance().getCzy_admin().contentEquals("T")) {
 
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/catalogManager.fxml"));
                 parent = loader.load();
                 catalogManagerController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko());
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+                Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
                 stage.setScene(scene);
                 Profile.font(scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else{
+        } else {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourHire.fxml"));
                 parent = loader.load();
                 yourRentsController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko(), event);
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+                Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
                 stage.setScene(scene);
                 Profile.font(scene);
             } catch (IOException e) {
@@ -362,26 +362,25 @@ public class appParent {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         size_guard(stage);
         Parent parent;
-        if(User.getInstance().getCzy_admin().contentEquals("T")){
+        if (User.getInstance().getCzy_admin().contentEquals("T")) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.admin/userManager.fxml"));
                 parent = loader.load();
                 userManagerController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko());
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+                Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
                 stage.setScene(scene);
                 Profile.font(scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else{
+        } else {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml.home/yourReservation.fxml"));
                 parent = loader.load();
                 yourReservationsController Profile = loader.getController();
                 Profile.init(User.getImie(), User.getNazwisko());
-                Scene scene = new Scene(parent,stage.getWidth()-15,stage.getHeight()-38);
+                Scene scene = new Scene(parent, stage.getWidth() - 15, stage.getHeight() - 38);
                 stage.setScene(scene);
                 Profile.font(scene);
             } catch (IOException e) {
@@ -394,10 +393,11 @@ public class appParent {
     /**
      * Metoda dostosowuje wygląd programu i treść bocznego menu,
      * w zależności od tego czy zalogowany jest student, czy administrator.
+     *
      * @param scene obiekt reprezentujący aktualnie przetwarzaną scenę aplikacji
      */
-    void overrideLabels(Scene scene){
-        if(User.getInstance().getCzy_admin().contentEquals("T")){
+    void overrideLabels(Scene scene) {
+        if (User.getInstance().getCzy_admin().contentEquals("T")) {
             scene.getStylesheets().clear();
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.admin/admin.css")).toExternalForm());
             scene.getRoot().applyCss();
@@ -405,8 +405,7 @@ public class appParent {
             labelrezerwacje.setText("Zarządzanie użytkownikami");
             Label labelwypozyczenia = (Label) scene.lookup("#labelwypozyczenia");
             labelwypozyczenia.setText("Zarządzanie katalogiem");
-        }
-        else{
+        } else {
             scene.getStylesheets().clear();
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/fxml.home/home.css")).toExternalForm());
             scene.getRoot().applyCss();
@@ -418,7 +417,7 @@ public class appParent {
      *
      * @param stage referencja do obiektu Stage
      */
-    protected void size_guard(Stage stage){
+    protected void size_guard(Stage stage) {
         stage.setMinHeight(768);
         stage.setMinWidth(1250);
     }
@@ -428,7 +427,7 @@ public class appParent {
      *
      * @return obiekt Node reprezentujący grafikę plusa
      */
-    protected Node createPriorityGraphic(){
+    protected Node createPriorityGraphic() {
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/add.png"))));
@@ -458,7 +457,7 @@ public class appParent {
      *
      * @return obiekt Node reprezentujący grafikę minusa
      */
-    protected Node createDeleteGraphic(){
+    protected Node createDeleteGraphic() {
         HBox graphicContainer = new HBox();
         graphicContainer.setAlignment(Pos.CENTER);
         ImageView imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/res/icons/dark/remove.png"))));

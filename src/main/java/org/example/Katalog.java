@@ -24,16 +24,16 @@ public class Katalog {
     /**
      * Konstruktor inicjalizujący katalog na podstawie przekazanych argumentów.
      *
-     * @param id_katalog         Identyfikator katalogu.
-     * @param nazwa              Nazwa katalogu.
-     * @param nazwa_autora       Nazwa autora.
-     * @param rok_wydania        Rok wydania.
-     * @param wydanie            Wydanie.
-     * @param isbn               Numer ISBN.
-     * @param jezyk              Język.
-     * @param uwagi              Uwagi.
-     * @param nazwa_wydawnictwa  Nazwa wydawnictwa.
-     * @param nazwa_gatunku      Nazwa gatunku.
+     * @param id_katalog        Identyfikator katalogu.
+     * @param nazwa             Nazwa katalogu.
+     * @param nazwa_autora      Nazwa autora.
+     * @param rok_wydania       Rok wydania.
+     * @param wydanie           Wydanie.
+     * @param isbn              Numer ISBN.
+     * @param jezyk             Język.
+     * @param uwagi             Uwagi.
+     * @param nazwa_wydawnictwa Nazwa wydawnictwa.
+     * @param nazwa_gatunku     Nazwa gatunku.
      */
     public Katalog(int id_katalog, String nazwa, String nazwa_autora, String rok_wydania, String wydanie, String isbn, String jezyk, String uwagi, String nazwa_wydawnictwa, String nazwa_gatunku) {
         this.id_katalog = new ReadOnlyIntegerWrapper(id_katalog);

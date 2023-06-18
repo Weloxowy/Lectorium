@@ -17,7 +17,6 @@ import org.example.app.appParent;
  * Klasa {@code contactController} jest kontrolerem widoku kontaktu z biblioteką.
  * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji oraz inicjalizację widoku.
  * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
- *
  */
 public class contactController extends appParent {
     @FXML

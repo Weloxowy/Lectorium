@@ -78,43 +78,43 @@ public class catalogController extends appParent {
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
-        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
-            idCol.setVisible(false);
+        idCol.setVisible(false);
 
         TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
-        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setMinWidth(anchortable.getPrefWidth() * 0.25);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
         TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
-        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         rokCol.setCellValueFactory(
                 new PropertyValueFactory<>("rok_wydania"));
 
         TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
-        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         wydanieCol.setCellValueFactory(
                 new PropertyValueFactory<>("wydanie"));
 
         TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
-        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         isbnCol.setCellValueFactory(
                 new PropertyValueFactory<>("isbn"));
 
         TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
-        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         jezykCol.setCellValueFactory(
                 new PropertyValueFactory<>("jezyk"));
 
         TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
-        uwagiCol.setMinWidth(anchortable.getWidth()*0.4);
+        uwagiCol.setMinWidth(anchortable.getWidth() * 0.4);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
@@ -137,7 +137,7 @@ public class catalogController extends appParent {
 
         lista.setFixedCellSize(30);
 
-        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        lista.getColumns().addAll(idCol, nazwaCol, autorCol, rokCol, wydanieCol, isbnCol, jezykCol, uwagiCol);
 
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
@@ -155,11 +155,11 @@ public class catalogController extends appParent {
         lista.getStylesheets().add("/fxml.home/home.css");
 
         lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                 TablePosition<Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
 
-                katalog_item(event,data,false);
+                katalog_item(event, data, false);
             }
         });
     }
@@ -169,47 +169,47 @@ public class catalogController extends appParent {
         ObservableList<Katalog> items = FXCollections.observableArrayList();
 
         TableColumn<Katalog, ?> idCol = new TableColumn<>("Id");
-        idCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        idCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         idCol.setCellValueFactory(
                 new PropertyValueFactory<>("id_katalog"));
         idCol.setVisible(false);
 
         TableColumn<Katalog, ?> autorCol = new TableColumn<>("Autor");
-        autorCol.setMinWidth(anchortable.getPrefWidth()*0.15);
+        autorCol.setMinWidth(anchortable.getPrefWidth() * 0.15);
         autorCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa_autora"));
 
         TableColumn<Katalog, ?> nazwaCol = new TableColumn<>("Nazwa");
-        nazwaCol.setMinWidth(anchortable.getPrefWidth()*0.25);
+        nazwaCol.setMinWidth(anchortable.getPrefWidth() * 0.25);
         nazwaCol.setCellValueFactory(
                 new PropertyValueFactory<>("nazwa"));
 
         TableColumn<Katalog, ?> rokCol = new TableColumn<>("Rok wydania");
-        rokCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        rokCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         rokCol.setCellValueFactory(
                 new PropertyValueFactory<>("rok_wydania"));
 
         TableColumn<Katalog, ?> wydanieCol = new TableColumn<>("Wydanie");
-        wydanieCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        wydanieCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         wydanieCol.setCellValueFactory(
                 new PropertyValueFactory<>("wydanie"));
 
         TableColumn<Katalog, ?> isbnCol = new TableColumn<>("ISBN");
-        isbnCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        isbnCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         isbnCol.setCellValueFactory(
                 new PropertyValueFactory<>("isbn"));
 
         TableColumn<Katalog, ?> jezykCol = new TableColumn<>("Język");
-        jezykCol.setMinWidth(anchortable.getPrefWidth()*0.1);
+        jezykCol.setMinWidth(anchortable.getPrefWidth() * 0.1);
         jezykCol.setCellValueFactory(
                 new PropertyValueFactory<>("jezyk"));
 
         TableColumn<Katalog, ?> uwagiCol = new TableColumn<>("Uwagi");
-        uwagiCol.setMinWidth(anchortable.getPrefWidth()*0.2);
+        uwagiCol.setMinWidth(anchortable.getPrefWidth() * 0.2);
         uwagiCol.setCellValueFactory(
                 new PropertyValueFactory<>("uwagi"));
 
-        for (String[] tab: db_getData.books) {
+        for (String[] tab : db_getData.books) {
             items.add(new Katalog(Integer.parseInt(tab[0]), tab[1], tab[2], tab[3], tab[4], tab[5], tab[6], tab[7], tab[8], tab[9]));
         }
 
@@ -217,7 +217,7 @@ public class catalogController extends appParent {
 
         lista.setFixedCellSize(30);
 
-        lista.getColumns().addAll(idCol,nazwaCol,autorCol,rokCol,wydanieCol,isbnCol,jezykCol,uwagiCol);
+        lista.getColumns().addAll(idCol, nazwaCol, autorCol, rokCol, wydanieCol, isbnCol, jezykCol, uwagiCol);
 
         lista.setPrefWidth(anchortable.getPrefWidth());
         lista.setPrefHeight(anchortable.getPrefHeight());
@@ -234,25 +234,27 @@ public class catalogController extends appParent {
 
         lista.getStylesheets().add("/fxml.home/home.css");
 
-        FilteredList<Katalog> filteredList = new FilteredList<>(items, b-> true);
+        FilteredList<Katalog> filteredList = new FilteredList<>(items, b -> true);
 
-            filteredList.setPredicate(Katalog -> {
-                if(query.isEmpty() || query.isBlank()){ return true;}
+        filteredList.setPredicate(Katalog -> {
+            if (query.isEmpty() || query.isBlank()) {
+                return true;
+            }
 
-                String searchword = query.toLowerCase();
+            String searchword = query.toLowerCase();
 
-                if(Katalog.getNazwa().toLowerCase().contains(searchword)){
-                    return true;
-                }
-                if(Katalog.getNazwa_autora().toLowerCase().contains(searchword)){
-                    return true;
-                }
-                if(Katalog.getIsbn().toLowerCase().contains(searchword)){
-                    return true;
-                }
-                return Katalog.getNazwa_gatunku().toLowerCase().contains(searchword);
+            if (Katalog.getNazwa().toLowerCase().contains(searchword)) {
+                return true;
+            }
+            if (Katalog.getNazwa_autora().toLowerCase().contains(searchword)) {
+                return true;
+            }
+            if (Katalog.getIsbn().toLowerCase().contains(searchword)) {
+                return true;
+            }
+            return Katalog.getNazwa_gatunku().toLowerCase().contains(searchword);
 
-            });
+        });
 
         SortedList<Katalog> sortedList = new SortedList<>(filteredList);
 
@@ -261,11 +263,11 @@ public class catalogController extends appParent {
         lista.setItems(sortedList);
 
         lista.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                 TablePosition<org.example.Katalog, ?> tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
 
                 Integer data = (Integer) idCol.getCellObservableValue(tablePosition.getRow()).getValue();
-                katalog_item(event,data,false);
+                katalog_item(event, data, false);
             }
         });
     }
@@ -287,9 +289,9 @@ public class catalogController extends appParent {
     }
 
     @FXML
-    void search_init(MouseEvent event){
+    void search_init(MouseEvent event) {
         String query = searchbar.getText();
-        katalog_clicked(event,query);
+        katalog_clicked(event, query);
     }
 
     private ScrollBar getVerticalScrollBar(TableView<?> tableView) {
@@ -303,7 +305,7 @@ public class catalogController extends appParent {
         return null;
     }
 
-    void loadNextRecords(ObservableList<Katalog> items){
+    void loadNextRecords(ObservableList<Katalog> items) {
         int recordsToLoad = 50;
         int endIndex = Math.min(lastLoadedIndex + recordsToLoad, db_getData.books.size());
 

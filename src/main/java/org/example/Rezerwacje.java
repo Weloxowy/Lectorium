@@ -1,4 +1,5 @@
 package org.example;
+
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -18,16 +19,15 @@ public class Rezerwacje {
     /**
      * Tworzy nową instancję rezerwacji.
      *
-     * @param id_egz        Identyfikator egzemplarza.
-     * @param naz           Nazwa rezerwowanego elementu.
-     * @param nazwa_autor   Nazwa autora.
-     * @param data_ko       Data zakończenia rezerwacji.
-     * @param data_rez      Data rozpoczęcia rezerwacji.
-     * @param prze_rez      Informacja o możliwości przedłużenia rezerwacji.
-     * @param anul_rez      Informacja o możliwości anulowania rezerwacji.
+     * @param id_egz      Identyfikator egzemplarza.
+     * @param naz         Nazwa rezerwowanego elementu.
+     * @param nazwa_autor Nazwa autora.
+     * @param data_ko     Data zakończenia rezerwacji.
+     * @param data_rez    Data rozpoczęcia rezerwacji.
+     * @param prze_rez    Informacja o możliwości przedłużenia rezerwacji.
+     * @param anul_rez    Informacja o możliwości anulowania rezerwacji.
      */
-    public Rezerwacje(String id_egz, String naz, String nazwa_autor, String data_ko, String data_rez , String prze_rez, String anul_rez)
-    {
+    public Rezerwacje(String id_egz, String naz, String nazwa_autor, String data_ko, String data_rez, String prze_rez, String anul_rez) {
         this.id_egzemplarze = new SimpleStringProperty(id_egz);
         this.nazwa = new SimpleStringProperty(naz);
         this.nazwa_autora = new SimpleStringProperty(nazwa_autor);

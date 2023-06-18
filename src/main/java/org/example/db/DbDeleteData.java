@@ -8,13 +8,12 @@ import java.sql.SQLException;
  * Posiada ona metody, które usuwają dane.
  *
  * @see org.example.db.DbParent
- *
  */
-public class DbDeleteData extends DbParent{
+public class DbDeleteData extends DbParent {
     /**
      * Metoda usuwa wszystkie rekordy z tabeli egzemplarze o danej nazwie książki i id egzemplarza
      *
-     * @param katalog nazwa książki
+     * @param katalog       nazwa książki
      * @param id_egzemplarz id_egzemplarza
      * @return
      */
@@ -42,9 +41,9 @@ public class DbDeleteData extends DbParent{
     /**
      * Metoda usuwa książkę o danych parametrach z bazy danych. Baza danych sama usunie egzemplarze dla danej książki.
      *
-     * @param nazwa nazwa książki
-     * @param isbn unikalny kod ISBN
-     * @param nazwaGatunku nazwa gatunku
+     * @param nazwa            nazwa książki
+     * @param isbn             unikalny kod ISBN
+     * @param nazwaGatunku     nazwa gatunku
      * @param nazwaWydawnictwa nazwa wydawnictwa
      * @return zwróci ilość usuniętych rekordów (książek)
      */
@@ -129,7 +128,7 @@ public class DbDeleteData extends DbParent{
      * sprawdzających poprawność wypożyczenia.
      *
      * @param id_uzytkownika - id użytkownika dokonującego wypożyczenia
-     * @param id_egzemplarz - id egzemplarza danej książki
+     * @param id_egzemplarz  - id egzemplarza danej książki
      * @return zwraca ilość rekordów usuniętych przez zapytanie
      */
     public int deleteReservation(int id_egzemplarz, int id_uzytkownika) {

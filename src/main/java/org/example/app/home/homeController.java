@@ -17,7 +17,6 @@ import org.example.app.appParent;
  * Klasa {@code homeController} jest kontrolerem widoku domowego ekranu aplikacji.
  * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji oraz inicjalizację widoku.
  * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
- *
  */
 public class homeController extends appParent {
     @FXML
@@ -150,7 +149,7 @@ public class homeController extends appParent {
             katalog_clicked(event, query);
         }
         if (event.getSource().equals(image_b1)) {
-            katalog_item(event, 130,false);
+            katalog_item(event, 130, false);
         }
         if (event.getSource().equals(image_b2)) {
             String query = "King";

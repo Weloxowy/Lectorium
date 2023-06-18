@@ -1,17 +1,16 @@
 package tests;
+
 import javafx.scene.image.Image;
 import org.example.User;
 import org.example.db.DbAuth;
-import org.example.db.DbParent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class testsDbloader{
+public class testsDbloader {
 
     @Test
     public void testGetImage() {

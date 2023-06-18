@@ -21,8 +21,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.User;
 import org.example.app.PasswordSkin;
-import org.example.db.DbAuth;
 import org.example.app.home.homeController;
+import org.example.db.DbAuth;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -82,10 +82,10 @@ public class loginController {
      * Wczytuje czcionki z plików zasobów.
      */
     public void font() {
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
         zalogujsietext.setFont(ssp_sb_h1);
         submit.setFont(pop_r_h1);
         haslo.setFont(pop_r_h2);
@@ -127,7 +127,7 @@ public class loginController {
             submit.fireEvent(new MouseEvent(
                     MouseEvent.MOUSE_CLICKED,
                     100, 100, 0, 0, MouseButton.PRIMARY, 1,
-                    false, false, false, false,false,false,false,false,false,false,null)); // wywołanie zdarzenia MouseEvent
+                    false, false, false, false, false, false, false, false, false, false, null)); // wywołanie zdarzenia MouseEvent
         }
     }
 
@@ -160,8 +160,8 @@ public class loginController {
             y[0] = event2.getSceneY();
         });
         scene.setOnMouseDragged(event3 -> {
-            stage.setX(event3.getScreenX()- x[0]);
-            stage.setY(event3.getScreenY()- y[0]);
+            stage.setX(event3.getScreenX() - x[0]);
+            stage.setY(event3.getScreenY() - y[0]);
         });
         stage.setScene(scene);
     }
@@ -181,10 +181,9 @@ public class loginController {
 
         boolean res = auth.tryLogin(log, has);
         if (res) {
-            if(User.getInstance().getCzy_zablokowany().contentEquals("T")){
+            if (User.getInstance().getCzy_zablokowany().contentEquals("T")) {
                 onfailure(true);
-            }
-            else{
+            } else {
                 onsuccess(event); //przekazywanie wartosci z funkcji tryLogin?
             }
         } else {
@@ -212,12 +211,12 @@ public class loginController {
             parent = loader.load();
             homeController controller = loader.getController();
 
-            controller.init(User.getInstance().getImie(),User.getInstance().getNazwisko());
+            controller.init(User.getInstance().getImie(), User.getInstance().getNazwisko());
             stage.setResizable(true);
             stage.setFullScreen(false);
-            if(User.getInstance().getCzy_admin().contentEquals("T")){
+            if (User.getInstance().getCzy_admin().contentEquals("T")) {
                 stage.setTitle("Lectorium (zalogowano jako administrator)");
-            }else{
+            } else {
                 stage.setTitle("Lectorium");
             }
             Scene scene = new Scene(parent);
@@ -239,10 +238,9 @@ public class loginController {
      * @param blockade Informacja, czy konto jest zablokowane.
      */
     void onfailure(boolean blockade) {
-        if(blockade==true){
+        if (blockade == true) {
             error.setText("Konto zablokowane");
-        }
-        else{
+        } else {
             error.setText("Błąd logowania");
         }
         error.setOpacity(1.0);

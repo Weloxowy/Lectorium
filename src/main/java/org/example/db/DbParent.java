@@ -1,22 +1,12 @@
 package org.example.db;
 
-import javafx.scene.image.Image;
-import org.example.Main;
-import org.example.User;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- *
  * Klasa DbParent jest klasą nadrzędną dla klas zawierających funkcje, które nawiązują połączenie
  * z bazą danych i dokonują na niej jakichś operacji.
- *
  */
 public class DbParent {
 

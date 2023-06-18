@@ -10,18 +10,17 @@ import java.util.Locale;
  * Posiada ona metody, które dodają dane do bazy.
  *
  * @see org.example.db.DbParent
- *
  */
-public class DbSetData extends DbParent{
+public class DbSetData extends DbParent {
 
     /**
      * Metoda dodaje nowego użytkownika do bazy. Dodawany tak użytkownik nie musi spełniać żadnych warunków,
      * w przeciwieństwie do funkcji tryRegister, gdzie tam sprawdzanych jest kilka warunków.
      *
-     * @param imie imie użytkownika
-     * @param nazwisko nazwisko użytkownika
-     * @param login login użytkownika
-     * @param haslo hasło użytkownika
+     * @param imie      imie użytkownika
+     * @param nazwisko  nazwisko użytkownika
+     * @param login     login użytkownika
+     * @param haslo     hasło użytkownika
      * @param czy_admin pole w bazie przyjmuje wartości "T" i "N". Inne są odrzucane.
      * @return zwraca ilość dodanych rekordów do bazy
      */
@@ -51,7 +50,7 @@ public class DbSetData extends DbParent{
     /**
      * Metoda dodająca autora do tabeli autor.
      *
-     * @param imie imie autora
+     * @param imie     imie autora
      * @param nazwisko nazwisko autora
      * @return true jeżeli udało się dodać autora do bazy, false jeżeli nie udało się dodać rekord
      */
@@ -65,7 +64,7 @@ public class DbSetData extends DbParent{
             statement.setString(2, nazwisko);
             int result = statement.executeUpdate();
             closeConnection();
-            if(result == 1)
+            if (result == 1)
                 return true;
             else
                 return false;
@@ -92,7 +91,7 @@ public class DbSetData extends DbParent{
             statement.setString(1, nazwa_gatunku);
             int result = statement.executeUpdate();
             closeConnection();
-            if(result == 1)
+            if (result == 1)
                 return true;
             else
                 return false;
@@ -119,7 +118,7 @@ public class DbSetData extends DbParent{
             statement.setString(1, nazwa_wydawnictwa);
             int result = statement.executeUpdate();
             closeConnection();
-            if(result == 1)
+            if (result == 1)
                 return true;
             else
                 return false;
@@ -162,19 +161,19 @@ public class DbSetData extends DbParent{
     /**
      * Funkcja dodaje nowy egzemplarz do bazy danych.
      *
-     * @param czy_dostepne  status dostępności egzemplarza
-     * @param lokalizacja   lokalizacja egzemplarza
-     * @param katalog       nazwa katalogu, do którego należy egzemplarz
+     * @param czy_dostepne status dostępności egzemplarza
+     * @param lokalizacja  lokalizacja egzemplarza
+     * @param katalog      nazwa katalogu, do którego należy egzemplarz
      * @return liczba wierszy, które zostały dodane do bazy danych
      */
     public int setNewCopy(String czy_dostepne, String lokalizacja, String katalog) {
         connectToDatabase();
         String insertUserSQL = """
-            INSERT INTO egzemplarze (czy_dostepne, lokalizacja, katalog_id_katalog)
-            SELECT  ?, ?, k.id_katalog
-            FROM katalog k
-            WHERE k.nazwa = ?;
-            """;
+                INSERT INTO egzemplarze (czy_dostepne, lokalizacja, katalog_id_katalog)
+                SELECT  ?, ?, k.id_katalog
+                FROM katalog k
+                WHERE k.nazwa = ?;
+                """;
         try {
             PreparedStatement statement = connection.prepareStatement(insertUserSQL);
             statement.setString(1, czy_dostepne);
@@ -199,15 +198,15 @@ public class DbSetData extends DbParent{
      * polu tabeli dajemy wartość true.
      * Następnie zwracamy tą tabelę do programu.
      *
-     * @param  nazwa  nazwa ksiazki
-     * @param rok_wydania rok wydania
-     * @param wydanie wydanie
-     * @param isbn kod ISBN
-     * @param jezyk język książki
-     * @param uwagi uwagi odnośnie książki
-     * @param imie_autora   imie autora
-     * @param nazwisko_autora nazwisko autora
-     * @param nazwa_gatunku nazwa gatunku książki
+     * @param nazwa             nazwa ksiazki
+     * @param rok_wydania       rok wydania
+     * @param wydanie           wydanie
+     * @param isbn              kod ISBN
+     * @param jezyk             język książki
+     * @param uwagi             uwagi odnośnie książki
+     * @param imie_autora       imie autora
+     * @param nazwisko_autora   nazwisko autora
+     * @param nazwa_gatunku     nazwa gatunku książki
      * @param nazwa_wydawnictwa nazwa wydawnictwa wydającego książkę
      * @return zwraca tabelę 3 elementową, typu boolean; pierwszy element oznacza czy nie istnieje taki autor, drugi - czy nie istnieje taki gatunek,
      * trzeci - czy nie istnieje takie wydawnictwo

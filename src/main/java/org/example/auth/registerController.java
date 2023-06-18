@@ -21,8 +21,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.example.User;
 import org.example.app.PasswordSkin;
-import org.example.db.DbAuth;
 import org.example.app.home.homeController;
+import org.example.db.DbAuth;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -76,12 +76,12 @@ public class registerController {
     /**
      * Metoda ustawiająca odpowiednie czcionki dla elementów interfejsu użytkownika
      */
-    public void font(){
+    public void font() {
         // Załadowanie czcionek z plików zasobów
-        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"),25);
-        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),18);
-        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
-        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"),14);
+        Font ssp_sb_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/SourceSerifPro-SemiBold.ttf"), 25);
+        Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
+        Font pop_r_h2 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 14);
+        Font pop_b_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-SemiBold.ttf"), 14);
 
         // Przypisanie odpowiednich czcionek do poszczególnych elementów interfejsu
         zarejestrujsietext.setFont(ssp_sb_h1);
@@ -99,6 +99,7 @@ public class registerController {
     /**
      * Metoda obsługująca zdarzenie kliknięcia przycisku zamknięcia okna.
      * Zamyka okno logowania.
+     *
      * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
      */
     @FXML
@@ -110,6 +111,7 @@ public class registerController {
     /**
      * Metoda obsługująca zdarzenie kliknięcia przycisku minimalizacji okna.
      * Minimalizuje okno logowania.
+     *
      * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
      */
     @FXML
@@ -120,6 +122,7 @@ public class registerController {
 
     /**
      * Obsługa zdarzenia rejestracji
+     *
      * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
      */
     @FXML
@@ -137,7 +140,7 @@ public class registerController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(parent == null)
+        if (parent == null)
             return;
         Scene scene = new Scene(parent);
         scene.setOnMousePressed(event2 -> {
@@ -145,8 +148,8 @@ public class registerController {
             y[0] = event2.getSceneY();
         });
         scene.setOnMouseDragged(event3 -> {
-            stage.setX(event3.getScreenX()- x[0]);
-            stage.setY(event3.getScreenY()- y[0]);
+            stage.setX(event3.getScreenX() - x[0]);
+            stage.setY(event3.getScreenY() - y[0]);
         });
         stage.setScene(scene);
     }
@@ -154,25 +157,26 @@ public class registerController {
 
     /**
      * Obsługa zdarzenia przycisku submit (próba rejestracji)
+     *
      * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
      */
     @FXML
-    void onsubmit(MouseEvent event){
+    void onsubmit(MouseEvent event) {
         hidefailuresign(event);
         DbAuth auth = new DbAuth();
         String name = imie.getText();
         String last_name = nazwisko.getText();
         String log = login.getText();
         String has = haslo.getText();
-        if(has.isEmpty() || log.isEmpty() || last_name.isEmpty() || name.isEmpty()){
+        if (has.isEmpty() || log.isEmpty() || last_name.isEmpty() || name.isEmpty()) {
             error_dane.setOpacity(1.0);
             return;
         }
-        if(has.length()<5){
+        if (has.length() < 5) {
             error_haslo.setOpacity(1.0);
             return;
         }
-        if(auth.testRegister(log)) {
+        if (auth.testRegister(log)) {
             boolean res = auth.tryRegister(name, last_name, log, has);
             res = auth.tryLogin(log, has);
             if (res) {
@@ -180,8 +184,7 @@ public class registerController {
             } else {
                 onfailure();
             }
-        }
-        else{
+        } else {
             error_login.setOpacity(1.0);
         }
     }
@@ -208,9 +211,9 @@ public class registerController {
             controller.init(User.getImie(), User.getNazwisko());
             stage.setResizable(true);
             stage.setFullScreen(false);
-            if(User.getInstance().getCzy_admin().contentEquals("T")){
+            if (User.getInstance().getCzy_admin().contentEquals("T")) {
                 stage.setTitle("Lectorium (zalogowano jako administrator)");
-            }else{
+            } else {
                 stage.setTitle("Lectorium");
             }
             Scene scene = new Scene(parent);
@@ -234,23 +237,25 @@ public class registerController {
 
     /**
      * Ukrycie komunikatów o błędach
+     *
      * @param event obiekt klasy MouseEvent wywoływany kliknięciem myszy
      */
     @FXML
     void hidefailuresign(MouseEvent event) {
-        if(error_dane.getOpacity() == 1.0){
+        if (error_dane.getOpacity() == 1.0) {
             error_dane.setOpacity(0.0);
         }
-        if(error_haslo.getOpacity() == 1.0) {
+        if (error_haslo.getOpacity() == 1.0) {
             error_haslo.setOpacity(0.0);
         }
-        if(error_login.getOpacity() == 1.0) {
+        if (error_login.getOpacity() == 1.0) {
             error_login.setOpacity(0.0);
         }
     }
 
     /**
      * Funkcja która wywołuje funkcję submit poprzez emulację uruchomienia eventu kliknięcia guzika Submit.
+     *
      * @param event obiekt klasy KeyEvent wywoływany kliknięciem przycisku na klawiaturze
      */
     //
@@ -261,7 +266,7 @@ public class registerController {
             submit.fireEvent(new MouseEvent(
                     MouseEvent.MOUSE_CLICKED,
                     100, 100, 0, 0, MouseButton.PRIMARY, 1,
-                    false, false, false, false,false,false,false,false,false,false,null)); // wywołanie zdarzenia MouseEvent
+                    false, false, false, false, false, false, false, false, false, false, null)); // wywołanie zdarzenia MouseEvent
         }
     }
 

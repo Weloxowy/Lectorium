@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
  * Klasa {@code Egzemplarze} reprezentuje egzemplarze książek.
  * Zawiera informacje takie jak nazwa, lokalizacja, dostępność i data zwrotu.
  * Klasa implementuje własności (properties) dla poszczególnych pól.
- *
  */
 public class Egzemplarze {
     ReadOnlyIntegerWrapper id_egzemplarze;
@@ -19,11 +18,11 @@ public class Egzemplarze {
     /**
      * Konstruktor tworzący obiekt klasy {@code Egzemplarze} i inicjalizujący jego pola.
      *
-     * @param nazwa         nazwa egzemplarza
+     * @param nazwa          nazwa egzemplarza
      * @param id_egzemplarze identyfikator egzemplarza
-     * @param lokalizacja   lokalizacja egzemplarza
-     * @param czy_dostepne  informacja o dostępności egzemplarza
-     * @param data_zwrotu   data zwrotu egzemplarza
+     * @param lokalizacja    lokalizacja egzemplarza
+     * @param czy_dostepne   informacja o dostępności egzemplarza
+     * @param data_zwrotu    data zwrotu egzemplarza
      */
     public Egzemplarze(String nazwa, Integer id_egzemplarze, String lokalizacja, String czy_dostepne, String data_zwrotu) {
         this.nazwa = new SimpleStringProperty(nazwa);

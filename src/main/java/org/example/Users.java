@@ -16,11 +16,11 @@ public class Users {
     /**
      * Konstruktor klasy {@code Users}.
      *
-     * @param imie_katalog        Imię użytkownika.
-     * @param nazwisko_katalog    Nazwisko użytkownika.
-     * @param id_katalog          ID użytkownika.
-     * @param czy_admin_katalog   Informacja czy użytkownik ma uprawnienia administratora.
-     * @param czy_zablokowany     Informacja czy użytkownik jest zablokowany.
+     * @param imie_katalog      Imię użytkownika.
+     * @param nazwisko_katalog  Nazwisko użytkownika.
+     * @param id_katalog        ID użytkownika.
+     * @param czy_admin_katalog Informacja czy użytkownik ma uprawnienia administratora.
+     * @param czy_zablokowany   Informacja czy użytkownik jest zablokowany.
      */
     public Users(String imie_katalog, String nazwisko_katalog, int id_katalog, String czy_admin_katalog, String czy_zablokowany) {
         this.imie_katalog = new SimpleStringProperty(imie_katalog);

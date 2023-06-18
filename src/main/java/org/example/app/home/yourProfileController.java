@@ -26,14 +26,14 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import static org.example.Main.*;
+import static org.example.Main.db_deleteData;
+import static org.example.Main.db_updateData;
 
 /**
  * Klasa {@code yourProfileController} jest kontrolerem widoku informacji o profilu aktualnie zalogowanego użytkownika.
  * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji o jego profilu, udostępnia funkcje modyfikacji
  * danych profilu oraz inicjalizację widoku.
  * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
- *
  */
 public class yourProfileController extends appParent {
     @FXML
@@ -142,6 +142,7 @@ public class yourProfileController extends appParent {
         Circle clipCircle = new Circle(centerX, centerY, radius);
         avatar.setClip(clipCircle);
     }
+
     /**
      * Metoda {@code avatar_view} ustawia clipping dla większego obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
      */
@@ -208,6 +209,7 @@ public class yourProfileController extends appParent {
         Label change_password = (Label) grid.lookup("#change_password");
         change_password.setFont(pop_b_h2);
     }
+
     /**
      * Metoda {@code init} inicjalizuje widok ekranu domowego.
      * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
@@ -221,11 +223,10 @@ public class yourProfileController extends appParent {
         avatar2115.setImage(User.getInstance().getImage());
         Name.setText("Imie: " + imie);
         Surname.setText("Nazwisko: " + nazwisko);
-        if(User.getInstance().getCzy_admin().contentEquals("T")){
-            Rank.setText(Rank.getText()+": administrator");
-        }
-        else{
-            Rank.setText(Rank.getText()+": czytelnik");
+        if (User.getInstance().getCzy_admin().contentEquals("T")) {
+            Rank.setText(Rank.getText() + ": administrator");
+        } else {
+            Rank.setText(Rank.getText() + ": czytelnik");
         }
         curr_password.setSkin(new PasswordSkin(curr_password));
         new_password.setSkin(new PasswordSkin(new_password));
