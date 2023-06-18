@@ -72,6 +72,13 @@ public class catalogItemController extends appParent {
     @FXML
     private final TableView<Egzemplarze> lista = new TableView<>();
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene) {
         super.font(scene);

@@ -28,6 +28,13 @@ import java.io.*;
 
 import static org.example.Main.*;
 
+/**
+ * Klasa {@code yourProfileController} jest kontrolerem widoku informacji o profilu aktualnie zalogowanego użytkownika.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji o jego profilu, udostępnia funkcje modyfikacji
+ * danych profilu oraz inicjalizację widoku.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ *
+ */
 public class yourProfileController extends appParent {
     @FXML
     private Label Name;
@@ -125,7 +132,9 @@ public class yourProfileController extends appParent {
     @FXML
     private Label Rank;
 
-
+    /**
+     * Metoda {@code avatar_view} ustawia clipping dla obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -133,7 +142,9 @@ public class yourProfileController extends appParent {
         Circle clipCircle = new Circle(centerX, centerY, radius);
         avatar.setClip(clipCircle);
     }
-
+    /**
+     * Metoda {@code avatar_view} ustawia clipping dla większego obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
+     */
     void avatar_view_profile() {
         int radius = 101;
         double centerX = avatar2115.getBoundsInLocal().getWidth() / 2.0;
@@ -142,6 +153,13 @@ public class yourProfileController extends appParent {
         avatar2115.setClip(clipCircle);
     }
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene) {
         super.font(scene);
@@ -190,7 +208,13 @@ public class yourProfileController extends appParent {
         Label change_password = (Label) grid.lookup("#change_password");
         change_password.setFont(pop_b_h2);
     }
-
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -211,12 +235,24 @@ public class yourProfileController extends appParent {
         wash_effects();
     }
 
+    /**
+     * Metoda {@code search_init} obsługuje inicjalizację wyszukiwania po wciśnięciu przycisku lub klawisza Enter w polu searchbar.
+     * Pobiera zapytanie z pola searchbar i przekazuje je do metody katalog_clicked w celu obsługi wyszukiwania.
+     *
+     * @param event zdarzenie kliknięcia myszy
+     */
     @FXML
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
     }
 
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Hasło".
+     * Wywołuje metodę `wash_effects()` i ustawia widoczność pola "password" na true.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void haslo_c(MouseEvent event) {
         wash_effects();
@@ -224,6 +260,12 @@ public class yourProfileController extends appParent {
 
     }
 
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Login".
+     * Wywołuje metodę `wash_effects()` i ustawia widoczność pola "login" na true.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void login_c(MouseEvent event) {
         wash_effects();
@@ -231,6 +273,13 @@ public class yourProfileController extends appParent {
 
     }
 
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Zmień login".
+     * Wywołuje metodę `wash_effects()` i wykonuje operacje zmiany loginu w bazie danych.
+     * Wyświetla odpowiednie komunikaty na podstawie rezultatu operacji.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void login_change(MouseEvent event) {
         commit_login.setStyle("-fx-border-width: 1");
@@ -255,7 +304,13 @@ public class yourProfileController extends appParent {
         timeline.play();
     }
 
-
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Zmień hasło".
+     * Wywołuje metodę `wash_effects()` i wykonuje operacje zmiany hasła w bazie danych.
+     * Wyświetla odpowiednie komunikaty na podstawie rezultatu operacji.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void password_change(MouseEvent event) {
         commit_login.setStyle("-fx-border-width: 1");
@@ -280,6 +335,13 @@ public class yourProfileController extends appParent {
         timeline.play();
     }
 
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Profil".
+     * Wywołuje metodę `wash_effects()` i ustawia widoczność pola "usun" na true.
+     * Ustawia styl ramki przycisku "profile_delete".
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void profile_d(MouseEvent event) {
         wash_effects();
@@ -287,6 +349,13 @@ public class yourProfileController extends appParent {
         profile_delete.setStyle("-fx-border-width: 2");
     }
 
+    /**
+     * Obsługuje zdarzenie kliknięcia przycisku "Usuń profil".
+     * Wywołuje metodę `wash_effects()` i wykonuje operacje usunięcia profilu z bazy danych.
+     * Wyświetla odpowiednie komunikaty na podstawie rezultatu operacji.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void delete_profile(MouseEvent event) {
         commit_delete.setStyle("-fx-border-width: 1");
@@ -310,12 +379,26 @@ public class yourProfileController extends appParent {
         timeline.play();
     }
 
+    /**
+     * Resetuje efekty wizualne ustawione na elementach interfejsu.
+     * Ukrywa pola "password", "usun" i "login".
+     */
     void wash_effects() {
         password.setVisible(false);
         usun.setVisible(false);
         login.setVisible(false);
     }
 
+    /**
+     * Obsługuje zdarzenie zamiany avatara.
+     * Otwiera okno dialogowe umożliwiające wybór pliku z obrazem.
+     * Po wybraniu pliku, przekształca go na obiekt Image, zmieniając aktualny avatar użytkownika.
+     * Następnie przekształca obraz na format BufferedImage, a następnie na tablicę bajtów.
+     * Wywołuje operację zmiany avatara w bazie danych, a następnie ponownie inicjuje zdarzenie dla elementu "avatar".
+     * W przypadku wystąpienia błędu podczas operacji, wyświetla odpowiedni komunikat.
+     *
+     * @param event obiekt reprezentujący zdarzenie myszy
+     */
     @FXML
     void avatar_swap(MouseEvent event) {
         FileChooser fileChooser = new FileChooser();

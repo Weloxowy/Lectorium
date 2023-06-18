@@ -33,6 +33,12 @@ import java.util.List;
 
 import static org.example.Main.*;
 
+/**
+ * Klasa {@code yourRentsController} jest kontrolerem widoku informacji o wypożyczeniach aktualnie zalogowanego użytkownika.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji, udostępnia funkcje przedłużania wypożyczenia oraz inicjalizację widoku.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ *
+ */
 public class yourRentsController extends appParent {
     @FXML
     private ImageView avatar;
@@ -88,6 +94,13 @@ public class yourRentsController extends appParent {
 
     double suma_zadluzenia = 0;
 
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko, MouseEvent event) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -100,10 +113,17 @@ public class yourRentsController extends appParent {
 
     }
 
+    /**
+     * Metoda wyświetlająca listę wypożyczeń dla danego użytkownika na podstawie podanego identyfikatora.
+     *
+     * @param id Identyfikator użytkownika
+     */
     public void Lista_Hire(int id) {
+        // Pobieranie informacji o wypożyczeniach z bazy danych
         db_getData.getHireInformation(id);
+        // Tworzenie obserwowalnej listy elementów wypożyczeń
         ObservableList<Wypozyczenia> items = FXCollections.observableArrayList();
-
+        // Tworzenie kolumn tabeli
         TableColumn<Wypozyczenia, ?> autorCol = new TableColumn<>("Autor");
         autorCol.setMinWidth(anchor_hire.getPrefWidth()*0.2);
         autorCol.setCellValueFactory(
@@ -134,9 +154,11 @@ public class yourRentsController extends appParent {
                 new PropertyValueFactory<>("data_zwrotu"));
 
 
-
+/*Tworzenie kolumny "Grzywna" z własnym rendererem komórki. Komórka zawierac bedzie stan zadłużenia wobec biblioteki za daną książkę
+   według wzoru: ilość_dni*0.20 gr    */
         grzywnaCol.setCellFactory(col -> {
             TableCell<Wypozyczenia, String> cell = new TableCell<>();
+            // Obsługa zdarzenia zmiany wartości w komórce "Grzywna"
             cell.itemProperty().addListener((obs, old, newVal) -> {
                 String debt;
                 List<Double> lista = new ArrayList<>();
@@ -145,9 +167,10 @@ public class yourRentsController extends appParent {
                     String data_zwrotu = data_zwrotuCol.getCellData(rowIndex).toString();
                     LocalDate dataZwrotu = LocalDate.parse(data_zwrotu, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalDate currentDate = LocalDate.now();
-
+                    //jezeli ksiazka nie jest przetrzymana
                     if (dataZwrotu.isAfter(currentDate)) {
                         cell.setText(" - ");
+                        //jezeli jest przetrzymana
                     } else if (dataZwrotu.isBefore(currentDate)) {
                         DecimalFormat currency = new DecimalFormat("#0.00");
                         int diff = (int) ChronoUnit.DAYS.between(dataZwrotu, currentDate);
@@ -157,6 +180,7 @@ public class yourRentsController extends appParent {
                             try {
                                 konwert = currency.parse(debt).doubleValue();
                                 lista.add(konwert);
+                                //liczenie sumy zadluzenia
                                 for(double pam : lista)
                                 {
                                     suma_zadluzenia += pam ;
@@ -180,6 +204,7 @@ public class yourRentsController extends appParent {
         przedluzCol.setCellValueFactory(
                 new PropertyValueFactory<>("ilosc_przedluzen"));
 
+        // Tworzenie kolumny "Przedłuż" z własnym rendererem komórki
         przedluzCol.setCellFactory(col -> {
             TableCell<Wypozyczenia, String> cell = new TableCell<>();
             cell.itemProperty().addListener((obs, old, newVal) -> {
@@ -191,13 +216,14 @@ public class yourRentsController extends appParent {
                     if (newVal != null && Integer.parseInt(newVal) < 3 && dataZwrotu.isAfter(currentDate)) {
                         Node centreBox = createPriorityGraphic();
                         cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(centreBox));
-
+                        //Obsługa kliknięcia "plusika" w tej komórce
                         cell.setOnMouseClicked(event -> {
                             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                                 TablePosition tablePosition = lista.getSelectionModel().getSelectedCells().get(0);
                                 int row = tablePosition.getRow();
                                 int data = Integer.parseInt((String) egzemplarzeCol.getCellObservableValue(row).getValue());
                                 String start_date = (String) data_wypozyczeniaCol.getCellObservableValue(row).getValue();
+                                //wykonanie operacji na bazie danych i odpowiedni komunikat zależny od wyniku funkcji
                                 if (db_updateData.updateRentalDate(data, User.getInstance().getId(), start_date)) {
                                     Label notificationLabel = new Label("Przedłużono pomyślnie.");
                                     Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"), 18);
@@ -253,6 +279,7 @@ public class yourRentsController extends appParent {
             return cell;
         });
 
+        // Dodawanie elementów wypożyczeń do listy
         for (String[] tab : db_getData.rental) {
             String id_egzemplarze = tab[0];
             String nazwa = tab[1];
@@ -263,12 +290,13 @@ public class yourRentsController extends appParent {
             items.add(new Wypozyczenia(id_egzemplarze,nazwa, data_wypozyczenia, data_zwrotu,nazwa_autora,ilosc_przedluzen));
         }
 
+        // Ustawianie elementów wypożyczeń jako dane dla tabeli
         lista.setItems(items);
-
+        // Dodawanie kolumn do tabeli
         lista.getColumns().addAll (nazwaCol, egzemplarzeCol,autorCol, data_wypozyczeniaCol,data_zwrotuCol,grzywnaCol,przedluzCol);
-
+        // Ustawianie tekstu zastępczego, gdy lista jest pusta
         lista.setPlaceholder(new Label("Jesteśmy zaskoczeni, że niczego nie znaleźliśmy! Czyżbyśmy mieli dzień wolny?"));
-
+        // Ustawianie wymiarów tabeli
         lista.setFixedCellSize(30);
 
         lista.setPrefWidth(anchor_hire.getPrefWidth());
@@ -278,15 +306,19 @@ public class yourRentsController extends appParent {
         lista.prefHeightProperty().bind(anchor_hire.heightProperty());
 
         anchor_hire.getChildren().addAll(lista);
-
+        // Dodawanie tabeli do kontenera
         AnchorPane.setTopAnchor(lista, 0.0);
         AnchorPane.setLeftAnchor(lista, 0.0);
         AnchorPane.setBottomAnchor(lista, 0.0);
         AnchorPane.setRightAnchor(lista, 0.0);
-
+        // Dodawanie arkusza stylów do tabeli
         lista.getStylesheets().add("/fxml.home/home.css");
 
     }
+
+    /**
+     * Metoda {@code avatar_view} ustawia clipping dla obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -295,6 +327,13 @@ public class yourRentsController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene){
         super.font(scene);
@@ -304,6 +343,11 @@ public class yourRentsController extends appParent {
         yourHire_name.setFont(pop_r_h2);
     }
 
+    /**
+     * Metoda obsługująca sprawdzanie informacji o wypożyczeniach po kliknięciu przycisku.
+     *
+     * @param event Obiekt reprezentujący zdarzenie kliknięcia myszą
+     */
     @FXML
     void check_hire_information(MouseEvent event)
     {
@@ -325,6 +369,12 @@ public class yourRentsController extends appParent {
         lista.setItems(items);
     }
 
+    /**
+     * Metoda obsługująca zmianę wyglądu przycisków na podstawie typu.
+     *
+     * @param event Obiekt reprezentujący zdarzenie kliknięcia myszą
+     * @param type  Typ przycisku (true - "Aktualne", false - "Wszystkie")
+     */
     @FXML
     void actual_button(MouseEvent event,boolean type){
         if(type){

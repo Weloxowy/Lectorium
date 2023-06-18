@@ -13,7 +13,12 @@ import javafx.scene.text.Text;
 import org.example.User;
 import org.example.app.appParent;
 
-
+/**
+ * Klasa {@code homeController} jest kontrolerem widoku domowego ekranu aplikacji.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji oraz inicjalizację widoku.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ *
+ */
 public class homeController extends appParent {
     @FXML
     private ImageView avatar = new ImageView();
@@ -45,6 +50,13 @@ public class homeController extends appParent {
     @FXML
     private Label nametag;
 
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -53,6 +65,13 @@ public class homeController extends appParent {
         labelglowna.setStyle("-fx-text-fill:#808080");
     }
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene) {
         super.font(scene);
@@ -62,6 +81,9 @@ public class homeController extends appParent {
         biblioteka_desc.setFont(pop_r_h2);
     }
 
+    /**
+     * Metoda {@code avatar_view} ustawia clipping dla obrazka avatara, aby uzyskać efekt zaokrąglonych rogów.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -70,6 +92,9 @@ public class homeController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Metoda {@code images_view} ustawia clipping dla obrazków
+     */
     void images_view() {
         double centerXa1 = image_a1.getBoundsInLocal().getWidth();
         double centerYa1 = image_a1.getBoundsInLocal().getHeight();
@@ -100,12 +125,24 @@ public class homeController extends appParent {
         biblioteka_photo.setClip(rectanglebib);
     }
 
+    /**
+     * Metoda {@code search_init} obsługuje inicjalizację wyszukiwania po wciśnięciu przycisku lub klawisza Enter w polu searchbar.
+     * Pobiera zapytanie z pola searchbar i przekazuje je do metody katalog_clicked w celu obsługi wyszukiwania.
+     *
+     * @param event zdarzenie kliknięcia myszy
+     */
     @FXML
     void search_init(MouseEvent event) {
         String query = searchbar.getText();
         katalog_clicked(event, query);
     }
 
+    /**
+     * Metoda {@code menu_panels} obsługuje kliknięcia na panele menu.
+     * W zależności od klikniętego obrazka, wywołuje odpowiednią funkcję.
+     *
+     * @param event zdarzenie kliknięcia myszy
+     */
     @FXML
     void menu_panels(MouseEvent event) {
         if (event.getSource().equals(image_a1)) {

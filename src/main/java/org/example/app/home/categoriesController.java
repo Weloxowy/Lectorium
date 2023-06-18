@@ -15,27 +15,14 @@ import org.example.app.appParent;
 
 import static org.example.Main.db_getData;
 
-
+/**
+ * Klasa {@code categoriesController} reprezentuje kontroler widoku kategorii.
+ * Zarządza interakcjami i logiką związaną z widokiem kategorii.
+ * Rozszerza klasę {@link appParent}, aby dziedziczyć pewne funkcjonalności z klasy nadrzędnej.
+ *
+ */
 public class categoriesController extends appParent {
 
-
-    public void init(String imie, String nazwisko){
-        nametag.setText(imie+" "+nazwisko);
-        avatar.setImage(User.getInstance().getImage());
-        avatar_view();
-        images_view();
-        categories_init();
-        labelkategorie.setStyle("-fx-text-fill:#808080");
-
-    }
-
-    void avatar_view() {
-        int radius = 28;
-        double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
-        double centerY = avatar.getBoundsInLocal().getHeight() / 2.0;
-        Circle clipCircle = new Circle(centerX, centerY, radius);
-        avatar.setClip(clipCircle);
-    }
     @FXML
     private ImageView avatar;
     @FXML
@@ -58,12 +45,52 @@ public class categoriesController extends appParent {
     @FXML
     private VBox images_vbox;
 
+
+    /**
+     * Metoda {@code init} inicjalizuje kontroler kategorii.
+     * Ustawia imię i nazwisko użytkownika, obrazek awatara, widoki kategorii oraz styl etykiety kategorii.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
+    public void init(String imie, String nazwisko){
+        nametag.setText(imie+" "+nazwisko);
+        avatar.setImage(User.getInstance().getImage());
+        avatar_view();
+        images_view();
+        categories_init();
+        labelkategorie.setStyle("-fx-text-fill:#808080");
+
+    }
+
+    /**
+     * Metoda {@code avatar_view} ustala widok awatara.
+     * Tworzy okrągłe przycięcie dla awatara.
+     */
+    void avatar_view() {
+        int radius = 28;
+        double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
+        double centerY = avatar.getBoundsInLocal().getHeight() / 2.0;
+        Circle clipCircle = new Circle(centerX, centerY, radius);
+        avatar.setClip(clipCircle);
+    }
+
+    /**
+     * Metoda {@code search_init} inicjalizuje wyszukiwanie.
+     * Pobiera z pola tekstowego zapytanie wyszukiwania i wywołuje metodę {@code katalog_clicked} z odpowiednimi parametrami.
+     *
+     * @param event zdarzenie kliknięcia myszą
+     */
     @FXML
     void search_init(MouseEvent event){
         String query = searchbar.getText();
         katalog_clicked(event,query);
     }
 
+    /**
+     * Metoda {@code categories_init} inicjalizuje kategorie.
+     * Pobiera dane kategorii z bazy danych i tworzy widok kategorii na podstawie tych danych.
+     */
     void categories_init(){
         db_getData.getCategories();
         if(db_getData.categories != null) {
@@ -95,6 +122,9 @@ public class categoriesController extends appParent {
         }
     }
 
+    /**
+     * Metoda {@code images_view} ustala wygląd pól reklamowych.
+     */
     void images_view() {
         double centerXa1 = image_a1.getBoundsInLocal().getWidth();
         double centerYa1 = image_a1.getBoundsInLocal().getHeight();
@@ -118,6 +148,12 @@ public class categoriesController extends appParent {
         image_a3.setClip(rectanglea3);
     }
 
+    /**
+     * Metoda {@code menu_panels} obsługuje kliknięcie na panele reklamowe.
+     * W zależności od klikniętego panelu, wywołuje odpowiednie metody.
+     *
+     * @param event zdarzenie kliknięcia myszą
+     */
     @FXML
     void menu_panels(MouseEvent event){
         if(event.getSource().equals(image_a1)){

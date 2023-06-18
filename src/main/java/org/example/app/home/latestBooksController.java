@@ -22,6 +22,12 @@ import java.util.Map;
 
 import static org.example.Main.db_getData;
 
+/**
+ * Klasa {@code latestBooksController} reprezentuje kontroler widoku najnowszych książek.
+ * Odpowiada za logikę interakcji użytkownika z widokiem, taką jak wyszukiwanie, wyświetlanie informacji o książkach itp.
+ *
+ * @see appParent
+ */
 public class latestBooksController extends appParent {
 
     @FXML
@@ -55,14 +61,25 @@ public class latestBooksController extends appParent {
     @FXML
     private GridPane grid_nowosci;
 
-
+    /**
+     * Metoda {@code search_init} inicjalizuje wyszukiwanie.
+     * Pobiera z pola tekstowego zapytanie wyszukiwania i wywołuje metodę {@code katalog_clicked} z odpowiednimi parametrami.
+     *
+     * @param event zdarzenie kliknięcia myszą
+     */
     @FXML
     void search_init(MouseEvent event){
         String query = searchbar.getText();
         katalog_clicked(event,query);
     }
 
-
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @Override
     public void font(Scene scene) {
         super.font(scene);
@@ -70,7 +87,14 @@ public class latestBooksController extends appParent {
         Label header = (Label) grid_nowosci.lookup("#header");
         header.setFont(ssp_sb_h1);
     }
-
+    /**
+     * Metoda inicjalizująca kontroler widoku najnowszych książek.
+     * Ustawia informacje o użytkowniku, inicjalizuje dane dotyczące najnowszych książek,
+     * a także wyświetla odpowiednie elementy w interfejsie użytkownika.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko){
         db_getData.getTop();
         nametag.setText(imie + " " + nazwisko);
@@ -108,6 +132,15 @@ public class latestBooksController extends appParent {
         labelnowosci.setStyle("-fx-text-fill:#808080");
     }
 
+    /**
+     * Metoda ustawiająca teksty etykiety  i obraz dla danego VBoxa.
+     *
+     * @param vb         obiekt VBox, dla którego ustawiany jest tekst etykiety
+     * @param nazwa      nazwa książki
+     * @param autor      nazwa autora
+     * @param id_katalog identyfikator katalogowy książki
+     * @param i          numer indeksu VBoxa
+     */
     public void setLabelText(VBox vb, String nazwa, String autor,int id_katalog, int i) {
         Font pop_r_h1 = Font.loadFont(getClass().getResourceAsStream("/res/font/Poppins-Regular.ttf"),14);
         Label label_a = (Label) vb.lookup("#author"+i);
@@ -135,6 +168,10 @@ public class latestBooksController extends appParent {
         }
     }
 
+    /**
+     * Metoda {@code avatar_view} ustala widok awatara.
+     * Tworzy okrągłe przycięcie dla awatara.
+     */
     void avatar_view() {
         int radius = 28;
         double centerX = avatar.getBoundsInLocal().getWidth() / 2.0;
@@ -143,6 +180,11 @@ public class latestBooksController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+
+    /**
+     * Metoda ustawiająca przejście do danej książki po kliknięciu jej okładki.
+     *
+     */
     @FXML
     void refer_to_book(MouseEvent event){
         Map<Integer, VBox> vboxMap = new HashMap<>();

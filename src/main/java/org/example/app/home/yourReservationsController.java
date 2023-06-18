@@ -23,6 +23,12 @@ import org.example.app.appParent;
 
 import static org.example.Main.*;
 
+/**
+ * Klasa {@code yourReservationsController} jest kontrolerem widoku informacji o rezerwacjach aktualnie zalogowanego użytkownika.
+ * Odpowiada za obsługę interakcji użytkownika, wyświetlanie informacji, udostępnia funkcje przedłużania i anulowania rezerwacji oraz inicjalizację widoku.
+ * Dziedziczy po klasie {@link appParent}, aby działać w kontekście głównego okna aplikacji.
+ *
+ */
 public class yourReservationsController extends appParent {
 
     @FXML
@@ -50,6 +56,13 @@ public class yourReservationsController extends appParent {
     @FXML
     private final AnchorPane anchortable = new AnchorPane();
 
+    /**
+     * Metoda {@code init} inicjalizuje widok ekranu domowego.
+     * Ustawia tekst w polu nametag, wczytuje obrazek awatara użytkownika oraz wywołuje metody odpowiedzialne za wyświetlanie obrazków i ustawienie stylu labelglowna.
+     *
+     * @param imie     imię użytkownika
+     * @param nazwisko nazwisko użytkownika
+     */
     public void init(String imie, String nazwisko) {
         nametag.setText(imie + " " + nazwisko);
         avatar.setImage(User.getInstance().getImage());
@@ -293,6 +306,13 @@ public class yourReservationsController extends appParent {
         avatar.setClip(clipCircle);
     }
 
+    /**
+     * Metoda inicjalizująca styl czcionki dla elementów w scenie.
+     * Wywołuje również metodę inicjalizującą styl czcionki dla klasy nadrzędnej.
+     *
+     * @param scene obiekt {@link Scene} reprezentujący scenę JavaFX
+     * @see appParent#font(Scene)
+     */
     @FXML
     public void font(Scene scene){
         super.font(scene);
